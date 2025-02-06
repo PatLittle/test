@@ -46,6 +46,7 @@
         window.onload = generateLinks;
     </script>
 
+    <h2>GitHub Issues</h2>
     <ul id="issues"></ul>
 
     <script>
@@ -56,7 +57,11 @@
 
             issues.forEach(issue => {
                 const listItem = document.createElement('li');
-                listItem.textContent = `${issue.title} (#${issue.number})`;
+                const link = document.createElement('a');
+                link.href = issue.html_url;
+                link.textContent = `${issue.title} (#${issue.number})`;
+                link.target = '_blank'; // Opens the link in a new tab
+                listItem.appendChild(link);
                 issuesList.appendChild(listItem);
             });
         }
