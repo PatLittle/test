@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index of Contents</title>
+</head>
+<body>
+    <h1>Index of Contents</h1>
+    <ul id="file-list">
+        <li><a href="README.md">README.md</a></li>
+        <li><a href="test.html">test.html</a></li>
+    </ul>
+    <script>
+        const fs = require('fs');
+        const path = require('path');
+
+        function getAllFiles(dirPath, arrayOfFiles) {
+            files = fs.readdirSync(dirPath);
+
+            arrayOfFiles = arrayOfFiles || [];
+
+            files.forEach(function(file) {
+                if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+                    arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles);
+                } else {
+                    arrayOfFiles.push(path.join(__dirname, dirPath, "/", file));
+                }
+            });
+
+            return arrayOfFiles;
+        }
+
+        function generateLinks() {
+            const files = getAllFiles(".");
+            const fileList = document.getElementById("file-list");
+
+            files.forEach(function(file) {
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = file;
+                a.textContent = file;
+                li.appendChild(a);
+                fileList.appendChild(li);
+            });
+        }
+
+        window.onload = generateLinks;
+    </script>
+</body>
+</html>
