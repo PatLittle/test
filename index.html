@@ -45,5 +45,23 @@
 
         window.onload = generateLinks;
     </script>
+
+    <ul id="issues"></ul>
+
+    <script>
+        async function fetchIssues() {
+            const response = await fetch('https://api.github.com/repos/PatLittle/test/issues');
+            const issues = await response.json();
+            const issuesList = document.getElementById('issues');
+
+            issues.forEach(issue => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${issue.title} (#${issue.number})`;
+                issuesList.appendChild(listItem);
+            });
+        }
+
+        fetchIssues();
+    </script>
 </body>
 </html>
