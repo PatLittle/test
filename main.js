@@ -221,6 +221,54 @@ dropZone.addEventListener("drop", e => {
 
 // existing “Process CSV” button keeps working unmodified
 
+// ---------- CSV helper ----------
+function fieldsToCSV(fields) {
+  const cols = ["id", "type", "label", "description", "example"];
+  const header = cols.join(",") + "\n";
+  const rows = fields
+    .filter(f => f.id !== "_id")
+    .map(f => {
+      const info = f.info || {};
+      return [
+        f.id,
+        f.type,
+        (info.label || "").replace(/"/g,'""'),
+        (info.notes || "").replace(/"/g,'""'),
+        info.example ? String(info.example).replace(/"/g,'""') : ""
+      ]
+        .map(v => `"${v}"`)          // simple CSV quoting
+        .join(",");
+    })
+    .join("\n");
+  return header + rows;
+}
+
+// ---------- download listener ----------
+import { getDataDictionary } from "./ckan.js";
+
+document
+  .getElementById("btnDownloadDD")
+  .addEventListener("click", async () => {
+    const site = document.getElementById("siteUrl").value;
+    const resId = document.getElementById("ddRes").value.trim();
+    const msg   = document.getElementById("ddMsg");
+    msg.textContent = "Fetching…";
+    try {
+      const fields = await getDataDictionary(site, resId, "");
+      if (!fields) throw new Error("No data dictionary found.");
+      const csv = fieldsToCSV(fields);
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
+      a.href = url;
+      a.download = `${resId}-data-dictionary.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      msg.textContent = "✔ downloaded";
+    } catch (e) {
+      msg.textContent = "Error: " + e.message;
+    }
+  });
 
 
 
