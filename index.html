@@ -28,13 +28,6 @@
   <button id="processCSV">Process CSV</button>
 </section>
 
-    <!-- Section for CSV file processing -->
-    <section id="upload-section">
-      <h2>Upload Your CSV</h2>
-      <input type="file" id="csvFile" accept=".csv" />
-      <button id="processCSV">Process CSV</button>
-    </section>
-
     <!-- Section for CKAN API calls -->
     <section id="ckan-section">
       <h2>CKAN API Calls</h2>
@@ -51,6 +44,13 @@
     <section id="schema-tools">
   <h2>Schema &amp; Data Dictionary</h2>
 
+<details>
+  <summary><strong>Download Data&nbsp;Dictionary</strong></summary>
+  <input id="ddRes"  placeholder="resource_id" />
+  <button id="btnDownloadDD">Download CSV</button>
+  <span id="ddMsg"></span>
+</details>
+      
   <details>
     <summary><strong>Compare Schemas</strong></summary>
     <input id="srcRes" placeholder="Source resource_id" />
