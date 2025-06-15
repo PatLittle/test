@@ -8,10 +8,25 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header>
-      <h1>CKAN Toolbox</h1>
-      <p>A set of lightweight tools for working with secant CSV data and CKAN data sets.</p>
-    </header>
+   <header>
+  <h1>CKAN Toolbox</h1>
+  <p>A set of lightweight tools for CKAN 2.10 datasets.</p>
+
+  <!-- ✅ Install-PWA button (hidden until we get the event) -->
+  <button id="installPWA" style="display:none;">Install App</button>
+
+  <!-- ✅ CKAN status badge -->
+  <span id="ckanStatus" class="badge"></span>
+</header>
+
+<!-- ✅ Drag-and-drop zone -->
+<section id="upload-section">
+  <h2>Upload Your CSV</h2>
+  <div id="dropZone" class="drop-zone">Drag CSV here or&nbsp;
+    <input type="file" id="csvFile" accept=".csv" />
+  </div>
+  <button id="processCSV">Process CSV</button>
+</section>
 
     <!-- Section for CSV file processing -->
     <section id="upload-section">
