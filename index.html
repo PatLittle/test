@@ -33,6 +33,27 @@
       <div id="ckanResponse"></div>
     </section>
 
+    <section id="schema-tools">
+  <h2>Schema &amp; Data Dictionary</h2>
+
+  <details>
+    <summary><strong>Compare Schemas</strong></summary>
+    <input id="srcRes" placeholder="Source resource_id" />
+    <input id="dstRes" placeholder="Destination resource_id" />
+    <button id="btnCompare">Compare</button>
+    <pre id="cmpOut"></pre>
+  </details>
+
+  <details>
+    <summary><strong>Clone Data Dictionary</strong></summary>
+    <input id="cloneSrc" placeholder="Source resource_id" />
+    <input id="cloneDst" placeholder="Destination resource_id" />
+    <button id="btnClone">Clone</button>
+    <pre id="cloneOut"></pre>
+  </details>
+</section>
+
+
     <!-- Section to display the data dictionary generated from CSV analysis -->
     <section id="results-section">
       <h2>Data Dictionary</h2>

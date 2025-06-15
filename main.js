@@ -116,3 +116,41 @@ document.getElementById("ckanForm").addEventListener("submit", async function (e
     document.getElementById("ckanResponse").textContent = "Error: " + error;
   }
 });
+
+import {
+  compareSchemas,
+  cloneDataDictionary,
+  getFields,
+} from "./ckan.js";
+
+// compare
+document.getElementById("btnCompare").addEventListener("click", async () => {
+  const site = document.getElementById("siteUrl").value;
+  const key  = document.getElementById("apiKey").value;
+  const src  = document.getElementById("srcRes").value.trim();
+  const dst  = document.getElementById("dstRes").value.trim();
+  try {
+    const { sameNames, typeMismatches } = await compareSchemas(site, src, dst, key);
+    document.getElementById("cmpOut").textContent =
+      sameNames && !typeMismatches.length
+        ? "✔ Schemas match perfectly"
+        : `⚠ Differences:\n${typeMismatches.join("\n") || "Field lists differ"}`;
+  } catch (e) {
+    document.getElementById("cmpOut").textContent = "Error: " + e.message;
+  }
+});
+
+// clone
+document.getElementById("btnClone").addEventListener("click", async () => {
+  const site = document.getElementById("siteUrl").value;
+  const key  = document.getElementById("apiKey").value;
+  const src  = document.getElementById("cloneSrc").value.trim();
+  const dst  = document.getElementById("cloneDst").value.trim();
+  try {
+    const res = await cloneDataDictionary(site, src, dst, key);
+    document.getElementById("cloneOut").textContent =
+      "Done. Fields now:\n" + JSON.stringify(res.fields, null, 2);
+  } catch (e) {
+    document.getElementById("cloneOut").textContent = "Error: " + e.message;
+  }
+});
