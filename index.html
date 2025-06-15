@@ -77,19 +77,12 @@
 
     <!-- Load PapaParse from CDN for CSV parsing -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <script src="main.js"></script>
-    <script>
-      // Register the service worker for offline caching and PWA support.
-      if ("serviceWorker" in navigator) {
-        navigator.serviceWorker
-          .register("sw.js")
-          .then(function (registration) {
-            console.log("Service Worker registered with scope:", registration.scope);
-          })
-          .catch(function (error) {
-            console.log("Service Worker registration failed:", error);
-          });
-      }
-    </script>
+    <script type="module" src="./main.js"></script>
+    <script type="module">
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js")
+      .then(r => console.log("SW scope:", r.scope))
+      .catch(console.error);
+  }
   </body>
 </html>
