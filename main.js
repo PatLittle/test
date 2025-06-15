@@ -154,3 +154,73 @@ document.getElementById("btnClone").addEventListener("click", async () => {
     document.getElementById("cloneOut").textContent = "Error: " + e.message;
   }
 });
+
+
+let deferredPrompt;
+const installBtn = document.getElementById("installPWA");
+
+window.addEventListener("beforeinstallprompt", e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "inline-block";
+});
+
+installBtn.addEventListener("click", async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log("PWA install:", outcome);
+  installBtn.style.display = "none";
+  deferredPrompt = null;
+});
+
+
+const statusBadge = document.getElementById("ckanStatus");
+
+function showStatus(ok, msg) {
+  statusBadge.textContent = msg;
+  statusBadge.className = ok ? "badge ok" : "badge error";
+}
+
+// in your CKAN test-call listener (replace the old output logic)
+try {
+  const data = await response.json();
+  if (data.success) {
+    showStatus(true, "✓ connected to CKAN 2.10");
+    document.getElementById("ckanResponse")
+            .textContent = JSON.stringify(data.result, null, 2);
+  } else {
+    throw new Error(data.error?.message || "Unknown CKAN error");
+  }
+} catch (err) {
+  showStatus(false, err.message);
+}
+
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("csvFile");
+
+["dragenter", "dragover"].forEach(evt =>
+  dropZone.addEventListener(evt, e => {
+    e.preventDefault(); e.dataTransfer.dropEffect = "copy";
+    dropZone.classList.add("dragover");
+  })
+);
+["dragleave", "drop"].forEach(evt =>
+  dropZone.addEventListener(evt, () => dropZone.classList.remove("dragover"))
+);
+
+dropZone.addEventListener("drop", e => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file && file.name.endsWith(".csv")) {
+    fileInput.files = e.dataTransfer.files;          // delegate to existing logic
+  } else {
+    alert("Please drop a CSV file.");
+  }
+});
+
+// existing “Process CSV” button keeps working unmodified
+
+
+
+
