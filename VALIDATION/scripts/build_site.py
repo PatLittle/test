@@ -1,21 +1,15 @@
 #!/usr/bin/env python3
 """
-Static site generator for CKAN validation reports with explicit versioning:
+Static site generator for CKAN validation reports (versioned):
+- v0.2 = `tasks` schema (priority)
+- v0.1 = `tables` schema (legacy)
 
-- v0.2 = language buckets holding `tasks: [...]` (new, preferred)
-- v0.1 = language buckets holding `tables: [...]` (older)
-
-We render each version with a purpose-built template (no compromises).
-The index supports search, filters, sorting, and pagination.
-
-ENV:
-  VALIDATION_JSONL (default: validation.jsonl)
-  SITE_DIR         (default: VALIDATION)
+Index shows org name + dataset/resource names (EN/FR per toggle).
 """
 
 import os, re, json, html, ujson
 
-IN_PATH  = os.getenv("VALIDATION_JSONL", "validation.jsonl")
+IN_PATH  = os.getenv("VALIDATION_JSONL", "validation_enriched.jsonl")
 OUT_DIR  = os.getenv("SITE_DIR", "VALIDATION")
 
 # --------------------- Utilities ---------------------
@@ -55,211 +49,127 @@ def parse_created_era(s):
 # --------------------- Version detection ---------------------
 
 def detect_version(rep_dict):
-    """
-    Return 'v0.2' if any language or generic holder contains `tasks: [...]`.
-    Return 'v0.1' if any contains `tables: [...]`.
-    Otherwise 'unknown'.
-    """
-    if not isinstance(rep_dict, dict):
-        return "unknown"
-
-    # Check language buckets first
-    for lang in ("en", "fr"):
-        v = rep_dict.get(lang)
-        if isinstance(v, dict):
-            if isinstance(v.get("tasks"), list):
-                return "v0.2"
-            if isinstance(v.get("tables"), list):
-                return "v0.1"
-
-    # Generic holders (fallback if no en/fr)
-    for holder in ("report", "data"):
-        v = rep_dict.get(holder)
-        if isinstance(v, dict):
-            if isinstance(v.get("tasks"), list):
-                return "v0.2"
-            if isinstance(v.get("tables"), list):
-                return "v0.1"
-
-    # Very old/odd cases with top-level
-    if isinstance(rep_dict.get("tasks"), list):
-        return "v0.2"
-    if isinstance(rep_dict.get("tables"), list):
-        return "v0.1"
-
+    if not isinstance(rep_dict, dict): return "unknown"
+    for lang in ("en","fr"):
+        blk = rep_dict.get(lang)
+        if isinstance(blk, dict):
+            if isinstance(blk.get("tasks"), list):  return "v0.2"
+            if isinstance(blk.get("tables"), list): return "v0.1"
+    for holder in ("report","data"):
+        blk = rep_dict.get(holder)
+        if isinstance(blk, dict):
+            if isinstance(blk.get("tasks"), list):  return "v0.2"
+            if isinstance(blk.get("tables"), list): return "v0.1"
+    if isinstance(rep_dict.get("tasks"), list):  return "v0.2"
+    if isinstance(rep_dict.get("tables"), list): return "v0.1"
     return "unknown"
 
-def lang_block(rep_dict, lang_or_holder):
-    v = rep_dict.get(lang_or_holder)
-    return v if isinstance(v, dict) else {}
-
 def extract_lang_v02(rep_dict):
-    """
-    Return tasks by language: {'en':[...], 'fr':[...]}
-    Falls back to generic holder as EN if en/fr missing.
-    """
     out = {"en": [], "fr": []}
-    if isinstance(rep_dict.get("en"), dict):
-        t = rep_dict["en"].get("tasks")
-        out["en"] = t if isinstance(t, list) else []
-    if isinstance(rep_dict.get("fr"), dict):
-        t = rep_dict["fr"].get("tasks")
-        out["fr"] = t if isinstance(t, list) else []
+    if isinstance(rep_dict.get("en"), dict): out["en"] = rep_dict["en"].get("tasks") or []
+    if isinstance(rep_dict.get("fr"), dict): out["fr"] = rep_dict["fr"].get("tasks") or []
     if not out["en"] and not out["fr"]:
-        # fallback to generic
-        for holder in ("report", "data"):
-            v = lang_block(rep_dict, holder)
-            t = v.get("tasks")
-            if isinstance(t, list):
-                out["en"] = t
-                break
+        for holder in ("report","data"):
+            blk = rep_dict.get(holder)
+            if isinstance(blk, dict) and isinstance(blk.get("tasks"), list):
+                out["en"] = blk["tasks"]; break
         if not out["en"] and isinstance(rep_dict.get("tasks"), list):
             out["en"] = rep_dict["tasks"]
     return out
 
 def extract_lang_v01(rep_dict):
-    """
-    Return tables by language: {'en':[...], 'fr':[...]}
-    Falls back to generic holder as EN if en/fr missing.
-    """
     out = {"en": [], "fr": []}
-    if isinstance(rep_dict.get("en"), dict):
-        t = rep_dict["en"].get("tables")
-        out["en"] = t if isinstance(t, list) else []
-    if isinstance(rep_dict.get("fr"), dict):
-        t = rep_dict["fr"].get("tables")
-        out["fr"] = t if isinstance(t, list) else []
+    if isinstance(rep_dict.get("en"), dict): out["en"] = rep_dict["en"].get("tables") or []
+    if isinstance(rep_dict.get("fr"), dict): out["fr"] = rep_dict["fr"].get("tables") or []
     if not out["en"] and not out["fr"]:
-        for holder in ("report", "data"):
-            v = lang_block(rep_dict, holder)
-            t = v.get("tables")
-            if isinstance(t, list):
-                out["en"] = t
-                break
+        for holder in ("report","data"):
+            blk = rep_dict.get(holder)
+            if isinstance(blk, dict) and isinstance(blk.get("tables"), list):
+                out["en"] = blk["tables"]; break
         if not out["en"] and isinstance(rep_dict.get("tables"), list):
             out["en"] = rep_dict["tables"]
     return out
 
-# --------------------- Aggregation ---------------------
-
 def agg_v02(tasks):
-    """
-    Aggregate per-language metrics for v0.2 (tasks schema).
-    Prefer task.stats.errors/rows; fall back to len(errors).
-    valid_all = True if all task.valid True, False if any False, None if no boolean.
-    """
     if not tasks:
         return {"error_count": 0, "row_count": 0, "valid_all": None, "warning_count": 0}
-    err = 0
-    rows = 0
-    warns = 0
-    valid_all = True
-    saw_valid = False
+    err=rows=warns=0; valid_all=True; saw=False
     for t in tasks:
-        stats = t.get("stats") or {}
-        e_num = stats.get("errors")
-        w_num = stats.get("warnings")
-        r_num = stats.get("rows")
-        # errors
-        if isinstance(e_num, int):
-            err += e_num
-        else:
-            err += len(t.get("errors") or [])
-        # warnings
-        if isinstance(w_num, int):
-            warns += w_num
-        else:
-            warns += len(t.get("warnings") or [])
-        # rows
-        if isinstance(r_num, int):
-            rows += r_num
-        v = t.get("valid")
-        if isinstance(v, bool):
-            saw_valid = True
-            if not v:
-                valid_all = False
-    if not saw_valid:
-        valid_all = None
-    return {"error_count": err, "row_count": rows, "valid_all": valid_all, "warning_count": warns}
+        st=t.get("stats") or {}
+        err += st.get("errors") if isinstance(st.get("errors"), int) else len(t.get("errors") or [])
+        warns+= st.get("warnings") if isinstance(st.get("warnings"),int) else len(t.get("warnings") or [])
+        rows+= st.get("rows") if isinstance(st.get("rows"), int) else 0
+        v=t.get("valid")
+        if isinstance(v,bool):
+            saw=True
+            if not v: valid_all=False
+    return {"error_count": err, "row_count": rows, "valid_all": (valid_all if saw else None), "warning_count": warns}
 
 def norm_get(table, *keys, default=None):
     for k in keys:
-        if k in table:
-            return table[k]
+        if k in table: return table[k]
     for k in keys:
-        alt = k.replace("-", "_") if "-" in k else k.replace("_", "-")
-        if alt in table:
-            return table[alt]
+        alt = k.replace("-", "_") if "-" in k else k.replace("_","-")
+        if alt in table: return table[alt]
     return default
 
 def agg_v01(tables):
-    """
-    Aggregate per-language metrics for v0.1 (tables schema).
-    """
     if not tables:
-        return {"error_count": 0, "row_count": 0, "valid_all": None, "warning_count": 0}
-    err = 0
-    rows = 0
-    valid_all = True
-    saw_valid = False
+        return {"error_count":0,"row_count":0,"valid_all":None,"warning_count":0}
+    err=rows=0; valid_all=True; saw=False
     for t in tables:
-        err += int(norm_get(t, "error-count", "error_count", default=0) or 0)
-        rows += int(norm_get(t, "row-count", "row_count", default=0) or 0)
-        v = t.get("valid")
-        if isinstance(v, bool):
-            saw_valid = True
-            if not v:
-                valid_all = False
-    if not saw_valid:
-        valid_all = None
-    return {"error_count": err, "row_count": rows, "valid_all": valid_all, "warning_count": 0}
+        err+= int(norm_get(t,"error-count","error_count",default=0) or 0)
+        rows+= int(norm_get(t,"row-count","row_count",default=0) or 0)
+        v=t.get("valid")
+        if isinstance(v,bool):
+            saw=True
+            if not v: valid_all=False
+    return {"error_count":err,"row_count":rows,"valid_all":(valid_all if saw else None),"warning_count":0}
 
 # --------------------- Load & normalize ---------------------
 
 def read_items(jsonl_path):
-    items = []
-    with open(jsonl_path, "r", encoding="utf-8") as f:
+    items=[]
+    with open(jsonl_path,"r",encoding="utf-8") as f:
         for line in f:
-            o = ujson.loads(line)
-            rep = parse_reports(o.get("reports"))
-            version = detect_version(rep)
-            created = (o.get("created") or "").strip()
-            era = parse_created_era(created)
+            o=ujson.loads(line)
+            rep=parse_reports(o.get("reports"))
+            version=detect_version(rep)
+            created=(o.get("created") or "").strip()
+            era=parse_created_era(created)
 
-            # Language splits and aggregation per version
-            if version == "v0.2":
-                lang_data = extract_lang_v02(rep)
-                en_aggr = agg_v02(lang_data["en"])
-                fr_aggr = agg_v02(lang_data["fr"])
-            elif version == "v0.1":
-                lang_data = extract_lang_v01(rep)
-                en_aggr = agg_v01(lang_data["en"])
-                fr_aggr = agg_v01(lang_data["fr"])
+            # per-version language data + agg
+            if version=="v0.2":
+                lang_data=extract_lang_v02(rep)
+                en_aggr=agg_v02(lang_data["en"]); fr_aggr=agg_v02(lang_data["fr"])
+            elif version=="v0.1":
+                lang_data=extract_lang_v01(rep)
+                en_aggr=agg_v01(lang_data["en"]); fr_aggr=agg_v01(lang_data["fr"])
             else:
-                # unknown -> treat as empty
-                lang_data = {"en": [], "fr": []}
-                en_aggr = {"error_count": 0, "row_count": 0, "valid_all": None, "warning_count": 0}
-                fr_aggr = {"error_count": 0, "row_count": 0, "valid_all": None, "warning_count": 0}
+                lang_data={"en":[],"fr":[]}; en_aggr={"error_count":0,"row_count":0,"valid_all":None,"warning_count":0}; fr_aggr=en_aggr
 
-            def b(v): return None if v is None else bool(v)
+            b=lambda v: (None if v is None else bool(v))
 
             items.append({
                 "id": (o.get("id") or o.get("resource_id") or ""),
                 "resource_id": o.get("resource_id") or "",
                 "created": created,
                 "status": o.get("status") or "",
-                "era": era,                    # new / old / unknown
-                "version": version,            # v0.2 / v0.1 / unknown
-                "en": {
-                    "errors": en_aggr["error_count"], "rows": en_aggr["row_count"],
-                    "valid": b(en_aggr["valid_all"]), "warnings": en_aggr["warning_count"]
-                },
-                "fr": {
-                    "errors": fr_aggr["error_count"], "rows": fr_aggr["row_count"],
-                    "valid": b(fr_aggr["valid_all"]), "warnings": fr_aggr["warning_count"]
-                },
-                "rep": rep,                    # for details
-                "lang_data": lang_data,        # tasks or tables, version-specific
+                "era": era,
+                "version": version,
+                # NEW metadata
+                "organization_name": o.get("organization_name") or "",
+                "dataset_id": o.get("dataset_id") or "",
+                "dataset_title_en": o.get("dataset_title_en") or "",
+                "dataset_title_fr": o.get("dataset_title_fr") or "",
+                "resource_name_en": o.get("resource_name_en") or "",
+                "resource_name_fr": o.get("resource_name_fr") or "",
+                "url_type": o.get("url_type") or "",
+                # aggregates
+                "en": {"errors": en_aggr["error_count"], "rows": en_aggr["row_count"], "valid": b(en_aggr["valid_all"]), "warnings": en_aggr["warning_count"]},
+                "fr": {"errors": fr_aggr["error_count"], "rows": fr_aggr["row_count"], "valid": b(fr_aggr["valid_all"]), "warnings": fr_aggr["warning_count"]},
+                "rep": rep,
+                "lang_data": lang_data,
             })
     return items
 
@@ -273,7 +183,7 @@ CSS = """
 *{box-sizing:border-box}
 body{margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
 a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
-.container{max-width:1280px; margin:0 auto; padding:28px}
+.container{max-width:1600px; margin:0 auto; padding:28px}  /* wider */
 .header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px}
 .h1{font-size:20px; font-weight:700; letter-spacing:.2px}
 .panel{background:var(--panel); border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,.25)}
@@ -284,9 +194,9 @@ a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
   color:var(--ink); border-radius:10px; font-size:14px
 }
 .btn{cursor:pointer}
-.table{width:100%; border-collapse:collapse; font-size:14px}
+.table{width:100%; border-collapse:collapse; font-size:14px; table-layout:auto}
 th, td{padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top}
-th{position:sticky; top:0; background:linear-gradient(0deg, rgba(22,27,51,.90), rgba(22,27,51,.95)); z-index:1}
+th{position:sticky; top:0; background:linear-gradient(0deg, rgba(22,27,51,.90), rgba(22,27,51,.95)); z-index:1; white-space:nowrap}
 th[data-sort]{cursor:pointer; user-select:none}
 .sort-ind{opacity:.9}
 .badge{display:inline-flex; align-items:center; gap:6px; padding:2px 8px; border-radius:999px; background:var(--chip); color:var(--ink); font-weight:600; font-size:12px}
@@ -299,6 +209,7 @@ th[data-sort]{cursor:pointer; user-select:none}
 .hdr-ctrl{margin-top:6px}
 .hdr-ctrl .input, .hdr-ctrl .select{width:100%}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace; background:rgba(255,255,255,.06); padding:10px; border-radius:10px; overflow:auto; white-space:pre-wrap}
+.small{font-size:12px; color:var(--muted)}
 """
 
 JS = r"""
@@ -310,11 +221,12 @@ function getRows(){ return Array.from(document.querySelectorAll('tbody tr')); }
 function visibleFilteredRows(){ return getRows().filter(r => r.dataset.filtered !== '0'); }
 
 function getCellValue(row, key){
-  if(key==='created')  return (row.dataset.created  || '').toLowerCase();
-  if(key==='status')   return (row.dataset.status   || '').toLowerCase();
-  if(key==='resource') return (row.dataset.resource || '').toLowerCase();
-  if(key==='version')  return (row.dataset.version  || '').toLowerCase();
-  if(key==='era')      return (row.dataset.era      || '').toLowerCase();
+  if(key==='created')   return (row.dataset.created   || '').toLowerCase();
+  if(key==='status')    return (row.dataset.status    || '').toLowerCase();
+  if(key==='resource')  return (row.dataset.resource  || '').toLowerCase();
+  if(key==='organization') return (row.dataset.org    || '').toLowerCase();
+  if(key==='version')   return (row.dataset.version   || '').toLowerCase();
+  if(key==='era')       return (row.dataset.era       || '').toLowerCase();
   return row.innerText.toLowerCase();
 }
 
@@ -351,6 +263,7 @@ function applyFilters(){
   const rF  = (document.querySelector('#filter-resource')?.value || '').toLowerCase().trim();
   const sF  = (document.querySelector('#filter-status')?.value || '').toLowerCase().trim();
   const cF  = (document.querySelector('#filter-created')?.value || '').toLowerCase().trim();
+  const oF  = (document.querySelector('#filter-org')?.value || '').toLowerCase().trim();
   const vF  = (document.querySelector('#filter-version')?.value || '').toLowerCase().trim();
   const eF  = (document.querySelector('#filter-era')?.value || '').toLowerCase().trim();
 
@@ -359,6 +272,7 @@ function applyFilters(){
     const dres = (r.dataset.resource || '').toLowerCase();
     const dsta = (r.dataset.status   || '').toLowerCase();
     const dcre = (r.dataset.created  || '').toLowerCase();
+    const dorg = (r.dataset.org      || '').toLowerCase();
     const dver = (r.dataset.version  || '').toLowerCase();
     const dera = (r.dataset.era      || '').toLowerCase();
 
@@ -367,6 +281,7 @@ function applyFilters(){
     if(rF && !dres.includes(rF)) show = false;
     if(sF && dsta !== sF) show = false;
     if(cF && !dcre.includes(cF)) show = false;
+    if(oF && !dorg.includes(oF)) show = false;
     if(vF && dver !== vF) show = false;
     if(eF && dera !== eF) show = false;
 
@@ -408,7 +323,7 @@ function renderPage(page){
 
 window.addEventListener('DOMContentLoaded',()=>{
   setLang(localStorage.getItem('vr_lang')||'en');
-  ['#q','#filter-resource','#filter-status','#filter-created','#filter-version','#filter-era'].forEach(sel=>{
+  ['#q','#filter-resource','#filter-status','#filter-created','#filter-org','#filter-version','#filter-era'].forEach(sel=>{
     const el=document.querySelector(sel); if(!el) return;
     el.addEventListener('input', applyFilters);
     el.addEventListener('change', applyFilters);
@@ -416,7 +331,6 @@ window.addEventListener('DOMContentLoaded',()=>{
   const ps=document.querySelector('#page-size');
   if(ps) ps.addEventListener('change', e=> setPageSize(e.target.value));
 
-  // initialize
   getRows().forEach(r=> r.dataset.filtered='1');
   updateSortIndicators();
   setPageSize(document.querySelector('#page-size')?.value || 25);
@@ -435,6 +349,10 @@ def chip(text, cls=""):
     cls_str = f" {cls}" if cls else ""
     return f'<span class="badge{cls_str}">{html.escape(str(text))}</span>'
 
+def lang_html(en, fr):
+    return (f'<span data-lang="en">{html.escape(en or "")}</span>'
+            f'<span data-lang="fr" style="display:none">{html.escape(fr or "")}</span>')
+
 # --------------------- Index page ---------------------
 
 def write_index(items, out_dir):
@@ -442,9 +360,12 @@ def write_index(items, out_dir):
         link=f"reports/{slugify(it['id'])}.html"
         created = it['created'] or ''
         status  = it['status'] or ''
-        resource= it['resource_id'] or '-'
+        resource_code = it['resource_id'] or '-'
         version = it['version'] or 'unknown'
         era     = it['era'] or 'unknown'
+        org     = it['organization_name'] or ''
+        d_en, d_fr = it.get("dataset_title_en",""), it.get("dataset_title_fr","")
+        r_en, r_fr = it.get("resource_name_en",""), it.get("resource_name_fr","")
 
         en_badge = badge_state(it['en']['valid']) + f' {chip(f"EN errors: {it["en"]["errors"]}", "na")}'
         fr_badge = badge_state(it['fr']['valid']) + f' {chip(f"FR erreurs: {it["fr"]["errors"]}", "na")}'
@@ -453,15 +374,25 @@ def write_index(items, out_dir):
         era_chip= chip(era, "na")
         st_chip = chip(status, 'na' if status not in ('success','failure') else ('ok' if status=='success' else 'bad'))
 
+        dataset_cell = f'{lang_html(d_en, d_fr)}<div class="small"><code>{html.escape(it["dataset_id"])}</code></div>'
+        resource_cell= f'{lang_html(r_en, r_fr)}<div class="small"><code>{html.escape(resource_code)}</code> · {html.escape(it.get("url_type") or "")}</div>'
+
         return f"""
           <tr data-created="{html.escape(created)}"
               data-status="{html.escape(status.lower())}"
-              data-resource="{html.escape(resource)}"
+              data-resource="{html.escape(resource_code)}"
+              data-organization="{html.escape(org)}"
+              data-org="{html.escape(org)}"
               data-version="{html.escape(version.lower())}"
               data-era="{html.escape(era.lower())}"
               data-filtered="1">
-            <td><a href="{link}"><code>{html.escape(it['id'])}</code></a><div class="subtle">{ver_chip} {era_chip}</div></td>
-            <td><code>{html.escape(resource)}</code></td>
+            <td>
+              <a href="{link}"><code>{html.escape(it['id'])}</code></a>
+              <div class="subtle">{ver_chip} {era_chip}</div>
+            </td>
+            <td>{dataset_cell}</td>
+            <td>{resource_cell}</td>
+            <td>{html.escape(org)}</td>
             <td>{en_badge}</td>
             <td>{fr_badge}</td>
             <td>{st_chip}</td>
@@ -508,9 +439,19 @@ def write_index(items, out_dir):
             <tr>
               <th>ID</th>
 
+              <th>
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
               <th data-sort="resource" onclick="sortBy('resource')">
                 Resource
-                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter resource…"/></div>
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+                <div class="hdr-ctrl"><input class="input" id="filter-org" placeholder="Filter org…"/></div>
               </th>
 
               <th>EN</th>
@@ -554,8 +495,8 @@ def write_index(items, out_dir):
     </div>
 
     <p class="subtle" style="margin-top:12px">
-      <strong>v0.2</strong> = tasks schema (priority). <strong>v0.1</strong> = tables schema (legacy).
-      Era is inferred from the created timestamp; rendering depends on the detected version.
+      v0.2 = tasks schema (priority). v0.1 = tables schema (legacy).
+      Language toggle switches dataset & resource titles (EN/FR). The resource row shows its code and url_type.
     </p>
   </div>
 </body></html>"""
@@ -563,7 +504,10 @@ def write_index(items, out_dir):
     with open(os.path.join(out_dir,"index.html"), "w", encoding="utf-8") as f:
         f.write(html_index)
 
-# --------------------- Detail: version-specific templates ---------------------
+# --------------------- Detail pages (unchanged structure, still versioned) ---------------------
+
+def badge_state_detail(ok):  # same visuals
+    return badge_state(ok)
 
 def render_errors_table(errs, lang='en'):
     if not errs:
@@ -579,159 +523,125 @@ def render_errors_table(errs, lang='en'):
     )
     return f'<table class="table">{head}<tbody>{rows}</tbody></table>'
 
-# --- v0.2 (tasks) language panel
+# v0.2 tasks blocks
 def render_task_block(task, lang='en', idx=0):
-    stats = task.get("stats") or {}
-    labels = task.get("labels") or []
-    warns  = task.get("warnings") or []
-    errs   = task.get("errors") or []
-    name   = task.get("name") or f"Task {idx+1}"
-    ttype  = task.get("type") or ""
-    place  = task.get("place") or ""
+    st=task.get("stats") or {}
+    labels=task.get("labels") or []
+    warns =task.get("warnings") or []
+    errs  =task.get("errors") or []
+    name  =task.get("name") or f"Task {idx+1}"
+    ttype =task.get("type") or ""
+    place =task.get("place") or ""
 
-    kv_parts = []
-    kv_parts.append(f"<div>Valid</div><div>{badge_state(task.get('valid'))}</div>")
-    for label, key in [
-        ("Type", "type"), ("Source", "place"),
-        ("Rows", "rows"), ("Fields", "fields"),
-        ("Errors", "errors"), ("Warnings", "warnings"),
-        ("Bytes", "bytes"), ("MD5", "md5"), ("SHA256", "sha256"),
-        ("Seconds", "seconds"),
-    ]:
-        val = stats.get(key) if key in ("rows","fields","errors","warnings","bytes","md5","sha256","seconds") else task.get(key)
-        if val not in (None, "", []):
-            if key == "place":
+    kv=[]
+    kv.append(f"<div>Valid</div><div>{badge_state_detail(task.get('valid'))}</div>")
+    for label,key in [("Type","type"),("Source","place"),("Rows","rows"),("Fields","fields"),("Errors","errors"),
+                      ("Warnings","warnings"),("Bytes","bytes"),("MD5","md5"),("SHA256","sha256"),("Seconds","seconds")]:
+        val = st.get(key) if key in ("rows","fields","errors","warnings","bytes","md5","sha256","seconds") else task.get(key)
+        if val not in (None,"",[]):
+            if key=="place":
                 val = f'<a href="{html.escape(str(val))}" target="_blank" rel="noopener">{html.escape(str(val))}</a>'
-            kv_parts.append(f"<div>{label}</div><div>{val}</div>")
+            kv.append(f"<div>{label}</div><div>{val}</div>")
 
-    labels_html = "<br/>".join(html.escape(str(x)) for x in labels) if labels else '<span class="subtle">(none)</span>'
-    warns_html  = "<br/>".join(html.escape(str(x)) for x in warns)  if warns  else '<span class="subtle">(none)</span>'
-    errs_html   = "<br/>".join(html.escape(str(x)) for x in errs)   if errs   else '<span class="subtle">(none)</span>'
-
-    raw_json = html.escape(json.dumps(task, ensure_ascii=False, indent=2))
+    labels_html="<br/>".join(html.escape(str(x)) for x in labels) if labels else '<span class="subtle">(none)</span>'
+    warns_html ="<br/>".join(html.escape(str(x)) for x in warns)  if warns  else '<span class="subtle">(none)</span>'
+    errs_html  ="<br/>".join(html.escape(str(x)) for x in errs)   if errs   else '<span class="subtle">(none)</span>'
+    raw_json   = html.escape(json.dumps(task, ensure_ascii=False, indent=2))
 
     return f"""
     <div class="section">
       <div class="h1" style="font-size:16px">{html.escape(name)} {chip(ttype, 'na')}</div>
-      <div class="kv" style="margin-top:8px">{''.join(kv_parts)}</div>
-
-      <h4 style="margin:12px 0 6px">{'Labels' if lang=='en' else 'Étiquettes'}</h4>
-      <div class="code">{labels_html}</div>
-
-      <h4 style="margin:12px 0 6px">{'Warnings' if lang=='en' else 'Avertissements'}</h4>
-      <div class="code">{warns_html}</div>
-
-      <h4 style="margin:12px 0 6px">{'Errors' if lang=='en' else 'Erreurs'}</h4>
-      <div class="code">{errs_html}</div>
-
-      <h4 style="margin:12px 0 6px">{'Raw task JSON' if lang=='en' else 'JSON brut de la tâche'}</h4>
-      <div class="code">{raw_json}</div>
-    </div>
-    """
+      <div class="kv" style="margin-top:8px">{''.join(kv)}</div>
+      <h4 style="margin:12px 0 6px">{'Labels' if lang=='en' else 'Étiquettes'}</h4><div class="code">{labels_html}</div>
+      <h4 style="margin:12px 0 6px">{'Warnings' if lang=='en' else 'Avertissements'}</h4><div class="code">{warns_html}</div>
+      <h4 style="margin:12px 0 6px">{'Errors' if lang=='en' else 'Erreurs'}</h4><div class="code">{errs_html}</div>
+      <h4 style="margin:12px 0 6px">{'Raw task JSON' if lang=='en' else 'JSON brut de la tâche'}</h4><div class="code">{raw_json}</div>
+    </div>"""
 
 def render_lang_panel_v02(lang, tasks):
+    def agg(tasks):
+        return agg_v02(tasks)
     if tasks is None:
         return f'<div class="section"><span class="badge na">Not available</span></div>'
-    aggr = agg_v02(tasks)
-    head = f"""
+    a=agg(tasks)
+    head=f"""
       <div class="section">
         <div class="kv">
-          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state(aggr["valid_all"])}</div>
-          <div>{"Errors" if lang=='en' else "Erreurs"}</div><div>{aggr["error_count"]}</div>
-          <div>{"Warnings" if lang=='en' else "Avertissements"}</div><div>{aggr["warning_count"]}</div>
-          <div>{"Rows" if lang=='en' else "Lignes"}</div><div>{aggr["row_count"]}</div>
+          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state_detail(a["valid_all"])}</div>
+          <div>{"Errors" if lang=='en' else "Erreurs"}</div><div>{a["error_count"]}</div>
+          <div>{"Warnings" if lang=='en' else "Avertissements"}</div><div>{a["warning_count"]}</div>
+          <div>{"Rows" if lang=='en' else "Lignes"}</div><div>{a["row_count"]}</div>
         </div>
-      </div>
-    """
-    blocks = "".join(render_task_block(t, lang, i) for i, t in enumerate(tasks))
-    if not blocks:
-        blocks = '<div class="section"><span class="badge na">No tasks</span></div>' if lang=='en' \
-               else '<div class="section"><span class="badge na">Aucune tâche</span></div>'
-    style = '' if lang=='en' else 'style="display:none"'
+      </div>"""
+    blocks="".join(render_task_block(t,lang,i) for i,t in enumerate(tasks)) or \
+        ('<div class="section"><span class="badge na">No tasks</span></div>' if lang=='en' else '<div class="section"><span class="badge na">Aucune tâche</span></div>')
+    style='' if lang=='en' else 'style="display:none"'
     return f'<section data-lang="{lang}" {style} class="panel">{head}{blocks}</section>'
 
-# --- v0.1 (tables) language panel
+# v0.1 tables blocks
 def render_table_block_v01(t, lang='en', idx=0):
-    headers = t.get("headers", [])
-    header_text = html.escape("\n".join(map(str, headers))) if headers else '<span class="subtle">(none)</span>'
-    kv_parts = []
-    # Show common v0.1 descriptors
-    for label, key in [
-        ("Valid","valid"), ("Format","format"), ("Encoding","encoding"), ("Scheme","scheme"),
-        ("Source","source"), ("Time","time"),
-        ("Row count","row-count"), ("Row count","row_count"),
-        ("Error count","error-count"), ("Error count","error_count"),
-    ]:
-        val = t.get(key)
+    headers=t.get("headers",[])
+    header_text=html.escape("\n".join(map(str,headers))) if headers else '<span class="subtle">(none)</span>'
+    kv=[]
+    for label,key in [("Valid","valid"),("Format","format"),("Encoding","encoding"),("Scheme","scheme"),
+                      ("Source","source"),("Time","time"),("Row count","row-count"),("Row count","row_count"),
+                      ("Error count","error-count"),("Error count","error_count")]:
+        val=t.get(key)
         if label in ("Row count","Error count") and val is None:
-            # try normalized
-            alt = key.replace("-", "_") if "-" in key else key.replace("_", "-")
-            val = t.get(alt)
-        if val not in (None, "", []):
-            if key == "valid":
-                val = badge_state(bool(val))
-            kv_parts.append(f"<div>{label}</div><div>{html.escape(str(val))}</div>")
-
-    errs = t.get("errors", [])
-    errors_table = render_errors_table(errs, lang)
-
-    raw_json = html.escape(json.dumps(t, ensure_ascii=False, indent=2))
+            alt = key.replace("-","_") if "-" in key else key.replace("_","-")
+            val=t.get(alt)
+        if val not in (None,"",[]):
+            if key=="valid": val=badge_state_detail(bool(val))
+            kv.append(f"<div>{label}</div><div>{html.escape(str(val))}</div>")
+    errors_table=render_errors_table(t.get("errors",[]),lang)
+    raw_json=html.escape(json.dumps(t, ensure_ascii=False, indent=2))
     return f"""
       <div class="section">
         <div class="h1" style="font-size:16px">Table {idx+1}</div>
-        <div class="kv" style="margin-top:8px">{''.join(kv_parts) or '<div>Table</div><div>-</div>'}</div>
-        <h4 style="margin:12px 0 6px">{'Errors' if lang=='en' else 'Erreurs'}</h4>
-        {errors_table}
-        <h4 style="margin:12px 0 6px">{'Headers' if lang=='en' else 'En-têtes'}</h4>
-        <div class="code">{header_text}</div>
-        <h4 style="margin:12px 0 6px">{'Raw table JSON' if lang=='en' else 'JSON brut de la table'}</h4>
-        <div class="code">{raw_json}</div>
-      </div>
-    """
+        <div class="kv" style="margin-top:8px">{''.join(kv) or '<div>Table</div><div>-</div>'}</div>
+        <h4 style="margin:12px 0 6px">{'Errors' if lang=='en' else 'Erreurs'}</h4>{errors_table}
+        <h4 style="margin:12px 0 6px">{'Headers' if lang=='en' else 'En-têtes'}</h4><div class="code">{header_text}</div>
+        <h4 style="margin:12px 0 6px">{'Raw table JSON' if lang=='en' else 'JSON brut de la table'}</h4><div class="code">{raw_json}</div>
+      </div>"""
 
 def render_lang_panel_v01(lang, tables):
-    if tables is None:
-        return f'<div class="section"><span class="badge na">Not available</span></div>'
-    aggr = agg_v01(tables)
-    head = f"""
+    a=agg_v01(tables)
+    head=f"""
       <div class="section">
         <div class="kv">
-          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state(aggr["valid_all"])}</div>
-          <div>{"Errors" if lang=='en' else "Erreurs"}</div><div>{aggr["error_count"]}</div>
-          <div>{"Rows" if lang=='en' else "Lignes"}</div><div>{aggr["row_count"]}</div>
+          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state_detail(a["valid_all"])}</div>
+          <div>{"Errors" if lang=='en' else "Erreurs"}</div><div>{a["error_count"]}</div>
+          <div>{"Rows" if lang=='en' else "Lignes"}</div><div>{a["row_count"]}</div>
         </div>
-      </div>
-    """
-    blocks = "".join(render_table_block_v01(t, lang, i) for i, t in enumerate(tables))
-    if not blocks:
-        blocks = '<div class="section"><span class="badge na">No tables</span></div>' if lang=='en' \
-               else '<div class="section"><span class="badge na">Aucune table</span></div>'
-    style = '' if lang=='en' else 'style="display:none"'
+      </div>"""
+    blocks="".join(render_table_block_v01(t,lang,i) for i,t in enumerate(tables)) or \
+        ('<div class="section"><span class="badge na">No tables</span></div>' if lang=='en' else '<div class="section"><span class="badge na">Aucune table</span></div>')
+    style='' if lang=='en' else 'style="display:none"'
     return f'<section data-lang="{lang}" {style} class="panel">{head}{blocks}</section>'
 
-# --- detail page wrapper
-
 def write_report_pages(items, out_dir):
-    rdir = os.path.join(out_dir, "reports")
-    os.makedirs(rdir, exist_ok=True)
+    rdir=os.path.join(out_dir,"reports"); os.makedirs(rdir, exist_ok=True)
     for it in items:
-        pid = slugify(it['id'])
-        ver = it.get("version") or "unknown"
+        pid=slugify(it['id']); ver=it.get("version") or "unknown"
+        header_meta=f"""
+        <div class="kv" style="margin-top:8px">
+          <div>Version</div><div>{chip(ver,'na')}</div>
+          <div>Era</div><div>{chip(it['era'],'na')}</div>
+          <div>Organization</div><div>{html.escape(it.get('organization_name',''))}</div>
+          <div>Dataset</div><div>{lang_html(it.get('dataset_title_en',''), it.get('dataset_title_fr',''))} <span class="small"><code>{html.escape(it.get('dataset_id',''))}</code></span></div>
+          <div>Resource</div><div>{lang_html(it.get('resource_name_en',''), it.get('resource_name_fr',''))} <span class="small"><code>{html.escape(it.get('resource_id',''))}</code> · {html.escape(it.get('url_type',''))}</span></div>
+          <div>Status</div><div>{chip(it['status'] or 'unknown', 'na' if it['status'] not in ('success','failure') else ('ok' if it['status']=='success' else 'bad'))}</div>
+          <div>Created</div><div><time>{html.escape(it['created'] or '')}</time></div>
+        </div>"""
 
-        if ver == "v0.2":
-            body = f"""
-            {render_lang_panel_v02('en', it['lang_data'].get('en'))}
-            {render_lang_panel_v02('fr', it['lang_data'].get('fr'))}
-            """
-        elif ver == "v0.1":
-            body = f"""
-            {render_lang_panel_v01('en', it['lang_data'].get('en'))}
-            {render_lang_panel_v01('fr', it['lang_data'].get('fr'))}
-            """
+        if ver=="v0.2":
+            body=f"{render_lang_panel_v02('en', it['lang_data'].get('en'))}{render_lang_panel_v02('fr', it['lang_data'].get('fr'))}"
+        elif ver=="v0.1":
+            body=f"{render_lang_panel_v01('en', it['lang_data'].get('en'))}{render_lang_panel_v01('fr', it['lang_data'].get('fr'))}"
         else:
-            body = '<div class="panel section"><span class="badge na">Unknown report format</span></div>'
+            body='<div class="panel section"><span class="badge na">Unknown report format</span></div>'
 
-        page = f"""<!doctype html><html lang="en"><head>
+        page=f"""<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Report {html.escape(it['id'])}</title>
 <link rel="stylesheet" href="../style.css"><script defer src="../app.js"></script>
@@ -747,13 +657,7 @@ def write_report_pages(items, out_dir):
 
     <div class="panel section">
       <div class="h1" style="font-size:18px"><code>{html.escape(it['id'])}</code></div>
-      <div class="kv" style="margin-top:8px">
-        <div>Version</div><div>{chip(ver, 'na')}</div>
-        <div>Era</div><div>{chip(it['era'], 'na')}</div>
-        <div>Resource</div><div><code>{html.escape(it['resource_id'] or "-")}</code></div>
-        <div>Status</div><div>{chip(it['status'] or 'unknown', 'na' if it['status'] not in ('success','failure') else ('ok' if it['status']=='success' else 'bad'))}</div>
-        <div>Created</div><div><time>{html.escape(it['created'] or '')}</time></div>
-      </div>
+      {header_meta}
     </div>
 
     {body}
@@ -768,8 +672,7 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, "style.css"), "w", encoding="utf-8") as f: f.write(CSS)
     with open(os.path.join(OUT_DIR, "app.js"),   "w", encoding="utf-8") as f: f.write(JS)
-    items = read_items(IN_PATH)
-    # Index last (needs items)
+    items=read_items(IN_PATH)
     write_index(items, OUT_DIR)
     write_report_pages(items, OUT_DIR)
     print(f"✓ Site built: {OUT_DIR}/  reports: {len(items)}")
