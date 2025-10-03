@@ -1,0 +1,75 @@
+name: Build & Deploy Validation Site
+
+on:
+  workflow_dispatch: 
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Fetch CSV & Convert to JSONL
+        env:
+          AZURE_ACCOUNT_URL: ${{ secrets.AZURE_ACCOUNT_URL }}
+          AZURE_CONTAINER:   ${{ secrets.AZURE_CONTAINER }}
+          AZURE_SAS_TOKEN:   ${{ secrets.AZURE_SAS_TOKEN }}   # no leading '?'
+          AZURE_BLOB_NAME:   ${{ secrets.AZURE_BLOB_NAME }}   # e.g. validation.csv
+          OUTPUT_CSV_PATH:   validation.csv
+          OUTPUT_JSONL_PATH: validation.jsonl
+        run: python scripts/fetch_and_convert.py
+
+      - name: Build static site into /VALIDATION
+        env:
+          VALIDATION_JSONL: validation.jsonl
+          SITE_DIR: VALIDATION
+        run: python scripts/build_site.py
+
+      - name: Stage Pages artifact (root contains /VALIDATION)
+        run: |
+          rm -rf public
+          mkdir -p public
+          cp -R VALIDATION public/VALIDATION
+          # optional: add a root index that links to /VALIDATION
+          cat > public/index.html <<'HTML'
+          <!doctype html><meta charset="utf-8">
+          <meta http-equiv="refresh" content="0; url=VALIDATION/">
+          <title>Redirecting…</title>
+          <a href="VALIDATION/">Go to VALIDATION/</a>
+          HTML
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
