@@ -42,9 +42,29 @@ jobs:
           ls -larh VALIDATION
           python VALIDATION/scripts/fetch_and_convert.py
 
+          # ... previous steps unchanged ...
+
+      - name: Fetch CSV & Convert to JSONL
+        env:
+          AZURE_ACCOUNT_URL: ${{ secrets.AZURE_ACCOUNT_URL }}
+          AZURE_CONTAINER:   ${{ secrets.AZURE_CONTAINER }}
+          AZURE_SAS_TOKEN:   ${{ secrets.AZURE_SAS_TOKEN }}
+          AZURE_BLOB_NAME:   ${{ secrets.AZURE_BLOB_NAME }}
+          OUTPUT_CSV_PATH:   validation.csv
+          OUTPUT_JSONL_PATH: validation.jsonl
+        run: python scripts/fetch_and_convert.py
+
+      - name: Enrich validation JSONL with dataset/resource metadata
+        env:
+          VALIDATION_JSONL_IN:  validation.jsonl
+          VALIDATION_JSONL_OUT: validation_enriched.jsonl
+          OD_JSONL_GZ_URL: https://open.canada.ca/static/od-do-canada.jsonl.gz
+          OD_JSONL_GZ_PATH: od-do-canada.jsonl.gz
+        run: python scripts/enrich_validation.py
+
       - name: Build static site into /VALIDATION
         env:
-          VALIDATION_JSONL: VALIDATION/validation.jsonl
+          VALIDATION_JSONL: VALIDATION/validation_enriched.jsonl
           SITE_DIR: VALIDATION
         run: |
           pwd
