@@ -52,8 +52,8 @@ def main():
     sas_token   = env("AZURE_SAS_TOKEN", required=True)
     blob_name   = env("AZURE_BLOB_NAME", required=True)
 
-    csv_out  = env("OUTPUT_CSV_PATH", "validation.csv")
-    jsonl_out= env("OUTPUT_JSONL_PATH", "validation.jsonl")
+    csv_out  = env("OUTPUT_CSV_PATH", "VALIDATION/validation.csv")
+    jsonl_out= env("OUTPUT_JSONL_PATH", "VALIDATION/validation.jsonl")
 
     download_blob_to_file(account_url, container, sas_token, blob_name, csv_out)
     csv_to_jsonl(csv_out, jsonl_out)
