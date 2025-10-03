@@ -4,7 +4,12 @@ Static site generator for CKAN validation reports (versioned):
 - v0.2 = `tasks` schema (priority)
 - v0.1 = `tables` schema (legacy)
 
-Index shows org name + dataset/resource names (EN/FR per toggle).
+Index shows Organization + Dataset/Resource names (EN/FR per toggle),
+and supports sorting/filtering + pagination. Dataset & Organization are sortable.
+
+ENV:
+  VALIDATION_JSONL (default: validation_enriched.jsonl)
+  SITE_DIR         (default: VALIDATION)
 """
 
 import os, re, json, html, ujson
@@ -50,16 +55,19 @@ def parse_created_era(s):
 
 def detect_version(rep_dict):
     if not isinstance(rep_dict, dict): return "unknown"
+    # language buckets preferred
     for lang in ("en","fr"):
         blk = rep_dict.get(lang)
         if isinstance(blk, dict):
             if isinstance(blk.get("tasks"), list):  return "v0.2"
             if isinstance(blk.get("tables"), list): return "v0.1"
+    # generic holders
     for holder in ("report","data"):
         blk = rep_dict.get(holder)
         if isinstance(blk, dict):
             if isinstance(blk.get("tasks"), list):  return "v0.2"
             if isinstance(blk.get("tables"), list): return "v0.1"
+    # very old/odd top-level
     if isinstance(rep_dict.get("tasks"), list):  return "v0.2"
     if isinstance(rep_dict.get("tables"), list): return "v0.1"
     return "unknown"
@@ -146,7 +154,9 @@ def read_items(jsonl_path):
                 lang_data=extract_lang_v01(rep)
                 en_aggr=agg_v01(lang_data["en"]); fr_aggr=agg_v01(lang_data["fr"])
             else:
-                lang_data={"en":[],"fr":[]}; en_aggr={"error_count":0,"row_count":0,"valid_all":None,"warning_count":0}; fr_aggr=en_aggr
+                lang_data={"en":[],"fr":[]}
+                en_aggr={"error_count":0,"row_count":0,"valid_all":None,"warning_count":0}
+                fr_aggr=en_aggr
 
             b=lambda v: (None if v is None else bool(v))
 
@@ -157,7 +167,7 @@ def read_items(jsonl_path):
                 "status": o.get("status") or "",
                 "era": era,
                 "version": version,
-                # NEW metadata
+                # Enriched metadata
                 "organization_name": o.get("organization_name") or "",
                 "dataset_id": o.get("dataset_id") or "",
                 "dataset_title_en": o.get("dataset_title_en") or "",
@@ -221,12 +231,20 @@ function getRows(){ return Array.from(document.querySelectorAll('tbody tr')); }
 function visibleFilteredRows(){ return getRows().filter(r => r.dataset.filtered !== '0'); }
 
 function getCellValue(row, key){
-  if(key==='created')   return (row.dataset.created   || '').toLowerCase();
-  if(key==='status')    return (row.dataset.status    || '').toLowerCase();
-  if(key==='resource')  return (row.dataset.resource  || '').toLowerCase();
-  if(key==='organization') return (row.dataset.org    || '').toLowerCase();
-  if(key==='version')   return (row.dataset.version   || '').toLowerCase();
-  if(key==='era')       return (row.dataset.era       || '').toLowerCase();
+  if(key==='created')     return (row.dataset.created    || '').toLowerCase();
+  if(key==='status')      return (row.dataset.status     || '').toLowerCase();
+  if(key==='resource')    return (row.dataset.resource   || '').toLowerCase();
+  if(key==='organization')return (row.dataset.org        || '').toLowerCase();
+  if(key==='version')     return (row.dataset.version    || '').toLowerCase();
+  if(key==='era')         return (row.dataset.era        || '').toLowerCase();
+
+  // Dataset sorts by visible language (EN/FR)
+  if(key==='dataset'){
+    const lang = (localStorage.getItem('vr_lang') || 'en').toLowerCase();
+    if(lang === 'fr') return (row.dataset.datasetFr || '').toLowerCase();
+    return (row.dataset.datasetEn || '').toLowerCase();
+  }
+
   return row.innerText.toLowerCase();
 }
 
@@ -312,7 +330,7 @@ function renderPage(page){
   currentPage = Math.max(1, Math.min(page, totalPages));
   getRows().forEach(r=> r.style.display='none');
   const start=(currentPage-1)*pageSize, end=start+pageSize;
-  rows.slice(start,end).forEach(r=> r.style.display='');
+  rows.slice(start,end).forEach(r=> r.style.display='';
   const info = document.querySelector('#pager-info');
   if(info){
     const shownStart = total ? (start+1) : 0;
@@ -385,6 +403,8 @@ def write_index(items, out_dir):
               data-org="{html.escape(org)}"
               data-version="{html.escape(version.lower())}"
               data-era="{html.escape(era.lower())}"
+              data-dataset-en="{html.escape(d_en)}"
+              data-dataset-fr="{html.escape(d_fr)}"
               data-filtered="1">
             <td>
               <a href="{link}"><code>{html.escape(it['id'])}</code></a>
@@ -439,7 +459,7 @@ def write_index(items, out_dir):
             <tr>
               <th>ID</th>
 
-              <th>
+              <th data-sort="dataset" onclick="sortBy('dataset')">
                 Dataset<br/>
                 <div class="small">Title (EN/FR)</div>
               </th>
@@ -504,10 +524,7 @@ def write_index(items, out_dir):
     with open(os.path.join(out_dir,"index.html"), "w", encoding="utf-8") as f:
         f.write(html_index)
 
-# --------------------- Detail pages (unchanged structure, still versioned) ---------------------
-
-def badge_state_detail(ok):  # same visuals
-    return badge_state(ok)
+# --------------------- Detail pages (versioned) ---------------------
 
 def render_errors_table(errs, lang='en'):
     if not errs:
@@ -534,7 +551,7 @@ def render_task_block(task, lang='en', idx=0):
     place =task.get("place") or ""
 
     kv=[]
-    kv.append(f"<div>Valid</div><div>{badge_state_detail(task.get('valid'))}</div>")
+    kv.append(f"<div>Valid</div><div>{badge_state(task.get('valid'))}</div>")
     for label,key in [("Type","type"),("Source","place"),("Rows","rows"),("Fields","fields"),("Errors","errors"),
                       ("Warnings","warnings"),("Bytes","bytes"),("MD5","md5"),("SHA256","sha256"),("Seconds","seconds")]:
         val = st.get(key) if key in ("rows","fields","errors","warnings","bytes","md5","sha256","seconds") else task.get(key)
@@ -559,21 +576,17 @@ def render_task_block(task, lang='en', idx=0):
     </div>"""
 
 def render_lang_panel_v02(lang, tasks):
-    def agg(tasks):
-        return agg_v02(tasks)
-    if tasks is None:
-        return f'<div class="section"><span class="badge na">Not available</span></div>'
-    a=agg(tasks)
+    a=agg_v02(tasks) if tasks is not None else {"valid_all":None,"error_count":0,"warning_count":0,"row_count":0}
     head=f"""
       <div class="section">
         <div class="kv">
-          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state_detail(a["valid_all"])}</div>
+          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state(a["valid_all"])}</div>
           <div>{"Errors" if lang=='en' else "Erreurs"}</div><div>{a["error_count"]}</div>
           <div>{"Warnings" if lang=='en' else "Avertissements"}</div><div>{a["warning_count"]}</div>
           <div>{"Rows" if lang=='en' else "Lignes"}</div><div>{a["row_count"]}</div>
         </div>
       </div>"""
-    blocks="".join(render_task_block(t,lang,i) for i,t in enumerate(tasks)) or \
+    blocks="".join(render_task_block(t,lang,i) for i,t in enumerate(tasks or [])) or \
         ('<div class="section"><span class="badge na">No tasks</span></div>' if lang=='en' else '<div class="section"><span class="badge na">Aucune tâche</span></div>')
     style='' if lang=='en' else 'style="display:none"'
     return f'<section data-lang="{lang}" {style} class="panel">{head}{blocks}</section>'
@@ -591,7 +604,7 @@ def render_table_block_v01(t, lang='en', idx=0):
             alt = key.replace("-","_") if "-" in key else key.replace("_","-")
             val=t.get(alt)
         if val not in (None,"",[]):
-            if key=="valid": val=badge_state_detail(bool(val))
+            if key=="valid": val=badge_state(bool(val))
             kv.append(f"<div>{label}</div><div>{html.escape(str(val))}</div>")
     errors_table=render_errors_table(t.get("errors",[]),lang)
     raw_json=html.escape(json.dumps(t, ensure_ascii=False, indent=2))
@@ -605,16 +618,16 @@ def render_table_block_v01(t, lang='en', idx=0):
       </div>"""
 
 def render_lang_panel_v01(lang, tables):
-    a=agg_v01(tables)
+    a=agg_v01(tables) if tables is not None else {"valid_all":None,"error_count":0,"row_count":0}
     head=f"""
       <div class="section">
         <div class="kv">
-          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state_detail(a["valid_all"])}</div>
+          <div>{"Valid" if lang=='en' else "Valide"}</div><div>{badge_state(a["valid_all"])}</div>
           <div>{"Errors" if lang=='en' else "Erreurs"}</div><div>{a["error_count"]}</div>
           <div>{"Rows" if lang=='en' else "Lignes"}</div><div>{a["row_count"]}</div>
         </div>
       </div>"""
-    blocks="".join(render_table_block_v01(t,lang,i) for i,t in enumerate(tables)) or \
+    blocks="".join(render_table_block_v01(t,lang,i) for i,t in enumerate(tables or [])) or \
         ('<div class="section"><span class="badge na">No tables</span></div>' if lang=='en' else '<div class="section"><span class="badge na">Aucune table</span></div>')
     style='' if lang=='en' else 'style="display:none"'
     return f'<section data-lang="{lang}" {style} class="panel">{head}{blocks}</section>'
@@ -623,6 +636,7 @@ def write_report_pages(items, out_dir):
     rdir=os.path.join(out_dir,"reports"); os.makedirs(rdir, exist_ok=True)
     for it in items:
         pid=slugify(it['id']); ver=it.get("version") or "unknown"
+
         header_meta=f"""
         <div class="kv" style="margin-top:8px">
           <div>Version</div><div>{chip(ver,'na')}</div>
