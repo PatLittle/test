@@ -35,8 +35,8 @@ jobs:
           AZURE_CONTAINER:   ${{ secrets.AZURE_CONTAINER }}
           AZURE_SAS_TOKEN:   ${{ secrets.AZURE_SAS_TOKEN }}   # no leading '?'
           AZURE_BLOB_NAME:   ${{ secrets.AZURE_BLOB_NAME }}   # e.g. validation.csv
-          OUTPUT_CSV_PATH:   validation.csv
-          OUTPUT_JSONL_PATH: validation.jsonl
+          OUTPUT_CSV_PATH:   VALIDATION/validation.csv
+          OUTPUT_JSONL_PATH: VALIDATION/validation.jsonl
         run: python VALIDATION/scripts/fetch_and_convert.py
 
       - name: Build static site into /VALIDATION
