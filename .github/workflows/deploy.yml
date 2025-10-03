@@ -50,17 +50,17 @@ jobs:
           AZURE_CONTAINER:   ${{ secrets.AZURE_CONTAINER }}
           AZURE_SAS_TOKEN:   ${{ secrets.AZURE_SAS_TOKEN }}
           AZURE_BLOB_NAME:   ${{ secrets.AZURE_BLOB_NAME }}
-          OUTPUT_CSV_PATH:   validation.csv
-          OUTPUT_JSONL_PATH: validation.jsonl
-        run: python scripts/fetch_and_convert.py
+          OUTPUT_CSV_PATH:   VALIDATION/validation.csv
+          OUTPUT_JSONL_PATH: VALIDATION/validation.jsonl
+        run: python VALIDATION/scripts/fetch_and_convert.py
 
       - name: Enrich validation JSONL with dataset/resource metadata
         env:
-          VALIDATION_JSONL_IN:  validation.jsonl
-          VALIDATION_JSONL_OUT: validation_enriched.jsonl
+          VALIDATION_JSONL_IN:  VALIDATION/validation.jsonl
+          VALIDATION_JSONL_OUT: VALIDATION/validation_enriched.jsonl
           OD_JSONL_GZ_URL: https://open.canada.ca/static/od-do-canada.jsonl.gz
           OD_JSONL_GZ_PATH: od-do-canada.jsonl.gz
-        run: python scripts/enrich_validation.py
+        run: python VALIDATION/scripts/enrich_validation.py
 
       - name: Build static site into /VALIDATION
         env:
