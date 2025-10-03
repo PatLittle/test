@@ -328,9 +328,9 @@ function renderPage(page){
   const total = rows.length;
   const totalPages = Math.max(1, Math.ceil(total/pageSize));
   currentPage = Math.max(1, Math.min(page, totalPages));
-  getRows().forEach(r=> r.style.display='none');
+  getRows().forEach(r=> { r.style.display='none'; });
   const start=(currentPage-1)*pageSize, end=start+pageSize;
-  rows.slice(start,end).forEach(r=> r.style.display='';
+  rows.slice(start,end).forEach(r => { r.style.display=''; });
   const info = document.querySelector('#pager-info');
   if(info){
     const shownStart = total ? (start+1) : 0;
@@ -354,6 +354,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   setPageSize(document.querySelector('#page-size')?.value || 25);
   renderPage(1);
 });
+
 """
 
 # --------------------- Render helpers ---------------------
