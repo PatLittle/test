@@ -37,13 +37,19 @@ jobs:
           AZURE_BLOB_NAME:   ${{ secrets.AZURE_BLOB_NAME }}   # e.g. validation.csv
           OUTPUT_CSV_PATH:   VALIDATION/validation.csv
           OUTPUT_JSONL_PATH: VALIDATION/validation.jsonl
-        run: python VALIDATION/scripts/fetch_and_convert.py
+        run: |
+          pwd
+          ls -larh VALIDATION
+          python VALIDATION/scripts/fetch_and_convert.py
 
       - name: Build static site into /VALIDATION
         env:
           VALIDATION_JSONL: VALIDATION/validation.jsonl
           SITE_DIR: VALIDATION
-        run: python VALIDATION/scripts/build_site.py
+        run: |
+          pwd
+          ls -larh VALIDATION
+          python VALIDATION/scripts/build_site.py
 
       - name: Stage Pages artifact (root contains /VALIDATION)
         run: |
