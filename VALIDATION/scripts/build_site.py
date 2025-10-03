@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Build a static site from validation.jsonl (ckanext-validation Frictionless reports),
-robust across historical format variants.
+robust across historical format variants. Uses per-record templates and client-side
+sorting, filtering, and pagination.
 
 INPUT:
   VALIDATION_JSONL   default: validation.jsonl
@@ -19,40 +20,25 @@ OUT_DIR  = os.getenv("SITE_DIR", "VALIDATION")
 def slugify(s: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_-]+","-", s or "").strip("-") or "report"
 
-def parse_reports(val):
-    """Unwrap JSON-encoded strings (up to 3 layers) and return a dict or {}."""
+def unwrap(val, max_layers=3):
     seen = 0
-    while isinstance(val, str) and seen < 3:
+    while isinstance(val, str) and seen < max_layers:
         try:
             val = ujson.loads(val)
         except ValueError:
             break
         seen += 1
-    return val if isinstance(val, dict) else {}
+    return val
 
-def first_existing(d, keys, default=None):
-    """Return d[k] for first k in keys that exists and is a dict; else default."""
-    for k in keys:
-        v = d.get(k)
-        if isinstance(v, dict):
-            return k, v
-    return None, default
-
-def get_tables(rep_dict, lang_key=None):
-    """Return a list of tables for the given language (or top-level), robustly."""
-    if lang_key and isinstance(rep_dict.get(lang_key), dict):
-        t = rep_dict[lang_key].get("tables")
-        return t if isinstance(t, list) else []
-    # fallback: try top-level tables if language-specific is absent
-    t = rep_dict.get("tables")
-    return t if isinstance(t, list) else []
+def parse_reports(v):
+    rep = unwrap(v, 3)
+    return rep if isinstance(rep, dict) else {}
 
 def norm_get(table, *keys, default=None):
-    """Fetch a value from a table handling hyphen/underscore variants."""
+    """Fetch a value handling hyphen/underscore variants."""
     for k in keys:
         if k in table:
             return table[k]
-    # try swapping hyphen <-> underscore
     for k in keys:
         alt = k.replace("-", "_") if "-" in k else k.replace("_", "-")
         if alt in table:
@@ -60,56 +46,70 @@ def norm_get(table, *keys, default=None):
     return default
 
 def aggregate_table_metrics(tables):
-    """Aggregate counts/valid across multiple tables."""
     if not tables:
-        return {
-            "error_count": 0,
-            "row_count": 0,
-            "valid_all": None,  # None means unknown
-        }
-    error_total = 0
-    row_total = 0
+        return {"error_count": 0, "row_count": 0, "valid_all": None}
+    err = 0
+    rows = 0
     valid_all = True
     saw_valid = False
     for t in tables:
-        error_total += int(norm_get(t, "error-count", "error_count", default=0) or 0)
-        row_total   += int(norm_get(t, "row-count", "row_count", default=0) or 0)
+        err += int(norm_get(t, "error-count", "error_count", default=0) or 0)
+        rows += int(norm_get(t, "row-count", "row_count", default=0) or 0)
         v = t.get("valid")
         if isinstance(v, bool):
             saw_valid = True
             valid_all = valid_all and v
-        else:
-            # if any table lacks valid, treat as unknown unless all others were True
-            pass
     if not saw_valid:
         valid_all = None
-    return {"error_count": error_total, "row_count": row_total, "valid_all": valid_all}
+    return {"error_count": err, "row_count": rows, "valid_all": valid_all}
 
-def language_blocks(rep):
+def detect_format(rep_dict):
     """
-    Return a dict of language -> tables list, supporting:
-      - 'en', 'fr' languages
-      - legacy holders like 'report' or 'data'
-      - absence of one or both languages
+    Returns one of:
+      - 'A_LANG'   if reports has 'en'/'fr' keys with {tables: [...]}
+      - 'B_GENERIC' if reports has 'report'/'data'/top-level 'tables'
+      - 'UNKNOWN'
     """
-    langs = {}
-    # Prefer explicit en/fr if present
+    if not isinstance(rep_dict, dict):
+        return "UNKNOWN"
+
+    # Format A? (en/fr buckets)
     for lang in ("en", "fr"):
-        if isinstance(rep.get(lang), dict):
-            langs[lang] = get_tables(rep, lang)
+        if isinstance(rep_dict.get(lang), dict):
+            return "A_LANG"
 
-    # If no explicit languages found, try a generic block once
-    if not langs:
-        generic_key, generic = first_existing(rep, ("report", "data"), default=None)
-        if generic:
-            # Treat it as EN for display; FR will be "not available"
-            tables = generic.get("tables") if isinstance(generic.get("tables"), list) else []
-            langs["en"] = tables
+    # Format B? (generic holder or top-level tables)
+    for holder in ("report", "data"):
+        if isinstance(rep_dict.get(holder), dict):
+            return "B_GENERIC"
+    if isinstance(rep_dict.get("tables"), list):
+        return "B_GENERIC"
 
-    # Guarantee keys so UI logic is simple (may be empty to signal "N/A")
-    langs.setdefault("en", langs.get("en", []))
-    langs.setdefault("fr", langs.get("fr", []))
-    return langs
+    return "UNKNOWN"
+
+def extract_tables_for_format(rep_dict, fmt):
+    """
+    Returns dict: {'en': [tables], 'fr': [tables]} (lists may be empty).
+    """
+    if fmt == "A_LANG":
+        en = rep_dict.get("en") if isinstance(rep_dict.get("en"), dict) else {}
+        fr = rep_dict.get("fr") if isinstance(rep_dict.get("fr"), dict) else {}
+        en_tables = en.get("tables") if isinstance(en.get("tables"), list) else []
+        fr_tables = fr.get("tables") if isinstance(fr.get("tables"), list) else []
+        return {"en": en_tables, "fr": fr_tables}
+
+    if fmt == "B_GENERIC":
+        # Prefer report/data holder, else top-level tables
+        for holder in ("report", "data"):
+            if isinstance(rep_dict.get(holder), dict):
+                tbls = rep_dict[holder].get("tables")
+                tables = tbls if isinstance(tbls, list) else []
+                return {"en": tables, "fr": []}
+        tables = rep_dict.get("tables") if isinstance(rep_dict.get("tables"), list) else []
+        return {"en": tables, "fr": []}
+
+    # unknown: nothing
+    return {"en": [], "fr": []}
 
 # ---------- read & normalize all records ----------
 
@@ -119,14 +119,11 @@ def read_items(jsonl_path):
         for line in f:
             obj = ujson.loads(line)
             rep = parse_reports(obj.get("reports"))
+            fmt = detect_format(rep)
+            lang_tables = extract_tables_for_format(rep, fmt)
 
-            # map languages -> table lists
-            lang_tables = language_blocks(rep)
-            en_tables = lang_tables.get("en", [])
-            fr_tables = lang_tables.get("fr", [])
-
-            en_aggr = aggregate_table_metrics(en_tables)
-            fr_aggr = aggregate_table_metrics(fr_tables)
+            en_aggr = aggregate_table_metrics(lang_tables.get("en", []))
+            fr_aggr = aggregate_table_metrics(lang_tables.get("fr", []))
 
             def v_to_bool(v):
                 return None if v is None else bool(v)
@@ -136,12 +133,13 @@ def read_items(jsonl_path):
                 "resource_id": obj.get("resource_id") or "",
                 "created": obj.get("created") or "",
                 "status": obj.get("status") or "",
+                "format_type": fmt,
                 "errors_en": en_aggr["error_count"],
                 "errors_fr": fr_aggr["error_count"],
                 "valid_en": v_to_bool(en_aggr["valid_all"]),
                 "valid_fr": v_to_bool(fr_aggr["valid_all"]),
                 "rep": rep,
-                "lang_tables": lang_tables,  # keep full tables for detail page
+                "lang_tables": lang_tables,  # full for detail page
             })
     return items
 
@@ -160,8 +158,9 @@ a{color:var(--link);text-decoration:none} a:hover{text-decoration:underline}
 .badge{display:inline-block;padding:2px 8px;border-radius:999px;font-weight:600;font-size:12px}
 .badge.ok{background:rgba(31,169,113,.2);color:var(--ok)} .badge.bad{background:rgba(255,85,85,.18);color:var(--bad)} .badge.muted{background:rgba(255,255,255,.08);color:var(--sub)}
 .badge.na{background:rgba(255,255,255,.08);color:var(--muted)}
-.toolbar{display:flex;gap:12px;align-items:center;margin:8px 0 16px}
-input[type="search"]{width:320px;max-width:60vw;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--text)}
+.toolbar{display:flex;gap:12px;align-items:center;margin:8px 0 16px;flex-wrap:wrap}
+.toolbar .grow{flex:1 1 260px}
+input[type="search"]{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--text)}
 .lang-toggle button{padding:8px 12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--text);border-radius:10px}
 .lang-toggle button.active{outline:2px solid var(--link)}
 .kv{display:grid;grid-template-columns:180px 1fr;gap:8px;font-size:14px}
@@ -176,10 +175,20 @@ th .hdr-ctrl input, th .hdr-ctrl select{
 }
 .sort-ind{opacity:.8}
 th[data-sort]{cursor:pointer; user-select:none}
+.pager{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin:12px 0}
+.pager button{padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--text)}
+.pager .info{font-size:12px;color:var(--sub)}
+.pager select{padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:var(--text);}
 """
 
 JS = r"""
 let sortState = { key: null, dir: 1 }; // 1 asc, -1 desc
+let pageSize = 25;
+let currentPage = 1;
+
+function getRows(){
+  return Array.from(document.querySelectorAll('tbody tr'));
+}
 
 function getCellValue(row, key){
   if(key==='created'){
@@ -195,7 +204,7 @@ function getCellValue(row, key){
 
 function sortBy(key){
   const tbody = document.querySelector('tbody');
-  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const rows = getRows();
   sortState.dir = (sortState.key === key) ? -sortState.dir : 1;
   sortState.key = key;
 
@@ -211,6 +220,7 @@ function sortBy(key){
 
   rows.forEach(r=>tbody.appendChild(r));
   updateSortIndicators();
+  renderPage(1); // reset to first page after sort
 }
 
 function updateSortIndicators(){
@@ -228,12 +238,11 @@ function updateSortIndicators(){
 
 function applyFilters(){
   const q = (document.querySelector('#q')?.value || '').toLowerCase().trim();
-
   const resFilter = (document.querySelector('#filter-resource')?.value || '').toLowerCase().trim();
-  const statusFilter = (document.querySelector('#filter-status')?.value || '').toLowerCase().trim(); // '', 'success', 'failure'
+  const statusFilter = (document.querySelector('#filter-status')?.value || '').toLowerCase().trim();
   const createdText = (document.querySelector('#filter-created')?.value || '').toLowerCase().trim();
 
-  document.querySelectorAll('tbody tr').forEach(r=>{
+  getRows().forEach(r=>{
     const text = r.innerText.toLowerCase();
     const dres = (r.dataset.resource || '').toLowerCase();
     const dstat= (r.dataset.status || '').toLowerCase();
@@ -245,11 +254,13 @@ function applyFilters(){
     if(statusFilter && dstat !== statusFilter) show = false;
     if(createdText && !dcre.includes(createdText)) show = false;
 
-    r.style.display = show ? '' : 'none';
+    r.dataset.filtered = show ? '1' : '0';
   });
+
+  renderPage(1);
 }
 
-function filterTable(){ applyFilters(); } // keep compatibility with the existing search box
+function filterTable(){ applyFilters(); } // global search compatibility
 
 function setLang(lang){
   localStorage.setItem('vr_lang',lang);
@@ -261,6 +272,38 @@ function setLang(lang){
   });
 }
 
+function setPageSize(sz){
+  pageSize = parseInt(sz,10) || 25;
+  renderPage(1);
+}
+
+function visibleFilteredRows(){
+  return getRows().filter(r => r.dataset.filtered !== '0');
+}
+
+function renderPage(page){
+  const rows = visibleFilteredRows();
+  const total = rows.length;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  currentPage = Math.max(1, Math.min(page, totalPages));
+
+  // hide all then show slice
+  getRows().forEach(r => r.style.display='none');
+  const start = (currentPage-1)*pageSize;
+  const end = start + pageSize;
+  rows.slice(start, end).forEach(r => r.style.display='');
+
+  const info = document.querySelector('#pager-info');
+  if(info){
+    const shownStart = total ? (start+1) : 0;
+    const shownEnd = Math.min(end, total);
+    info.textContent = `${shownStart}-${shownEnd} of ${total}`;
+  }
+}
+
+function gotoPrev(){ renderPage(currentPage-1); }
+function gotoNext(){ renderPage(currentPage+1); }
+
 window.addEventListener('DOMContentLoaded',()=>{
   setLang(localStorage.getItem('vr_lang')||'en');
   ['#filter-resource','#filter-status','#filter-created','#q'].forEach(sel=>{
@@ -269,7 +312,14 @@ window.addEventListener('DOMContentLoaded',()=>{
     el.addEventListener('input', applyFilters);
     el.addEventListener('change', applyFilters);
   });
+  const ps = document.querySelector('#page-size');
+  if(ps){ ps.addEventListener('change', e=> setPageSize(e.target.value)); }
+
+  // initialize filter flags
+  getRows().forEach(r=> r.dataset.filtered='1');
   updateSortIndicators();
+  setPageSize(document.querySelector('#page-size')?.value || 25);
+  renderPage(1);
 });
 """
 
@@ -293,7 +343,8 @@ def write_index(items, out_dir):
         return f"""
           <tr data-created="{html.escape(created)}"
               data-status="{html.escape(status.lower())}"
-              data-resource="{html.escape(resource)}">
+              data-resource="{html.escape(resource)}"
+              data-filtered="1">
             <td><a href="{link}"><code>{html.escape(it['id'])}</code></a></td>
             <td><code>{html.escape(resource)}</code></td>
             <td>{en_badge}</td>
@@ -312,12 +363,26 @@ def write_index(items, out_dir):
 </head><body><div class="container"><div class="card">
   <h1 data-lang="en">Validation Reports</h1>
   <h1 data-lang="fr" style="display:none">Rapports de validation</h1>
+
   <div class="toolbar">
-    <input type="search" id="q" placeholder="Filter…" oninput="filterTable()"/>
+    <div class="grow"><input type="search" id="q" placeholder="Filter…"/></div>
     <div class="lang-toggle">
       <button type="button" data-set="en" onclick="setLang('en')" class="active">EN</button>
       <button type="button" data-set="fr" onclick="setLang('fr')">FR</button>
     </div>
+  </div>
+
+  <div class="pager">
+    <span class="info" id="pager-info"></span>
+    <label for="page-size" class="info">Rows per page:</label>
+    <select id="page-size">
+      <option value="25" selected>25</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="500">500</option>
+    </select>
+    <button onclick="gotoPrev()">Prev</button>
+    <button onclick="gotoNext()">Next</button>
   </div>
 
   <table class="table">
@@ -366,7 +431,7 @@ def write_index(items, out_dir):
     with open(os.path.join(out_dir,"index.html"), "w", encoding="utf-8") as f:
         f.write(html_index)
 
-# ---------- write detail pages ----------
+# ---------- write detail pages (template-per-format) ----------
 
 def render_errors_table(errs, lang='en'):
     if not errs:
@@ -422,14 +487,42 @@ def render_lang_section(lang, tables):
     </section>
     """
 
+def render_detail_template_A(it):
+    lang_tables = it["lang_tables"]
+    en_tables = lang_tables.get("en", [])
+    fr_tables = lang_tables.get("fr", [])
+    return f"""
+  {render_lang_section('en', en_tables)}
+  {render_lang_section('fr', fr_tables)}
+"""
+
+def render_detail_template_B(it):
+    # Generic -> show as EN, mark FR N/A
+    lang_tables = it["lang_tables"]
+    en_tables = lang_tables.get("en", [])
+    return f"""
+  {render_lang_section('en', en_tables)}
+  <section data-lang="fr" style="display:none">
+    <h2>Résultat de la validation</h2>
+    <p class="badge na">Non disponible pour ce rapport.</p>
+  </section>
+"""
+
 def write_report_pages(items, out_dir):
     rdir = os.path.join(out_dir, "reports")
     os.makedirs(rdir, exist_ok=True)
     for it in items:
         pid = slugify(it['id'])
-        lang_tables = it["lang_tables"]
-        en_tables = lang_tables.get("en", [])
-        fr_tables = lang_tables.get("fr", [])
+        fmt = it.get("format_type") or "UNKNOWN"
+
+        if fmt == "A_LANG":
+            detail_body = render_detail_template_A(it)
+        elif fmt == "B_GENERIC":
+            detail_body = render_detail_template_B(it)
+        else:
+            # fallback: treat like generic
+            detail_body = render_detail_template_B(it)
+
         page = f"""<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Report {html.escape(it['id'])}</title>
@@ -443,6 +536,7 @@ def write_report_pages(items, out_dir):
         <div>Resource</div><div><code>{html.escape(it['resource_id'] or "-")}</code></div>
         <div>Status</div><div><span class="badge {'ok' if it['status']=='success' else 'bad'}">{html.escape(it['status'])}</span></div>
         <div>Created</div><div><time>{html.escape(it['created'] or '')}</time></div>
+        <div>Format</div><div><span class="badge muted">{html.escape(fmt)}</span></div>
       </div>
     </div>
     <div class="lang-toggle">
@@ -450,8 +544,7 @@ def write_report_pages(items, out_dir):
       <button type="button" data-set="fr" onclick="setLang('fr')">FR</button>
     </div>
   </div>
-  {render_lang_section('en', en_tables)}
-  {render_lang_section('fr', fr_tables)}
+  {detail_body}
 </div></div></body></html>"""
         with open(os.path.join(rdir, f"{pid}.html"), "w", encoding="utf-8") as f:
             f.write(page)
