@@ -28,7 +28,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r VALIDATION/requirements.txt
-          df -h
+          df -h /home/runner/actions-runner/cached/
           
 
       - name: Fetch CSV & Convert to JSONL
