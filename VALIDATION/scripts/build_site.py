@@ -4,12 +4,13 @@ Static site generator for CKAN validation reports (versioned):
 - v0.2 = `tasks` schema (priority)
 - v0.1 = `tables` schema (legacy)
 
-Index shows Organization + Dataset/Resource names (EN/FR per toggle),
-and supports sorting/filtering + pagination. Dataset & Organization are sortable.
-
-ENV:
-  VALIDATION_JSONL (default: validation_enriched.jsonl)
-  SITE_DIR         (default: VALIDATION)
+Changes:
+- ERA concept removed entirely (no parsing, no chips, no filters)
+- Index shows Organization + Dataset/Resource names (EN/FR per toggle)
+- Single Errors column that follows the language toggle (EN/FR)
+- Dataset links on report page:
+  * Registry (edit): https://registry.open.canada.ca/dataset/{dataset_id}
+  * Portal:   https://open.canada.ca/data/en/dataset/{dataset_id}
 """
 
 import os, re, json, html, ujson
@@ -35,21 +36,6 @@ def unwrap(val, max_layers=3):
 def parse_reports(v):
     rep = unwrap(v, 3)
     return rep if isinstance(rep, dict) else {}
-
-def parse_created_era(s):
-    import datetime as dt
-    cutoff = dt.datetime(2024, 12, 10)
-    if not s:
-        return "unknown"
-    fmts = ("%Y-%m-%d", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S",
-            "%Y-%m-%dT%H:%M:%S.%f", "%Y-%m-%d %H:%M:%S.%f")
-    for fmt in fmts:
-        try:
-            d = dt.datetime.strptime(s[:len(fmt)], fmt)
-            return "new" if d >= cutoff else "old"
-        except Exception:
-            continue
-    return "unknown"
 
 # --------------------- Version detection ---------------------
 
@@ -144,9 +130,7 @@ def read_items(jsonl_path):
             rep=parse_reports(o.get("reports"))
             version=detect_version(rep)
             created=(o.get("created") or "").strip()
-            era=parse_created_era(created)
 
-            # per-version language data + agg
             if version=="v0.2":
                 lang_data=extract_lang_v02(rep)
                 en_aggr=agg_v02(lang_data["en"]); fr_aggr=agg_v02(lang_data["fr"])
@@ -165,7 +149,6 @@ def read_items(jsonl_path):
                 "resource_id": o.get("resource_id") or "",
                 "created": created,
                 "status": o.get("status") or "",
-                "era": era,
                 "version": version,
                 # Enriched metadata
                 "organization_name": o.get("organization_name") or "",
@@ -193,7 +176,7 @@ CSS = """
 *{box-sizing:border-box}
 body{margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Arial}
 a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
-.container{max-width:1600px; margin:0 auto; padding:28px}  /* wider */
+.container{max-width:1600px; margin:0 auto; padding:28px}
 .header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px}
 .h1{font-size:20px; font-weight:700; letter-spacing:.2px}
 .panel{background:var(--panel); border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,.25)}
@@ -220,6 +203,7 @@ th[data-sort]{cursor:pointer; user-select:none}
 .hdr-ctrl .input, .hdr-ctrl .select{width:100%}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace; background:rgba(255,255,255,.06); padding:10px; border-radius:10px; overflow:auto; white-space:pre-wrap}
 .small{font-size:12px; color:var(--muted)}
+.badge.link{background:rgba(255,255,255,.08)}
 """
 
 JS = r"""
@@ -236,7 +220,6 @@ function getCellValue(row, key){
   if(key==='resource')    return (row.dataset.resource   || '').toLowerCase();
   if(key==='organization')return (row.dataset.org        || '').toLowerCase();
   if(key==='version')     return (row.dataset.version    || '').toLowerCase();
-  if(key==='era')         return (row.dataset.era        || '').toLowerCase();
 
   // Dataset sorts by visible language (EN/FR)
   if(key==='dataset'){
@@ -283,7 +266,6 @@ function applyFilters(){
   const cF  = (document.querySelector('#filter-created')?.value || '').toLowerCase().trim();
   const oF  = (document.querySelector('#filter-org')?.value || '').toLowerCase().trim();
   const vF  = (document.querySelector('#filter-version')?.value || '').toLowerCase().trim();
-  const eF  = (document.querySelector('#filter-era')?.value || '').toLowerCase().trim();
 
   getRows().forEach(r=>{
     const text = r.innerText.toLowerCase();
@@ -292,7 +274,6 @@ function applyFilters(){
     const dcre = (r.dataset.created  || '').toLowerCase();
     const dorg = (r.dataset.org      || '').toLowerCase();
     const dver = (r.dataset.version  || '').toLowerCase();
-    const dera = (r.dataset.era      || '').toLowerCase();
 
     let show = true;
     if(q && !text.includes(q)) show = false;
@@ -301,7 +282,6 @@ function applyFilters(){
     if(cF && !dcre.includes(cF)) show = false;
     if(oF && !dorg.includes(oF)) show = false;
     if(vF && dver !== vF) show = false;
-    if(eF && dera !== eF) show = false;
 
     r.dataset.filtered = show ? '1' : '0';
   });
@@ -328,7 +308,7 @@ function renderPage(page){
   const total = rows.length;
   const totalPages = Math.max(1, Math.ceil(total/pageSize));
   currentPage = Math.max(1, Math.min(page, totalPages));
-  getRows().forEach(r=> { r.style.display='none'; });
+  getRows().forEach(r => { r.style.display='none'; });
   const start=(currentPage-1)*pageSize, end=start+pageSize;
   rows.slice(start,end).forEach(r => { r.style.display=''; });
   const info = document.querySelector('#pager-info');
@@ -341,7 +321,7 @@ function renderPage(page){
 
 window.addEventListener('DOMContentLoaded',()=>{
   setLang(localStorage.getItem('vr_lang')||'en');
-  ['#q','#filter-resource','#filter-status','#filter-created','#filter-org','#filter-version','#filter-era'].forEach(sel=>{
+  ['#q','#filter-resource','#filter-status','#filter-created','#filter-org','#filter-version'].forEach(sel=>{
     const el=document.querySelector(sel); if(!el) return;
     el.addEventListener('input', applyFilters);
     el.addEventListener('change', applyFilters);
@@ -354,7 +334,6 @@ window.addEventListener('DOMContentLoaded',()=>{
   setPageSize(document.querySelector('#page-size')?.value || 25);
   renderPage(1);
 });
-
 """
 
 # --------------------- Render helpers ---------------------
@@ -381,16 +360,16 @@ def write_index(items, out_dir):
         status  = it['status'] or ''
         resource_code = it['resource_id'] or '-'
         version = it['version'] or 'unknown'
-        era     = it['era'] or 'unknown'
         org     = it['organization_name'] or ''
         d_en, d_fr = it.get("dataset_title_en",""), it.get("dataset_title_fr","")
         r_en, r_fr = it.get("resource_name_en",""), it.get("resource_name_fr","")
 
-        en_badge = badge_state(it['en']['valid']) + f' {chip(f"EN errors: {it["en"]["errors"]}", "na")}'
-        fr_badge = badge_state(it['fr']['valid']) + f' {chip(f"FR erreurs: {it["fr"]["errors"]}", "na")}'
+        # one Errors column driven by language
+        en_err = f"{it['en']['errors']} err"
+        fr_err = f"{it['fr']['errors']} err."
+        err_cell = f'<span data-lang="en">{en_err}</span><span data-lang="fr" style="display:none">{fr_err}</span>'
 
         ver_chip= chip(version, "na")
-        era_chip= chip(era, "na")
         st_chip = chip(status, 'na' if status not in ('success','failure') else ('ok' if status=='success' else 'bad'))
 
         dataset_cell = f'{lang_html(d_en, d_fr)}<div class="small"><code>{html.escape(it["dataset_id"])}</code></div>'
@@ -403,19 +382,17 @@ def write_index(items, out_dir):
               data-organization="{html.escape(org)}"
               data-org="{html.escape(org)}"
               data-version="{html.escape(version.lower())}"
-              data-era="{html.escape(era.lower())}"
               data-dataset-en="{html.escape(d_en)}"
               data-dataset-fr="{html.escape(d_fr)}"
               data-filtered="1">
             <td>
               <a href="{link}"><code>{html.escape(it['id'])}</code></a>
-              <div class="subtle">{ver_chip} {era_chip}</div>
+              <div class="subtle">{ver_chip}</div>
             </td>
             <td>{dataset_cell}</td>
             <td>{resource_cell}</td>
             <td>{html.escape(org)}</td>
-            <td>{en_badge}</td>
-            <td>{fr_badge}</td>
+            <td>{err_cell}</td>
             <td>{st_chip}</td>
             <td><time>{html.escape(created)}</time></td>
           </tr>
@@ -446,12 +423,6 @@ def write_index(items, out_dir):
           <option value="v0.1">v0.1</option>
           <option value="unknown">unknown</option>
         </select></label></div>
-        <div><label class="subtle">Era<br/><select class="select" id="filter-era">
-          <option value="">All</option>
-          <option value="new">new (≥ 2024-12-10)</option>
-          <option value="old">old (&lt; 2024-12-10)</option>
-          <option value="unknown">unknown</option>
-        </select></label></div>
       </div>
 
       <div class="table-wrap">
@@ -475,8 +446,11 @@ def write_index(items, out_dir):
                 <div class="hdr-ctrl"><input class="input" id="filter-org" placeholder="Filter org…"/></div>
               </th>
 
-              <th>EN</th>
-              <th>FR</th>
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
 
               <th data-sort="status" onclick="sortBy('status')">
                 Status
@@ -517,7 +491,7 @@ def write_index(items, out_dir):
 
     <p class="subtle" style="margin-top:12px">
       v0.2 = tasks schema (priority). v0.1 = tables schema (legacy).
-      Language toggle switches dataset & resource titles (EN/FR). The resource row shows its code and url_type.
+      Language toggle switches dataset & resource titles and which errors column is shown (EN/FR).
     </p>
   </div>
 </body></html>"""
@@ -638,12 +612,23 @@ def write_report_pages(items, out_dir):
     for it in items:
         pid=slugify(it['id']); ver=it.get("version") or "unknown"
 
+        # Dataset links (edit + portal)
+        dsid = it.get('dataset_id','')
+        edit_url   = f"https://registry.open.canada.ca/dataset/{html.escape(dsid)}"
+        portal_url = f"https://open.canada.ca/data/en/dataset/{html.escape(dsid)}"
+        dataset_links = f'''
+          <div>
+            <a class="badge link" href="{edit_url}" target="_blank" rel="noopener">edit</a>
+            &nbsp;
+            <a class="badge link" href="{portal_url}" target="_blank" rel="noopener">portal</a>
+          </div>
+        '''
+
         header_meta=f"""
         <div class="kv" style="margin-top:8px">
           <div>Version</div><div>{chip(ver,'na')}</div>
-          <div>Era</div><div>{chip(it['era'],'na')}</div>
           <div>Organization</div><div>{html.escape(it.get('organization_name',''))}</div>
-          <div>Dataset</div><div>{lang_html(it.get('dataset_title_en',''), it.get('dataset_title_fr',''))} <span class="small"><code>{html.escape(it.get('dataset_id',''))}</code></span></div>
+          <div>Dataset</div><div>{lang_html(it.get('dataset_title_en',''), it.get('dataset_title_fr',''))} <span class="small"><code>{html.escape(dsid)}</code></span>{dataset_links}</div>
           <div>Resource</div><div>{lang_html(it.get('resource_name_en',''), it.get('resource_name_fr',''))} <span class="small"><code>{html.escape(it.get('resource_id',''))}</code> · {html.escape(it.get('url_type',''))}</span></div>
           <div>Status</div><div>{chip(it['status'] or 'unknown', 'na' if it['status'] not in ('success','failure') else ('ok' if it['status']=='success' else 'bad'))}</div>
           <div>Created</div><div><time>{html.escape(it['created'] or '')}</time></div>
