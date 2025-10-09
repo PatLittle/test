@@ -692,11 +692,15 @@ def write_gcds_index(items, out_dir):
     html_code = f"""<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <title>Validation Portal - Government of Canada</title>
-  <meta name="description" content="Validation Portal" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/css/gcds.css" />
+  <!-- GC Design System -->
+<link
+  rel="stylesheet"
+  href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css"
+/>
+<script
+  type="module"
+  src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"
+></script>
 </head>
 <body>
   {GCDS_HEADER}
