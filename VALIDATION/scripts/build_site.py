@@ -14,7 +14,8 @@ Changes:
 """
 
 import os, re, json, html, ujson
-import datetime
+from datetime import datetime
+from collections import Counter, defaultdict
 
 IN_PATH  = os.getenv("VALIDATION_JSONL", "validation_enriched.jsonl")
 OUT_DIR  = os.getenv("SITE_DIR", "VALIDATION")
@@ -37,6 +38,78 @@ def unwrap(val, max_layers=3):
 def parse_reports(v):
     rep = unwrap(v, 3)
     return rep if isinstance(rep, dict) else {}
+
+STATUS_ALIASES = {
+    "passed": "success",
+    "pass": "success",
+    "ok": "success",
+    "succeeded": "success",
+    "errored": "failure",
+    "failed": "failure",
+    "error": "failure",
+}
+
+STATUS_DISPLAY = {
+    "success": "Success",
+    "failure": "Failure",
+    "pending": "Pending",
+    "running": "Running",
+    "queued": "Queued",
+    "unknown": "Unknown",
+}
+
+STATUS_COLORS = {
+    "success": "#2e8540",
+    "failure": "#d3080c",
+    "pending": "#f9a825",
+    "running": "#3f57a6",
+    "queued": "#5b5b5b",
+    "unknown": "#6c757d",
+}
+
+DEFAULT_STATUS_COLOR = "#617d98"
+PREFERRED_STATUS_ORDER = ["success", "failure", "pending", "running", "queued", "unknown"]
+CHART_JS_URL = "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+
+def normalize_status(value):
+    if value is None:
+        return "unknown"
+    key = str(value).strip().lower()
+    if not key:
+        return "unknown"
+    return STATUS_ALIASES.get(key, key)
+
+def display_status(key):
+    return STATUS_DISPLAY.get(key, key.replace("_", " ").title() if key else "Unknown")
+
+def order_status_keys(counter: Counter):
+    if not counter:
+        return []
+    present = {k for k, v in counter.items() if v}
+    ordered = [k for k in PREFERRED_STATUS_ORDER if k in present]
+    remaining = sorted(present - set(ordered))
+    return ordered + remaining
+
+def normalize_url_type(value):
+    if value is None:
+        return "unknown", "Unknown"
+    raw = str(value).strip()
+    if not raw:
+        return "unknown", "Unknown"
+    return raw.lower(), raw
+
+def ensure_unique_slug(base, used):
+    slug = base or "organization"
+    candidate = slug
+    idx = 2
+    while not candidate or candidate in used:
+        candidate = f"{slug}-{idx}"
+        idx += 1
+    used.add(candidate)
+    return candidate
+
+def normalize_org_name(name):
+    return (name or "Unknown").strip() or "Unknown"
 
 # --------------------- Version detection ---------------------
 
@@ -167,6 +240,139 @@ def read_items(jsonl_path):
             })
     return items
 
+def build_org_groups(items):
+    used_slugs = set()
+    groups = {}
+    for it in items:
+        org_name = normalize_org_name(it.get("organization_name"))
+        group = groups.get(org_name)
+        if group is None:
+            slug_base = slugify(org_name)
+            slug = ensure_unique_slug(slug_base, used_slugs)
+            group = {
+                "name": org_name,
+                "slug": slug,
+                "items": [],
+                "status_counts": Counter(),
+                "url_counts": Counter(),
+                "status_by_url": defaultdict(Counter),
+                "url_labels": {},
+            }
+            groups[org_name] = group
+
+        group["items"].append(it)
+
+        status_key = normalize_status(it.get("status"))
+        group["status_counts"][status_key] += 1
+
+        url_key, url_label = normalize_url_type(it.get("url_type"))
+        group["url_counts"][url_key] += 1
+        group["status_by_url"][url_key][status_key] += 1
+        if url_label:
+            group["url_labels"].setdefault(url_key, url_label)
+
+    org_groups = []
+    for group in groups.values():
+        items_sorted = sorted(group["items"], key=lambda x: (x.get("created") or ""), reverse=True)
+        group["items"] = items_sorted
+        group["total"] = len(items_sorted)
+        group["latest_created"] = max((x.get("created") or "" for x in items_sorted), default="")
+        group["status_order"] = order_status_keys(group["status_counts"])
+        group["url_order"] = sorted(
+            group["url_counts"],
+            key=lambda key: (-group["url_counts"][key], group["url_labels"].get(key, "")),
+        )
+        org_groups.append(group)
+
+    org_groups.sort(key=lambda g: g["name"].lower())
+    return org_groups
+
+def prepare_org_summary(group):
+    success = group["status_counts"].get("success", 0)
+    failure = group["status_counts"].get("failure", 0)
+    other = group["total"] - success - failure
+    url_types_count = len(group["url_counts"])
+
+    status_order = group.get("status_order") or []
+    if not status_order:
+        status_order = ["unknown"]
+    status_labels = [display_status(s) for s in status_order]
+    status_values = [group["status_counts"].get(s, 0) for s in status_order]
+    status_colors = [STATUS_COLORS.get(s, DEFAULT_STATUS_COLOR) for s in status_order]
+    status_data_json = json.dumps(
+        {
+            "labels": status_labels,
+            "datasets": [{
+                "label": "Reports",
+                "data": status_values,
+                "backgroundColor": status_colors,
+                "hoverOffset": 8,
+            }]
+        },
+        ensure_ascii=False,
+    )
+
+    url_order = group.get("url_order") or []
+    if not url_order:
+        url_order = ["unknown"]
+    url_labels = [group["url_labels"].get(u, "Unknown") for u in url_order]
+    stacked_datasets = []
+    for status_key in status_order:
+        data_points = [
+            group["status_by_url"].get(u, Counter()).get(status_key, 0)
+            for u in url_order
+        ]
+        if any(data_points):
+            stacked_datasets.append({
+                "label": display_status(status_key),
+                "data": data_points,
+                "backgroundColor": STATUS_COLORS.get(status_key, DEFAULT_STATUS_COLOR),
+                "stack": "status",
+                "borderWidth": 0,
+            })
+    if not stacked_datasets:
+        stacked_datasets.append({
+            "label": "Reports",
+            "data": [group["url_counts"].get(u, 0) for u in url_order],
+            "backgroundColor": DEFAULT_STATUS_COLOR,
+            "stack": "status",
+            "borderWidth": 0,
+        })
+    url_chart_json = json.dumps(
+        {
+            "labels": url_labels,
+            "datasets": stacked_datasets,
+        },
+        ensure_ascii=False,
+    )
+
+    status_table_rows = []
+    for url_key in url_order:
+        label = group["url_labels"].get(url_key, "Unknown")
+        counts = group["status_by_url"].get(url_key, Counter())
+        total = group["url_counts"].get(url_key, 0)
+        status_table_rows.append({
+            "label": label,
+            "total": total,
+            "counts": [counts.get(status_key, 0) for status_key in status_order],
+        })
+
+    return {
+        "success": success,
+        "failure": failure,
+        "other": other,
+        "url_types_count": url_types_count,
+        "status_order": status_order,
+        "status_labels": status_labels,
+        "status_values": status_values,
+        "status_data_json": status_data_json,
+        "url_order": url_order,
+        "url_labels": url_labels,
+        "url_chart_json": url_chart_json,
+        "status_table_rows": status_table_rows,
+        "latest_created": group.get("latest_created") or "N/A",
+    }
+
 # --------------------- UI assets ---------------------
 
 CSS = """
@@ -179,7 +385,10 @@ body{margin:0; background:var(--bg); color:var(--ink); font-family:Inter,system-
 a{color:var(--link); text-decoration:none} a:hover{text-decoration:underline}
 .container{max-width:1600px; margin:0 auto; padding:28px}
 .header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px}
+.header .actions{margin-left:auto; display:flex; gap:10px; flex-wrap:wrap}
 .h1{font-size:20px; font-weight:700; letter-spacing:.2px}
+.lang-toggle{display:inline-flex; gap:6px}
+.lang-toggle .btn{min-width:44px}
 .panel{background:var(--panel); border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,.25)}
 .controls{display:flex; flex-wrap:wrap; gap:10px; padding:14px 16px; border-bottom:1px solid var(--line)}
 .controls .grow{flex:1 1 260px}
@@ -205,6 +414,15 @@ th[data-sort]{cursor:pointer; user-select:none}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace; background:rgba(255,255,255,.06); padding:10px; border-radius:10px; overflow:auto; white-space:pre-wrap}
 .small{font-size:12px; color:var(--muted)}
 .badge.link{background:rgba(255,255,255,.08)}
+.chart-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); margin:16px 0}
+.chart-card{padding:18px}
+.chart-card h3{margin:0 0 12px; font-size:16px}
+.chart-card canvas{width:100%; max-width:100%; height:320px}
+.summary-grid{display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(220px,1fr))}
+.summary-tile{padding:16px; border-radius:12px; background:rgba(255,255,255,.04)}
+.summary-tile .label{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted)}
+.summary-tile .value{font-size:20px; font-weight:600; margin-top:4px}
+.org-list{list-style:none; margin:0; padding:0; display:grid; gap:16px}
 """
 
 JS = r"""
@@ -212,7 +430,10 @@ let sortState = { key: null, dir: 1 }; // 1 asc, -1 desc
 let pageSize = 25;
 let currentPage = 1;
 
-function getRows(){ return Array.from(document.querySelectorAll('tbody tr')); }
+const reportTable = document.querySelector('[data-report-table]');
+const reportTableBody = reportTable ? reportTable.querySelector('tbody') : null;
+
+function getRows(){ return reportTableBody ? Array.from(reportTableBody.querySelectorAll('tr')) : []; }
 function visibleFilteredRows(){ return getRows().filter(r => r.dataset.filtered !== '0'); }
 
 function getCellValue(row, key){
@@ -233,8 +454,9 @@ function getCellValue(row, key){
 }
 
 function sortBy(key){
-  const tbody = document.querySelector('tbody');
+  if(!reportTableBody) return;
   const rows = getRows();
+  if(!rows.length) return;
   sortState.dir = (sortState.key === key) ? -sortState.dir : 1;
   sortState.key = key;
 
@@ -246,13 +468,14 @@ function sortBy(key){
     }
     return va.localeCompare(vb) * sortState.dir;
   });
-  rows.forEach(r=>tbody.appendChild(r));
+  rows.forEach(r=>reportTableBody.appendChild(r));
   updateSortIndicators();
   renderPage(1);
 }
 
 function updateSortIndicators(){
-  document.querySelectorAll('th[data-sort]').forEach(th=>{
+  if(!reportTable) return;
+  reportTable.querySelectorAll('th[data-sort]').forEach(th=>{
     const key=th.dataset.sort; th.querySelector('.sort-ind')?.remove();
     if(sortState.key===key){
       const s=document.createElement('span'); s.className='sort-ind'; s.textContent=sortState.dir===1?' ↑':' ↓'; th.appendChild(s);
@@ -261,6 +484,7 @@ function updateSortIndicators(){
 }
 
 function applyFilters(){
+  if(!reportTableBody) return;
   const q   = (document.querySelector('#q')?.value || '').toLowerCase().trim();
   const rF  = (document.querySelector('#filter-resource')?.value || '').toLowerCase().trim();
   const sF  = (document.querySelector('#filter-status')?.value || '').toLowerCase().trim();
@@ -300,11 +524,19 @@ function setLang(lang){
   });
 }
 
-function setPageSize(v){ pageSize = parseInt(v,10)||25; renderPage(1); }
-function gotoPrev(){ renderPage(currentPage-1); }
-function gotoNext(){ renderPage(currentPage+1); }
+function setPageSize(v){
+  pageSize = parseInt(v,10)||25;
+  if(reportTableBody) renderPage(1);
+}
+function gotoPrev(){
+  if(reportTableBody) renderPage(currentPage-1);
+}
+function gotoNext(){
+  if(reportTableBody) renderPage(currentPage+1);
+}
 
 function renderPage(page){
+  if(!reportTableBody) return;
   const rows = visibleFilteredRows();
   const total = rows.length;
   const totalPages = Math.max(1, Math.ceil(total/pageSize));
@@ -330,10 +562,11 @@ window.addEventListener('DOMContentLoaded',()=>{
   const ps=document.querySelector('#page-size');
   if(ps) ps.addEventListener('change', e=> setPageSize(e.target.value));
 
-  getRows().forEach(r=> r.dataset.filtered='1');
-  updateSortIndicators();
-  setPageSize(document.querySelector('#page-size')?.value || 25);
-  renderPage(1);
+  if(reportTableBody){
+    getRows().forEach(r=> r.dataset.filtered='1');
+    updateSortIndicators();
+    setPageSize(document.querySelector('#page-size')?.value || 25);
+  }
 });
 """
 
@@ -352,54 +585,55 @@ def lang_html(en, fr):
     return (f'<span data-lang="en">{html.escape(en or "")}</span>'
             f'<span data-lang="fr" style="display:none">{html.escape(fr or "")}</span>')
 
+def render_report_row(it, link_prefix="reports"):
+    slug = slugify(it['id'])
+    prefix = (link_prefix or "").rstrip("/")
+    link = f"{prefix}/{slug}.html" if prefix else f"{slug}.html"
+    created = it['created'] or ''
+    status  = it['status'] or ''
+    resource_code = it['resource_id'] or '-'
+    version = it['version'] or 'unknown'
+    org     = it['organization_name'] or ''
+    d_en, d_fr = it.get("dataset_title_en",""), it.get("dataset_title_fr","")
+    r_en, r_fr = it.get("resource_name_en",""), it.get("resource_name_fr","")
+
+    en_err = f"{it['en']['errors']} err"
+    fr_err = f"{it['fr']['errors']} err."
+    err_cell = f'<span data-lang="en">{en_err}</span><span data-lang="fr" style="display:none">{fr_err}</span>'
+
+    ver_chip= chip(version, "na")
+    st_chip = chip(status, 'na' if status not in ('success','failure') else ('ok' if status=='success' else 'bad'))
+
+    dataset_cell = f'{lang_html(d_en, d_fr)}<div class="small"><code>{html.escape(it["dataset_id"])}</code></div>'
+    resource_cell= f'{lang_html(r_en, r_fr)}<div class="small"><code>{html.escape(resource_code)}</code> · {html.escape(it.get("url_type") or "")}</div>'
+
+    return f"""
+      <tr data-created="{html.escape(created)}"
+          data-status="{html.escape(status.lower())}"
+          data-resource="{html.escape(resource_code)}"
+          data-organization="{html.escape(org)}"
+          data-org="{html.escape(org)}"
+          data-version="{html.escape(version.lower())}"
+          data-dataset-en="{html.escape(d_en)}"
+          data-dataset-fr="{html.escape(d_fr)}"
+          data-filtered="1">
+        <td>
+          <a href="{link}"><code>{html.escape(it['id'])}</code></a>
+          <div class="subtle">{ver_chip}</div>
+        </td>
+        <td>{dataset_cell}</td>
+        <td>{resource_cell}</td>
+        <td>{html.escape(org)}</td>
+        <td>{err_cell}</td>
+        <td>{st_chip}</td>
+        <td><time>{html.escape(created)}</time></td>
+      </tr>
+    """
+
 # --------------------- Index page ---------------------
 
 def write_index(items, out_dir):
-    def row_html(it):
-        link=f"reports/{slugify(it['id'])}.html"
-        created = it['created'] or ''
-        status  = it['status'] or ''
-        resource_code = it['resource_id'] or '-'
-        version = it['version'] or 'unknown'
-        org     = it['organization_name'] or ''
-        d_en, d_fr = it.get("dataset_title_en",""), it.get("dataset_title_fr","")
-        r_en, r_fr = it.get("resource_name_en",""), it.get("resource_name_fr","")
-
-        # one Errors column driven by language
-        en_err = f"{it['en']['errors']} err"
-        fr_err = f"{it['fr']['errors']} err."
-        err_cell = f'<span data-lang="en">{en_err}</span><span data-lang="fr" style="display:none">{fr_err}</span>'
-
-        ver_chip= chip(version, "na")
-        st_chip = chip(status, 'na' if status not in ('success','failure') else ('ok' if status=='success' else 'bad'))
-
-        dataset_cell = f'{lang_html(d_en, d_fr)}<div class="small"><code>{html.escape(it["dataset_id"])}</code></div>'
-        resource_cell= f'{lang_html(r_en, r_fr)}<div class="small"><code>{html.escape(resource_code)}</code> · {html.escape(it.get("url_type") or "")}</div>'
-
-        return f"""
-          <tr data-created="{html.escape(created)}"
-              data-status="{html.escape(status.lower())}"
-              data-resource="{html.escape(resource_code)}"
-              data-organization="{html.escape(org)}"
-              data-org="{html.escape(org)}"
-              data-version="{html.escape(version.lower())}"
-              data-dataset-en="{html.escape(d_en)}"
-              data-dataset-fr="{html.escape(d_fr)}"
-              data-filtered="1">
-            <td>
-              <a href="{link}"><code>{html.escape(it['id'])}</code></a>
-              <div class="subtle">{ver_chip}</div>
-            </td>
-            <td>{dataset_cell}</td>
-            <td>{resource_cell}</td>
-            <td>{html.escape(org)}</td>
-            <td>{err_cell}</td>
-            <td>{st_chip}</td>
-            <td><time>{html.escape(created)}</time></td>
-          </tr>
-        """
-
-    rows = [row_html(it) for it in items]
+    rows = [render_report_row(it) for it in items]
 
     html_index = f"""<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -409,9 +643,12 @@ def write_index(items, out_dir):
   <div class="container">
     <div class="header">
       <div class="h1">Validation Reports</div>
-      <div class="lang-toggle">
-        <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
-        <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+      <div class="actions">
+        <a class="btn" href="organizations/index.html">Organizations</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
       </div>
     </div>
 
@@ -427,7 +664,7 @@ def write_index(items, out_dir):
       </div>
 
       <div class="table-wrap">
-        <table class="table">
+        <table class="table" data-report-table>
           <thead>
             <tr>
               <th>ID</th>
@@ -499,6 +736,336 @@ def write_index(items, out_dir):
 
     with open(os.path.join(out_dir,"index.html"), "w", encoding="utf-8") as f:
         f.write(html_index)
+
+def write_org_index(org_groups, out_dir):
+    org_dir = os.path.join(out_dir, "organizations")
+    os.makedirs(org_dir, exist_ok=True)
+
+    items_html = []
+    for group in org_groups:
+        success = group["status_counts"].get("success", 0)
+        failure = group["status_counts"].get("failure", 0)
+        other = group["total"] - success - failure
+        url_types_count = len(group["url_counts"])
+        latest_created = group.get("latest_created") or "N/A"
+        match = f"{group['name']} {success} {failure} {other} {url_types_count}".lower()
+        items_html.append(f"""
+      <li class="panel section" data-match="{html.escape(match)}">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap">
+          <div class="h1" style="font-size:18px">{html.escape(group['name'])}</div>
+          <a class="btn" href="{html.escape(group['slug'])}.html">Open report</a>
+        </div>
+        <div class="summary-grid" style="margin-top:16px">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">{group['total']}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--good)">{success}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--bad)">{failure}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Other statuses</div>
+            <div class="value">{max(other, 0)}</div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          URL types: {url_types_count} · Latest report: <time>{html.escape(latest_created)}</time>
+        </p>
+      </li>
+    """)
+
+    html_page = f"""<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Organizations · Validation Reports</title>
+<link rel="stylesheet" href="../style.css"><script defer src="../app.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="../index.html">← Validation Reports</a></div>
+      <div class="actions">
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow">
+          <input class="input" id="org-search" placeholder="Search organizations…"/>
+        </div>
+      </div>
+      <ul class="org-list" id="org-list">
+        {''.join(items_html) if items_html else '<li class="panel section"><span class="badge na">No organizations found</span></li>'}
+      </ul>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){{
+      const search = document.getElementById('org-search');
+      const rows = Array.from(document.querySelectorAll('#org-list [data-match]'));
+      if(search){{
+        search.addEventListener('input', function(){{
+          const q = search.value.trim().toLowerCase();
+          rows.forEach(li => {{
+            li.style.display = (!q || li.dataset.match.includes(q)) ? '' : 'none';
+          }});
+        }});
+      }}
+    }});
+  </script>
+</body></html>"""
+
+    with open(os.path.join(org_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(html_page)
+
+def write_org_pages(org_groups, out_dir):
+    org_dir = os.path.join(out_dir, "organizations")
+    os.makedirs(org_dir, exist_ok=True)
+
+    for group in org_groups:
+        summary = prepare_org_summary(group)
+        success = summary["success"]
+        failure = summary["failure"]
+        other = summary["other"]
+        url_types_count = summary["url_types_count"]
+        status_labels = summary["status_labels"]
+        status_data_json = summary["status_data_json"]
+        url_chart_json = summary["url_chart_json"]
+        status_table_headers = "".join(f"<th>{html.escape(label)}</th>" for label in status_labels)
+        status_table_rows = []
+        for row in summary["status_table_rows"]:
+            cells = "".join(f"<td>{value}</td>" for value in row["counts"])
+            status_table_rows.append(f"<tr><td>{html.escape(row['label'])}</td><td>{row['total']}</td>{cells}</tr>")
+        if not status_table_rows:
+            status_table_rows.append('<tr><td colspan="99"><span class="badge na">No URL types</span></td></tr>')
+
+        latest_created = summary["latest_created"]
+        report_rows = [render_report_row(it, "../reports") for it in group["items"]]
+        if not report_rows:
+            report_rows.append('<tr><td colspan="7"><span class="badge na">No reports found</span></td></tr>')
+
+        page_html = f"""<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{html.escape(group['name'])} · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="{CHART_JS_URL}"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">{html.escape(group['name'])}</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: {group['total']} · Success: {success} · Failure: {failure} · Other: {max(other, 0)} · URL types: {url_types_count} · Latest: <time>{html.escape(latest_created)}</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">{group['total']}</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">{success}</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">{failure}</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">{url_types_count}</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              {status_table_headers}
+            </tr>
+          </thead>
+          <tbody>
+            {''.join(status_table_rows)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {''.join(report_rows)}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){{
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {status_data_json};
+      const urlTypeData = {url_chart_json};
+      if(window.Chart){{
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){{
+          new Chart(statusCanvas.getContext('2d'), {{
+            type: 'pie',
+            data: statusData,
+            options: {{
+              plugins: {{
+                legend: {{
+                  position: 'bottom',
+                  labels: {{ color: tickColor }}
+                }}
+              }}
+            }}
+          }});
+        }}
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){{
+          new Chart(urlCanvas.getContext('2d'), {{
+            type: 'bar',
+            data: urlTypeData,
+            options: {{
+              plugins: {{
+                legend: {{
+                  labels: {{ color: tickColor }}
+                }}
+              }},
+              responsive: true,
+              scales: {{
+                x: {{
+                  stacked: true,
+                  ticks: {{ color: tickColor }},
+                  grid: {{ color: gridColor }}
+                }},
+                y: {{
+                  stacked: true,
+                  ticks: {{ color: tickColor }},
+                  grid: {{ color: gridColor }},
+                  beginAtZero: true
+                }}
+              }}
+            }}
+          }});
+        }}
+      }}
+    }});
+  </script>
+</body></html>"""
+
+        with open(os.path.join(org_dir, f"{group['slug']}.html"), "w", encoding="utf-8") as f:
+            f.write(page_html)
 
 # --------------------- Detail pages (versioned) ---------------------
 
@@ -608,7 +1175,7 @@ def render_lang_panel_v01(lang, tables):
     style='' if lang=='en' else 'style="display:none"'
     return f'<section data-lang="{lang}" {style} class="panel">{head}{blocks}</section>'
 
-def write_report_pages(items, out_dir):
+def write_report_pages(items, out_dir, org_lookup=None):
     rdir=os.path.join(out_dir,"reports"); os.makedirs(rdir, exist_ok=True)
     for it in items:
         pid=slugify(it['id']); ver=it.get("version") or "unknown"
@@ -625,10 +1192,17 @@ def write_report_pages(items, out_dir):
           </div>
         '''
 
+        org_name = normalize_org_name(it.get('organization_name'))
+        org_slug = (org_lookup or {}).get(org_name)
+        if org_slug:
+            org_cell = f'<a href="../organizations/{html.escape(org_slug)}.html">{html.escape(org_name)}</a>'
+        else:
+            org_cell = html.escape(org_name)
+
         header_meta=f"""
         <div class="kv" style="margin-top:8px">
           <div>Version</div><div>{chip(ver,'na')}</div>
-          <div>Organization</div><div>{html.escape(it.get('organization_name',''))}</div>
+          <div>Organization</div><div>{org_cell}</div>
           <div>Dataset</div><div>{lang_html(it.get('dataset_title_en',''), it.get('dataset_title_fr',''))} <span class="small"><code>{html.escape(dsid)}</code></span>{dataset_links}</div>
           <div>Resource</div><div>{lang_html(it.get('resource_name_en',''), it.get('resource_name_fr',''))} <span class="small"><code>{html.escape(it.get('resource_id',''))}</code> · {html.escape(it.get('url_type',''))}</span></div>
           <div>Status</div><div>{chip(it['status'] or 'unknown', 'na' if it['status'] not in ('success','failure') else ('ok' if it['status']=='success' else 'bad'))}</div>
@@ -678,42 +1252,231 @@ GCDS_CSS_SHORTCUTS = "https://cdn.design-system.alpha.canada.ca/@gcds-core/css-s
 GCDS_COMPONENTS_CSS = "https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css"
 GCDS_COMPONENTS_JS  = "https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"
 
-def write_gcds_index(items, out_dir):
-    """Write the improved GCDS main index page using latest GCDS styles/components."""
+GC_CSS = """
+:root{
+  --gc-surface:#ffffff;
+  --gc-surface-alt:#f3f6f9;
+  --gc-border:#dfe3e8;
+  --gc-text:#1b1b1b;
+  --gc-muted:#5a6b7d;
+  --gc-link:#1a5a96;
+  --gc-good:#2e7d32;
+  --gc-bad:#c62828;
+}
+body{
+  margin:0;
+  background:var(--gc-surface-alt);
+  color:var(--gc-text);
+  font-family:"Noto Sans","Helvetica Neue",Arial,sans-serif;
+}
+a{color:var(--gc-link);}
+a:hover{text-decoration:underline;}
+.gc-wrapper{padding:32px 0;}
+.panel{background:var(--gc-surface); border:1px solid var(--gc-border); border-radius:16px; box-shadow:0 6px 24px rgba(0,0,0,0.05); margin-bottom:24px;}
+.section{padding:24px;}
+.controls{display:flex; flex-wrap:wrap; gap:16px; padding:20px 24px; border-bottom:1px solid var(--gc-border); background:#fbfcfd;}
+.controls .grow{flex:1 1 240px;}
+.input, .select, .btn{
+  height:42px; padding:0 12px; border:1px solid var(--gc-border); border-radius:8px;
+  background:#fff; color:var(--gc-text); font-size:15px; font-family:inherit;
+  box-shadow:none;
+}
+.input:focus, .select:focus{outline:2px solid #1a5a96; outline-offset:2px;}
+.btn{cursor:pointer; background:#1a5a96; color:#fff; border:none; font-weight:600;}
+.btn:hover{background:#164d7f;}
+.btn.secondary{background:#fff; color:#1a5a96; border:1px solid #1a5a96;}
+.table{width:100%; border-collapse:collapse; font-size:15px;}
+.table thead{background:#eef3f8;}
+.table th, .table td{padding:12px 14px; border-bottom:1px solid var(--gc-border); vertical-align:top; text-align:left;}
+.table th{position:sticky; top:0; z-index:1;}
+.table tbody tr:nth-child(even){background:#fbfcfe;}
+.hdr-ctrl{margin-top:8px;}
+.hdr-ctrl .input{width:100%;}
+.pager{display:flex; align-items:center; justify-content:flex-end; gap:12px; padding:16px 24px; border-top:1px solid var(--gc-border); background:#fbfcfd; flex-wrap:wrap;}
+.table-wrap{max-height:70vh; overflow:auto;}
+.badge{display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:999px; background:#eef3f8; color:var(--gc-text); font-weight:600; font-size:13px;}
+.badge.ok{background:#e3f2e6; color:var(--gc-good);}
+.badge.bad{background:#fdecea; color:var(--gc-bad);}
+.badge.na{background:#f1f2f6; color:var(--gc-muted);}
+.badge.link{background:#fff; border:1px solid var(--gc-border);}
+.small{font-size:13px; color:var(--gc-muted);}
+.subtle{color:var(--gc-muted); font-size:13px;}
+.lang-toggle{display:inline-flex; gap:8px;}
+.lang-toggle .btn{height:36px; min-width:44px; background:#fff; color:#1a5a96; border:1px solid #1a5a96;}
+.lang-toggle .btn.active{background:#1a5a96; color:#fff;}
+.summary-grid{display:grid; gap:16px; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); margin:24px 0;}
+.summary-tile{padding:20px; border-radius:12px; background:#fff; border:1px solid var(--gc-border);}
+.summary-tile .label{font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--gc-muted);}
+.summary-tile .value{font-size:22px; font-weight:700; margin-top:4px;}
+.chart-grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); margin:24px 0;}
+.chart-card{padding:24px; border-radius:12px; border:1px solid var(--gc-border); background:#fff;}
+.chart-card h3{margin:0 0 16px; font-size:18px;}
+.chart-card canvas{width:100%; height:320px;}
+.org-list{list-style:none; padding:0; margin:0; display:grid; gap:20px;}
+.actions{display:flex; align-items:center; gap:12px; flex-wrap:wrap;}
+.h1{font-size:24px; font-weight:700; margin:0;}
+.kv{display:grid; grid-template-columns:200px 1fr; gap:10px; font-size:15px;}
+.badge.link{display:inline-flex;}
+.panel.section .h1 code{font-size:18px;}
+@media (max-width: 600px){
+  .controls{flex-direction:column;}
+  .kv{grid-template-columns:1fr;}
+}
+"""
+def write_gcds_index(items, org_groups, out_dir):
+    """Write the improved GCDS main index page using latest GCDS styles/components with feature parity."""
 
     today = datetime.utcnow().strftime("%Y-%m-%d")
-    gc_reports_links = "\n".join(
-        f'<li><gcds-link href="gc_reports/{slugify(it["id"])}.html">{html.escape(it["id"])} – {html.escape(it["dataset_title_en"] or it["dataset_id"] or "")}</gcds-link></li>'
-        for it in items
-    )
+    rows = [render_report_row(it, "gc_reports") for it in items]
+    total_reports = len(items)
+    success_count = sum(1 for it in items if normalize_status(it.get("status")) == "success")
+    failure_count = sum(1 for it in items if normalize_status(it.get("status")) == "failure")
+    other_count = total_reports - success_count - failure_count
+    org_count = len(org_groups)
 
     html_code = f"""<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A validation portal index generated using the Government of Canada Design System." />
+  <meta name="description" content="Validation reports presented with the Government of Canada Design System." />
   <title>Validation Portal – GCDS</title>
   <link rel="stylesheet" href="{GCDS_CSS_SHORTCUTS}" />
   <link rel="stylesheet" href="{GCDS_COMPONENTS_CSS}" />
+  <link rel="stylesheet" href="gc_style.css" />
   <script type="module" src="{GCDS_COMPONENTS_JS}"></script>
+  <script defer src="app.js"></script>
 </head>
 <body>
-  <gcds-header service-title="Validation Portal" skip-to-href="#main-content"></gcds-header>
-  <gcds-container id="main-content" main-container size="xl" centered tag="main">
-    <section>
-      <gcds-heading tag="h1">Validation Portal (GCDS Theme)</gcds-heading>
-      <gcds-text>
-        This version uses the
-        <gcds-link href="https://design-system.alpha.canada.ca/en/">Government of Canada Design System (Alpha)</gcds-link>.
-      </gcds-text>
-      <ul>
-        {gc_reports_links if gc_reports_links else "<li>No reports found.</li>"}
-      </ul>
-      <gcds-link href="index.html">View original site</gcds-link>
-    </section>
-    <gcds-date-modified>{today}</gcds-date-modified>
-  </gcds-container>
+  <gcds-header service-title="Validation Portal" service-href="gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="h1">Validation Portal (GCDS Theme)</div>
+        <p class="subtle" style="margin:12px 0">
+          This theme mirrors the Government of Canada layout while keeping all validation features.
+        </p>
+        <div class="actions">
+          <a class="btn secondary" href="index.html">Primary theme</a>
+          <a class="btn secondary" href="gc_organizations/index.html">Organizations</a>
+          <div class="lang-toggle">
+            <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+            <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+          </div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">{total_reports}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">{success_count}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">{failure_count}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Other statuses</div>
+            <div class="value">{other_count}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Organizations</div>
+            <div class="value">{org_count}</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search all columns…" /></div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Organization<br/>
+              <input class="input" id="filter-org" placeholder="Filter org…"/>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                  <div class="hdr-ctrl">
+                    <select class="select" id="filter-status">
+                      <option value="">All</option>
+                      <option value="success">success</option>
+                      <option value="failure">failure</option>
+                    </select>
+                  </div>
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                  <div class="hdr-ctrl"><input class="input" id="filter-created" placeholder="yyyy-mm…"/></div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {''.join(rows)}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <p class="subtle">
+        Language toggle switches dataset and resource titles and keeps parity with the primary theme.
+      </p>
+      <gcds-date-modified>{today}</gcds-date-modified>
+    </gcds-container>
+  </div>
   <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
 </body>
 </html>
@@ -721,64 +1484,451 @@ def write_gcds_index(items, out_dir):
     with open(os.path.join(out_dir, "gc_index.html"), "w", encoding="utf-8") as f:
         f.write(html_code)
 
-GCDS_REPORT_TEMPLATE = """<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Validation Report for {dataset_title} ({report_id})" />
-  <title>Validation Report {report_id} – GCDS</title>
-  <link rel="stylesheet" href="{gcds_css_shortcuts}" />
-  <link rel="stylesheet" href="{gcds_components_css}" />
-  <script type="module" src="{gcds_components_js}"></script>
-</head>
-<body>
-  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
-  <gcds-container id="main-content" main-container size="xl" centered tag="main">
-    <section>
-      <gcds-heading tag="h1">Validation Report: {report_id}</gcds-heading>
-      <gcds-text>
-        <b>Dataset:</b> {dataset_title}<br>
-        <b>Resource:</b> {resource_name}<br>
-        <b>Status:</b> {status}<br>
-        <b>Errors:</b> {errors}<br>
-        <b>Warnings:</b> {warnings}<br>
-        <b>Rows:</b> {rows}<br>
-        <b>Created:</b> {created}<br>
-        <b>Version:</b> {version}<br>
-      </gcds-text>
-      <gcds-link href="../gc_index.html">Back to Main</gcds-link>
-    </section>
-    <gcds-date-modified>{date_modified}</gcds-date-modified>
-  </gcds-container>
-  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
-</body>
-</html>
-"""
-
-def write_gcds_report_pages(items, out_dir):
+def write_gcds_report_pages(items, out_dir, org_lookup=None):
     gc_reports_dir = os.path.join(out_dir, "gc_reports")
     os.makedirs(gc_reports_dir, exist_ok=True)
     today = datetime.utcnow().strftime("%Y-%m-%d")
     for it in items:
         pid = slugify(it['id'])
-        report_html = GCDS_REPORT_TEMPLATE.format(
-            report_id=html.escape(it['id']),
-            dataset_title=html.escape(it.get('dataset_title_en') or it.get('dataset_id') or ""),
-            resource_name=html.escape(it.get('resource_name_en') or it.get('resource_id') or ""),
-            status=html.escape(it.get('status') or ""),
-            errors=it['en']['errors'],
-            warnings=it['en']['warnings'],
-            rows=it['en']['rows'],
-            created=html.escape(it.get('created') or ""),
-            version=html.escape(it.get('version') or ""),
-            date_modified=today,
-            gcds_css_shortcuts=GCDS_CSS_SHORTCUTS,
-            gcds_components_css=GCDS_COMPONENTS_CSS,
-            gcds_components_js=GCDS_COMPONENTS_JS
-        )
+        ver = it.get("version") or "unknown"
+        dsid = it.get('dataset_id','')
+        edit_url   = f"https://registry.open.canada.ca/dataset/{html.escape(dsid)}"
+        portal_url = f"https://open.canada.ca/data/en/dataset/{html.escape(dsid)}"
+        dataset_links = f'''
+          <div>
+            <a class="badge link" href="{edit_url}" target="_blank" rel="noopener">edit</a>
+            &nbsp;
+            <a class="badge link" href="{portal_url}" target="_blank" rel="noopener">portal</a>
+          </div>
+        '''
+
+        org_name = normalize_org_name(it.get('organization_name'))
+        org_slug = (org_lookup or {}).get(org_name)
+        if org_slug:
+            org_cell = f'<a href="../gc_organizations/{html.escape(org_slug)}.html">{html.escape(org_name)}</a>'
+        else:
+            org_cell = html.escape(org_name)
+
+        header_meta=f"""
+        <div class="kv" style="margin-top:12px">
+          <div>Version</div><div>{chip(ver,'na')}</div>
+          <div>Organization</div><div>{org_cell}</div>
+          <div>Dataset</div><div>{lang_html(it.get('dataset_title_en',''), it.get('dataset_title_fr',''))} <span class="small"><code>{html.escape(dsid)}</code></span>{dataset_links}</div>
+          <div>Resource</div><div>{lang_html(it.get('resource_name_en',''), it.get('resource_name_fr',''))} <span class="small"><code>{html.escape(it.get('resource_id',''))}</code> · {html.escape(it.get('url_type',''))}</span></div>
+          <div>Status</div><div>{chip(it['status'] or 'unknown', 'na' if it['status'] not in ('success','failure') else ('ok' if it['status']=='success' else 'bad'))}</div>
+          <div>Created</div><div><time>{html.escape(it.get('created') or '')}</time></div>
+        </div>"""
+
+        if ver=="v0.2":
+            body=f"{render_lang_panel_v02('en', it['lang_data'].get('en'))}{render_lang_panel_v02('fr', it['lang_data'].get('fr'))}"
+        elif ver=="v0.1":
+            body=f"{render_lang_panel_v01('en', it['lang_data'].get('en'))}{render_lang_panel_v01('fr', it['lang_data'].get('fr'))}"
+        else:
+            body='<div class="panel section"><span class="badge na">Unknown report format</span></div>'
+
+        report_html = f"""<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Validation Report for {html.escape(it['id'])}" />
+  <title>Validation Report {html.escape(it['id'])} – GCDS</title>
+  <link rel="stylesheet" href="{GCDS_CSS_SHORTCUTS}" />
+  <link rel="stylesheet" href="{GCDS_COMPONENTS_CSS}" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="{GCDS_COMPONENTS_JS}"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1"><code>{html.escape(it['id'])}</code></div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">Back to index</a>
+            <a class="btn secondary" href="../reports/{html.escape(pid)}.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        {header_meta}
+      </section>
+
+      {body}
+
+      <gcds-date-modified>{today}</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+</body>
+</html>
+"""
         with open(os.path.join(gc_reports_dir, f"{pid}.html"), "w", encoding="utf-8") as f:
             f.write(report_html)
+
+def write_gcds_org_index(org_groups, out_dir):
+    org_dir = os.path.join(out_dir, "gc_organizations")
+    os.makedirs(org_dir, exist_ok=True)
+    today = datetime.utcnow().strftime("%Y-%m-%d")
+
+    items_html = []
+    for group in org_groups:
+        summary = prepare_org_summary(group)
+        match = f"{group['name']} {summary['success']} {summary['failure']} {summary['other']} {summary['url_types_count']}".lower()
+        items_html.append(f"""
+      <li class="panel section" data-match="{html.escape(match)}">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1" style="font-size:20px">{html.escape(group['name'])}</div>
+          <a class="btn secondary" href="{html.escape(group['slug'])}.html">Open report</a>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">{group['total']}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">{summary['success']}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">{summary['failure']}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Other statuses</div>
+            <div class="value">{max(summary['other'], 0)}</div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          URL types: {summary['url_types_count']} · Latest report: <time>{html.escape(summary['latest_created'])}</time>
+        </p>
+      </li>
+    """)
+
+    html_page = f"""<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Validation organizations (GCDS theme)." />
+  <title>Organizations · Validation Portal (GCDS)</title>
+  <link rel="stylesheet" href="{GCDS_CSS_SHORTCUTS}" />
+  <link rel="stylesheet" href="{GCDS_COMPONENTS_CSS}" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="{GCDS_COMPONENTS_JS}"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Organizations</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">Back to index</a>
+            <a class="btn secondary" href="../organizations/index.html">Primary theme</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow">
+            <input class="input" id="org-search" placeholder="Search organizations…"/>
+          </div>
+        </div>
+        <ul class="org-list" id="org-list">
+          {''.join(items_html) if items_html else '<li class="panel section"><span class="badge na">No organizations found</span></li>'}
+        </ul>
+      </section>
+
+      <gcds-date-modified>{today}</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){{
+      const search = document.getElementById('org-search');
+      const items = Array.from(document.querySelectorAll('#org-list [data-match]'));
+      if(search){{
+        search.addEventListener('input', function(){{
+          const q = search.value.trim().toLowerCase();
+          items.forEach(item => {{
+            item.style.display = (!q || item.dataset.match.includes(q)) ? '' : 'none';
+          }});
+        }});
+      }}
+    }});
+  </script>
+</body>
+</html>
+"""
+
+    with open(os.path.join(org_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(html_page)
+
+def write_gcds_org_pages(org_groups, out_dir):
+    org_dir = os.path.join(out_dir, "gc_organizations")
+    os.makedirs(org_dir, exist_ok=True)
+
+    for group in org_groups:
+        summary = prepare_org_summary(group)
+        status_table_headers = "".join(f"<th>{html.escape(label)}</th>" for label in summary["status_labels"])
+        status_table_rows = []
+        for row in summary["status_table_rows"]:
+            cells = "".join(f"<td>{value}</td>" for value in row["counts"])
+            status_table_rows.append(f"<tr><td>{html.escape(row['label'])}</td><td>{row['total']}</td>{cells}</tr>")
+        if not status_table_rows:
+            status_table_rows.append('<tr><td colspan="99"><span class="badge na">No URL types</span></td></tr>')
+
+        report_rows = [render_report_row(it, "../gc_reports") for it in group["items"]]
+        if not report_rows:
+            report_rows.append('<tr><td colspan="7"><span class="badge na">No reports found</span></td></tr>')
+
+        success = summary["success"]
+        failure = summary["failure"]
+        other = summary["other"]
+        url_types_count = summary["url_types_count"]
+        latest_created = summary["latest_created"]
+
+        page_html = f"""<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for {html.escape(group['name'])} (GCDS theme)." />
+  <title>{html.escape(group['name'])} · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="{GCDS_CSS_SHORTCUTS}" />
+  <link rel="stylesheet" href="{GCDS_COMPONENTS_CSS}" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="{GCDS_COMPONENTS_JS}"></script>
+  <script src="{CHART_JS_URL}"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">{html.escape(group['name'])}</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/{html.escape(group['slug'])}.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: {group['total']} · Success: {success} · Failure: {failure} · Other: {max(other, 0)} · URL types: {url_types_count} · Latest: <time>{html.escape(latest_created)}</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">{group['total']}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">{success}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">{failure}</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">{url_types_count}</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                {status_table_headers}
+              </tr>
+            </thead>
+            <tbody>
+              {''.join(status_table_rows)}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {''.join(report_rows)}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>{datetime.utcnow().strftime("%Y-%m-%d")}</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){{
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {summary["status_data_json"]};
+      const urlTypeData = {summary["url_chart_json"]};
+      if(window.Chart){{
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){{
+          new Chart(statusCanvas.getContext('2d'), {{
+            type: 'pie',
+            data: statusData,
+            options: {{
+              plugins: {{
+                legend: {{
+                  position: 'bottom',
+                  labels: {{ color: tickColor }}
+                }}
+              }}
+            }}
+          }});
+        }}
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){{
+          new Chart(urlCanvas.getContext('2d'), {{
+            type: 'bar',
+            data: urlTypeData,
+            options: {{
+              plugins: {{
+                legend: {{
+                  labels: {{ color: tickColor }}
+                }}
+              }},
+              responsive: true,
+              scales: {{
+                x: {{
+                  stacked: true,
+                  ticks: {{ color: tickColor }},
+                  grid: {{ color: gridColor }}
+                }},
+                y: {{
+                  stacked: true,
+                  ticks: {{ color: tickColor }},
+                  grid: {{ color: gridColor }},
+                  beginAtZero: true
+                }}
+              }}
+            }}
+          }});
+        }}
+      }}
+    }});
+  </script>
+</body>
+</html>
+"""
+        with open(os.path.join(org_dir, f"{group['slug']}.html"), "w", encoding="utf-8") as f:
+            f.write(page_html)
 
 ############################################################
 # Main
@@ -788,15 +1938,22 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, "style.css"), "w", encoding="utf-8") as f: f.write(CSS)
     with open(os.path.join(OUT_DIR, "app.js"),   "w", encoding="utf-8") as f: f.write(JS)
+    with open(os.path.join(OUT_DIR, "gc_style.css"), "w", encoding="utf-8") as f: f.write(GC_CSS)
     items=read_items(IN_PATH)
+    org_groups = build_org_groups(items)
+    org_lookup = {group["name"]: group["slug"] for group in org_groups}
 
     # Original site
     write_index(items, OUT_DIR)
-    write_report_pages(items, OUT_DIR)
+    write_org_index(org_groups, OUT_DIR)
+    write_report_pages(items, OUT_DIR, org_lookup)
+    write_org_pages(org_groups, OUT_DIR)
 
     # GCDS site (improved)
-    write_gcds_index(items, OUT_DIR)
-    write_gcds_report_pages(items, OUT_DIR)
+    write_gcds_index(items, org_groups, OUT_DIR)
+    write_gcds_report_pages(items, OUT_DIR, org_lookup)
+    write_gcds_org_index(org_groups, OUT_DIR)
+    write_gcds_org_pages(org_groups, OUT_DIR)
 
     print(f"✓ Site built: {OUT_DIR}/  reports: {len(items)} (including GCDS)")
 
