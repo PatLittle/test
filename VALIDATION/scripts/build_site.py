@@ -14,6 +14,7 @@ Changes:
 """
 
 import os, re, json, html, ujson
+import datetime
 
 IN_PATH  = os.getenv("VALIDATION_JSONL", "validation_enriched.jsonl")
 OUT_DIR  = os.getenv("SITE_DIR", "VALIDATION")
