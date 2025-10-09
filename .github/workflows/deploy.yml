@@ -81,10 +81,7 @@ jobs:
       - name: Stage Pages artifact (root contains /VALIDATION)
         run: |
           sudo rm -rf /var/cache/apt/archives/*; rm -rf ~/.cargo
-          rm -rf public
-          mkdir -p public
-          cp -R VALIDATION public/VALIDATION
-          # optional: add a root index that links to /VALIDATION
+          rm -rf public && mkdir public && mv VALIDATION public/VALIDATION
           cat > public/index.html <<'HTML'
           <!doctype html><meta charset="utf-8">
           <meta http-equiv="refresh" content="0; url=VALIDATION/">
