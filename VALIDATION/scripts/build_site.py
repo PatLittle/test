@@ -17,8 +17,9 @@ import os, re, json, html, ujson
 from datetime import datetime
 from collections import Counter, defaultdict
 
-IN_PATH  = os.getenv("VALIDATION_JSONL", "validation_enriched.jsonl")
-OUT_DIR  = os.getenv("SITE_DIR", "VALIDATION")
+IN_PATH   = os.getenv("VALIDATION_JSONL", "validation_enriched.jsonl")
+OUT_DIR   = os.getenv("SITE_DIR", "VALIDATION")
+SITE_THEME = os.getenv("SITE_THEME", "both").strip().lower()
 
 # --------------------- Utilities ---------------------
 
@@ -1936,26 +1937,42 @@ def write_gcds_org_pages(org_groups, out_dir):
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    with open(os.path.join(OUT_DIR, "style.css"), "w", encoding="utf-8") as f: f.write(CSS)
-    with open(os.path.join(OUT_DIR, "app.js"),   "w", encoding="utf-8") as f: f.write(JS)
-    with open(os.path.join(OUT_DIR, "gc_style.css"), "w", encoding="utf-8") as f: f.write(GC_CSS)
+    theme = SITE_THEME or "both"
+    build_primary = theme in ("both", "primary", "")
+    build_gcds = theme in ("both", "gcds")
+    if not build_primary and not build_gcds:
+        build_primary = True
+
+    with open(os.path.join(OUT_DIR, "style.css"), "w", encoding="utf-8") as f:
+        f.write(CSS)
+    with open(os.path.join(OUT_DIR, "app.js"), "w", encoding="utf-8") as f:
+        f.write(JS)
+    if build_gcds:
+        with open(os.path.join(OUT_DIR, "gc_style.css"), "w", encoding="utf-8") as f:
+            f.write(GC_CSS)
+
     items=read_items(IN_PATH)
     org_groups = build_org_groups(items)
     org_lookup = {group["name"]: group["slug"] for group in org_groups}
 
-    # Original site
-    write_index(items, OUT_DIR)
-    write_org_index(org_groups, OUT_DIR)
-    write_report_pages(items, OUT_DIR, org_lookup)
-    write_org_pages(org_groups, OUT_DIR)
+    themes_rendered = []
 
-    # GCDS site (improved)
-    write_gcds_index(items, org_groups, OUT_DIR)
-    write_gcds_report_pages(items, OUT_DIR, org_lookup)
-    write_gcds_org_index(org_groups, OUT_DIR)
-    write_gcds_org_pages(org_groups, OUT_DIR)
+    if build_primary:
+        write_index(items, OUT_DIR)
+        write_org_index(org_groups, OUT_DIR)
+        write_report_pages(items, OUT_DIR, org_lookup)
+        write_org_pages(org_groups, OUT_DIR)
+        themes_rendered.append("primary")
 
-    print(f"✓ Site built: {OUT_DIR}/  reports: {len(items)} (including GCDS)")
+    if build_gcds:
+        write_gcds_index(items, org_groups, OUT_DIR)
+        write_gcds_report_pages(items, OUT_DIR, org_lookup)
+        write_gcds_org_index(org_groups, OUT_DIR)
+        write_gcds_org_pages(org_groups, OUT_DIR)
+        themes_rendered.append("gcds")
+
+    theme_label = ", ".join(themes_rendered) if themes_rendered else "none"
+    print(f"✓ Site built ({theme_label}): {OUT_DIR}/  reports: {len(items)}")
 
 if __name__ == "__main__":
     main()
