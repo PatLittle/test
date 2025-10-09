@@ -1,7 +1,16 @@
-name: Build & Deploy Validation Site
+name: Build Validation Site
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
+    inputs:
+      site-theme:
+        description: "Theme to build (primary, gcds, or both)"
+        type: choice
+        options:
+          - primary
+          - gcds
+          - both
+        default: primary
 
 permissions:
   contents: read
@@ -14,80 +23,73 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Python
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Free Disk Space Before Build
+      - name: Free disk space
+        shell: bash
         run: |
           echo "Disk space before cleanup:"
           df -h
-          sudo rm -rf /usr/local/.ghcup
-          sudo rm -rf /opt/hostedtoolcache/CodeQL
-          sudo rm -rf /usr/local/lib/android/sdk/ndk
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/local/.ghcup \
+                      /opt/hostedtoolcache/CodeQL \
+                      /usr/local/lib/android/sdk/ndk \
+                      /usr/share/dotnet \
+                      /opt/ghc \
+                      /usr/local/share/boost
           sudo apt-get clean
           echo "Disk space after cleanup:"
           df -h
 
-      - name: Install deps
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r VALIDATION/requirements.txt
-          df -h /home/runner/actions-runner/cached/
-          
 
-      - name: Fetch CSV & Convert to JSONL
+      - name: Fetch CSV & convert to JSONL
         env:
           AZURE_ACCOUNT_URL: ${{ secrets.AZURE_ACCOUNT_URL }}
-          AZURE_CONTAINER:   ${{ secrets.AZURE_CONTAINER }}
-          AZURE_SAS_TOKEN:   ${{ secrets.AZURE_SAS_TOKEN }}   # no leading '?'
-          AZURE_BLOB_NAME:   ${{ secrets.AZURE_BLOB_NAME }}   # e.g. validation.csv
-          OUTPUT_CSV_PATH:   VALIDATION/validation.csv
+          AZURE_CONTAINER: ${{ secrets.AZURE_CONTAINER }}
+          AZURE_SAS_TOKEN: ${{ secrets.AZURE_SAS_TOKEN }}
+          AZURE_BLOB_NAME: ${{ secrets.AZURE_BLOB_NAME }}
+          OUTPUT_CSV_PATH: VALIDATION/validation.csv
           OUTPUT_JSONL_PATH: VALIDATION/validation.jsonl
-        run: |
-          pwd
-          ls -larh VALIDATION
-          df -h
-          python VALIDATION/scripts/fetch_and_convert.py
+        run: python VALIDATION/scripts/fetch_and_convert.py
 
-      - name: Enrich validation JSONL with dataset/resource metadata
+      - name: Enrich validation JSONL
         env:
-          VALIDATION_JSONL_IN:  VALIDATION/validation.jsonl
+          VALIDATION_JSONL_IN: VALIDATION/validation.jsonl
           VALIDATION_JSONL_OUT: VALIDATION/validation_enriched.jsonl
           OD_JSONL_GZ_URL: https://open.canada.ca/static/od-do-canada.jsonl.gz
           OD_JSONL_GZ_PATH: od-do-canada.jsonl.gz
         run: python VALIDATION/scripts/enrich_validation.py
 
-      - name: Build static site into /VALIDATION
+      - name: Build static site
         env:
+          SITE_DIR: public/VALIDATION
+          SITE_THEME: ${{ github.event.inputs.site-theme || 'primary' }}
           VALIDATION_JSONL: VALIDATION/validation_enriched.jsonl
-          SITE_DIR: VALIDATION
         run: |
-          pwd
-          ls -larh VALIDATION
+          rm -rf public
+          mkdir -p "$SITE_DIR"
           python VALIDATION/scripts/build_site.py
-          df -h
-          sudo rm -rf /tmp/*
 
-      - name: Stage Pages artifact (root contains /VALIDATION)
+      - name: Remove intermediate artifacts
         run: |
-          sudo rm -rf /var/cache/apt/archives/*; rm -rf ~/.cargo
-          rm -rf public && mkdir public && mv VALIDATION public/VALIDATION
-          cat > public/index.html <<'HTML'
-          <!doctype html><meta charset="utf-8">
-          <meta http-equiv="refresh" content="0; url=VALIDATION/">
-          <title>Redirecting…</title>
-          <a href="VALIDATION/">Go to VALIDATION/</a>
-          HTML
+          rm -f VALIDATION/validation.csv \
+                VALIDATION/validation.jsonl \
+                VALIDATION/validation_enriched.jsonl \
+                od-do-canada.jsonl.gz
+          echo "Final artifact footprint:"
+          du -sh public || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
