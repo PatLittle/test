@@ -666,16 +666,129 @@ def write_report_pages(items, out_dir):
         with open(os.path.join(rdir, f"{pid}.html"), "w", encoding="utf-8") as f:
             f.write(page)
 
-# --------------------- Main ---------------------
+
+############################################################
+# GCDS Government of Canada Design System PAGES
+############################################################
+
+GCDS_HEADER = '''
+<gcds-header
+  service-title="Validation Portal"
+  service-href="gc_index.html"
+></gcds-header>
+'''
+
+GCDS_FOOTER = '''
+<gcds-footer></gcds-footer>
+<script src="https://cdn.design-system.alpha.canada.ca/js/gcds.js"></script>
+'''
+
+def write_gcds_index(items, out_dir):
+    """Write the GCDS main index page."""
+    gc_reports_links = "\n".join(
+        f'<li><a href="gc_reports/{slugify(it["id"])}.html">{html.escape(it["id"])} – {html.escape(it["dataset_title_en"] or it["dataset_id"] or "")}</a></li>'
+        for it in items
+    )
+    html_code = f"""<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>Validation Portal - Government of Canada</title>
+  <meta name="description" content="Validation Portal" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/css/gcds.css" />
+</head>
+<body>
+  {GCDS_HEADER}
+  <main id="main-content" tabindex="-1" style="padding:2rem;">
+    <section>
+      <h1>Validation Portal (GCDS Theme)</h1>
+      <p>This version uses the <a href="https://design-system.alpha.canada.ca/en/">Government of Canada Design System (Alpha)</a>.</p>
+      <ul>
+        {gc_reports_links if gc_reports_links else "<li>No reports found.</li>"}
+      </ul>
+      <a class="gc-button" href="index.html">View original site</a>
+    </section>
+  </main>
+  {GCDS_FOOTER}
+</body>
+</html>
+"""
+    with open(os.path.join(out_dir, "gc_index.html"), "w", encoding="utf-8") as f:
+        f.write(html_code)
+
+GCDS_REPORT_TEMPLATE = """<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>Validation Report {report_id}</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/css/gcds.css" />
+</head>
+<body>
+  <gcds-header
+    service-title="Validation Portal"
+    service-href="../gc_index.html"
+  ></gcds-header>
+  <main id="main-content" tabindex="-1" style="padding:2rem;">
+    <section>
+      <h1>Validation Report: {report_id}</h1>
+      <p><b>Dataset:</b> {dataset_title} <br>
+      <b>Resource:</b> {resource_name} <br>
+      <b>Status:</b> {status} <br>
+      <b>Errors:</b> {errors} <br>
+      <b>Warnings:</b> {warnings} <br>
+      <b>Rows:</b> {rows} <br>
+      <b>Created:</b> {created} <br>
+      <b>Version:</b> {version} <br>
+      </p>
+      <a class="gc-button" href="../gc_index.html">Back to Main</a>
+    </section>
+  </main>
+  <gcds-footer></gcds-footer>
+  <script src="https://cdn.design-system.alpha.canada.ca/js/gcds.js"></script>
+</body>
+</html>
+"""
+
+def write_gcds_report_pages(items, out_dir):
+    gc_reports_dir = os.path.join(out_dir, "gc_reports")
+    os.makedirs(gc_reports_dir, exist_ok=True)
+    for it in items:
+        pid = slugify(it['id'])
+        report_html = GCDS_REPORT_TEMPLATE.format(
+            report_id=html.escape(it['id']),
+            dataset_title=html.escape(it.get('dataset_title_en') or it.get('dataset_id') or ""),
+            resource_name=html.escape(it.get('resource_name_en') or it.get('resource_id') or ""),
+            status=html.escape(it.get('status') or ""),
+            errors=it['en']['errors'],
+            warnings=it['en']['warnings'],
+            rows=it['en']['rows'],
+            created=html.escape(it.get('created') or ""),
+            version=html.escape(it.get('version') or "")
+        )
+        with open(os.path.join(gc_reports_dir, f"{pid}.html"), "w", encoding="utf-8") as f:
+            f.write(report_html)
+
+############################################################
+# Main
+############################################################
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(os.path.join(OUT_DIR, "style.css"), "w", encoding="utf-8") as f: f.write(CSS)
     with open(os.path.join(OUT_DIR, "app.js"),   "w", encoding="utf-8") as f: f.write(JS)
     items=read_items(IN_PATH)
+
+    # Original site
     write_index(items, OUT_DIR)
     write_report_pages(items, OUT_DIR)
-    print(f"✓ Site built: {OUT_DIR}/  reports: {len(items)}")
+
+    # GCDS site
+    write_gcds_index(items, OUT_DIR)
+    write_gcds_report_pages(items, OUT_DIR)
+
+    print(f"✓ Site built: {OUT_DIR}/  reports: {len(items)} (including GCDS)")
 
 if __name__ == "__main__":
     main()
