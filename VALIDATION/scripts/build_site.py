@@ -667,54 +667,53 @@ def write_report_pages(items, out_dir):
             f.write(page)
 
 
+
+
 ############################################################
-# GCDS Government of Canada Design System PAGES
+# Improved GCDS Government of Canada Design System PAGES
 ############################################################
 
-GCDS_HEADER = '''
-<gcds-header
-  service-title="Validation Portal"
-  service-href="gc_index.html"
-></gcds-header>
-'''
-
-GCDS_FOOTER = '''
-<gcds-footer></gcds-footer>
-<script src="https://cdn.design-system.alpha.canada.ca/js/gcds.js"></script>
-'''
+GCDS_CSS_SHORTCUTS = "https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css"
+GCDS_COMPONENTS_CSS = "https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css"
+GCDS_COMPONENTS_JS  = "https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"
 
 def write_gcds_index(items, out_dir):
-    """Write the GCDS main index page."""
+    """Write the improved GCDS main index page using latest GCDS styles/components."""
+
+    today = datetime.utcnow().strftime("%Y-%m-%d")
     gc_reports_links = "\n".join(
-        f'<li><a href="gc_reports/{slugify(it["id"])}.html">{html.escape(it["id"])} – {html.escape(it["dataset_title_en"] or it["dataset_id"] or "")}</a></li>'
+        f'<li><gcds-link href="gc_reports/{slugify(it["id"])}.html">{html.escape(it["id"])} – {html.escape(it["dataset_title_en"] or it["dataset_id"] or "")}</gcds-link></li>'
         for it in items
     )
+
     html_code = f"""<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <!-- GC Design System -->
-<link
-  rel="stylesheet"
-  href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css"
-/>
-<script
-  type="module"
-  src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"
-></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A validation portal index generated using the Government of Canada Design System." />
+  <title>Validation Portal – GCDS</title>
+  <link rel="stylesheet" href="{GCDS_CSS_SHORTCUTS}" />
+  <link rel="stylesheet" href="{GCDS_COMPONENTS_CSS}" />
+  <script type="module" src="{GCDS_COMPONENTS_JS}"></script>
 </head>
 <body>
-  {GCDS_HEADER}
-  <main id="main-content" tabindex="-1" style="padding:2rem;">
+  <gcds-header service-title="Validation Portal" skip-to-href="#main-content"></gcds-header>
+  <gcds-container id="main-content" main-container size="xl" centered tag="main">
     <section>
-      <h1>Validation Portal (GCDS Theme)</h1>
-      <p>This version uses the <a href="https://design-system.alpha.canada.ca/en/">Government of Canada Design System (Alpha)</a>.</p>
+      <gcds-heading tag="h1">Validation Portal (GCDS Theme)</gcds-heading>
+      <gcds-text>
+        This version uses the
+        <gcds-link href="https://design-system.alpha.canada.ca/en/">Government of Canada Design System (Alpha)</gcds-link>.
+      </gcds-text>
       <ul>
         {gc_reports_links if gc_reports_links else "<li>No reports found.</li>"}
       </ul>
-      <a class="gc-button" href="index.html">View original site</a>
+      <gcds-link href="index.html">View original site</gcds-link>
     </section>
-  </main>
-  {GCDS_FOOTER}
+    <gcds-date-modified>{today}</gcds-date-modified>
+  </gcds-container>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
 </body>
 </html>
 """
@@ -725,32 +724,33 @@ GCDS_REPORT_TEMPLATE = """<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8" />
-  <title>Validation Report {report_id}</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/css/gcds.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Validation Report for {dataset_title} ({report_id})" />
+  <title>Validation Report {report_id} – GCDS</title>
+  <link rel="stylesheet" href="{gcds_css_shortcuts}" />
+  <link rel="stylesheet" href="{gcds_components_css}" />
+  <script type="module" src="{gcds_components_js}"></script>
 </head>
 <body>
-  <gcds-header
-    service-title="Validation Portal"
-    service-href="../gc_index.html"
-  ></gcds-header>
-  <main id="main-content" tabindex="-1" style="padding:2rem;">
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <gcds-container id="main-content" main-container size="xl" centered tag="main">
     <section>
-      <h1>Validation Report: {report_id}</h1>
-      <p><b>Dataset:</b> {dataset_title} <br>
-      <b>Resource:</b> {resource_name} <br>
-      <b>Status:</b> {status} <br>
-      <b>Errors:</b> {errors} <br>
-      <b>Warnings:</b> {warnings} <br>
-      <b>Rows:</b> {rows} <br>
-      <b>Created:</b> {created} <br>
-      <b>Version:</b> {version} <br>
-      </p>
-      <a class="gc-button" href="../gc_index.html">Back to Main</a>
+      <gcds-heading tag="h1">Validation Report: {report_id}</gcds-heading>
+      <gcds-text>
+        <b>Dataset:</b> {dataset_title}<br>
+        <b>Resource:</b> {resource_name}<br>
+        <b>Status:</b> {status}<br>
+        <b>Errors:</b> {errors}<br>
+        <b>Warnings:</b> {warnings}<br>
+        <b>Rows:</b> {rows}<br>
+        <b>Created:</b> {created}<br>
+        <b>Version:</b> {version}<br>
+      </gcds-text>
+      <gcds-link href="../gc_index.html">Back to Main</gcds-link>
     </section>
-  </main>
-  <gcds-footer></gcds-footer>
-  <script src="https://cdn.design-system.alpha.canada.ca/js/gcds.js"></script>
+    <gcds-date-modified>{date_modified}</gcds-date-modified>
+  </gcds-container>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
 </body>
 </html>
 """
@@ -758,6 +758,7 @@ GCDS_REPORT_TEMPLATE = """<!DOCTYPE html>
 def write_gcds_report_pages(items, out_dir):
     gc_reports_dir = os.path.join(out_dir, "gc_reports")
     os.makedirs(gc_reports_dir, exist_ok=True)
+    today = datetime.utcnow().strftime("%Y-%m-%d")
     for it in items:
         pid = slugify(it['id'])
         report_html = GCDS_REPORT_TEMPLATE.format(
@@ -769,7 +770,11 @@ def write_gcds_report_pages(items, out_dir):
             warnings=it['en']['warnings'],
             rows=it['en']['rows'],
             created=html.escape(it.get('created') or ""),
-            version=html.escape(it.get('version') or "")
+            version=html.escape(it.get('version') or ""),
+            date_modified=today,
+            gcds_css_shortcuts=GCDS_CSS_SHORTCUTS,
+            gcds_components_css=GCDS_COMPONENTS_CSS,
+            gcds_components_js=GCDS_COMPONENTS_JS
         )
         with open(os.path.join(gc_reports_dir, f"{pid}.html"), "w", encoding="utf-8") as f:
             f.write(report_html)
@@ -788,7 +793,7 @@ def main():
     write_index(items, OUT_DIR)
     write_report_pages(items, OUT_DIR)
 
-    # GCDS site
+    # GCDS site (improved)
     write_gcds_index(items, OUT_DIR)
     write_gcds_report_pages(items, OUT_DIR)
 
