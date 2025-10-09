@@ -80,6 +80,7 @@ jobs:
 
       - name: Stage Pages artifact (root contains /VALIDATION)
         run: |
+          sudo rm -rf /var/cache/apt/archives/*; rm -rf ~/.cargo
           rm -rf public
           mkdir -p public
           cp -R VALIDATION public/VALIDATION
