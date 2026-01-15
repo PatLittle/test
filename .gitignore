@@ -1,0 +1,4 @@
+BN/.venv/
+BN/venv/
+BN/data.sqlite
+docs/data.sqlite
