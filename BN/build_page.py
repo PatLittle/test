@@ -29,6 +29,7 @@ def main() -> None:
         print(f"⚠️  Missing {OUT_SQLITE}; page will require a remote db_url.")
     template_html = TEMPLATE_FILE.read_text(encoding="utf-8")
     db_url = os.environ.get("BN_DB_URL", DEFAULT_DB_URL)
+    db_size = str(OUT_SQLITE.stat().st_size) if OUT_SQLITE.exists() else "0"
     loader_js = r"""
 <script type=\"module\">
 (async () => {
@@ -64,12 +65,16 @@ def main() -> None:
   await addScript(\"https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js\");
   await addScript(\"https://unpkg.com/sql.js-httpvfs/dist/index.js\");
 
-  const urlParam = new URLSearchParams(location.search).get(\"db_url\");
+  const params = new URLSearchParams(location.search);
+  const urlParam = params.get(\"db_url\");
+  const sizeParam = params.get(\"db_size\");
   const DB_URL = urlParam || \"__DB_URL__\";
+  const DB_FILE_LENGTH = Number(sizeParam || \"__DB_FILE_LENGTH__\") || 0;
   const createDbWorker = window.createDbWorker;
   if (!createDbWorker) throw new Error(\"sql.js-httpvfs failed to load\");
+  const useFileLength = urlParam ? Number(sizeParam) || 0 : DB_FILE_LENGTH;
   const worker = await createDbWorker(
-    [{ from: \"inline\", config: { serverMode: \"full\", requestChunkSize: 4096, url: DB_URL } }],
+    [{ from: \"inline\", config: { serverMode: \"full\", requestChunkSize: 4096, url: DB_URL, fileLength: useFileLength || undefined } }],
     \"./sqlite.worker.js\",
     \"./sql-wasm.wasm\"
   );
@@ -326,7 +331,10 @@ def main() -> None:
 </script>
 """
     loader_js = loader_js.replace('\\"', '"')
-    final_html = inject_script_into_html(template_html, loader_js.replace("__DB_URL__", db_url))
+    final_html = inject_script_into_html(
+        template_html,
+        loader_js.replace("__DB_URL__", db_url).replace("__DB_FILE_LENGTH__", db_size),
+    )
     final_html = final_html.replace("{{ build_date }}", date.today().isoformat())
     OUT_HTML.write_text(final_html, encoding="utf-8")
     print(f"🧾 Wrote {OUT_HTML}")
