@@ -2,6 +2,8 @@ name: Build & Deploy Validation Site
 
 on:
   workflow_dispatch: 
+  schedule:
+    - cron: "15 6 * * *"
 
 permissions:
   contents: read
@@ -42,6 +44,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r VALIDATION/requirements.txt
+          pip install pandas requests documentcloud
           df -h /home/runner/actions-runner/cached/
           
 
@@ -78,15 +81,31 @@ jobs:
           df -h
           sudo rm -rf /tmp/*
 
-      - name: Stage Pages artifact (root contains /VALIDATION)
+      - name: Build BN site (docs output)
+        run: |
+          python BN/build_db.py
+          BN_DB_URL='./data.sqlite' python BN/build_page.py
+
+      - name: Stage Pages artifact (root contains /VALIDATION and /BN)
         run: |
           sudo rm -rf /var/cache/apt/archives/*; rm -rf ~/.cargo
-          rm -rf public && mkdir public && mv VALIDATION public/VALIDATION
+          rm -rf public && mkdir public
+          mv VALIDATION public/VALIDATION
+          mv docs public/BN
           cat > public/index.html <<'HTML'
           <!doctype html><meta charset="utf-8">
-          <meta http-equiv="refresh" content="0; url=VALIDATION/">
-          <title>Redirecting…</title>
-          <a href="VALIDATION/">Go to VALIDATION/</a>
+          <title>Sites</title>
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <style>
+            body { font-family: system-ui, -apple-system, sans-serif; padding: 2rem; }
+            h1 { font-size: 1.5rem; }
+            ul { padding-left: 1.25rem; }
+          </style>
+          <h1>Published Sites</h1>
+          <ul>
+            <li><a href="VALIDATION/">Validation Site</a></li>
+            <li><a href="BN/">BN + ATI Match Explorer</a></li>
+          </ul>
           HTML
 
       - name: Upload Pages artifact
