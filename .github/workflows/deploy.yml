@@ -82,6 +82,9 @@ jobs:
           sudo rm -rf /tmp/*
 
       - name: Build BN site (docs output)
+        env:
+          DC_USERNAME: ${{ secrets.DC_USERNAME }}
+          DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
         run: |
           python BN/build_db.py
           BN_DB_URL='./data.sqlite' python BN/build_page.py

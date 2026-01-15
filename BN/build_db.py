@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import io
+import os
 import re
 import time
 import sqlite3
@@ -86,7 +87,10 @@ def fetch_doccloud_table() -> pd.DataFrame:
     """
     try:
         print("🔎 DocumentCloud: querying...")
-        client = DocumentCloud()  # uses env auth (username/password or token)
+        client = DocumentCloud(
+            username=os.environ.get("DC_USERNAME"),
+            password=os.environ.get("DC_PASSWORD"),
+        )
         docs = client.documents.search(query=DOCCLOUD_QUERY, per_page=DOCCLOUD_PER_PAGE)
 
         recs = []
