@@ -1,0 +1,2551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>CKAN Metadata Companion — Open Government Portal</title>
+<style>
+:root {
+  --bg: #0b1220;
+  --panel: #0f1a2e;
+  --panel2: #0c172a;
+  --text: #e8eefc;
+  --muted: #a8b3cf;
+  --border: rgba(255,255,255,0.12);
+  --accent: #7dd3fc;
+  --accent2: #a78bfa;
+  --good: #34d399;
+  --warn: #fbbf24;
+  --bad: #fb7185;
+  --shadow: 0 10px 30px rgba(0,0,0,0.35);
+  --radius: 16px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f7f8fb;
+    --panel: #ffffff;
+    --panel2: #fbfbfe;
+    --text: #0b1220;
+    --muted: #45506a;
+    --border: rgba(0,0,0,0.12);
+    --shadow: 0 10px 24px rgba(0,0,0,0.10);
+  }
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background: radial-gradient(1200px 700px at 15% 10%, rgba(125,211,252,0.12), transparent 60%),
+              radial-gradient(900px 600px at 80% 0%, rgba(167,139,250,0.10), transparent 60%),
+              var(--bg);
+  color: var(--text);
+}
+a { color: inherit; text-underline-offset: 2px; }
+kbd {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.04);
+}
+.topbar {
+  position: sticky; top: 0; z-index: 5;
+  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--panel) 85%, transparent);
+  border-bottom: 1px solid var(--border);
+}
+.topbar-inner {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  margin-right: 8px;
+}
+.brand .title {
+  font-weight: 750;
+  letter-spacing: 0.2px;
+}
+.brand .sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--panel2) 90%, transparent);
+  box-shadow: var(--shadow);
+}
+.pill label {
+  font-size: 12px;
+  color: var(--muted);
+}
+select, input[type="text"], input[type="url"], input[type="email"], input[type="number"], input[type="datetime-local"], textarea {
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px 10px;
+  outline: none;
+  min-width: 200px;
+}
+textarea { min-height: 92px; resize: vertical; }
+input[type="checkbox"] { transform: translateY(1px); }
+.btn {
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--panel2) 92%, transparent), color-mix(in oklab, var(--panel) 92%, transparent));
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  font-weight: 650;
+}
+.btn:hover { border-color: color-mix(in oklab, var(--accent) 55%, var(--border)); }
+.btn.primary {
+  background: linear-gradient(180deg, rgba(125,211,252,0.30), rgba(125,211,252,0.12));
+  border-color: rgba(125,211,252,0.55);
+}
+.btn.danger {
+  background: linear-gradient(180deg, rgba(251,113,133,0.30), rgba(251,113,133,0.10));
+  border-color: rgba(251,113,133,0.55);
+}
+.btn.small { padding: 6px 8px; font-size: 12px; border-radius: 10px; }
+.tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  font-size: 12px;
+  color: var(--muted);
+}
+.tag.good { color: var(--good); border-color: color-mix(in oklab, var(--good) 40%, var(--border)); }
+.tag.warn { color: var(--warn); border-color: color-mix(in oklab, var(--warn) 40%, var(--border)); }
+.tag.bad  { color: var(--bad);  border-color: color-mix(in oklab, var(--bad)  40%, var(--border)); }
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 14px;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1.05fr 10px 0.95fr;
+  gap: 0;
+  align-items: stretch;
+  min-height: calc(100vh - 72px);
+}
+.panel {
+  background: color-mix(in oklab, var(--panel) 92%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.panel-header {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--panel2) 92%, transparent);
+}
+.panel-header .h {
+  display:flex; flex-direction: column; gap: 4px;
+}
+.panel-header .h b { font-size: 14px; letter-spacing: 0.2px; }
+.panel-header .h span { font-size: 12px; color: var(--muted); }
+.panel-body { padding: 12px 14px; }
+.divider {
+  cursor: col-resize;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--border) 80%, transparent);
+  margin: 10px 0;
+}
+.divider:hover { background: color-mix(in oklab, var(--accent) 45%, var(--border)); }
+.field-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.field-item {
+  display:flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 10px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+}
+.field-item:hover { border-color: color-mix(in oklab, var(--accent) 45%, var(--border)); }
+.field-item.active {
+  border-color: color-mix(in oklab, var(--accent) 60%, var(--border));
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--accent) 22%, transparent);
+}
+.field-item .top {
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+.field-item .name {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: color-mix(in oklab, var(--muted) 80%, var(--text));
+}
+.field-item .label {
+  font-weight: 750;
+}
+.field-item .mini {
+  display:flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.grid2 {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.grid3 {
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+hr.sep {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 14px 0;
+}
+pre {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(0,0,0,0.18);
+  overflow: auto;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.45;
+}
+.small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.details h3 { margin: 0 0 6px 0; }
+.details p { margin: 8px 0; color: color-mix(in oklab, var(--text) 92%, var(--muted)); }
+.details ul { margin: 8px 0 8px 18px; color: color-mix(in oklab, var(--text) 92%, var(--muted)); }
+.notice {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+}
+.notice.good { border-color: color-mix(in oklab, var(--good) 40%, var(--border)); }
+.notice.warn { border-color: color-mix(in oklab, var(--warn) 40%, var(--border)); }
+.notice.bad  { border-color: color-mix(in oklab, var(--bad)  40%, var(--border)); }
+
+.resource-card {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  padding: 10px;
+}
+.resource-card .row {
+  display:flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.resource-card .row b {
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.resource-card .row .actions {
+  display:flex; gap: 8px;
+}
+.footer {
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align:center;
+}
+@media (max-width: 1100px) {
+  .split { grid-template-columns: 1fr; }
+  .divider { display:none; }
+}
+
+
+/* ===== Theme: light/dark ===== */
+html { color-scheme: dark; }
+html[data-theme="light"] { color-scheme: light; }
+html[data-theme="light"] {
+  --bg: #f6f7fb;
+  --panel: #ffffff;
+  --panel2: #ffffff;
+  --text: #0b1220;
+  --muted: rgba(11,18,32,0.65);
+  --border: rgba(11,18,32,0.12);
+  --accent: #0b5fff;
+  --accent2: #4a7dff;
+  --good: #1a7f37;
+  --warn: #b54708;
+  --shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.container { padding-left: 16px; padding-right: 16px; }
+
+/* ===== Modal dialogs ===== */
+.modal {
+  width: min(980px, calc(100vw - 36px));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  padding: 0;
+}
+.modal::backdrop { background: rgba(0,0,0,0.55); }
+html[data-theme="light"] .modal::backdrop { background: rgba(0,0,0,0.25); }
+.modal-head {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 12px 12px 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.modal-title { font-weight: 800; }
+.modal-body {
+  padding: 12px;
+  max-height: min(74vh, 720px);
+  overflow:auto;
+}
+
+/* ===== Select picker popover styling (Chromium customizable select) ===== */
+@supports selector(::picker(select)) {
+  select, ::picker(select) { appearance: base-select; }
+  select { background: transparent; }
+  ::picker(select) {
+    background: transparent;
+    border: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+  }
+}
+
+
+/* --- Tabs --- */
+.tabsbar{
+  display:flex;
+  gap:8px;
+  padding: 10px 12px;
+  align-items:center;
+  justify-content:flex-start;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.tabbtn{
+  border:1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 999px;
+  cursor:pointer;
+  font-weight: 650;
+}
+.tabbtn:hover{ filter: brightness(1.02); }
+.tabbtn.active{
+  background: var(--accent);
+  border-color: color-mix(in oklab, var(--accent), black 20%);
+  color: white;
+}
+.tab-panels{
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 12px 14px 12px;
+}
+.tab-panel{ display:none; }
+.tab-panel.active{ display:block; }
+
+/* Wider overall */
+.container{ max-width:none; }
+.split{ min-height: calc(100vh - 120px); }
+
+/* Datastore field repeating list */
+.replist{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.ds-card{
+  border:1px solid var(--border);
+  background: var(--panel2);
+  border-radius: 12px;
+  padding: 10px;
+}
+.ds-card .row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.ds-card label{ display:flex; flex-direction:column; gap:4px; min-width: 180px; flex:1; }
+.ds-card input, .ds-card select, .ds-card textarea{
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+}
+.ds-card textarea{ min-height: 60px; resize: vertical; }
+.ds-actions{ display:flex; gap:6px; align-items:center; justify-content:flex-end; margin-top:8px; }
+.ds-actions .btn{ padding:6px 10px; border-radius:10px; }
+.section-title{
+  margin-top: 12px;
+  font-weight: 800;
+}
+
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="title">CKAN Metadata Companion</div>
+      <div class="sub">Open Government Portal • single-file static app</div>
+    </div>
+
+    <div class="pill">
+      <label for="schemaSel">Schema</label>
+      <select id="schemaSel"></select>
+    </div>
+
+    <div class="pill">
+      <label for="sectionSel">Section</label>
+      <select id="sectionSel">
+        <option value="dataset">Dataset</option>
+        <option value="resource">Resources</option>
+      </select>
+    </div>
+
+    <div class="pill">
+      <label for="langSel">Docs</label>
+      <select id="langSel">
+        <option value="en">EN</option>
+        <option value="fr">FR</option>
+      </select>
+    </div>
+
+    <div class="pill">
+      <label><input id="showHarvested" type="checkbox"/> Show harvested/src-only</label>
+    </div>
+
+    <div class="pill">
+      <label><input id="showSystem" type="checkbox"/> Show system-created</label>
+    </div>
+
+    <div style="flex:1"></div>
+
+    
+    <button class="btn" id="btnTheme" title="Toggle light/dark">☾</button>
+<button class="btn" id="btnLoadExample">Load example</button>
+    <button class="btn" id="btnUpload">Upload JSON</button>
+    <button class="btn primary" id="btnDownload">Download JSON</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="tabsbar" role="tablist" aria-label="Main views">
+    <button class="tabbtn active" id="tabBtnMetadata" role="tab" aria-selected="true" aria-controls="tabMetadata">Metadata guide</button>
+    <button class="tabbtn" id="tabBtnDatastore" role="tab" aria-selected="false" aria-controls="tabDatastore">Datastore dictionary</button>
+  </div>
+
+  <div class="tab-panels">
+    <div class="tab-panel active" id="tabMetadata" role="tabpanel" aria-labelledby="tabBtnMetadata">
+      <div class="split">
+    <div class="panel" id="panelDocs">
+      <div class="panel-header">
+        <div class="h">
+          <b id="docsTitle">Documentation</b>
+          <span id="docsSub">Schema-aware field guide with DCAT / ISO / schema.org hints</span>
+        </div>
+        <input id="searchBox" type="text" placeholder="Search fields (name, label, notes)…" style="min-width: 320px"/>
+      </div>
+      <div class="panel-body">
+        <div id="fieldList" class="field-list"></div>
+        <div class="hint" style="margin-top:10px;">Click a field to open details (popup). Your form stays on the right.</div>
+      </div>
+      <div class="footer">Tip: click a field to see nuance, mapping hints, and common pitfalls. <span class="small">Keyboard: <kbd>/</kbd> focuses search.</span></div>
+    </div>
+
+    <div class="divider" id="divider" title="Drag to resize"></div>
+
+    <div class="panel" id="panelForm">
+      <div class="panel-header">
+        <div class="h">
+          <b>Fillable metadata form</b>
+          <span id="formSub">Populate dataset + resources, then export JSON for CKAN package_create/package_patch</span>
+        </div>
+        <button class="btn danger small" id="btnReset">Reset</button>
+      </div>
+      <div class="panel-body">
+        <div id="formArea"></div>
+        <hr class="sep"/>
+        <div class="grid2">
+          <div>
+            <div class="small">Live JSON preview</div>
+            <pre id="jsonPreview"></pre>
+          </div>
+          <div>
+            <div class="small">Notes</div>
+            <div id="formNotes" class="notice"></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">Upload a saved JSON to resume, or load one of the bundled examples.</div>
+    </div>
+  </div>
+
+    </div> <!-- /split -->
+    </div> <!-- /tabMetadata -->
+
+    <div class="tab-panel" id="tabDatastore" role="tabpanel" aria-labelledby="tabBtnDatastore">
+      <div class="split" id="dsSplit">
+        <div class="panel" id="panelDatastoreLeft">
+          <div class="panel-header">
+            <div class="h">
+              <b>Datastore data dictionary</b>
+              <span>Build / load / export the <code>fields</code> array used by <code>datastore_create</code>. You can fetch existing definitions from CKAN.</span>
+            </div>
+            <div class="row" style="display:flex; gap:8px; align-items:flex-end; flex-wrap:wrap;">
+              <label class="small" style="display:flex; flex-direction:column; gap:4px;">
+                <span>Resource ID</span>
+                <input id="dsResourceId" type="text" value="299a2e26-5103-4a49-ac3a-53db9fcc06c7" style="min-width:320px"/>
+              </label>
+              <button class="btn" id="btnDsFetchInfo" title="Fetch datastore_info for this resource_id">Fetch datastore_info</button>
+              <button class="btn" id="btnDsFetchSearch" title="Fetch datastore_search (fields inferred from data)">Fetch datastore_search</button>
+              <button class="btn" id="btnDsNew" title="Start a new dictionary">New</button>
+              <button class="btn" id="btnDsDownload" title="Download current dictionary JSON">Download</button>
+              <button class="btn" id="btnDsUpload" title="Load dictionary JSON from a file">Load file</button>
+            </div>
+            <div class="row" style="display:flex; gap:8px; align-items:flex-end; flex-wrap:wrap; margin-top:8px;">
+              <label class="small" style="display:flex; flex-direction:column; gap:4px; flex:1; min-width:420px;">
+                <span>Load from URL (action endpoint or raw JSON)</span>
+                <input id="dsUrl" type="text" value="https://open.canada.ca/data/en/api/3/action/datastore_info?id=299a2e26-5103-4a49-ac3a-53db9fcc06c7"/>
+              </label>
+              <button class="btn" id="btnDsLoadUrl">Load URL</button>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="hint">
+              <b>What this is:</b> CKAN Datastore uses a JSON snippet like <code>{"fields":[{"id":"col","type":"text"}]}</code> in <code>datastore_create</code>.
+              This tab helps you author that snippet and keep it under source control.
+              <span id="dsFileOriginHint" class="small"></span>
+            </div>
+
+            <div style="margin-top:10px;" class="pill">
+              <label class="toggle"><input type="checkbox" id="dsExportPayload" checked> Export as <code>datastore_create</code> payload</label>
+              <label class="toggle"><input type="checkbox" id="dsIncludeInfo" checked> Include <code>info</code> blocks (bilingual labels/notes)</label>
+              <label class="toggle"><input type="checkbox" id="dsIncludeSchema" checked> Include <code>schema</code> blocks (ckanext-validation)</label>
+            </div>
+
+            <div class="section-title">Fields</div>
+            <div id="dsFieldsList" class="replist"></div>
+
+            <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;">
+              <button class="btn" id="btnDsAddField">Add field</button>
+              <button class="btn" id="btnDsAddCommon" title="Add common columns like year, month, geoname, etc.">Add common set</button>
+            </div>
+
+            <div class="hint" style="margin-top:10px;">
+              <b>Types:</b> CKAN datastore types typically include <code>text</code>, <code>int</code>, <code>numeric</code>, <code>bool</code>, <code>timestamp</code>, <code>date</code>.
+              Use <code>info</code> for human-facing label/description (when your portal supports a data dictionary UI).
+            </div>
+          </div>
+          <div class="footer">Tip: API calls may fail when opened as <code>file://</code>. Prefer GitHub Pages hosting for CORS-friendly fetch.</div>
+        </div>
+
+        <div class="divider" id="dsDivider" title="Drag to resize"></div>
+
+        <div class="panel" id="panelDatastoreRight">
+          <div class="panel-header">
+            <div class="h">
+              <b>Preview</b>
+              <span>Copy or download; then use in <code>datastore_create</code> / <code>datastore_upsert</code> workflows.</span>
+            </div>
+            <button class="btn" id="btnDsCopy">Copy JSON</button>
+          </div>
+          <div class="panel-body">
+            <pre id="dsJsonPreview" class="json"></pre>
+          </div>
+          <div class="footer">This is only the dictionary snippet/payload — it doesn’t modify data by itself.</div>
+        </div>
+      </div>
+    </div> <!-- /tabDatastore -->
+  </div> <!-- /tab-panels -->
+</div> <!-- /container -->
+
+
+<input id="filePicker" type="file" accept=".json,application/json" style="display:none"/>
+<input id="dsFilePicker" type="file" accept=".json,application/json" style="display:none"/>
+
+<!-- appData moved to external JSON file (ckan-meta-5.appdata.json) -->
+
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  'use strict';
+  // Ignore a common noisy promise rejection from certain Chrome extensions.
+  // (Does not affect app logic; prevents confusing "Uncaught (in promise)" messages.)
+  window.addEventListener('unhandledrejection', (e) => {
+    const msg = String(e && e.reason ? e.reason : '');
+    if (msg.includes('message channel closed') && msg.includes('listener indicated an asynchronous response')) {
+      e.preventDefault();
+    }
+  });
+
+
+  // ------------------------------
+// Bootstrapping appData
+// ------------------------------
+const decodeHtmlEntities = (s) => {
+  if (!s) return s;
+  // Fast path: already looks like real JSON
+  if (s[0] === '{' && s.includes('"site"')) return s;
+  const t = document.createElement('textarea');
+  t.innerHTML = s;
+  return t.value;
+};
+
+const showFatal = (msg) => {
+  console.error(msg);
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:sticky;top:0;z-index:9999;background:#7f1d1d;color:#fff;padding:12px 14px;font:14px/1.35 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;border-bottom:1px solid rgba(255,255,255,0.15)';
+  banner.innerHTML = `<b>App failed to start.</b> <span style="opacity:.95">${msg.replace(/</g,'&lt;')}</span>`;
+  document.body.prepend(banner);
+};
+
+const detectGistHost = () => {
+  try {
+    if (location.hostname !== 'gisthost.github.io') return null;
+    const sp = new URLSearchParams(location.search);
+    const firstKey = sp.keys().next().value || '';
+    const key = decodeURIComponent(firstKey);
+    const parts = key.split('/').filter(Boolean);
+    if (!parts.length) return null;
+    const gistId = parts[0];
+    if (!/^[0-9a-f]{32}$/i.test(gistId)) return null;
+    const file = parts.slice(1).join('/') || null;
+    return { gistId, file };
+  } catch (e) {
+    return null;
+  }
+};
+
+const fetchJsonAny = async (url) => {
+  const res = await fetch(url, { mode: 'cors', credentials: 'omit' });
+
+  // Read the body once so we can include helpful diagnostics on failures.
+  const ct = (res.headers.get('content-type') || '').toLowerCase();
+  const bodyText = await res.text();
+
+  if (!res.ok) {
+    let details = bodyText.slice(0, 600).trim();
+    // GitHub / CKAN often return JSON errors; try to extract a friendly message
+    if (details) {
+      try {
+        const j = JSON.parse(details);
+        details = (j?.message || j?.error || JSON.stringify(j)).toString().slice(0, 600);
+      } catch (e) {}
+    }
+    throw new Error(`HTTP ${res.status} for ${url}${details ? ': ' + details : ''}`);
+  }
+
+  try {
+    return JSON.parse(bodyText);
+  } catch (e) {
+    throw new Error(`Failed to parse JSON from ${url} (content-type: ${ct || 'unknown'}). ${e?.message || e}`);
+  }
+};
+
+const loadAppData = async () => {
+  // NOTE: We try multiple sources so the app works as:
+  // - local file
+  // - raw gist URL (gist.github.com/raw or gist.githubusercontent.com)
+  // - gisthost.github.io wrapper URL
+
+  // 0) Explicit override via URL hash, e.g. #appdata=https://.../file.json
+  try {
+    const hp = new URLSearchParams((location.hash || '').replace(/^#/, ''));
+    const override = hp.get('appdata');
+    if (override) {
+      console.info('[appdata] Loaded from #appdata override');
+      return await fetchJsonAny(override);
+    }
+  } catch (e) {}
+
+  // 1) Legacy embedded <script id="appData" type="application/json"> (if present)
+  const embedded = document.getElementById('appData');
+  if (embedded) {
+    const raw = (embedded.textContent || '').trim();
+    try {
+      console.info('[appdata] Loaded embedded <script id="appData">');
+      return JSON.parse(decodeHtmlEntities(raw));
+    } catch (e) {
+      console.warn('[appdata] Embedded appData present but failed to parse; will try external JSON.', e);
+    }
+  }
+
+  // 2) If served from a raw gist URL, try fetching sibling JSON files in the same directory.
+  // Example: https://gist.github.com/<user>/<gistId>/raw/<rev>/ckan-meta-5-fixed.html
+  try {
+    const u = new URL(location.href);
+    const host = (u.hostname || '').toLowerCase();
+    const isRawGist = host === 'gist.github.com' || host === 'gist.githubusercontent.com';
+    if (isRawGist) {
+      const currentFile = u.pathname.split('/').pop() || '';
+      const base = currentFile.replace(/\.(html?)$/i, '');
+      const base2 = base.replace(/-fixed$/i, '');
+      const candidates = [
+        `${base}.appdata.json`,
+        `${base2}.appdata.json`,
+        'appdata.json',
+        `${base}.json`,
+        `${base2}.json`
+      ];
+
+      const tried = [];
+      for (const name of candidates) {
+        tried.push(name);
+        const sibling = new URL(u.href);
+        sibling.pathname = sibling.pathname.replace(/[^/]+$/, name);
+        try {
+          const j = await fetchJsonAny(sibling.toString());
+          if (j && j.site && j.schemas) {
+            console.info('[appdata] Loaded from raw gist sibling:', name);
+            return j;
+          }
+        } catch (e) {}
+      }
+
+      console.warn('[appdata] Raw gist detected but no sibling JSON matched:', tried.join(', '));
+    }
+  } catch (e) {}
+
+  // 3) If hosted via Gist Host, fetch an appdata JSON file from the same gist via GitHub API.
+  const gh = detectGistHost();
+  if (gh) {
+    const gist = await fetchJsonAny(`https://api.github.com/gists/${gh.gistId}`);
+    const files = gist && gist.files ? gist.files : {};
+    const base = (gh.file || 'index.html').split('/').pop().replace(/\.(html?)$/i, '');
+    const base2 = base.replace(/-fixed$/i, '');
+
+    const candidates = [
+      `${base}.appdata.json`,
+      `${base2}.appdata.json`,
+      'appdata.json',
+      `${base}.json`,
+      `${base2}.json`
+    ];
+
+    const fileKeys = Object.keys(files);
+    const lowerMap = new Map(fileKeys.map(k => [k.toLowerCase(), k]));
+
+    for (const name of candidates) {
+      const key = (files[name] && files[name].raw_url) ? name : (lowerMap.get(name.toLowerCase()) || null);
+      if (key && files[key] && files[key].raw_url) {
+        console.info('[appdata] Loaded from gist file:', key);
+        return await fetchJsonAny(files[key].raw_url);
+      }
+    }
+
+    // Fallback: any JSON file that looks like our appData
+    const jsonFiles = Object.values(files).filter(f => f && f.filename && f.filename.toLowerCase().endsWith('.json') && f.raw_url);
+    for (const f of jsonFiles) {
+      try {
+        const j = await fetchJsonAny(f.raw_url);
+        if (j && j.site && j.schemas) {
+          console.info('[appdata] Loaded from gist JSON fallback:', f.filename);
+          return j;
+        }
+      } catch (e) {}
+    }
+
+    throw new Error(
+      `No app data JSON found in gist ${gh.gistId}. ` +
+      `Tried: ${candidates.join(', ')}. ` +
+      `Available: ${Object.keys(files).join(', ') || '(none)'}. ` +
+      `Tip: add #appdata=<raw_json_url> to the URL to force-load the JSON.`
+    );
+  }
+
+  throw new Error(
+    'No embedded app data found and not running via Gist Host. ' +
+    'Either embed app data in the HTML (an element with id="appData" and type="application/json") ' +
+    'or provide #appdata=<raw_json_url>.'
+  );
+};
+
+let data;
+try {
+  data = await loadAppData();
+} catch (e) {
+  showFatal(e?.message || String(e));
+  return;
+}
+
+const site = data.site;
+const schemas = data.schemas;
+const examples = data.examples || [];
+const fieldEnrich = data.fieldEnrich || {};
+const STORAGE_KEY = 'ckan-metadata-companion:v2';
+
+  const el = (id) => document.getElementById(id);
+  const schemaSel = el('schemaSel');
+  const sectionSel = el('sectionSel');
+  const langSel = el('langSel');
+  const showHarvestedEl = el('showHarvested');
+  const showSystemEl = el('showSystem');
+  const btnTheme = el('btnTheme');
+  const fieldModal = el('fieldModal');
+  const fieldModalTitle = el('fieldModalTitle');
+  const fieldModalBody = el('fieldModalBody');
+  const exampleModal = el('exampleModal');
+  const exampleModalTitle = el('exampleModalTitle');
+  const exampleModalBody = el('exampleModalBody');
+  const fieldListEl = el('fieldList');
+  const fieldDetailsEl = el('fieldDetails');
+  const formAreaEl = el('formArea');
+  const jsonPreviewEl = el('jsonPreview');
+  const formNotesEl = el('formNotes');
+  const searchBox = el('searchBox');
+
+  const btnDownload = el('btnDownload');
+  const btnUpload = el('btnUpload');
+  const btnLoadExample = el('btnLoadExample');
+  const btnReset = el('btnReset');
+  const filePicker = el('filePicker');
+
+  // ---------- state ----------
+  const defaultState = {
+    schemaKey: 'dataset',
+    section: 'dataset',
+    lang: site.locale_default || 'en',
+    showHarvested: false,
+    showSystem: false,
+    theme: 'dark',
+    selectedField: null,
+    // editable payload:
+    payload: {
+      // dataset
+      collection: 'primary',
+      title_translated: { en: '', fr: '' },
+      notes_translated: { en: '', fr: '' },
+      keywords: { en: [], fr: [] },
+      subject: [],
+      owner_org: '',
+      maintainer_email: '',
+      // resources
+      resources: []
+    }
+  };
+
+  function deepClone(x) { return JSON.parse(JSON.stringify(x)); }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  function mergeInto(target, src) {
+    if (!src || typeof src !== 'object') return target;
+    for (const k of Object.keys(src)) {
+      if (src[k] && typeof src[k] === 'object' && !Array.isArray(src[k])) {
+        if (!target[k] || typeof target[k] !== 'object') target[k] = {};
+        mergeInto(target[k], src[k]);
+      } else {
+        target[k] = src[k];
+      }
+    }
+    return target;
+  }
+
+  let state = mergeInto(deepClone(defaultState), loadState() || {});
+  // Always start with no field selected (prevents modal on load)
+  state.selectedField = null;
+
+
+  // ---------- schema helpers ----------
+  function schemaLabel(schemaKey) {
+    if (schemaKey === 'dataset') return 'Raw/Geo Data (dataset)';
+    if (schemaKey === 'info') return 'Open Info (info)';
+    if (schemaKey === 'organization') return 'Organization (publisher)';
+    return schemaKey;
+  }
+
+  function getSchema(schemaKey) {
+    return schemas[schemaKey];
+  }
+
+  function getFields(schemaKey, section) {
+    const s = getSchema(schemaKey);
+    if (!s) return [];
+    if (schemaKey === 'organization') return (s.fields || []).map(f => ({...f, _section:'organization'}));
+    if (section === 'dataset') return (s.dataset_fields || []).map(f => ({...f, _section:'dataset'}));
+    if (section === 'resource') return (s.resource_fields || []).map(f => ({...f, _section:'resource'}));
+    return [];
+  }
+
+  
+  const SYSTEM_FIELD_NAMES = new Set([
+    'id','created','metadata_created','metadata_modified','revision_id','state',
+    'num_resources','num_tags','num_followers','package_count','is_organization','type',
+    'tracking_summary','image_display_url','image_url'
+  ]);
+
+  function isSystemField(field) {
+    const name = field.field_name || '';
+    if (SYSTEM_FIELD_NAMES.has(name)) return true;
+    if (name.startsWith('metadata_')) return true;
+    if (name.startsWith('num_')) return true;
+    return false;
+  }
+
+function isRequired(field) {
+    if (field.required === true) return true;
+    const v = (field.validators || '').toLowerCase();
+    return v.includes('scheming_required') || v.includes('not_empty');
+  }
+
+  function labelFor(field, lang) {
+    const l = field.label;
+    if (!l) return field.field_name;
+    if (typeof l === 'string') return l;
+    return l[lang] || l.en || l.fr || field.field_name;
+  }
+
+  function helpFor(field, lang) {
+    // Try fluent_help_text, help_text
+    let h = field.help_text || field.fluent_help_text;
+    if (!h) return '';
+    if (typeof h === 'string') return h;
+    // fluent_help_text is nested by UI language:
+    if (h[lang] && typeof h[lang] === 'object') {
+      // pick matching portal form language for the chosen docs language
+      const inner = h[lang];
+      return inner[lang] || inner.en || inner.fr || '';
+    }
+    return h[lang] || h.en || h.fr || '';
+  }
+
+  function explicitNullForm(field) {
+    return Object.prototype.hasOwnProperty.call(field, 'form_snippet') && field.form_snippet === null;
+  }
+
+  function isHarvestedOnly(field) {
+    const enrich = fieldEnrich[field.field_name] || {};
+    if (enrich.harvestedOnly === true) return true;
+    if (explicitNullForm(field)) return true;
+    // Some fields are meant only for harvested collections even if form_snippet is present in presets.
+    const geoish = new Set(['geogratis','fgp','federated']);
+    const col = (state.payload.collection || 'primary');
+    const collectionIsHarvested = geoish.has(col);
+    if (!state.showHarvested && collectionIsHarvested) {
+      // We're still hiding harvested-only fields unless checkbox on.
+      // This is deliberate per requirements.
+    }
+    return false;
+  }
+
+  function shouldShowField(field) {
+    if (state.showHarvested) return true;
+    // hide explicit harvested-only fields
+    if (explicitNullForm(field)) return false;
+    const enrich = fieldEnrich[field.field_name] || {};
+    if (enrich.harvestedOnly) return false;
+    return true;
+  }
+
+  // ---------- rendering: schema selector ----------
+  function renderSchemaSelector() {
+    schemaSel.innerHTML = '';
+    const keys = Object.keys(schemas).filter(k => ['dataset','info','organization'].includes(k));
+    for (const k of keys) {
+      const opt = document.createElement('option');
+      opt.value = k;
+      opt.textContent = schemaLabel(k);
+      schemaSel.appendChild(opt);
+    }
+    schemaSel.value = state.schemaKey;
+  }
+
+  // ---------- field list ----------
+  function fieldMatchesQuery(field, q) {
+    if (!q) return true;
+    const lang = state.lang;
+    const t = (labelFor(field, lang) + ' ' + field.field_name + ' ' + helpFor(field, lang)).toLowerCase();
+    return t.includes(q);
+  }
+
+  function renderFieldList() {
+    fieldListEl.innerHTML = '';
+    const schemaKey = state.schemaKey;
+    const section = state.section;
+    let fields = [];
+    if (section === 'system') {
+      fields = getSystemFields();
+    } else {
+      fields = getFields(schemaKey, section);
+    }
+
+    const q = (searchBox.value || '').trim().toLowerCase();
+    const visible = fields.filter(f => fieldMatchesQuery(f, q)).filter(f => {
+      if (section === 'system') return true;
+      return state.showHarvested ? true : shouldShowField(f);
+    });
+
+    if (visible.length === 0) {
+      const n = document.createElement('div');
+      n.className = 'notice';
+      n.textContent = 'No fields match your search.';
+      fieldListEl.appendChild(n);
+      return;
+    }
+
+    for (const f of visible) {
+      const item = document.createElement('div');
+      item.className = 'field-item' + (state.selectedField === f.field_name ? ' active' : '');
+      item.addEventListener('click', () => {
+        state.selectedField = f.field_name;
+        saveState();
+        renderFieldList();
+        renderFieldDetails(f);
+      });
+
+      const top = document.createElement('div');
+      top.className = 'top';
+
+      const label = document.createElement('div');
+      label.className = 'label';
+      label.textContent = labelFor(f, state.lang);
+
+      const name = document.createElement('div');
+      name.className = 'name';
+      name.textContent = f.field_name;
+
+      top.appendChild(label);
+      top.appendChild(name);
+
+      const mini = document.createElement('div');
+      mini.className = 'mini';
+      if (isRequired(f)) mini.appendChild(tag('required', 'good'));
+      else mini.appendChild(tag('optional', ''));
+      if (explicitNullForm(f) || (fieldEnrich[f.field_name]||{}).harvestedOnly) mini.appendChild(tag('harvested/src only', 'warn'));
+      if (f.choices) mini.appendChild(tag('controlled list', ''));
+      if (f.repeating_subfields) mini.appendChild(tag('repeatable', ''));
+
+      item.appendChild(top);
+      item.appendChild(mini);
+      fieldListEl.appendChild(item);
+    }
+  }
+
+  function tag(text, kind) {
+    const t = document.createElement('span');
+    t.className = 'tag' + (kind ? ' ' + kind : '');
+    t.textContent = text;
+    return t;
+  }
+
+  // ---------- field details ----------
+  function asList(items) {
+    if (!items || items.length === 0) return '';
+    return '<ul>' + items.map(x => '<li>' + escapeHtml(x) + '</li>').join('') + '</ul>';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  }
+
+  function fieldDetailsHTML(field) {
+    const enrich = fieldEnrich[field.field_name] || {};
+    const label = labelFor(field, state.lang);
+    const help = helpFor(field, state.lang);
+
+    const srcBits = [];
+    if (enrich.source) srcBits.push(`<span class="tag">${escapeHtml(enrich.source)}</span>`);
+    if (enrich.namespace) srcBits.push(`<span class="tag">${escapeHtml(enrich.namespace)}</span>`);
+    if (isSystemField(field)) srcBits.push(`<span class="tag">system-created</span>`);
+    if (explicitNullForm(field) || enrich.harvestedOnly) srcBits.push(`<span class="tag warn">harvested/src only</span>`);
+
+    let out = `
+      <div class="details">
+        <div style="display:flex; gap:10px; align-items:baseline; flex-wrap:wrap;">
+          <div style="font-size:18px; font-weight:800;">${escapeHtml(label)}</div>
+          <div class="small"><code>${escapeHtml(field.field_name)}</code></div>
+          ${isRequired(field) ? `<span class="tag good">required</span>` : `<span class="tag">optional</span>`}
+          ${srcBits.join('')}
+        </div>
+        ${help ? `<p class="small" style="margin-top:8px;">${escapeHtml(help)}</p>` : ``}
+        ${enrich.why ? `<div class="notice" style="margin-top:10px;"><b>What this conveys</b><div class="small" style="margin-top:6px;">${escapeHtml(enrich.why)}</div></div>` : ``}
+        ${enrich.when ? `<div class="notice" style="margin-top:10px;"><b>When to use it</b><div class="small" style="margin-top:6px;">${escapeHtml(enrich.when)}</div></div>` : ``}
+        ${enrich.pitfalls ? `<div class="notice warn" style="margin-top:10px;"><b>Common mistakes</b><ul class="small" style="margin:6px 0 0 18px;">${enrich.pitfalls.map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul></div>` : ``}
+      </div>
+    `;
+
+    if (field.choices) {
+      out += `<div class="notice" style="margin-top:10px;"><b>Controlled list</b><div class="small" style="margin-top:6px;">${escapeHtml(field.choices_label || 'Choose one of:')}</div><div class="chips">${field.choices.map(c=>`<span class="chip">${escapeHtml(c.value||c)}</span>`).join('')}</div></div>`;
+    }
+
+    if (field.repeating_subfields) {
+      out += `<div class="notice" style="margin-top:10px;"><b>Repeating group</b><div class="small" style="margin-top:6px;">This field contains repeating subfields.</div></div>`;
+    }
+
+    return out;
+  }
+
+  function openFieldModal(field) {
+    fieldModalTitle.textContent = `${labelFor(field, state.lang)} — ${field.field_name}`;
+    fieldModalBody.innerHTML = fieldDetailsHTML(field);
+    try { fieldModal.showModal(); } catch (e) { fieldModal.setAttribute('open',''); }
+  }
+
+  function closeFieldModal(){
+    try{ if(fieldModal.open) fieldModal.close(); }catch(e){ fieldModal.removeAttribute('open'); }
+  }
+
+
+  function renderFieldDetails(field) {
+    openFieldModal(field);
+  }
+
+
+  function findInExamples(fieldName) {
+    const out = [];
+    for (const ex of examples) {
+      const pkg = ex.package;
+      // dataset field?
+      if (pkg && Object.prototype.hasOwnProperty.call(pkg, fieldName)) {
+        out.push({
+          example: ex.key,
+          path: 'dataset.' + fieldName,
+          valuePreview: previewValue(pkg[fieldName])
+        });
+      }
+      // resource fields
+      if (pkg && Array.isArray(pkg.resources)) {
+        pkg.resources.slice(0, 3).forEach((r, i) => {
+          if (r && Object.prototype.hasOwnProperty.call(r, fieldName)) {
+            out.push({
+              example: ex.key,
+              path: `resources[${i}].${fieldName}`,
+              valuePreview: previewValue(r[fieldName])
+            });
+          }
+        });
+      }
+    }
+    return out.slice(0, 8);
+  }
+
+  function previewValue(v) {
+    if (v === null || v === undefined) return String(v);
+    if (typeof v === 'string') return v.length > 80 ? v.slice(0, 77)+'…' : v;
+    if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+    if (Array.isArray(v)) return JSON.stringify(v.slice(0, 5)) + (v.length>5 ? '…' : '');
+    if (typeof v === 'object') {
+      const s = JSON.stringify(v);
+      return s.length > 120 ? s.slice(0, 117)+'…' : s;
+    }
+    return String(v);
+  }
+
+  // ---------- system fields (CKAN core) ----------
+  function getSystemFields() {
+    // These are NOT in scheming schemas but show up in package_show/resource dicts.
+    const sample = (examples[0] && examples[0].package) || {};
+    const sampleRes = (sample.resources && sample.resources[0]) || {};
+
+    const dsKeys = [
+      'metadata_created','metadata_modified','state','type','private',
+      'num_resources','num_tags','revision_id','creator_user_id','isopen',
+      'license_id','license_title','license_url','organization'
+    ].filter(k => k in sample);
+
+    const resKeys = [
+      'created','last_modified','metadata_modified','url_type','cache_url','cache_last_updated',
+      'datastore_active','mimetype','mimetype_inner','hash'
+    ].filter(k => k in sampleRes);
+
+    const make = (name, label, help) => ({ field_name:name, label:{en:label, fr:label}, help_text:{en:help, fr:help} });
+
+    const fields = [];
+    for (const k of dsKeys) {
+      fields.push(make(k, 'Dataset system field: ' + k, systemHelp(k)));
+    }
+    for (const k of resKeys) {
+      fields.push(make('resource.'+k, 'Resource system field: ' + k, systemHelp('resource.'+k)));
+    }
+    return fields;
+  }
+
+  function systemHelp(k) {
+    const M = {
+      'metadata_created': 'When the metadata record was first created in CKAN (system-managed). Not the same as date_created.',
+      'metadata_modified': 'When any part of the metadata record was last edited in CKAN (system-managed). Not the same as date_modified.',
+      'state': 'Workflow/state of the record (active/deleted, etc.).',
+      'type': 'CKAN package type (dataset/info, etc.).',
+      'private': 'Whether the record is private (not publicly visible).',
+      'num_resources': 'Count of resources (distributions) attached to the dataset.',
+      'num_tags': 'Count of tag entries.',
+      'revision_id': 'Internal revision identifier.',
+      'creator_user_id': 'CKAN user who created the record (system-managed).',
+      'isopen': 'Whether CKAN considers the license to be an “open” license.',
+      'license_id': 'License identifier selected from CKAN license list.',
+      'license_title': 'Human-readable license title (derived).',
+      'license_url': 'License URL (derived).',
+      'organization': 'Organization object (publisher) attached to the dataset.',
+      'resource.created': 'When the resource object was created in CKAN (system-managed).',
+      'resource.last_modified': 'When the resource content was last modified (if tracked). Often set by harvester/upload.',
+      'resource.metadata_modified': 'When the resource metadata was last edited in CKAN.',
+      'resource.url_type': 'How CKAN should interpret url (e.g., upload vs link).',
+      'resource.cache_url': 'Cache URL generated by CKAN for certain views (system-managed).',
+      'resource.cache_last_updated': 'When cache_url was last refreshed.',
+      'resource.datastore_active': 'Whether the resource is loaded into CKAN DataStore.',
+      'resource.mimetype': 'MIME type detected/declared.',
+      'resource.mimetype_inner': 'Inner MIME type (e.g. for archives).',
+      'resource.hash': 'Checksum or hash of the content, when available.'
+    };
+    return M[k] || 'System-managed field.';
+  }
+
+  // ---------- form rendering ----------
+  function renderForm() {
+    const schemaKey = state.schemaKey;
+    const section = state.section;
+
+    // Guidance note
+    const geoish = new Set(['geogratis','fgp','federated']);
+    const col = state.payload.collection || 'primary';
+    const collectionIsHarvested = geoish.has(col);
+    let note = '';
+    if (collectionIsHarvested && !state.showHarvested) {
+      note = 'This record uses a harvested collection type ('+col+'). Per requirements, harvested-only fields are hidden from the form unless you enable “Show harvested/src-only”.';
+      formNotesEl.className = 'notice warn';
+    } else {
+      note = 'This form builds JSON compatible with CKAN Action API (package_create / package_patch). Use “Download JSON” to save your work.';
+      formNotesEl.className = 'notice';
+    }
+    formNotesEl.textContent = note;
+
+    formAreaEl.innerHTML = '';
+
+    if (schemaKey === 'organization') {
+      formAreaEl.appendChild(renderOrganizationForm());
+    } else {
+      formAreaEl.appendChild(renderDatasetForm());
+    }
+
+    refreshPreview();
+  }
+
+  function normalizeEmpty(v) {
+    if (v === '') return null;
+    return v;
+  }
+
+  function renderDatasetForm() {
+    const wrap = document.createElement('div');
+
+    // Dataset fields (from schema)
+    const fields = getFields(state.schemaKey, 'dataset')
+      .filter(f => state.showHarvested ? true : shouldShowField(f))
+      .filter(f => !['id','name'].includes(f.field_name)); // system-generated
+
+    // Ensure resources array exists
+    if (!Array.isArray(state.payload.resources)) state.payload.resources = [];
+
+    // Collection selector first (if present)
+    const collectionField = fields.find(f => f.field_name === 'collection');
+    if (collectionField) {
+      wrap.appendChild(renderFieldInput(collectionField, 'dataset'));
+      wrap.appendChild(hr());
+    }
+
+    for (const f of fields) {
+      if (f.field_name === 'collection') continue;
+      wrap.appendChild(renderFieldInput(f, 'dataset'));
+    }
+
+    wrap.appendChild(hr());
+    // Resources
+    const resHeader = document.createElement('div');
+    resHeader.className = 'row';
+    resHeader.innerHTML = `<div><b>Resources / Distributions</b><div class="small">Add one entry per downloadable file / API endpoint / distribution.</div></div>
+      <div class="actions"><button class="btn small" id="btnAddRes">+ Add resource</button></div>`;
+    wrap.appendChild(resHeader);
+
+    const btnAddRes = resHeader.querySelector('#btnAddRes');
+    btnAddRes.addEventListener('click', () => {
+      state.payload.resources.push({
+        name_translated: { en: '', fr: '' },
+        description: '',
+        url: '',
+        format: '',
+        language: '',
+        resource_type: '',
+      });
+      saveState(); renderForm();
+    });
+
+    const resFields = getFields(state.schemaKey, 'resource')
+      .filter(f => state.showHarvested ? true : shouldShowField(f));
+
+    state.payload.resources.forEach((r, idx) => {
+      const card = document.createElement('div');
+      card.className = 'resource-card';
+      const head = document.createElement('div');
+      head.className = 'row';
+      head.innerHTML = `<div><b>resource[${idx}]</b> <span class="small">${escapeHtml(r.format||'')}</span></div>
+        <div class="actions">
+          <button class="btn small" data-act="dup">Duplicate</button>
+          <button class="btn danger small" data-act="del">Remove</button>
+        </div>`;
+      head.querySelector('[data-act="del"]').addEventListener('click', () => {
+        state.payload.resources.splice(idx, 1);
+        saveState(); renderForm();
+      });
+      head.querySelector('[data-act="dup"]').addEventListener('click', () => {
+        state.payload.resources.splice(idx+1, 0, deepClone(r));
+        saveState(); renderForm();
+      });
+
+      card.appendChild(head);
+      card.appendChild(document.createElement('div')).appendChild(document.createElement('div'));
+      const body = document.createElement('div');
+      body.style.marginTop = '10px';
+
+      // Render common CKAN core resource fields first (based on examples)
+      body.appendChild(renderCoreResourceInputs(r, idx));
+      body.appendChild(hr());
+
+      // Render scheming resource extras
+      for (const f of resFields) {
+        body.appendChild(renderFieldInput(f, `resources.${idx}`));
+      }
+
+      card.appendChild(body);
+      wrap.appendChild(card);
+    });
+
+    return wrap;
+  }
+
+  function renderCoreResourceInputs(resourceObj, idx) {
+    const box = document.createElement('div');
+    box.className = 'grid2';
+
+    box.appendChild(simpleInput(`resources[${idx}].name_translated.en`, 'Title (EN)', resourceObj.name_translated?.en || '', (v) => {
+      if (!resourceObj.name_translated) resourceObj.name_translated = {en:'', fr:''};
+      resourceObj.name_translated.en = v;
+    }));
+    box.appendChild(simpleInput(`resources[${idx}].name_translated.fr`, 'Title (FR)', resourceObj.name_translated?.fr || '', (v) => {
+      if (!resourceObj.name_translated) resourceObj.name_translated = {en:'', fr:''};
+      resourceObj.name_translated.fr = v;
+    }));
+
+    box.appendChild(simpleTextArea(`resources[${idx}].description`, 'Description', resourceObj.description || '', (v) => {
+      resourceObj.description = v;
+    }));
+
+    box.appendChild(simpleInput(`resources[${idx}].url`, 'URL', resourceObj.url || '', (v) => {
+      resourceObj.url = v;
+    }, 'url', 'https://…'));
+
+    box.appendChild(simpleInput(`resources[${idx}].format`, 'Format', resourceObj.format || '', (v) => {
+      resourceObj.format = v;
+    }, 'text', 'CSV / JSON / GeoJSON / API …'));
+
+    box.appendChild(simpleInput(`resources[${idx}].language`, 'Data language (optional)', resourceObj.language || '', (v) => {
+      resourceObj.language = v;
+    }, 'text', 'en / fr / und'));
+
+    box.appendChild(simpleInput(`resources[${idx}].resource_type`, 'Resource type (optional)', resourceObj.resource_type || '', (v) => {
+      resourceObj.resource_type = v;
+    }, 'text', 'file / api / documentation …'));
+
+    return box;
+  }
+
+  function renderOrganizationForm() {
+    const wrap = document.createElement('div');
+    const fields = getFields('organization', 'organization');
+
+    for (const f of fields) {
+      // Organization form is optional; store under payload.organization_fields
+      wrap.appendChild(renderFieldInput(f, 'organization'));
+    }
+    return wrap;
+  }
+
+  function hr() {
+    const h = document.createElement('hr');
+    h.className = 'sep';
+    return h;
+  }
+
+  function simpleInput(path, label, value, onChange, type='text', placeholder='') {
+    const d = document.createElement('div');
+    const l = document.createElement('div');
+    l.className = 'small';
+    l.innerHTML = `${escapeHtml(label)} <span class="name">${escapeHtml(path)}</span>`;
+    const i = document.createElement('input');
+    i.type = type;
+    i.value = value ?? '';
+    if (placeholder) i.placeholder = placeholder;
+    i.addEventListener('input', () => {
+      onChange(i.value);
+      refreshPreview();
+    });
+    d.appendChild(l);
+    d.appendChild(i);
+    return d;
+  }
+
+  function simpleTextArea(path, label, value, onChange) {
+    const d = document.createElement('div');
+    const l = document.createElement('div');
+    l.className = 'small';
+    l.innerHTML = `${escapeHtml(label)} <span class="name">${escapeHtml(path)}</span>`;
+    const t = document.createElement('textarea');
+    t.value = value ?? '';
+    t.addEventListener('input', () => {
+      onChange(t.value);
+      refreshPreview();
+    });
+    d.appendChild(l);
+    d.appendChild(t);
+    return d;
+  }
+
+  function getObjAtPath(root, path) {
+    // path like "dataset" or "resources.0" or "organization"
+    if (!path) return root;
+    if (path === 'dataset') return root;
+    if (path === 'organization') {
+      root.organization = root.organization || {};
+      return root.organization;
+    }
+    if (path.startsWith('resources.')) {
+      const idx = parseInt(path.split('.')[1], 10);
+      if (!Array.isArray(root.resources)) root.resources = [];
+      root.resources[idx] = root.resources[idx] || {};
+      return root.resources[idx];
+    }
+    return root;
+  }
+
+  function renderFieldInput(field, targetPath) {
+    const wrap = document.createElement('div');
+    wrap.style.marginBottom = '10px';
+
+    const name = field.field_name;
+
+    // Hide system-created fields from the form unless enabled
+    if (isSystemField(field) && !state.showSystem) {
+      const placeholder = document.createElement('div');
+      placeholder.className = 'small muted';
+      placeholder.textContent = 'Hidden (system-created). Enable “Show system-created” to view.';
+      return placeholder;
+    }
+    const enrich = fieldEnrich[name] || {};
+    const readOnly = isSystemField(field);
+
+    const header = document.createElement('div');
+    header.className = 'small';
+    header.innerHTML = `<b>${escapeHtml(labelFor(field, state.lang))}</b>
+      <span class="name">${escapeHtml(targetPath === 'dataset' ? name : targetPath + '.' + name)}</span>
+      ${isRequired(field) ? '<span class="tag good" style="margin-left:8px;">required</span>' : '<span class="tag" style="margin-left:8px;">optional</span>'}
+      ${(explicitNullForm(field) || enrich.harvestedOnly) ? '<span class="tag warn" style="margin-left:6px;">harvested/src only</span>' : ''}
+          ${readOnly ? '<span class=\"tag\" style=\"margin-left:6px;\">system</span>' : ''}
+`;
+    wrap.appendChild(header);
+
+    const help = helpFor(field, state.lang);
+    const helpNode = document.createElement('div');
+    helpNode.className = 'small';
+    helpNode.style.margin = '4px 0 6px 0';
+    helpNode.textContent = help || (enrich.why || '');
+    wrap.appendChild(helpNode);
+
+    if (readOnly) {
+      const ro = document.createElement('div');
+      ro.className = 'notice';
+      ro.textContent = 'System-created field: typically read-only and returned by CKAN. Shown here for reference.';
+      wrap.appendChild(ro);
+    }
+
+    const obj = getObjAtPath(state.payload, targetPath === 'dataset' ? '' : targetPath);
+
+    // Determine input type
+    if (field.repeating_subfields) {
+      wrap.appendChild(renderRepeatingGroup(field, obj));
+      return wrap;
+    }
+
+    // Fluent fields: title_translated, notes_translated, org_title_at_publication, etc.
+    const looksFluent = /translated$/.test(name) || (field.validators || '').includes('fluent_') || (field.preset || '').includes('fluent');
+    if (looksFluent) {
+      wrap.appendChild(renderFluent(field, obj));
+      return wrap;
+    }
+
+    // Multiple choice -> array of values
+    if (field.choices && (field.validators || '').includes('scheming_multiple_choice')) {
+      wrap.appendChild(renderMultiSelect(field, obj));
+      return wrap;
+    }
+
+    // Single choice
+    if (field.choices) {
+      wrap.appendChild(renderSelect(field, obj));
+      return wrap;
+    }
+
+    // Tags field (keywords)
+    if (name === 'keywords') {
+      wrap.appendChild(renderKeywordTags(field, obj));
+      return wrap;
+    }
+
+    // default: text
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.value = obj[name] ?? '';
+    input.placeholder = enrich.placeholder || '';
+    input.addEventListener('input', () => {
+      obj[name] = input.value;
+      saveState();
+      refreshPreview();
+    });
+    wrap.appendChild(input);
+    return wrap;
+  }
+
+  function renderFluent(field, obj) {
+    const name = field.field_name;
+    if (!obj[name] || typeof obj[name] !== 'object') obj[name] = { en:'', fr:'' };
+    const box = document.createElement('div');
+    box.className = 'grid2';
+
+    const en = document.createElement('textarea');
+    en.value = obj[name].en || '';
+    en.placeholder = 'English';
+    en.addEventListener('input', () => {
+      obj[name].en = en.value;
+      saveState(); refreshPreview();
+    });
+
+    const fr = document.createElement('textarea');
+    fr.value = obj[name].fr || '';
+    fr.placeholder = 'Français';
+    fr.addEventListener('input', () => {
+      obj[name].fr = fr.value;
+      saveState(); refreshPreview();
+    });
+
+    box.appendChild(en);
+    box.appendChild(fr);
+    return box;
+  }
+
+  function renderKeywordTags(field, obj) {
+    const name = field.field_name;
+    if (!obj[name] || typeof obj[name] !== 'object') obj[name] = { en:[], fr:[] };
+    const box = document.createElement('div');
+    box.className = 'grid2';
+
+    const mk = (lang, label) => {
+      const d = document.createElement('div');
+      const t = document.createElement('input');
+      t.type = 'text';
+      t.placeholder = 'comma-separated';
+      t.value = (obj[name][lang] || []).join(', ');
+      t.addEventListener('input', () => {
+        obj[name][lang] = t.value.split(',').map(s => s.trim()).filter(Boolean);
+        saveState(); refreshPreview();
+      });
+      const l = document.createElement('div');
+      l.className = 'small';
+      l.textContent = label;
+      d.appendChild(l);
+      d.appendChild(t);
+      return d;
+    };
+
+    box.appendChild(mk('en','Keywords (EN)'));
+    box.appendChild(mk('fr','Mots-clés (FR)'));
+    return box;
+  }
+
+  function renderSelect(field, obj) {
+    const sel = document.createElement('select');
+    const name = field.field_name;
+    // blank choice
+    const blank = document.createElement('option');
+    blank.value = '';
+    blank.textContent = '—';
+    sel.appendChild(blank);
+
+    for (const ch of (field.choices || [])) {
+      const opt = document.createElement('option');
+      opt.value = ch.value;
+      const lab = ch.label ? (ch.label[state.lang] || ch.label.en || ch.label.fr || ch.value) : ch.value;
+      opt.textContent = lab;
+      sel.appendChild(opt);
+    }
+    sel.value = obj[name] ?? '';
+    sel.addEventListener('change', () => {
+      obj[name] = sel.value || '';
+      // Keep collection in payload (for hide rules)
+      if (name === 'collection') state.payload.collection = sel.value || 'primary';
+      saveState(); renderFieldList(); renderForm(); // re-evaluate visibility
+    });
+    return sel;
+  }
+
+  function renderMultiSelect(field, obj) {
+    const sel = document.createElement('select');
+    sel.multiple = true;
+    sel.size = Math.min(10, (field.choices||[]).length);
+    const name = field.field_name;
+    const current = Array.isArray(obj[name]) ? obj[name] : [];
+    for (const ch of (field.choices || [])) {
+      const opt = document.createElement('option');
+      opt.value = ch.value;
+      const lab = ch.label ? (ch.label[state.lang] || ch.label.en || ch.label.fr || ch.value) : ch.value;
+      opt.textContent = lab;
+      if (current.includes(ch.value)) opt.selected = true;
+      sel.appendChild(opt);
+    }
+    sel.addEventListener('change', () => {
+      const vals = Array.from(sel.selectedOptions).map(o => o.value);
+      obj[name] = vals;
+      saveState(); refreshPreview();
+    });
+    return sel;
+  }
+
+  function renderRepeatingGroup(field, obj) {
+    const name = field.field_name;
+    if (!Array.isArray(obj[name])) obj[name] = [];
+    const container = document.createElement('div');
+
+    const list = document.createElement('div');
+    list.style.display = 'grid';
+    list.style.gap = '10px';
+
+    const addBtn = document.createElement('button');
+    addBtn.className = 'btn small';
+    addBtn.textContent = '+ Add';
+    addBtn.addEventListener('click', () => {
+      obj[name].push({});
+      saveState(); renderForm();
+    });
+    container.appendChild(addBtn);
+
+    obj[name].forEach((row, idx) => {
+      const card = document.createElement('div');
+      card.className = 'notice';
+      const head = document.createElement('div');
+      head.className = 'row';
+      head.innerHTML = `<b>${escapeHtml(name)}[${idx}]</b>
+        <div class="actions"><button class="btn danger small">Remove</button></div>`;
+      head.querySelector('button').addEventListener('click', () => {
+        obj[name].splice(idx, 1);
+        saveState(); renderForm();
+      });
+      card.appendChild(head);
+
+      const grid = document.createElement('div');
+      grid.className = 'grid2';
+      grid.style.marginTop = '10px';
+
+      for (const sf of (field.repeating_subfields || [])) {
+        const sfName = sf.field_name;
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = row[sfName] ?? '';
+        input.placeholder = labelFor(sf, state.lang);
+        input.addEventListener('input', () => {
+          row[sfName] = input.value;
+          saveState(); refreshPreview();
+        });
+        grid.appendChild(input);
+      }
+
+      card.appendChild(grid);
+      list.appendChild(card);
+    });
+
+    container.appendChild(list);
+    return container;
+  }
+
+  function refreshPreview() {
+    // Clean output: drop empty strings/empty objects/empty arrays
+    const out = deepClone(state.schemaKey === 'organization' ? (state.payload.organization || {}) : state.payload);
+
+    function clean(x) {
+      if (x === null || x === undefined) return undefined;
+      if (typeof x === 'string') return x.trim() === '' ? undefined : x;
+      if (Array.isArray(x)) {
+        const a = x.map(clean).filter(v => v !== undefined);
+        return a.length ? a : undefined;
+      }
+      if (typeof x === 'object') {
+        const o = {};
+        for (const [k,v] of Object.entries(x)) {
+          const cv = clean(v);
+          if (cv !== undefined) o[k] = cv;
+        }
+        return Object.keys(o).length ? o : undefined;
+      }
+      return x;
+    }
+
+    const cleaned = clean(out) || {};
+    jsonPreviewEl.textContent = JSON.stringify(cleaned, null, 2);
+    saveState();
+  }
+
+  // ---------- file IO ----------
+  function downloadJson() {
+    const blob = new Blob([jsonPreviewEl.textContent], {type:'application/json'});
+    const a = document.createElement('a');
+    const dt = new Date().toISOString().slice(0,10);
+    a.download = `ckan-metadata-${state.schemaKey}-${dt}.json`;
+    a.href = URL.createObjectURL(blob);
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      URL.revokeObjectURL(a.href);
+      a.remove();
+    }, 0);
+  }
+
+  function uploadJsonFile(file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const obj = JSON.parse(String(reader.result || ''));
+        // Accept either full state shape or a payload
+        if (obj && obj.payload) {
+          state = mergeInto(state, obj);
+        } else {
+          // treat as payload
+          state.payload = obj;
+        }
+        saveState();
+        renderAll();
+      } catch (e) {
+        alert('Could not parse JSON: ' + e);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function promptExample() {
+    const eligible = examples.filter(e => (state.schemaKey === 'organization') ? !!e.organization : !!e.package);
+    if (!eligible.length) return;
+
+    exampleModalTitle.textContent = 'Load example';
+    exampleModalBody.innerHTML = `
+      <div class="small" style="margin-bottom:10px;">Choose an example. This replaces the current working JSON (your previous work is still in localStorage unless you reset).</div>
+      <div class="chips" id="exChips"></div>
+      <div style="margin-top:12px;" class="small muted">Tip: switch Schema to see different examples.</div>
+    `;
+
+    const chips = exampleModalBody.querySelector('#exChips');
+    for (const ex of eligible) {
+      const b = document.createElement('button');
+      b.className = 'btn';
+      b.type = 'button';
+      b.textContent = ex.label;
+      b.style.margin = '4px';
+      b.addEventListener('click', () => {
+        loadExample(ex);
+        exampleModal.close();
+      });
+      chips.appendChild(b);
+    }
+
+    try { exampleModal.showModal(); } catch(e) { exampleModal.setAttribute('open',''); }
+  }
+
+  function loadExample(ex) {
+    // Organization example
+    if (ex.organization) {
+      state.schemaKey = 'organization';
+      state.section = 'organization';
+      state.payload.organization = deepClone(ex.organization);
+      saveState();
+      renderAll();
+      return;
+    }
+
+    // Pull scheming-relevant fields + resources core fields into payload
+    const pkg = ex.package;
+    const s = getSchema(state.schemaKey);
+
+    const dsFields = new Set((s.dataset_fields||[]).map(f => f.field_name));
+    const resFields = new Set((s.resource_fields||[]).map(f => f.field_name));
+
+    const payload = {};
+
+    // dataset fields
+    for (const k of Object.keys(pkg)) {
+      if (dsFields.has(k)) payload[k] = deepClone(pkg[k]);
+    }
+
+    // core resource fields we support
+    payload.resources = (pkg.resources || []).map(r => {
+      const o = {};
+      for (const kk of ['name_translated','description','url','format','language','resource_type','size','character_set','date_published','unique_identifier','data_quality']) {
+        if (kk in r) o[kk] = deepClone(r[kk]);
+      }
+      // scheming resource extras
+      for (const kk of Object.keys(r)) {
+        if (resFields.has(kk)) o[kk] = deepClone(r[kk]);
+      }
+      return o;
+    });
+
+    state.payload = mergeInto(deepClone(defaultState.payload), payload);
+    // Set schema selection to match example (best-effort)
+    if (pkg.type === 'info' || pkg.collection === 'aia') state.schemaKey = 'info';
+    else state.schemaKey = 'dataset';
+
+    saveState();
+    renderAll();
+
+    // If there is a DCAT JSON-LD graph, add a gentle note.
+    if (ex.dcat_jsonld) {
+      formNotesEl.textContent += ' (This example also includes a DCAT JSON-LD export in @graph.)';
+    }
+  }
+
+  // ---------- layout (resizable divider) ----------
+  function enableDivider() {
+    const divider = el('divider');
+    const split = document.querySelector('.split');
+    let dragging = false;
+
+    divider.addEventListener('mousedown', (e) => {
+      dragging = true;
+      document.body.style.userSelect = 'none';
+    });
+    window.addEventListener('mouseup', () => {
+      dragging = false;
+      document.body.style.userSelect = '';
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      const rect = split.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const min = 360;
+      const max = rect.width - 360;
+      const clamped = Math.max(min, Math.min(max, x));
+      const left = (clamped / rect.width) * 100;
+      const right = 100 - left;
+      split.style.gridTemplateColumns = `${left}fr 10px ${right}fr`;
+    });
+  }
+
+  // ---------- wiring ----------
+  function renderAll() {
+    // If organization schema selected, lock to organization fields and hide section picker
+    if (state.schemaKey === 'organization') {
+      state.section = 'organization';
+      sectionSel.closest('.pill').style.display = 'none';
+    } else {
+      sectionSel.closest('.pill').style.display = '';
+      if (state.section === 'organization') state.section = 'dataset';
+    }
+    // selector values
+    renderSchemaSelector();
+    schemaSel.value = state.schemaKey;
+    sectionSel.value = state.section;
+    langSel.value = state.lang;
+    showHarvestedEl.checked = !!state.showHarvested;
+    showSystemEl.checked = !!state.showSystem;
+    applyTheme(state.theme);
+
+    // docs title
+    el('docsTitle').textContent = `Documentation — ${schemaLabel(state.schemaKey)} / ${state.section}`;
+    renderFieldList();
+    // render selected field details
+    const fields = getFields(state.schemaKey, state.section);
+    const current = fields.find(f => f.field_name === state.selectedField) || fields[0];
+    if (current) renderFieldDetails(current);
+
+    renderForm();
+  }
+
+  schemaSel.addEventListener('change', () => {
+    state.schemaKey = schemaSel.value;
+    state.selectedField = null;
+    closeFieldModal();
+    saveState(); renderAll();
+  });
+
+  sectionSel.addEventListener('change', () => {
+    state.section = sectionSel.value;
+    state.selectedField = null;
+    closeFieldModal();
+    saveState(); renderAll();
+  });
+
+  langSel.addEventListener('change', () => {
+    state.lang = langSel.value;
+    saveState(); renderAll();
+  });
+
+  showHarvestedEl.addEventListener('change', () => {
+    state.showHarvested = showHarvestedEl.checked;
+    saveState(); renderAll();
+  });
+
+  showSystemEl.addEventListener('change', () => {
+    state.showSystem = showSystemEl.checked;
+    saveState(); renderAll();
+  });
+
+  function applyTheme(theme) {
+    const t = theme || 'dark';
+    document.documentElement.dataset.theme = (t === 'light') ? 'light' : 'dark';
+    btnTheme.textContent = (t === 'light') ? '☀' : '☾';
+  }
+
+  btnTheme.addEventListener('click', () => {
+    state.theme = (state.theme === 'light') ? 'dark' : 'light';
+    applyTheme(state.theme);
+    saveState();
+  });
+
+  fieldModal.addEventListener('click', (e) => { if (e.target === fieldModal) fieldModal.close(); });
+  exampleModal.addEventListener('click', (e) => { if (e.target === exampleModal) exampleModal.close(); });
+
+
+
+  searchBox.addEventListener('input', () => renderFieldList());
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchBox) {
+      e.preventDefault();
+      searchBox.focus();
+    }
+  });
+
+  btnDownload.addEventListener('click', downloadJson);
+  btnUpload.addEventListener('click', () => filePicker.click());
+  filePicker.addEventListener('change', () => {
+    const f = filePicker.files && filePicker.files[0];
+    if (f) uploadJsonFile(f);
+    filePicker.value = '';
+  });
+  btnLoadExample.addEventListener('click', promptExample);
+  btnReset.addEventListener('click', () => {
+    if (!confirm('Reset form and local saved state?')) return;
+    state = deepClone(defaultState);
+    localStorage.removeItem(STORAGE_KEY);
+    renderAll();
+  });
+
+
+
+  // ------------------------------
+  // Tabs (Metadata vs Datastore)
+  // ------------------------------
+  const tabBtnMetadata = document.getElementById('tabBtnMetadata');
+  const tabBtnDatastore = document.getElementById('tabBtnDatastore');
+  const tabMetadata = document.getElementById('tabMetadata');
+  const tabDatastore = document.getElementById('tabDatastore');
+
+  function setTab(which){
+    const isMeta = (which === 'metadata');
+    tabBtnMetadata.classList.toggle('active', isMeta);
+    tabBtnDatastore.classList.toggle('active', !isMeta);
+    tabMetadata.classList.toggle('active', isMeta);
+    tabDatastore.classList.toggle('active', !isMeta);
+
+    tabBtnMetadata.setAttribute('aria-selected', isMeta ? 'true' : 'false');
+    tabBtnDatastore.setAttribute('aria-selected', !isMeta ? 'true' : 'false');
+
+    // close any open dialogs when switching contexts
+    closeFieldModal();
+    try { if (exampleModal && exampleModal.open) exampleModal.close(); } catch(e) {}
+    // don't auto-select any field
+    state.selectedField = null;
+    saveState();
+    renderFieldList();
+  }
+
+  tabBtnMetadata.addEventListener('click', () => setTab('metadata'));
+  tabBtnDatastore.addEventListener('click', () => setTab('datastore'));
+
+  // ------------------------------
+  // Datastore data dictionary tool
+  // ------------------------------
+  const DS_STORAGE_KEY = 'ckan_meta_companion_datastore_state_v1';
+  const dsResourceId = document.getElementById('dsResourceId');
+  const dsUrl = document.getElementById('dsUrl');
+  const btnDsFetchInfo = document.getElementById('btnDsFetchInfo');
+  const btnDsFetchSearch = document.getElementById('btnDsFetchSearch');
+  const btnDsNew = document.getElementById('btnDsNew');
+  const btnDsDownload = document.getElementById('btnDsDownload');
+  const btnDsUpload = document.getElementById('btnDsUpload');
+  const btnDsLoadUrl = document.getElementById('btnDsLoadUrl');
+  const btnDsAddField = document.getElementById('btnDsAddField');
+  const btnDsAddCommon = document.getElementById('btnDsAddCommon');
+  const btnDsCopy = document.getElementById('btnDsCopy');
+  const dsFieldsList = document.getElementById('dsFieldsList');
+  const dsJsonPreview = document.getElementById('dsJsonPreview');
+  const dsExportPayload = document.getElementById('dsExportPayload');
+  const dsIncludeInfo = document.getElementById('dsIncludeInfo');
+  const dsIncludeSchema = document.getElementById('dsIncludeSchema');
+  const dsFilePicker = document.getElementById('dsFilePicker');
+  const dsFileOriginHint = document.getElementById('dsFileOriginHint');
+
+  let dsState = {
+    resource_id: dsResourceId?.value || '',
+    fields: [
+      { id: '_id', type: 'int',
+        info: { label_en: 'Row ID', label_fr: 'ID de ligne', notes_en: 'Primary key / internal row identifier', notes_fr: 'Clé primaire / identifiant interne de ligne', type_override: '' },
+        schema: { native_type: 'int', notnull: false, index_name: null, is_index: false, uniquekey: false, foreignkeys: false }
+      }
+    ],
+    exportPayload: true,
+    includeInfo: true,
+    includeSchema: true
+  };
+
+  function loadDsState(){
+    try{
+      const raw = localStorage.getItem(DS_STORAGE_KEY);
+      if (!raw) return;
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') dsState = { ...dsState, ...parsed };
+    } catch(e) {}
+  }
+  function saveDsState(){
+    try{
+      localStorage.setItem(DS_STORAGE_KEY, JSON.stringify(dsState));
+    } catch(e) {}
+  }
+
+  function esc(s){ return (s==null?'':String(s)); }
+
+  function normalizeFields(input){
+    // Accept:
+    // - CKAN action response: {success:true, result:{fields:[...]}}
+    // - raw object: {fields:[...]} or {result:{fields:[...]}}
+    // - raw array: [...]
+    const obj = input;
+    let fields = null;
+    if (Array.isArray(obj)) fields = obj;
+    else if (obj && obj.result && Array.isArray(obj.result.fields)) fields = obj.result.fields;
+    else if (obj && Array.isArray(obj.fields)) fields = obj.fields;
+    if (!Array.isArray(fields)) return [];
+
+    return fields
+      .filter(f => f && (f.id || f.field_name))
+      .map(f => {
+        const id = f.id || f.field_name || '';
+        const type = f.type || f.datatype || 'text';
+        const out = { id, type };
+
+        // info normalization (Open Government pattern)
+        let info = (f.info && typeof f.info === 'object') ? { ...f.info } : null;
+        if (!info) {
+          const label = f.label || '';
+          const desc = f.description || '';
+          if (label || desc) info = { label_en: label||'', label_fr:'', notes_en: desc||'', notes_fr:'', type_override:'' };
+        }
+
+        if (info) {
+          // migrate older single-language keys
+          if (('label' in info) && !('label_en' in info) && !('label_fr' in info)) {
+            info.label_en = info.label || '';
+            info.label_fr = '';
+            delete info.label;
+          }
+          if (('description' in info) && !('notes_en' in info) && !('notes_fr' in info)) {
+            info.notes_en = info.description || '';
+            info.notes_fr = '';
+            delete info.description;
+          }
+
+          info.label_en = info.label_en || '';
+          info.label_fr = info.label_fr || '';
+          info.notes_en = info.notes_en || '';
+          info.notes_fr = info.notes_fr || '';
+          if (!('type_override' in info)) info.type_override = '';
+
+          out.info = info;
+        }
+
+        if (f.schema && typeof f.schema === 'object') {
+          out.schema = { ...f.schema };
+        }
+
+        return out;
+      });
+  }
+
+  function ensureDsFieldShape(f){
+    if (!f || typeof f !== 'object') return { id:'', type:'text' };
+    if (!f.id) f.id = '';
+    if (!f.type) f.type = 'text';
+
+    if (!f.info || typeof f.info !== 'object') {
+      f.info = { label_en:'', label_fr:'', notes_en:'', notes_fr:'', type_override:'' };
+    } else {
+      if (('label' in f.info) && !('label_en' in f.info)) { f.info.label_en = f.info.label || ''; delete f.info.label; }
+      if (('description' in f.info) && !('notes_en' in f.info)) { f.info.notes_en = f.info.description || ''; delete f.info.description; }
+      f.info.label_en = f.info.label_en || '';
+      f.info.label_fr = f.info.label_fr || '';
+      f.info.notes_en = f.info.notes_en || '';
+      f.info.notes_fr = f.info.notes_fr || '';
+      if (!('type_override' in f.info)) f.info.type_override = '';
+    }
+
+    if (!f.schema || typeof f.schema !== 'object') {
+      f.schema = { native_type: f.type || 'text', notnull: false, index_name: null, is_index: false, uniquekey: false, foreignkeys: false };
+    } else {
+      if (!('native_type' in f.schema) || f.schema.native_type === undefined || f.schema.native_type === null) f.schema.native_type = f.type || 'text';
+      if (!('notnull' in f.schema)) f.schema.notnull = false;
+      if (!('index_name' in f.schema)) f.schema.index_name = null;
+      if (!('is_index' in f.schema)) f.schema.is_index = false;
+      if (!('uniquekey' in f.schema)) f.schema.uniquekey = false;
+      if (!('foreignkeys' in f.schema)) f.schema.foreignkeys = false;
+    }
+    return f;
+  }
+
+  function dsPayload(){
+    const includeInfo = !!dsState.includeInfo;
+    const includeSchema = !!dsState.includeSchema;
+    const fields = dsState.fields.map(raw => {
+      const f = ensureDsFieldShape({ ...raw });
+      const out = { id: f.id || '', type: f.type || 'text' };
+
+      if (includeInfo && f.info) {
+        const info = {
+          label_en: f.info.label_en || '',
+          label_fr: f.info.label_fr || '',
+          notes_en: f.info.notes_en || '',
+          notes_fr: f.info.notes_fr || '',
+          type_override: f.info.type_override || ''
+        };
+        const any = Object.values(info).some(v => v !== '' && v !== null && v !== undefined);
+        if (any) out.info = info;
+      }
+
+      if (includeSchema && f.schema) {
+        const schema = {
+          native_type: f.schema.native_type ?? (f.type || 'text'),
+          notnull: !!f.schema.notnull,
+          index_name: (f.schema.index_name === '' ? null : (f.schema.index_name ?? null)),
+          is_index: !!f.schema.is_index,
+          uniquekey: !!f.schema.uniquekey,
+          foreignkeys: !!f.schema.foreignkeys
+        };
+        const anySchema = Object.values(schema).some(v => v === true || (typeof v === 'string' && v.trim() !== '') || v === 0 || v === null);
+        // include schema only if we have any meaningful non-default signal OR it came from datastore_info
+        // (we always include when includeSchema is on, but schema stays compact)
+        out.schema = schema;
+      }
+
+      return out;
+    });
+
+    if (dsState.exportPayload) {
+      return { resource_id: dsState.resource_id || '', fields };
+    }
+    return fields;
+  }
+
+  function renderDs(){
+    if (!dsFieldsList) return;
+    dsFieldsList.innerHTML = '';
+    dsState.resource_id = dsResourceId.value.trim();
+    dsState.exportPayload = !!dsExportPayload.checked;
+    dsState.includeInfo = !!dsIncludeInfo.checked;
+    dsState.includeSchema = !!dsIncludeSchema.checked;
+
+    dsState.fields.forEach((f, i) => {
+      f = ensureDsFieldShape(f);
+      const card = document.createElement('div');
+      card.className = 'ds-card';
+
+      const row1 = document.createElement('div');
+      row1.className = 'row';
+      row1.innerHTML = `
+        <label><span class="small">Column name (<code>id</code>)</span><input data-k="id" data-i="${i}" value="${esc(f.id)}" placeholder="e.g., fiscal_year"/></label>
+        <label><span class="small">Type</span>
+          <select data-k="type" data-i="${i}">
+            ${['text','int','numeric','bool','timestamp','date','json','uuid'].map(t => `<option value="${t}" ${t===f.type?'selected':''}>${t}</option>`).join('')}
+          </select>
+        </label>
+        <label><span class="small"><code>info.type_override</code> (optional)</span>
+          <select data-k="info.type_override" data-i="${i}">
+            ${['', 'text','int','numeric','bool','timestamp','date','json','uuid'].map(t => `<option value="${t}" ${t===(f.info?.type_override||'')?'selected':''}>${t===''?'—':t}</option>`).join('')}
+          </select>
+        </label>
+      `;
+      card.appendChild(row1);
+
+      const row2 = document.createElement('div');
+      row2.className = 'row';
+      row2.style.marginTop = '8px';
+      row2.innerHTML = `
+        <div class="small muted" style="margin-bottom:6px;">Bilingual data dictionary metadata (stored under <code>info</code>)</div>
+        <div class="grid2">
+          <label style="min-width:260px;"><span class="small">Label (EN)</span><input data-k="info.label_en" data-i="${i}" value="${esc((f.info&&f.info.label_en)||'')}" placeholder="Human-friendly column label (English)"/></label>
+          <label style="min-width:260px;"><span class="small">Label (FR)</span><input data-k="info.label_fr" data-i="${i}" value="${esc((f.info&&f.info.label_fr)||'')}" placeholder="Libellé lisible (français)"/></label>
+        </div>
+        <div class="grid2" style="margin-top:8px;">
+          <label style="min-width:260px;"><span class="small">Notes (EN)</span><textarea data-k="info.notes_en" data-i="${i}" placeholder="What this column means to end users (English)">${esc((f.info&&f.info.notes_en)||'')}</textarea></label>
+          <label style="min-width:260px;"><span class="small">Notes (FR)</span><textarea data-k="info.notes_fr" data-i="${i}" placeholder="Ce que cette colonne signifie pour les utilisateurs (français)">${esc((f.info&&f.info.notes_fr)||'')}</textarea></label>
+        </div>
+
+        <details style="margin-top:8px;">
+          <summary class="small">Advanced: <code>schema</code> (ckanext-validation)</summary>
+          <div class="grid2" style="margin-top:8px;">
+            <label><span class="small"><code>schema.native_type</code></span>
+              <input data-k="schema.native_type" data-i="${i}" value="${esc((f.schema&&f.schema.native_type)||'')}" placeholder="native database type (e.g., text, numeric)"/>
+            </label>
+            <label class="toggle" style="align-items:flex-start; padding-top:18px;">
+              <input type="checkbox" data-k="schema.notnull" data-i="${i}" ${f.schema && f.schema.notnull ? 'checked' : ''}/> <span><span class="small"><code>schema.notnull</code></span></span>
+            </label>
+            <label class="toggle" style="align-items:flex-start; padding-top:18px;">
+              <input type="checkbox" data-k="schema.is_index" data-i="${i}" ${f.schema && f.schema.is_index ? 'checked' : ''}/> <span><span class="small"><code>schema.is_index</code></span></span>
+            </label>
+            <label><span class="small"><code>schema.index_name</code></span>
+              <input data-k="schema.index_name" data-i="${i}" value="${esc((f.schema&&f.schema.index_name)||'')}" placeholder="index name (optional)"/>
+            </label>
+            <label class="toggle" style="align-items:flex-start; padding-top:18px;">
+              <input type="checkbox" data-k="schema.uniquekey" data-i="${i}" ${f.schema && f.schema.uniquekey ? 'checked' : ''}/> <span><span class="small"><code>schema.uniquekey</code></span></span>
+            </label>
+            <label class="toggle" style="align-items:flex-start; padding-top:18px;">
+              <input type="checkbox" data-k="schema.foreignkeys" data-i="${i}" ${f.schema && f.schema.foreignkeys ? 'checked' : ''}/> <span><span class="small"><code>schema.foreignkeys</code></span></span>
+            </label>
+          </div>
+          <div class="small muted" style="margin-top:6px;">These properties are returned by <code>datastore_info</code> on open.canada.ca and used by validation tooling.</div>
+        </details>
+      `;
+      card.appendChild(row2);
+
+      const actions = document.createElement('div');
+      actions.className = 'ds-actions';
+      actions.innerHTML = `
+        <button class="btn" data-act="up" data-i="${i}" title="Move up">↑</button>
+        <button class="btn" data-act="down" data-i="${i}" title="Move down">↓</button>
+        <button class="btn" data-act="dup" data-i="${i}" title="Duplicate">Duplicate</button>
+        <button class="btn" data-act="del" data-i="${i}" title="Remove">Remove</button>
+      `;
+      card.appendChild(actions);
+
+      dsFieldsList.appendChild(card);
+    });
+
+    const payload = dsPayload();
+    dsJsonPreview.textContent = JSON.stringify(payload, null, 2);
+    saveDsState();
+  }
+
+  function dsUpdateField(i, patch){
+    dsState.fields[i] = { ...dsState.fields[i], ...patch };
+    renderDs();
+  }
+
+  dsFieldsList?.addEventListener('input', (e) => {
+    const t = e.target;
+    if (!t || !t.dataset) return;
+    const i = Number(t.dataset.i);
+    const k = t.dataset.k;
+    if (!(i >= 0)) return;
+
+    const field = ensureDsFieldShape(dsState.fields[i]);
+
+    if (k === 'id') field.id = t.value;
+    else if (k === 'type') {
+      field.type = t.value;
+      // keep native_type loosely aligned if user hasn't set it
+      if (field.schema && (field.schema.native_type === '' || field.schema.native_type === null || field.schema.native_type === undefined)) {
+        field.schema.native_type = t.value;
+      }
+    } else if (k && k.startsWith('info.')) {
+      const prop = k.slice('info.'.length);
+      field.info = field.info || {};
+      field.info[prop] = t.value;
+    } else if (k && k.startsWith('schema.')) {
+      const prop = k.slice('schema.'.length);
+      field.schema = field.schema || {};
+      if (t.type === 'checkbox') field.schema[prop] = !!t.checked;
+      else {
+        const v = t.value;
+        field.schema[prop] = (prop === 'index_name' && v.trim() === '') ? null : v;
+      }
+    }
+
+    dsState.fields[i] = field;
+    renderDs();
+  });
+
+    dsFieldsList?.addEventListener('click', (e) => {
+    const btn = e.target?.closest('button');
+    if (!btn) return;
+    const i = Number(btn.dataset.i);
+    const act = btn.dataset.act;
+    if (!(i >= 0)) return;
+
+    if (act === 'del') {
+      dsState.fields.splice(i, 1);
+    } else if (act === 'dup') {
+      const clone = JSON.parse(JSON.stringify(dsState.fields[i]));
+      dsState.fields.splice(i+1, 0, clone);
+    } else if (act === 'up' && i > 0) {
+      const tmp = dsState.fields[i-1]; dsState.fields[i-1] = dsState.fields[i]; dsState.fields[i] = tmp;
+    } else if (act === 'down' && i < dsState.fields.length-1) {
+      const tmp = dsState.fields[i+1]; dsState.fields[i+1] = dsState.fields[i]; dsState.fields[i] = tmp;
+    }
+    renderDs();
+  });
+
+  btnDsAddField?.addEventListener('click', () => {
+    dsState.fields.push({
+      id: '',
+      type: 'text',
+      info: { label_en: '', label_fr: '', notes_en: '', notes_fr: '', type_override: '' },
+      schema: { native_type: 'text', notnull: false, index_name: null, is_index: false, uniquekey: false, foreignkeys: false }
+    });
+    renderDs();
+  });
+
+  btnDsAddCommon?.addEventListener('click', () => {
+    const common = [
+      { id:'year', type:'numeric', info:{label_en:'Year', label_fr:'Année', notes_en:'Calendar year for the observation/record', notes_fr:'Année civile de l’observation/enregistrement', type_override:'numeric'}, schema:{native_type:'numeric', notnull:false, index_name:null, is_index:false, uniquekey:false, foreignkeys:false} },
+      { id:'month', type:'numeric', info:{label_en:'Month', label_fr:'Mois', notes_en:'Month number (1–12) for the observation/record', notes_fr:'Numéro du mois (1–12) pour l’observation/enregistrement', type_override:'numeric'}, schema:{native_type:'numeric', notnull:false, index_name:null, is_index:false, uniquekey:false, foreignkeys:false} },
+      { id:'owner_org', type:'text', info:{label_en:'Owner organization', label_fr:'Organisation responsable', notes_en:'Short org code used in CKAN (e.g., tbs-sct)', notes_fr:"Code court de l'organisation dans CKAN (p. ex. tbs-sct)", type_override:''}, schema:{native_type:'text', notnull:false, index_name:null, is_index:false, uniquekey:false, foreignkeys:false} },
+      { id:'request_number', type:'text', info:{label_en:'Request number', label_fr:'Numéro de demande', notes_en:'Program or process reference number', notes_fr:'Numéro de référence du programme ou du processus', type_override:''}, schema:{native_type:'text', notnull:false, index_name:null, is_index:false, uniquekey:false, foreignkeys:false} }
+    ];
+    dsState.fields = dsState.fields.concat(common);
+    renderDs();
+  });
+
+  async function fetchJson(url){
+    const res = await fetch(url, { mode: 'cors', credentials: 'omit' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return await res.json();
+  }
+
+  async function loadFieldsFromUrl(url){
+    const j = await fetchJson(url);
+    const fields = normalizeFields(j);
+    if (!fields.length) throw new Error('No fields[] found in response');
+    dsState.fields = fields.map(f => ensureDsFieldShape(f));
+    dsState.includeSchema = dsState.includeSchema || fields.some(f => !!f.schema);
+    // try to infer resource_id
+    if (j?.result?.resource_id) dsState.resource_id = j.result.resource_id;
+    renderDs();
+  }
+
+  btnDsLoadUrl?.addEventListener('click', async () => {
+    try{
+      await loadFieldsFromUrl(dsUrl.value.trim());
+    } catch(e){
+      alert('Failed to load URL: ' + (e?.message || e));
+    }
+  });
+
+  btnDsFetchInfo?.addEventListener('click', async () => {
+    const rid = dsResourceId.value.trim();
+    if (!rid) return alert('Enter a resource_id');
+    const url = `https://open.canada.ca/data/en/api/3/action/datastore_info?id=${encodeURIComponent(rid)}`;
+    dsUrl.value = url;
+    try{
+      await loadFieldsFromUrl(url);
+    } catch(e){
+      alert('Failed to fetch datastore_info: ' + (e?.message || e));
+    }
+  });
+
+  btnDsFetchSearch?.addEventListener('click', async () => {
+    const rid = dsResourceId.value.trim();
+    if (!rid) return alert('Enter a resource_id');
+    const url = `https://open.canada.ca/data/en/api/3/action/datastore_search?resource_id=${encodeURIComponent(rid)}&limit=1`;
+    dsUrl.value = url;
+    try{
+      await loadFieldsFromUrl(url);
+    } catch(e){
+      alert('Failed to fetch datastore_search: ' + (e?.message || e));
+    }
+  });
+
+  btnDsNew?.addEventListener('click', () => {
+    dsState = {
+      resource_id: dsResourceId.value.trim(),
+      fields: [{
+        id: '_id', type: 'int',
+        info: { label_en: 'Row ID', label_fr: 'ID de ligne', notes_en: 'Primary key / internal row identifier', notes_fr: 'Clé primaire / identifiant interne de ligne', type_override: '' },
+        schema: { native_type: 'int', notnull: false, index_name: null, is_index: false, uniquekey: false, foreignkeys: false }
+      }],
+      exportPayload: dsExportPayload.checked,
+      includeInfo: dsIncludeInfo.checked,
+      includeSchema: dsIncludeSchema.checked
+    };
+    renderDs();
+  });
+
+    function downloadText(filename, text){
+    const blob = new Blob([text], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+  }
+
+  btnDsDownload?.addEventListener('click', () => {
+    const payload = dsPayload();
+    const fname = dsState.exportPayload ? 'datastore_create_payload.json' : 'datastore_fields.json';
+    downloadText(fname, JSON.stringify(payload, null, 2));
+  });
+
+  btnDsCopy?.addEventListener('click', async () => {
+    try{
+      await navigator.clipboard.writeText(JSON.stringify(dsPayload(), null, 2));
+      btnDsCopy.textContent = 'Copied!';
+      setTimeout(()=>btnDsCopy.textContent='Copy JSON', 900);
+    } catch(e){
+      alert('Copy failed (browser permissions).');
+    }
+  });
+
+  btnDsUpload?.addEventListener('click', () => dsFilePicker.click());
+  dsFilePicker?.addEventListener('change', async () => {
+    const f = dsFilePicker.files?.[0];
+    if (!f) return;
+    try{
+      const txt = await f.text();
+      const j = JSON.parse(txt);
+      const fields = normalizeFields(j);
+      if (!fields.length) throw new Error('No fields[] found');
+      dsState.fields = fields;
+      if (j?.resource_id) dsState.resource_id = j.resource_id;
+      renderDs();
+    } catch(e){
+      alert('Failed to load file: ' + (e?.message || e));
+    } finally {
+      dsFilePicker.value = '';
+    }
+  });
+
+  dsExportPayload?.addEventListener('change', renderDs);
+  dsIncludeInfo?.addEventListener('change', renderDs);
+  dsResourceId?.addEventListener('input', () => { dsState.resource_id = dsResourceId.value.trim(); renderDs(); });
+
+  // draggable divider for datastore tab
+  (function enableDsDivider(){
+    const divider = document.getElementById('dsDivider');
+    const left = document.getElementById('panelDatastoreLeft');
+    const right = document.getElementById('panelDatastoreRight');
+    if (!divider || !left || !right) return;
+    let dragging=false;
+    divider.addEventListener('pointerdown', (e) => {
+      dragging=true;
+      divider.setPointerCapture(e.pointerId);
+      document.body.style.cursor='col-resize';
+    });
+    divider.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const rect = divider.parentElement.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const pct = Math.max(20, Math.min(80, (x/rect.width)*100));
+      left.style.flex = `0 0 ${pct}%`;
+      right.style.flex = `1 1 ${100-pct}%`;
+    });
+    divider.addEventListener('pointerup', () => {
+      dragging=false;
+      document.body.style.cursor='';
+    });
+  })();
+
+  // protocol hint
+  if (location.protocol === 'file:' && dsFileOriginHint) {
+    dsFileOriginHint.textContent = ' (You are running from file:// — API fetch may be blocked by your browser. Host on GitHub Pages for best results.)';
+  }
+
+  loadDsState();
+  // sync controls from persisted dsState
+  if (dsResourceId) dsResourceId.value = dsState.resource_id || dsResourceId.value;
+  if (dsExportPayload) dsExportPayload.checked = !!dsState.exportPayload;
+  if (dsIncludeInfo) dsIncludeInfo.checked = !!dsState.includeInfo;
+  renderDs();
+
+  enableDivider();
+  renderAll();
+});
+</script>
+
+<dialog id="fieldModal" class="modal">
+  <form method="dialog" style="margin:0;">
+    <div class="modal-head">
+      <div class="modal-title" id="fieldModalTitle">Field details</div>
+      <button class="btn" id="fieldModalClose" value="cancel" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="fieldModalBody"></div>
+  </form>
+</dialog>
+
+<dialog id="exampleModal" class="modal">
+  <form method="dialog" style="margin:0;">
+    <div class="modal-head">
+      <div class="modal-title" id="exampleModalTitle">Load example</div>
+      <button class="btn" id="exampleModalClose" value="cancel" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body" id="exampleModalBody"></div>
+  </form>
+</dialog>
+
+</body>
+</html>
