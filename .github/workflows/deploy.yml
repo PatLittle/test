@@ -1,4 +1,4 @@
-name: Build Validation Site
+name: Build Validation + BN Sites
 
 on:
   workflow_dispatch:
@@ -11,12 +11,24 @@ on:
           - gcds
           - both
         default: primary
+      doccloud-mode:
+        description: "DocumentCloud fetch mode"
+        type: choice
+        options:
+          - incremental
+          - backfill
+        default: incremental
       publish-db:
         description: "Commit BN data.sqlite to repo"
         type: boolean
-        default: false
+        default: true
   schedule:
     - cron: "15 6 * * *"
+  push:
+    branches:
+      - BN-only
+    paths-ignore:
+      - docs/data.sqlite
 
 permissions:
   contents: write
@@ -30,6 +42,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      USERNAME: plittle
+      PASSWORD: 'pTr8antq$85$c$A'
 
     steps:
       - name: Checkout repository
@@ -81,10 +96,10 @@ jobs:
           OD_JSONL_GZ_PATH: od-do-canada.jsonl.gz
         run: python VALIDATION/scripts/enrich_validation.py
 
-      - name: Build static site
+      - name: Build Validation site
         env:
           SITE_DIR: public/VALIDATION
-          SITE_THEME: ${{ github.event.inputs.site-theme || 'primary' }}
+          SITE_THEME: ${{ github.event.inputs['site-theme'] || 'primary' }}
           VALIDATION_JSONL: VALIDATION/validation_enriched.jsonl
         run: |
           rm -rf public
@@ -93,19 +108,22 @@ jobs:
 
       - name: Build BN site (docs output)
         env:
-          DC_USERNAME: ${{ secrets.DC_USERNAME }}
-          DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
+          DC_USERNAME: ${{ env.USERNAME }}
+          DC_PASSWORD: ${{ env.PASSWORD }}
+          DOCCLOUD_MODE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs['doccloud-mode'] || 'incremental' }}
+          DOCCLOUD_INCREMENTAL_DAYS: "10"
+          DOCCLOUD_BACKFILL_SINCE: "2021-01-01"
         run: |
           python BN/build_db.py
           BN_DB_URL='./data.sqlite' python BN/build_page.py
 
       - name: Commit BN database to repo (optional)
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.publish-db == 'true' }}
+        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs['publish-db'] == 'true') }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -f docs/data.sqlite
-          git diff --cached --quiet && echo "No DB changes" || git commit -m "Update BN data.sqlite"
+          git diff --cached --quiet && echo "No DB changes" || git commit -m "Update BN data.sqlite [skip ci]"
           git push
 
       - name: Stage BN site
@@ -130,6 +148,7 @@ jobs:
             <li><a href="BN/">BN + ATI Match Explorer</a></li>
           </ul>
           HTML
+
       - name: Remove intermediate artifacts
         run: |
           rm -f VALIDATION/validation.csv \

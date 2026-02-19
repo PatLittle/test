@@ -6,13 +6,14 @@ import os
 import re
 import time
 import sqlite3
+import calendar
 from pathlib import Path
 from typing import Iterable, List, Dict
 
 import pandas as pd
 import requests
 from documentcloud import DocumentCloud
-from datetime import date
+from datetime import date, timedelta
 
 # --------------------
 # Config
@@ -22,9 +23,12 @@ A_URL = "https://open.canada.ca/data/en/datastore/dump/299a2e26-5103-4a49-ac3a-5
 B_URL = "https://open.canada.ca/data/en/datastore/dump/e664cf3d-6cb7-4aaa-adfa-e459c2552e3e?format=csv"
 C_URL = "https://open.canada.ca/data/en/datastore/dump/19383ca2-b01a-487d-88f7-e1ffbc7d39c2?format=csv"
 
-# DocumentCloud query (as requested)
-DOCCLOUD_QUERY = 'organization:38956 created_at:[NOW-10DAY TO NOW]'
-DOCCLOUD_PER_PAGE = 25
+# DocumentCloud query windowing
+DOCCLOUD_QUERY_BASE = "organization:38956"
+DOCCLOUD_WINDOW_MONTHS = 3
+DOCCLOUD_SINCE = date(2021, 1, 1)
+DOCCLOUD_INCREMENTAL_DAYS = 10
+DOCCLOUD_PER_PAGE = 100
 
 # Outputs
 ROOT = Path(__file__).resolve().parent
@@ -36,6 +40,14 @@ TN_REGEX_CHUNK = 400
 
 # Weak IDs
 WEAK_BN_VALUES = {s.lower() for s in ["c", "1", "0", "NA", "na", "-", "REDACTED", "[REDACTED]", "TBD-PM-00"]}
+
+DOCCLOUD_COLUMNS = [
+    "owner_org",
+    "request_number",
+    "tracking_number",
+    "open_by_default_url",
+    "open_by_default_flag",
+]
 
 
 # --------------------
@@ -75,6 +87,89 @@ def is_weak(v: str) -> bool:
     return s in WEAK_BN_VALUES
 
 
+def add_months(d: date, months: int) -> date:
+    month_idx = d.month - 1 + months
+    year = d.year + month_idx // 12
+    month = month_idx % 12 + 1
+    day = min(d.day, calendar.monthrange(year, month)[1])
+    return date(year, month, day)
+
+
+def iter_month_windows(start_date: date, end_date: date, months_per_window: int) -> Iterable[tuple[date, date]]:
+    """
+    Yield contiguous forward windows:
+      [start, start+months-1day], [next, ...], ..., [<= end_date]
+    """
+    cursor = start_date
+    while cursor <= end_date:
+        window_end = add_months(cursor, months_per_window) - timedelta(days=1)
+        if window_end > end_date:
+            window_end = end_date
+        yield cursor, window_end
+        cursor = window_end + timedelta(days=1)
+
+
+def empty_doccloud_df() -> pd.DataFrame:
+    return pd.DataFrame(columns=DOCCLOUD_COLUMNS)
+
+
+def sanitize_doccloud_df(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return empty_doccloud_df()
+    for col in DOCCLOUD_COLUMNS:
+        if col not in df.columns:
+            df[col] = "" if col != "open_by_default_flag" else 0
+    df = df[DOCCLOUD_COLUMNS].copy()
+    df["open_by_default_url"] = df["open_by_default_url"].fillna("").astype(str)
+    df["open_by_default_flag"] = pd.to_numeric(df["open_by_default_flag"], errors="coerce").fillna(0).astype(int)
+    for col in ("owner_org", "request_number", "tracking_number"):
+        df[col] = df[col].fillna("").astype(str)
+    return df
+
+
+def read_env_int(name: str, default: int) -> int:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        print(f"⚠️  Invalid {name}={raw!r}; using {default}")
+        return default
+
+
+def load_existing_doccloud_cache(sqlite_path: Path) -> pd.DataFrame:
+    if not sqlite_path.exists():
+        return empty_doccloud_df()
+    try:
+        with sqlite3.connect(sqlite_path) as con:
+            tables = {
+                row[0]
+                for row in con.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
+            }
+            if "doccloud_cache" in tables:
+                df = pd.read_sql_query(
+                    "SELECT owner_org, request_number, tracking_number, open_by_default_url, open_by_default_flag FROM doccloud_cache",
+                    con,
+                )
+                return sanitize_doccloud_df(df)
+
+            # Backward compatibility with older DBs that don't have doccloud_cache yet.
+            if "strong_matches" in tables:
+                df = pd.read_sql_query(
+                    """
+                    SELECT owner_org, request_number, tracking_number, open_by_default_url, open_by_default_flag
+                    FROM strong_matches
+                    WHERE COALESCE(TRIM(open_by_default_url), '') <> ''
+                    """,
+                    con,
+                )
+                return sanitize_doccloud_df(df)
+    except Exception as err:
+        print(f"⚠️  Could not load prior doccloud cache from {sqlite_path}: {err}")
+    return empty_doccloud_df()
+
+
 # --------------------
 # DocumentCloud → DataFrame
 # --------------------
@@ -85,56 +180,86 @@ def fetch_doccloud_table() -> pd.DataFrame:
     We try to read owner_org / request_number / tracking_number from doc.data (metadata).
     If not present, we leave them empty (no join for those rows).
     """
+    mode = os.environ.get("DOCCLOUD_MODE", "incremental").strip().lower()
+    incremental_days = read_env_int("DOCCLOUD_INCREMENTAL_DAYS", DOCCLOUD_INCREMENTAL_DAYS)
+    backfill_since_raw = os.environ.get("DOCCLOUD_BACKFILL_SINCE", DOCCLOUD_SINCE.isoformat())
     try:
-        print("🔎 DocumentCloud: querying...")
-        client = DocumentCloud(
-            username=os.environ.get("DC_USERNAME"),
-            password=os.environ.get("DC_PASSWORD"),
-        )
-        docs = client.documents.search(query=DOCCLOUD_QUERY, per_page=DOCCLOUD_PER_PAGE)
+        backfill_since = date.fromisoformat(backfill_since_raw)
+    except ValueError:
+        backfill_since = DOCCLOUD_SINCE
+        print(f"⚠️  Invalid DOCCLOUD_BACKFILL_SINCE={backfill_since_raw!r}; using {backfill_since.isoformat()}")
 
-        recs = []
-        for d in docs:
-            data = getattr(d, "data", None) or {}
-            owner_org = str(data.get("owner_org", "")).strip()
-            request_number = str(data.get("request_number", "")).strip()
-            tracking_number = str(data.get("tracking_number", "")).strip()
-            open_url = str(d.canonical_url).strip()
-            
-            recs.append({
-                "owner_org": owner_org,
-                "request_number": request_number,
-                "tracking_number": tracking_number,
-                "open_by_default_url": open_url,
-                "open_by_default_flag": 1 if open_url else 0,
-            })
+    existing_cache = load_existing_doccloud_cache(OUT_SQLITE)
+    print(f"📦 Existing DocCloud cache rows: {len(existing_cache):,}")
 
-        df = pd.DataFrame(recs, dtype=str)
-        if df.empty:
-            df = pd.DataFrame(
-                columns=[
-                    "owner_org",
-                    "request_number",
-                    "tracking_number",
-                    "open_by_default_url",
-                    "open_by_default_flag",
-                ]
-            )
+    username = os.environ.get("DC_USERNAME")
+    password = os.environ.get("DC_PASSWORD")
+    if not username or not password:
+        print("⚠️  DocumentCloud credentials missing (DC_USERNAME/DC_PASSWORD); reusing cached rows only.")
+        return existing_cache
+
+    try:
+        client = DocumentCloud(username=username, password=password)
+        recs: list[dict] = []
+        today = date.today()
+
+        if mode == "backfill":
+            print(f"🔎 DocumentCloud mode=backfill, windows={DOCCLOUD_WINDOW_MONTHS} months, since={backfill_since.isoformat()}")
+            windows = list(iter_month_windows(backfill_since, today, DOCCLOUD_WINDOW_MONTHS))
+        elif mode == "incremental":
+            start = today - timedelta(days=max(1, incremental_days))
+            print(f"🔎 DocumentCloud mode=incremental, last {incremental_days} days ({start.isoformat()} → {today.isoformat()})")
+            windows = [(start, today)]
+        elif mode in {"off", "none", "cache-only"}:
+            print("🔎 DocumentCloud mode=cache-only; skipping API calls.")
+            return existing_cache
         else:
-            df["open_by_default_flag"] = df["open_by_default_flag"].astype(int)
-        print(f"DocumentCloud rows: {len(df):,}")
-        return df.fillna("")
+            print(f"⚠️  Unknown DOCCLOUD_MODE={mode!r}; using incremental mode.")
+            start = today - timedelta(days=max(1, incremental_days))
+            windows = [(start, today)]
+
+        for i, (start_d, end_d) in enumerate(windows, start=1):
+            query = f"{DOCCLOUD_QUERY_BASE} created_at:[{start_d.isoformat()} TO {end_d.isoformat()}]"
+            print(f"  • Window {i}/{len(windows)}: {start_d.isoformat()} → {end_d.isoformat()}")
+            docs = client.documents.search(query=query, per_page=DOCCLOUD_PER_PAGE)
+
+            window_rows = 0
+            for d in docs:
+                data = getattr(d, "data", None) or {}
+                recs.append(
+                    {
+                        "owner_org": str(data.get("owner_org", "")).strip(),
+                        "request_number": str(data.get("request_number", "")).strip(),
+                        "tracking_number": str(data.get("tracking_number", "")).strip(),
+                        "open_by_default_url": str(d.canonical_url).strip(),
+                        "open_by_default_flag": 1 if getattr(d, "canonical_url", "") else 0,
+                    }
+                )
+                window_rows += 1
+
+            print(f"    rows fetched: {window_rows:,}")
+            time.sleep(0.2)
+
+        fetched_df = sanitize_doccloud_df(pd.DataFrame(recs, dtype=str))
+        if fetched_df.empty:
+            print("DocumentCloud rows fetched this run: 0")
+            return existing_cache
+
+        combined = sanitize_doccloud_df(pd.concat([existing_cache, fetched_df], ignore_index=True))
+        combined = combined.drop_duplicates(
+            subset=["owner_org", "request_number", "tracking_number", "open_by_default_url"],
+            keep="last",
+        )
+        print(
+            "DocumentCloud rows:"
+            f" fetched={len(fetched_df):,},"
+            f" cached_before={len(existing_cache):,},"
+            f" combined={len(combined):,}"
+        )
+        return combined.fillna("")
     except Exception as err:  # network/auth failures shouldn't break build
         print(f"⚠️  DocumentCloud query failed: {err}")
-        return pd.DataFrame(
-            columns=[
-                "owner_org",
-                "request_number",
-                "tracking_number",
-                "open_by_default_url",
-                "open_by_default_flag",
-            ]
-        )
+        return existing_cache
 
 
 # --------------------
@@ -404,11 +529,22 @@ def main() -> None:
       value TEXT
     );
 
+    DROP TABLE IF EXISTS doccloud_cache;
+    CREATE TABLE doccloud_cache (
+      owner_org TEXT,
+      request_number TEXT,
+      tracking_number TEXT,
+      open_by_default_url TEXT,
+      open_by_default_flag INTEGER
+    );
+
     CREATE INDEX idx_strong_owner_org ON strong_matches(owner_org);
     CREATE INDEX idx_strong_req ON strong_matches(request_number);
     CREATE INDEX idx_strong_track ON strong_matches(tracking_number);
     CREATE INDEX idx_org_stats_owner_org ON org_stats(owner_org);
     CREATE INDEX idx_weak_stats_owner_org ON weak_stats(owner_org);
+    CREATE INDEX idx_doccloud_owner_req ON doccloud_cache(owner_org, request_number);
+    CREATE INDEX idx_doccloud_owner_track ON doccloud_cache(owner_org, tracking_number);
     """)
 
     if not df_strong.empty:
@@ -419,6 +555,8 @@ def main() -> None:
         df_org_stats.to_sql("org_stats", con, if_exists="append", index=False)
     if not df_weak_stats.empty:
         df_weak_stats.to_sql("weak_stats", con, if_exists="append", index=False)
+    if not df_dc.empty:
+        df_dc.to_sql("doccloud_cache", con, if_exists="append", index=False)
 
     # Optional: FTS (kept for future search UI)
     cur.executescript("""
@@ -441,6 +579,7 @@ def main() -> None:
         "weak_matches": int(len(df_weak)),
         "strong_matches": int(len(df_strong)),
         "open_by_default": int(df_strong.get("open_by_default_flag", pd.Series(dtype=int)).sum()),
+        "doccloud_cache_rows": int(len(df_dc)),
     }
     cur.executemany(
         "INSERT INTO meta_counts(key,value) VALUES (?,?)",

@@ -1,4 +1,9 @@
 BN/.venv/
 BN/venv/
+.venv/
+venv/
 BN/data.sqlite
 docs/data.sqlite
+
+__pycache__/
+*.pyc
