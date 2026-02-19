@@ -1,8 +1,16 @@
-name: Build BN Site
+name: Build Validation + BN Sites
 
 on:
   workflow_dispatch:
     inputs:
+      site-theme:
+        description: "Theme to build (primary, gcds, or both)"
+        type: choice
+        options:
+          - primary
+          - gcds
+          - both
+        default: primary
       doccloud-mode:
         description: "DocumentCloud fetch mode"
         type: choice
@@ -28,7 +36,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages-bn"
+  group: "pages"
   cancel-in-progress: false
 
 jobs:
@@ -49,10 +57,54 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Free disk space
+        shell: bash
+        run: |
+          echo "Disk space before cleanup:"
+          df -h
+          sudo rm -rf /usr/local/.ghcup \
+                      /opt/hostedtoolcache/CodeQL \
+                      /usr/local/lib/android/sdk/ndk \
+                      /usr/share/dotnet \
+                      /opt/ghc \
+                      /usr/local/share/boost
+          sudo apt-get clean
+          echo "Disk space after cleanup:"
+          df -h
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install -r VALIDATION/requirements.txt
           pip install pandas requests documentcloud
+
+      - name: Fetch CSV & convert to JSONL
+        env:
+          AZURE_ACCOUNT_URL: ${{ secrets.AZURE_ACCOUNT_URL }}
+          AZURE_CONTAINER: ${{ secrets.AZURE_CONTAINER }}
+          AZURE_SAS_TOKEN: ${{ secrets.AZURE_SAS_TOKEN }}
+          AZURE_BLOB_NAME: ${{ secrets.AZURE_BLOB_NAME }}
+          OUTPUT_CSV_PATH: VALIDATION/validation.csv
+          OUTPUT_JSONL_PATH: VALIDATION/validation.jsonl
+        run: python VALIDATION/scripts/fetch_and_convert.py
+
+      - name: Enrich validation JSONL
+        env:
+          VALIDATION_JSONL_IN: VALIDATION/validation.jsonl
+          VALIDATION_JSONL_OUT: VALIDATION/validation_enriched.jsonl
+          OD_JSONL_GZ_URL: https://open.canada.ca/static/od-do-canada.jsonl.gz
+          OD_JSONL_GZ_PATH: od-do-canada.jsonl.gz
+        run: python VALIDATION/scripts/enrich_validation.py
+
+      - name: Build Validation site
+        env:
+          SITE_DIR: public/VALIDATION
+          SITE_THEME: ${{ github.event.inputs['site-theme'] || 'primary' }}
+          VALIDATION_JSONL: VALIDATION/validation_enriched.jsonl
+        run: |
+          rm -rf public
+          mkdir -p "$SITE_DIR"
+          python VALIDATION/scripts/build_site.py
 
       - name: Build BN site (docs output)
         env:
@@ -76,23 +128,35 @@ jobs:
 
       - name: Stage BN site
         run: |
-          rm -rf public
-          mkdir -p public
+          rm -rf public/BN
           mv docs public/BN
 
       - name: Create root index
         run: |
           cat > public/index.html <<'HTML'
           <!doctype html><meta charset="utf-8">
-          <title>BN Site</title>
+          <title>Sites</title>
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <style>
             body { font-family: system-ui, -apple-system, sans-serif; padding: 2rem; }
             h1 { font-size: 1.5rem; }
+            ul { padding-left: 1.25rem; }
           </style>
-          <h1>Published Site</h1>
-          <p><a href="BN/">BN + ATI Match Explorer</a></p>
+          <h1>Published Sites</h1>
+          <ul>
+            <li><a href="VALIDATION/">Validation Site</a></li>
+            <li><a href="BN/">BN + ATI Match Explorer</a></li>
+          </ul>
           HTML
+
+      - name: Remove intermediate artifacts
+        run: |
+          rm -f VALIDATION/validation.csv \
+                VALIDATION/validation.jsonl \
+                VALIDATION/validation_enriched.jsonl \
+                od-do-canada.jsonl.gz
+          echo "Final artifact footprint:"
+          du -sh public || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
