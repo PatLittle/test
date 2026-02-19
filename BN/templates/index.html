@@ -144,6 +144,44 @@
     .status.error { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
     .status.ok { background: #ecfeff; border-color: #cffafe; color: #0e7490; }
 
+    .lineage-wrap {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .lineage-svg {
+      width: 100%;
+      min-width: 1120px;
+      height: auto;
+      display: block;
+    }
+    .lineage-legend {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .lineage-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .lineage-swatch {
+      width: 0.95rem;
+      height: 0.95rem;
+      border-radius: 0.3rem;
+      border: 1px solid var(--line);
+      display: inline-block;
+    }
+    .lineage-swatch.source { background: #eff6ff; border-color: #93c5fd; }
+    .lineage-swatch.process { background: #fff7ed; border-color: #fdba74; }
+    .lineage-swatch.output { background: #ecfeff; border-color: #67e8f9; }
+
     .footer {
       margin-top: 2.5rem;
       text-align: center;
@@ -178,6 +216,24 @@
       <div id="bn-ati-stats" class="stats-grid"></div>
       <div class="chart-wrap">
         <canvas id="orgChart"></canvas>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Data Lineage Diagram</h2>
+      <p class="subtle">How sources flow through joins and end up in the SQLite tables used by this page.</p>
+      <div class="lineage-wrap">
+        <img
+          src="./data-lineage.svg"
+          class="lineage-svg"
+          alt="Diagram showing BN plus ATI source datasets, joins, and output tables written to docs/data.sqlite."
+          loading="lazy"
+        >
+      </div>
+      <div class="lineage-legend">
+        <span><i class="lineage-swatch source"></i>Source dataset</span>
+        <span><i class="lineage-swatch process"></i>Transformation or join</span>
+        <span><i class="lineage-swatch output"></i>Output table</span>
       </div>
     </section>
 

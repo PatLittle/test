@@ -3,12 +3,15 @@ from __future__ import annotations
 
 from pathlib import Path
 import os
+import shutil
 from datetime import date
 
 ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT.parent / "docs"
 OUT_HTML = OUT_DIR / "index.html"
 TEMPLATE_FILE = ROOT / "templates/index.html"
+LINEAGE_SVG_FILE = ROOT / "templates/data-lineage.svg"
+OUT_LINEAGE_SVG = OUT_DIR / "data-lineage.svg"
 OUT_SQLITE = OUT_DIR / "data.sqlite"
 DEFAULT_DB_URL = "https://raw.githubusercontent.com/OWNER/REPO/BRANCH/data.sqlite"
 
@@ -27,6 +30,8 @@ def inject_script_into_html(html: str, script_tag: str) -> str:
 def main() -> None:
     if not OUT_SQLITE.exists():
         print(f"⚠️  Missing {OUT_SQLITE}; page will require a remote db_url.")
+    if not LINEAGE_SVG_FILE.exists():
+        raise FileNotFoundError(f"Missing required diagram asset: {LINEAGE_SVG_FILE}")
     template_html = TEMPLATE_FILE.read_text(encoding="utf-8")
     db_url = os.environ.get("BN_DB_URL", DEFAULT_DB_URL)
     db_size = str(OUT_SQLITE.stat().st_size) if OUT_SQLITE.exists() else "0"
@@ -336,8 +341,11 @@ def main() -> None:
         loader_js.replace("__DB_URL__", db_url).replace("__DB_FILE_LENGTH__", db_size),
     )
     final_html = final_html.replace("{{ build_date }}", date.today().isoformat())
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
     OUT_HTML.write_text(final_html, encoding="utf-8")
+    shutil.copyfile(LINEAGE_SVG_FILE, OUT_LINEAGE_SVG)
     print(f"🧾 Wrote {OUT_HTML}")
+    print(f"🖼️  Wrote {OUT_LINEAGE_SVG}")
 
 
 if __name__ == "__main__":

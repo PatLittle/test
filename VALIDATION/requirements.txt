@@ -1,2 +1,0 @@
-azure-storage-blob>=12.21.0
-ujson>=5.10.0

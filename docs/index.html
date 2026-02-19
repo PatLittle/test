@@ -144,6 +144,44 @@
     .status.error { background: #fee2e2; border-color: #fecaca; color: #991b1b; }
     .status.ok { background: #ecfeff; border-color: #cffafe; color: #0e7490; }
 
+    .lineage-wrap {
+      margin-top: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+      padding: 0.75rem;
+      overflow-x: auto;
+    }
+    .lineage-svg {
+      width: 100%;
+      min-width: 1120px;
+      height: auto;
+      display: block;
+    }
+    .lineage-legend {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .lineage-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .lineage-swatch {
+      width: 0.95rem;
+      height: 0.95rem;
+      border-radius: 0.3rem;
+      border: 1px solid var(--line);
+      display: inline-block;
+    }
+    .lineage-swatch.source { background: #eff6ff; border-color: #93c5fd; }
+    .lineage-swatch.process { background: #fff7ed; border-color: #fdba74; }
+    .lineage-swatch.output { background: #ecfeff; border-color: #67e8f9; }
+
     .footer {
       margin-top: 2.5rem;
       text-align: center;
@@ -182,6 +220,24 @@
     </section>
 
     <section class="section">
+      <h2>Data Lineage Diagram</h2>
+      <p class="subtle">How sources flow through joins and end up in the SQLite tables used by this page.</p>
+      <div class="lineage-wrap">
+        <img
+          src="./data-lineage.svg"
+          class="lineage-svg"
+          alt="Diagram showing BN plus ATI source datasets, joins, and output tables written to docs/data.sqlite."
+          loading="lazy"
+        >
+      </div>
+      <div class="lineage-legend">
+        <span><i class="lineage-swatch source"></i>Source dataset</span>
+        <span><i class="lineage-swatch process"></i>Transformation or join</span>
+        <span><i class="lineage-swatch output"></i>Output table</span>
+      </div>
+    </section>
+
+    <section class="section">
       <h2>Explore Records</h2>
       <p class="subtle">Sorted by owner org. Expand a row for full details and summary text.</p>
       <table id="report" class="display nowrap" style="width:100%">
@@ -203,7 +259,9 @@
     <section class="section">
       <h2>Weak ID Summary</h2>
       <p class="subtle">Counts of low‑quality IDs that can create false positive matches.</p>
-      <canvas id="weakChart"></canvas>
+      <div class="chart-wrap" style="height: 32rem; margin-top: 1.5rem;">  <!-- or 28rem / 36rem depending on taste -->
+  <canvas id="weakChart"></canvas>
+</div>
       <details>
         <summary>Chart Data</summary>
         <p class="subtle" id="weak-note"></p>
@@ -261,12 +319,16 @@
   await addScript("https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js");
   await addScript("https://unpkg.com/sql.js-httpvfs/dist/index.js");
 
-  const urlParam = new URLSearchParams(location.search).get("db_url");
-  const DB_URL = urlParam || "https://raw.githubusercontent.com/PatLittle/test/main/data.sqlite";
+  const params = new URLSearchParams(location.search);
+  const urlParam = params.get("db_url");
+  const sizeParam = params.get("db_size");
+  const DB_URL = urlParam || "https://raw.githubusercontent.com/OWNER/REPO/BRANCH/data.sqlite";
+  const DB_FILE_LENGTH = Number(sizeParam || "13983744") || 0;
   const createDbWorker = window.createDbWorker;
   if (!createDbWorker) throw new Error("sql.js-httpvfs failed to load");
+  const useFileLength = urlParam ? Number(sizeParam) || 0 : DB_FILE_LENGTH;
   const worker = await createDbWorker(
-    [{ from: "inline", config: { serverMode: "full", requestChunkSize: 4096, url: DB_URL } }],
+    [{ from: "inline", config: { serverMode: "full", requestChunkSize: 4096, url: DB_URL, fileLength: useFileLength || undefined } }],
     "./sqlite.worker.js",
     "./sql-wasm.wasm"
   );
