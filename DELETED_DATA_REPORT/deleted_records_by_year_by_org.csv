@@ -14,20 +14,276 @@
 2026,Public Health Agency of Canada | Agence de la santé publique du Canada,2
 2026,Health Canada | Santé Canada,1
 2026,"Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",1
-2025,Government and Municipalities of Québec | Gouvernement et municipalités du Québec,27
+2025,Government and Municipalities of Québec | Gouvernement et municipalités du Québec,63
+2025,Government of Alberta | Gouvernement de l'Alberta,27
+2025,Government of Nova Scotia | Gouvernment de la Nouvelle-Écosse,23
+2025,Government of Ontario | Gouvernement de l'Ontario,15
 2025,Veterans Affairs Canada | Anciens Combattants Canada,14
-2025,Government of Alberta | Gouvernement de l'Alberta,12
-2025,Environment and Climate Change Canada | Environnement et Changement climatique Canada,4
-2025,Global Affairs Canada | Affaires mondiales Canada,4
-2025,Department of Justice Canada | Ministère de la Justice Canada,3
-2025,Government of Manitoba | Gouvernement du Manitoba,3
-2025,Government of Ontario | Gouvernement de l'Ontario,3
+2025,Global Affairs Canada | Affaires mondiales Canada,9
+2025,Environment and Climate Change Canada | Environnement et Changement climatique Canada,7
+2025,Government of Manitoba | Gouvernement du Manitoba,7
+2025,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,6
+2025,Department of Justice Canada | Ministère de la Justice Canada,5
+2025,Government of British Columbia | Gouvernment de la Colombie-Britannique,5
+2025,Canada Revenue Agency | Agence du revenu du Canada,4
+2025,Fisheries and Oceans Canada | Pêches et Océans Canada,2
 2025,Public Health Agency of Canada | Agence de la santé publique du Canada,2
-2025,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,1
-2025,Canada Revenue Agency | Agence du revenu du Canada,1
+2025,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,2
+2025,Royal Canadian Mounted Police | Gendarmerie royale du Canada,2
+2025,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,2
 2025,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,1
-2025,Fisheries and Oceans Canada | Pêches et Océans Canada,1
-2025,Government of Nova Scotia | Gouvernment de la Nouvelle-Écosse,1
-2025,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,1
-2025,Royal Canadian Mounted Police | Gendarmerie royale du Canada,1
-2025,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,1
+2025,Government of Saskatchewan | Gouvernement de la Saskatchewan,1
+2025,Government of Yukon | Gouvernement du Yukon,1
+2025,Health Canada | Santé Canada,1
+2025,Impact Assessment Agency of Canada | Agence d'évaluation d'impact du Canada,1
+2024,Environment and Climate Change Canada | Environnement et Changement climatique Canada,13
+2024,Office of the Auditor General of Canada | Bureau du vérificateur général du Canada,9
+2024,Fisheries and Oceans Canada | Pêches et Océans Canada,4
+2024,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,2
+2024,Defence Construction Canada | Construction de Défense Canada,1
+2024,Global Affairs Canada | Affaires mondiales Canada,1
+2023,Fisheries and Oceans Canada | Pêches et Océans Canada,130
+2023,Environment and Climate Change Canada | Environnement et Changement climatique Canada,47
+2023,Canada Revenue Agency | Agence du revenu du Canada,33
+2023,Transportation Safety Board of Canada | Bureau de la sécurité des transports du Canada,17
+2023,Global Affairs Canada | Affaires mondiales Canada,16
+2023,Health Canada | Santé Canada,13
+2023,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,12
+2023,Impact Assessment Agency of Canada | Agence d'évaluation d'impact du Canada,7
+2023,2875039 Canada Limited | 2875039 Canada Limited,6
+2023,Correctional Service of Canada | Service correctionnel du Canada,6
+2023,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,5
+2023,Canadian Institute of Health Information | Institut canadien d'information sur la santé,5
+2023,Parks Canada | Parcs Canada,4
+2023,3Net Indy Holdings | 3Net Indy Holdings,3
+2023,Canada Deposit Insurance Corporation | Société d'assurance-dépôts du Canada,3
+2023,Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada,3
+2023,Federal Bridge Corporation | Société des ponts fédéraux,3
+2023,Natural Resources Canada | Ressources naturelles Canada,3
+2023,Public Service Commission of Canada | Commission de la fonction publique du Canada,3
+2023,3906949 Canada Inc. | 3906949 Canada Inc.,2
+2023,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,2
+2023,Canadian Heritage | Patrimoine canadien,2
+2023,Asia-Pacific Foundation of Canada | Fondation Asie Pacifique du Canada,1
+2023,Atlantic Pilotage Authority Canada | Administration de pilotage de l'Atlantique Canada,1
+2023,Canada Agricultural Review Tribunal | Commission de révision agricole du Canada,1
+2023,Canadian Centre for Occupational Health and Safety | Centre canadien d'hygiène et de sécurité au travail,1
+2023,Copyright Board Canada | Commission du droit d'auteur du Canada,1
+2023,Department for Women and Gender Equality | Ministère des Femmes et de l’Égalité des genres,1
+2023,Financial Transactions and Reports Analysis Centre of Canada | Centre d'analyse des opérations et déclarations financières du Canada,1
+2023,Natural Sciences and Engineering Research Council of Canada | Conseil de recherches en sciences naturelles et en génie du Canada,1
+2023,Office of the Commissioner of Lobbying of Canada | Commissariat au lobbying du Canada,1
+2023,Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada,1
+2023,Public Health Agency of Canada | Agence de la santé publique du Canada,1
+2023,Shared Services Canada | Services partagés Canada,1
+2023,Transport Canada | Transports Canada,1
+2023,Veterans Review and Appeal Board | Tribunal des anciens combattants (révision et appel),1
+2022,Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada,93
+2022,Environment and Climate Change Canada | Environnement et Changement climatique Canada,63
+2022,Employment and Social Development Canada | Emploi et Développement social Canada,23
+2022,Fisheries and Oceans Canada | Pêches et Océans Canada,23
+2022,Global Affairs Canada | Affaires mondiales Canada,9
+2022,Canada Revenue Agency | Agence du revenu du Canada,7
+2022,Public Service Commission of Canada | Commission de la fonction publique du Canada,7
+2022,Natural Sciences and Engineering Research Council of Canada | Conseil de recherches en sciences naturelles et en génie du Canada,6
+2022,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,6
+2022,Department of Justice Canada | Ministère de la Justice Canada,5
+2022,Elections Canada | Élections Canada,4
+2022,Financial Transactions and Reports Analysis Centre of Canada | Centre d'analyse des opérations et déclarations financières du Canada,4
+2022,Health Canada | Santé Canada,4
+2022,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,3
+2022,National Defence | Défense nationale,2
+2022,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,2
+2022,Transport Canada | Transports Canada,2
+2022,3Net Indy Investments Inc. | 3Net Indy Investments Inc.,1
+2022,Atlantic Canada Opportunities Agency | Agence de promotion économique du Canada atlantique,1
+2022,Business Development Bank of Canada | Banque de développement du Canada,1
+2022,Canada Energy Regulator | La Régie de l’énergie du Canada,1
+2022,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,1
+2022,Canadian Heritage | Patrimoine canadien,1
+2022,Correctional Service of Canada | Service correctionnel du Canada,1
+2022,Destination Canada | Destination Canada,1
+2022,Impact Assessment Agency of Canada | Agence d'évaluation d'impact du Canada,1
+2022,Natural Resources Canada | Ressources naturelles Canada,1
+2022,Social Sciences and Humanities Research Council of Canada | Conseil de recherches en sciences humaines du Canada,1
+2021,Library and Archives Canada | Bibliothèque et Archives Canada,106
+2021,Canada Revenue Agency | Agence du revenu du Canada,17
+2021,Public Health Agency of Canada | Agence de la santé publique du Canada,13
+2021,Natural Resources Canada | Ressources naturelles Canada,7
+2021,Canada Energy Regulator | La Régie de l’énergie du Canada,5
+2021,Health Canada | Santé Canada,5
+2021,Canadian Institutes of Health Research | Instituts de recherche en santé du Canada,4
+2021,Impact Assessment Agency of Canada | Agence d'évaluation d'impact du Canada,4
+2021,Canadian Grain Commission | Commission canadienne des grains,3
+2021,Employment and Social Development Canada | Emploi et Développement social Canada,3
+2021,Canadian Heritage | Patrimoine canadien,2
+2021,Environment and Climate Change Canada | Environnement et Changement climatique Canada,2
+2021,Financial Consumer Agency of Canada | Agence de la consommation en matière financière du Canada,2
+2021,Global Affairs Canada | Affaires mondiales Canada,2
+2021,National Defence | Défense nationale,2
+2021,Office of the Commissioner of Lobbying of Canada | Commissariat au lobbying du Canada,2
+2021,Shared Services Canada | Services partagés Canada,2
+2021,Transportation Safety Board of Canada | Bureau de la sécurité des transports du Canada,2
+2021,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,2
+2021,Western Economic Diversification Canada | Diversification de l'économie de l'Ouest Canada,2
+2021,Canada Border Services Agency | Agence des services frontaliers du Canada,1
+2021,Canada Mortgage and Housing Corporation | Société canadienne d'hypothèques et de logement,1
+2021,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,1
+2021,Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire,1
+2021,Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada,1
+2021,Defence Research and Development Canada | Recherche et développement pour la Défense Canada,1
+2021,Department for Women and Gender Equality | Ministère des Femmes et de l’Égalité des genres,1
+2021,Department of Justice Canada | Ministère de la Justice Canada,1
+2021,Indigenous Services Canada | Services aux Autochtones Canada,1
+2021,"Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",1
+2021,Office of the Auditor General of Canada | Bureau du vérificateur général du Canada,1
+2021,Public Service Commission of Canada | Commission de la fonction publique du Canada,1
+2021,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,1
+2021,Royal Canadian Mounted Police | Gendarmerie royale du Canada,1
+2020,Natural Resources Canada | Ressources naturelles Canada,38
+2020,Health Canada | Santé Canada,36
+2020,Shared Services Canada | Services partagés Canada,10
+2020,Public Health Agency of Canada | Agence de la santé publique du Canada,9
+2020,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,9
+2020,Canada Revenue Agency | Agence du revenu du Canada,7
+2020,Employment and Social Development Canada | Emploi et Développement social Canada,5
+2020,Environment and Climate Change Canada | Environnement et Changement climatique Canada,5
+2020,National Defence | Défense nationale,5
+2020,Public Service Commission of Canada | Commission de la fonction publique du Canada,5
+2020,Public Prosecution Service of Canada | Service des poursuites pénales du Canada,4
+2020,Canada Energy Regulator | La Régie de l’énergie du Canada,3
+2020,Fisheries and Oceans Canada | Pêches et Océans Canada,3
+2020,Office of the Auditor General of Canada | Bureau du vérificateur général du Canada,3
+2020,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,2
+2020,Canadian Radio-television and Telecommunications Commission | Conseil de la radiodiffusion et des télécommunications canadiennes,2
+2020,Financial Transactions and Reports Analysis Centre of Canada | Centre d'analyse des opérations et déclarations financières du Canada,2
+2020,Indigenous Services Canada | Services aux Autochtones Canada,2
+2020,Library and Archives Canada | Bibliothèque et Archives Canada,2
+2020,Parks Canada | Parcs Canada,2
+2020,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,2
+2020,Transport Canada | Transports Canada,2
+2020,2875039 Canada Limited | 2875039 Canada Limited,1
+2020,Administrative Tribunals Support Service of Canada | Service canadien d'appui aux tribunaux administratifs,1
+2020,Canadian Heritage | Patrimoine canadien,1
+2020,Canadian Institutes of Health Research | Instituts de recherche en santé du Canada,1
+2020,Canadian Space Agency | Agence spatiale canadienne,1
+2020,Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada,1
+2020,Department of Finance Canada | Ministère des Finances Canada,1
+2020,Financial Consumer Agency of Canada | Agence de la consommation en matière financière du Canada,1
+2020,Global Affairs Canada | Affaires mondiales Canada,1
+2020,"Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada",1
+2020,"Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",1
+2020,Office of the Commissioner of Lobbying of Canada | Commissariat au lobbying du Canada,1
+2020,Office of the Privacy Commissioner of Canada | Commissariats à l’information et à la protection de la vie privée au Canada,1
+2020,Parole Board of Canada | Commission des libérations conditionnelles du Canada,1
+2020,Privy Council Office | Bureau du Conseil privé,1
+2020,Statistics Canada | Statistique Canada,1
+2019,Department of Finance Canada | Ministère des Finances Canada,73
+2019,Environment and Climate Change Canada | Environnement et Changement climatique Canada,66
+2019,Public Health Agency of Canada | Agence de la santé publique du Canada,16
+2019,Canada Energy Regulator | La Régie de l’énergie du Canada,14
+2019,Parks Canada | Parcs Canada,11
+2019,Transportation Safety Board of Canada | Bureau de la sécurité des transports du Canada,8
+2019,Fisheries and Oceans Canada | Pêches et Océans Canada,6
+2019,Health Canada | Santé Canada,6
+2019,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,5
+2019,Canadian Radio-television and Telecommunications Commission | Conseil de la radiodiffusion et des télécommunications canadiennes,5
+2019,Employment and Social Development Canada | Emploi et Développement social Canada,5
+2019,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,3
+2019,Canada Revenue Agency | Agence du revenu du Canada,3
+2019,Canada School of Public Service | École de la fonction publique du Canada,3
+2019,Global Affairs Canada | Affaires mondiales Canada,3
+2019,"Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",3
+2019,Canadian Grain Commission | Commission canadienne des grains,2
+2019,International Development Research Centre | Centre de recherches pour le développement international,2
+2019,National Defence | Défense nationale,2
+2019,Office of the Auditor General of Canada | Bureau du vérificateur général du Canada,2
+2019,Shared Services Canada | Services partagés Canada,2
+2019,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,2
+2019,Bank of Canada | Banque du Canada,1
+2019,Canada Border Services Agency | Agence des services frontaliers du Canada,1
+2019,Canada Mortgage and Housing Corporation | Société canadienne d'hypothèques et de logement,1
+2019,Canadian Space Agency | Agence spatiale canadienne,1
+2019,Crown-Indigenous Relations and Northern Affairs Canada | Relations Couronne-Autochtones et Affaires du Nord Canada,1
+2019,External User | Utilisateur externe,1
+2019,Indigenous Services Canada | Services aux Autochtones Canada,1
+2019,Natural Resources Canada | Ressources naturelles Canada,1
+2019,Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada,1
+2019,Public Service Commission of Canada | Commission de la fonction publique du Canada,1
+2019,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,1
+2018,Parks Canada | Parcs Canada,161
+2018,Employment and Social Development Canada | Emploi et Développement social Canada,34
+2018,Veterans Affairs Canada | Anciens Combattants Canada,21
+2018,Environment and Climate Change Canada | Environnement et Changement climatique Canada,18
+2018,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,11
+2018,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,9
+2018,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,9
+2018,Administrative Tribunals Support Service of Canada | Service canadien d'appui aux tribunaux administratifs,7
+2018,Public Health Agency of Canada | Agence de la santé publique du Canada,4
+2018,Canadian Heritage | Patrimoine canadien,3
+2018,Department of Justice Canada | Ministère de la Justice Canada,3
+2018,"Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",3
+2018,Western Economic Diversification Canada | Diversification de l'économie de l'Ouest Canada,3
+2018,Canada Economic Development for Quebec Regions | Développement économique Canada pour les régions du Québec,2
+2018,Canada Revenue Agency | Agence du revenu du Canada,2
+2018,Fisheries and Oceans Canada | Pêches et Océans Canada,2
+2018,Health Canada | Santé Canada,2
+2018,National Defence | Défense nationale,2
+2018,Office of the Auditor General of Canada | Bureau du vérificateur général du Canada,2
+2018,Public Service Commission of Canada | Commission de la fonction publique du Canada,2
+2018,Statistics Canada | Statistique Canada,2
+2018,Canada Energy Regulator | La Régie de l’énergie du Canada,1
+2018,Federal Economic Development Agency for Southern Ontario | Agence fédérale de développement économique pour le Sud de l'Ontario,1
+2018,Immigration and Refugee Board of Canada | Commission de l'immigration et du statut de réfugié du Canada,1
+2018,Transportation Safety Board of Canada | Bureau de la sécurité des transports du Canada,1
+2017,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,1630
+2017,Environment and Climate Change Canada | Environnement et Changement climatique Canada,63
+2017,Fisheries and Oceans Canada | Pêches et Océans Canada,25
+2017,Canadian Space Agency | Agence spatiale canadienne,16
+2017,Parks Canada | Parcs Canada,14
+2017,"Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada",10
+2017,Employment and Social Development Canada | Emploi et Développement social Canada,9
+2017,Canadian Heritage | Patrimoine canadien,7
+2017,Statistics Canada | Statistique Canada,7
+2017,Assisted Human Reproduction Canada | Procréation Assistée Canada,6
+2017,"Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada",6
+2017,Canada Revenue Agency | Agence du revenu du Canada,5
+2017,Canada Energy Regulator | La Régie de l’énergie du Canada,4
+2017,Department of Justice Canada | Ministère de la Justice Canada,4
+2017,Elections Canada | Élections Canada,4
+2017,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,4
+2017,Atlantic Canada Opportunities Agency | Agence de promotion économique du Canada atlantique,3
+2017,Veterans Affairs Canada | Anciens Combattants Canada,3
+2017,Canada School of Public Service | École de la fonction publique du Canada,2
+2017,Canadian Food Inspection Agency | Agence canadienne d'inspection des aliments,2
+2017,Canadian Grain Commission | Commission canadienne des grains,2
+2017,Canadian Institutes of Health Research | Instituts de recherche en santé du Canada,2
+2017,Administrative Tribunals Support Service of Canada | Service canadien d'appui aux tribunaux administratifs,1
+2017,Canada Border Services Agency | Agence des services frontaliers du Canada,1
+2017,Canadian Radio-television and Telecommunications Commission | Conseil de la radiodiffusion et des télécommunications canadiennes,1
+2017,Canadian Security Intelligence Service | Service canadien du renseignement de sécurité,1
+2017,Crown-Indigenous Relations and Northern Affairs Canada | Relations Couronne-Autochtones et Affaires du Nord Canada,1
+2017,Federal Economic Development Agency for Southern Ontario | Agence fédérale de développement économique pour le Sud de l'Ontario,1
+2017,Global Affairs Canada | Affaires mondiales Canada,1
+2017,Natural Sciences and Engineering Research Council of Canada | Conseil de recherches en sciences naturelles et en génie du Canada,1
+2017,Privy Council Office | Bureau du Conseil privé,1
+2017,Public Safety Canada | Sécurité publique Canada,1
+2017,Social Sciences and Humanities Research Council of Canada | Conseil de recherches en sciences humaines du Canada,1
+2017,Transportation Safety Board of Canada | Bureau de la sécurité des transports du Canada,1
+2016,Environment and Climate Change Canada | Environnement et Changement climatique Canada,37
+2016,Public Service Commission of Canada | Commission de la fonction publique du Canada,6
+2016,National Research Council Canada | Conseil national de recherches Canada,4
+2016,Transportation Safety Board of Canada | Bureau de la sécurité des transports du Canada,4
+2016,Treasury Board of Canada Secretariat | Secrétariat du Conseil du Trésor du Canada,4
+2016,Public Services and Procurement Canada | Services publics et Approvisionnement Canada,3
+2016,Canada Energy Regulator | La Régie de l’énergie du Canada,2
+2016,Employment and Social Development Canada | Emploi et Développement social Canada,2
+2016,Western Economic Diversification Canada | Diversification de l'économie de l'Ouest Canada,2
+2016,Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada,1
+2016,Bank of Canada | Banque du Canada,1
+2016,Canadian Radio-television and Telecommunications Commission | Conseil de la radiodiffusion et des télécommunications canadiennes,1
+2016,Canadian Space Agency | Agence spatiale canadienne,1
+2016,Crown-Indigenous Relations and Northern Affairs Canada | Relations Couronne-Autochtones et Affaires du Nord Canada,1
+2016,Department of Justice Canada | Ministère de la Justice Canada,1
+2016,"Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada",1
+2016,Statistics Canada | Statistique Canada,1

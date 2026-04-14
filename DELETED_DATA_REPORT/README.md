@@ -14,16 +14,16 @@ Current outputs:
 
 Rows in merged report: `3759`
 
-Rows with parseable deletion date: `150`
+Rows with parseable deletion date: `3759`
 
 ## Deleted Records By Year
 
 ```mermaid
 xychart-beta
     title "Deleted Records by Year"
-    x-axis [2026, 2025]
-    y-axis "Deleted records" 0 --> 80
-    line [70, 80]
+    x-axis [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016]
+    y-axis "Deleted records" 0 --> 1840
+    line [70, 200, 30, 339, 274, 201, 174, 253, 306, 1840, 72]
 ```
 
 ## Top 10 Organizations By Deleted Records
