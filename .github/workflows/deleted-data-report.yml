@@ -1,0 +1,48 @@
+name: Build Deleted Data Report
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "45 6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  build-deleted-data-report:
+    runs-on: ubuntu-latest
+    env:
+      AZURE_ACCOUNT_URL: ${{ secrets.AZURE_ACCOUNT_URL }}
+      AZURE_CONTAINER: ${{ secrets.AZURE_CONTAINER }}
+      AZURE_SAS_TOKEN: ${{ secrets.AZURE_SAS_TOKEN }}
+      AZURE_BLOB_NAME: ${{ secrets.AZURE_BLOB_NAME }}
+      OUTPUT_CSV_PATH: DELETED_DATA_REPORT/deleted_merged_report.csv
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas requests azure-storage-blob
+
+      - name: Build deleted data report CSV
+        run: python DELETED_DATA_REPORT/getdeletedmergedfs.py
+
+      - name: Commit updated report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add DELETED_DATA_REPORT/deleted_merged_report.csv
+          if git diff --cached --quiet; then
+            echo "No report changes"
+          else
+            git commit -m "Update deleted data report [skip ci]"
+            git push
+          fi
