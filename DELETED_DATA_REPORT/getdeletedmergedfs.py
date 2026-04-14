@@ -6,6 +6,7 @@ from __future__ import annotations
 import os
 import re
 import sys
+import unicodedata
 from io import StringIO
 from pathlib import Path, PurePosixPath
 
@@ -27,6 +28,14 @@ DELETED_BLOB_PATTERN = re.compile(r"^deleted(?:\d{8})?\.csv$", re.IGNORECASE)
 FRENCH_COL_PRIMARY = "Title (French) / Titre (français)"
 FRENCH_COL_VARIANT = "Title (French) / Titre (francais)"
 DATE_COLUMN = "Date and Time Deleted/ Date et heure de suppression"
+HEADER_ALIASES = {
+    "Title (English) / Titre (anglais)": "Title (English) / Titre (anglais)",
+    "Title (French) / Titre (français)": FRENCH_COL_PRIMARY,
+    "Title (French) / Titre (francais)": FRENCH_COL_PRIMARY,
+    "Organization / Organisation": "Organization / Organisation",
+    "Record ID / Identificateur du dossier": "Record ID / Identificateur du dossier",
+    "Date and Time Deleted/ Date et heure de suppression": DATE_COLUMN,
+}
 
 
 def env(name: str, default: str | None = None, required: bool = False) -> str:
@@ -118,9 +127,9 @@ def load_live_dataframe() -> pd.DataFrame:
 
 
 def canonicalize_column_name(column_name: str) -> str:
-    if column_name == FRENCH_COL_VARIANT:
-        return FRENCH_COL_PRIMARY
-    return column_name
+    normalized = unicodedata.normalize("NFKC", str(column_name)).replace("\ufeff", "")
+    normalized = re.sub(r"\s+", " ", normalized).strip()
+    return HEADER_ALIASES.get(normalized, normalized)
 
 
 def canonicalize_column_names(column_names: list[str]) -> list[str]:
@@ -141,7 +150,38 @@ def normalize_columns(dataframe: pd.DataFrame) -> pd.DataFrame:
     return dataframe
 
 
+def normalize_text_value(value):
+    if pd.isna(value):
+        return ""
+    normalized = unicodedata.normalize("NFKC", str(value)).replace("\ufeff", "")
+    normalized = normalized.replace("\r\n", "\n").replace("\r", "\n").strip()
+    return normalized
+
+
+def normalize_date_value(value: str) -> str:
+    if not value:
+        return ""
+
+    normalized = re.sub(r"\s+", " ", value).strip()
+    normalized = normalized.replace("/", "-")
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}$", normalized):
+        return f"{normalized} 00:00:00"
+    return normalized
+
+
+def normalize_dataframe_values(dataframe: pd.DataFrame) -> pd.DataFrame:
+    dataframe = dataframe.copy()
+    for column in dataframe.columns:
+        dataframe[column] = dataframe[column].map(normalize_text_value)
+
+    if DATE_COLUMN in dataframe.columns:
+        dataframe[DATE_COLUMN] = dataframe[DATE_COLUMN].map(normalize_date_value)
+
+    return dataframe
+
+
 def align_columns(dataframe: pd.DataFrame, expected_columns: list[str]) -> pd.DataFrame:
+    dataframe = normalize_dataframe_values(dataframe)
     extra_columns = [column for column in dataframe.columns if column not in expected_columns]
     ordered_columns = expected_columns + extra_columns
     aligned = dataframe.reindex(columns=ordered_columns)
@@ -159,8 +199,19 @@ def clean_combined_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
     print(f"Removed {before - len(dataframe)} duplicate row(s).")
 
     if DATE_COLUMN in dataframe.columns:
-        dataframe[DATE_COLUMN] = pd.to_datetime(dataframe[DATE_COLUMN], errors="coerce")
-        dataframe = dataframe.sort_values(by=DATE_COLUMN, ascending=False)
+        parsed_dates = pd.to_datetime(
+            dataframe[DATE_COLUMN],
+            errors="coerce",
+            utc=False,
+            format="mixed",
+        )
+        parsed_count = parsed_dates.notna().sum()
+        print(f"Parsed {parsed_count} non-empty date value(s).")
+        dataframe[DATE_COLUMN] = parsed_dates
+        dataframe = dataframe.sort_values(by=DATE_COLUMN, ascending=False, na_position="last")
+        dataframe[DATE_COLUMN] = dataframe[DATE_COLUMN].dt.strftime("%Y-%m-%d %H:%M:%S.%f")
+        dataframe[DATE_COLUMN] = dataframe[DATE_COLUMN].str.replace(r"\.000000$", "", regex=True)
+        dataframe[DATE_COLUMN] = dataframe[DATE_COLUMN].fillna("")
         print(f"Sorted final DataFrame by {DATE_COLUMN!r}.")
     else:
         print(f"Warning: {DATE_COLUMN!r} not found. Skipping sort.", file=sys.stderr)
