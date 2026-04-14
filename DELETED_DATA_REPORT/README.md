@@ -8,26 +8,31 @@ Current outputs:
 
 - `deleted_merged_report.csv`: canonical merged deleted-records dataset
 - `deleted_records_by_org.csv`: deleted record counts by organization, most to least
-- `deleted_records_by_year.csv`: deleted record counts by year, recent to oldest
-- `deleted_records_by_year_by_org.csv`: deleted record counts by year by organization, recent to oldest and most to least within each year
+- `deleted_records_by_year.csv`: deleted record counts by year
+- `deleted_records_by_year_by_org.csv`: deleted record counts by year by organization
 - `deleted_merged_report_wayback.csv`: incremental Wayback enrichment for dataset IDs when available
 
+<!-- GENERATED:STATS_START -->
 Rows in merged report: `3759`
 
 Rows with parseable deletion date: `3759`
+<!-- GENERATED:STATS_END -->
 
 ## Deleted Records By Year
 
+<!-- GENERATED:YEAR_CHART_START -->
 ```mermaid
 xychart-beta
     title "Deleted Records by Year"
-    x-axis [2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016]
+    x-axis [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
     y-axis "Deleted records" 0 --> 1840
-    line [70, 200, 30, 339, 274, 201, 174, 253, 306, 1840, 72]
+    line [72, 1840, 306, 253, 174, 201, 274, 339, 30, 200, 70]
 ```
+<!-- GENERATED:YEAR_CHART_END -->
 
 ## Top 10 Organizations By Deleted Records
 
+<!-- GENERATED:TOP_ORGS_START -->
 | Organization | Deleted records |
 | --- | ---: |
 | Agriculture and Agri-Food Canada \| Agriculture et Agroalimentaire Canada | 1658 |
@@ -40,3 +45,4 @@ xychart-beta
 | Canada Revenue Agency \| Agence du revenu du Canada | 78 |
 | Department of Finance Canada \| Ministère des Finances Canada | 74 |
 | Government and Municipalities of Québec \| Gouvernement et municipalités du Québec | 74 |
+<!-- GENERATED:TOP_ORGS_END -->

@@ -18,6 +18,7 @@ jobs:
     env:
       INPUT_CSV_PATH: DELETED_DATA_REPORT/deleted_merged_report.csv
       OUTPUT_CSV_PATH: DELETED_DATA_REPORT/deleted_merged_report_wayback.csv
+      WAYBACK_METRICS_PATH: DELETED_DATA_REPORT/wayback_metrics.json
       WAYBACK_SLEEP_SECONDS: "0.25"
 
     steps:
@@ -36,6 +37,37 @@ jobs:
 
       - name: Enrich deleted data report with Wayback data
         run: python DELETED_DATA_REPORT/enrich_wayback_report.py
+
+      - name: Summarize Wayback backlog
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          metrics = json.loads(Path("DELETED_DATA_REPORT/wayback_metrics.json").read_text(encoding="utf-8"))
+          unchecked_remaining = int(metrics["unchecked_remaining"])
+          error_remaining = int(metrics["error_remaining_after_run"])
+          selected_total = int(metrics["selected_total"])
+          selected_unchecked = int(metrics["selected_unchecked"])
+          selected_errors = int(metrics["selected_errors"])
+
+          summary_lines = [
+              "## Wayback Backlog",
+              "",
+              f"- Checked this run: {selected_total}",
+              f"- New unchecked checked this run: {selected_unchecked}",
+              f"- Error retries checked this run: {selected_errors}",
+              f"- New unchecked remaining: {unchecked_remaining}",
+              f"- Error-status rows remaining: {error_remaining}",
+          ]
+          summary_path = Path(__import__("os").environ["GITHUB_STEP_SUMMARY"])
+          summary_path.write_text("\n".join(summary_lines) + "\n", encoding="utf-8")
+
+          if unchecked_remaining > 0:
+              print(f"::warning title=Wayback unchecked backlog::{unchecked_remaining} deleted records remain unchecked after the 100 URL run cap.")
+          if error_remaining > 0:
+              print(f"::warning title=Wayback error backlog::{error_remaining} records still have error status after this run.")
+          PY
 
       - name: Commit updated Wayback report
         run: |

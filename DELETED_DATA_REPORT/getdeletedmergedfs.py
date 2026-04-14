@@ -42,6 +42,12 @@ HEADER_ALIASES = {
     "Record ID / Identificateur du dossier": "Record ID / Identificateur du dossier",
     "Date and Time Deleted/ Date et heure de suppression": DATE_COLUMN,
 }
+README_STATS_START = "<!-- GENERATED:STATS_START -->"
+README_STATS_END = "<!-- GENERATED:STATS_END -->"
+README_YEAR_CHART_START = "<!-- GENERATED:YEAR_CHART_START -->"
+README_YEAR_CHART_END = "<!-- GENERATED:YEAR_CHART_END -->"
+README_TOP_ORGS_START = "<!-- GENERATED:TOP_ORGS_START -->"
+README_TOP_ORGS_END = "<!-- GENERATED:TOP_ORGS_END -->"
 
 
 def env(name: str, default: str | None = None, required: bool = False) -> str:
@@ -251,9 +257,10 @@ def build_mermaid_year_chart(year_summary: pd.DataFrame) -> str:
     if year_summary.empty:
         return "```mermaid\nxychart-beta\n    title \"Deleted Records by Year\"\n    x-axis []\n    y-axis \"Deleted records\" 0 --> 1\n    line []\n```"
 
-    years = ", ".join(str(year) for year in year_summary["year"].tolist())
-    counts = ", ".join(str(count) for count in year_summary["deleted_record_count"].tolist())
-    max_count = int(year_summary["deleted_record_count"].max())
+    chart_df = year_summary.sort_values(by="year", ascending=True).reset_index(drop=True)
+    years = ", ".join(str(year) for year in chart_df["year"].tolist())
+    counts = ", ".join(str(count) for count in chart_df["deleted_record_count"].tolist())
+    max_count = int(chart_df["deleted_record_count"].max())
     upper_bound = max_count if max_count > 0 else 1
     return (
         "```mermaid\n"
@@ -279,45 +286,34 @@ def dataframe_to_markdown_table(dataframe: pd.DataFrame) -> str:
     return "\n".join([header, divider, *rows])
 
 
-def build_readme(
+def replace_marked_section(content: str, start_marker: str, end_marker: str, replacement: str) -> str:
+    pattern = re.compile(
+        rf"({re.escape(start_marker)}\n)(.*?)(\n{re.escape(end_marker)})",
+        re.DOTALL,
+    )
+    updated, count = pattern.subn(rf"\1{replacement}\3", content)
+    if count != 1:
+        raise ValueError(f"Could not update README section {start_marker} .. {end_marker}")
+    return updated
+
+
+def update_readme_sections(
     final_df: pd.DataFrame,
     by_org: pd.DataFrame,
     by_year: pd.DataFrame,
     readme_path: Path,
 ) -> None:
-    top_10_orgs = by_org.head(10)
-    chart = build_mermaid_year_chart(by_year)
-    top_10_table = dataframe_to_markdown_table(top_10_orgs)
+    content = readme_path.read_text(encoding="utf-8")
     nonempty_dates = pd.to_datetime(final_df.get(DATE_COLUMN, ""), errors="coerce", format="mixed").notna().sum()
+    stats_block = f"Rows in merged report: `{len(final_df)}`\n\nRows with parseable deletion date: `{nonempty_dates}`"
+    chart_block = build_mermaid_year_chart(by_year)
+    top_orgs_block = dataframe_to_markdown_table(by_org.head(10))
 
-    content = f"""# DELETED_DATA_REPORT
-
-[![GitHub last commit](https://img.shields.io/github/last-commit/PatLittle/test?path=%2FDELETED_DATA_REPORT&display_timestamp=committer&style=flat-square)](https://flatgithub.com/PatLittle/test/blob/main/DELETED_DATA_REPORT/deleted_merged_report.csv?filename=DELETED_DATA_REPORT%2Fdeleted_merged_report.csv)
-
-`DELETED_DATA_REPORT` is the generated deleted-datasets reporting area for this repository. The main report merges historical Azure `deleted*.csv` blobs with the current Open Canada deleted-datasets feed, normalizes headers and datatypes, and writes derived summaries for quick analysis.
-
-Current outputs:
-
-- `deleted_merged_report.csv`: canonical merged deleted-records dataset
-- `deleted_records_by_org.csv`: deleted record counts by organization, most to least
-- `deleted_records_by_year.csv`: deleted record counts by year, recent to oldest
-- `deleted_records_by_year_by_org.csv`: deleted record counts by year by organization, recent to oldest and most to least within each year
-- `deleted_merged_report_wayback.csv`: incremental Wayback enrichment for dataset IDs when available
-
-Rows in merged report: `{len(final_df)}`
-
-Rows with parseable deletion date: `{nonempty_dates}`
-
-## Deleted Records By Year
-
-{chart}
-
-## Top 10 Organizations By Deleted Records
-
-{top_10_table}
-"""
+    content = replace_marked_section(content, README_STATS_START, README_STATS_END, stats_block)
+    content = replace_marked_section(content, README_YEAR_CHART_START, README_YEAR_CHART_END, chart_block)
+    content = replace_marked_section(content, README_TOP_ORGS_START, README_TOP_ORGS_END, top_orgs_block)
     readme_path.write_text(content, encoding="utf-8")
-    print(f"Wrote {readme_path}.")
+    print(f"Updated generated sections in {readme_path}.")
 
 
 def clean_combined_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
@@ -375,7 +371,7 @@ def main() -> int:
     write_csv(by_org, Path(env("ORG_SUMMARY_PATH", ORG_SUMMARY_PATH)))
     write_csv(by_year, Path(env("YEAR_SUMMARY_PATH", YEAR_SUMMARY_PATH)))
     write_csv(by_year_by_org, Path(env("YEAR_ORG_SUMMARY_PATH", YEAR_ORG_SUMMARY_PATH)))
-    build_readme(final_df, by_org, by_year, Path(env("README_PATH", DEFAULT_README_PATH)))
+    update_readme_sections(final_df, by_org, by_year, Path(env("README_PATH", DEFAULT_README_PATH)))
     return 0
 
 
