@@ -76,8 +76,10 @@ def load_azure_deleted_dataframes(container_client) -> list[pd.DataFrame]:
                 dtype=str,
                 keep_default_na=False,
             )
+            dataframe = normalize_columns(dataframe)
             dataframes.append(dataframe)
             print(f"Loaded Azure blob {blob_name} with {len(dataframe)} rows.")
+            print(f"Schema for {blob_name}: {list(dataframe.columns)}")
         except Exception as exc:
             print(f"Error processing Azure blob {blob_name}: {exc}", file=sys.stderr)
 
@@ -93,6 +95,7 @@ def fetch_expected_columns() -> list[str]:
 
     fields = response.json()["result"]["fields"]
     columns = [field["id"] for field in fields if field["id"] != "_id"]
+    columns = canonicalize_column_names(columns)
     print(f"Datastore schema reports {len(columns)} data column(s).")
     return columns
 
@@ -109,25 +112,36 @@ def load_live_dataframe() -> pd.DataFrame:
         dtype=str,
         keep_default_na=False,
     )
+    dataframe = normalize_columns(dataframe)
     print(f"Loaded live CSV with {len(dataframe)} rows.")
     return dataframe
 
 
+def canonicalize_column_name(column_name: str) -> str:
+    if column_name == FRENCH_COL_VARIANT:
+        return FRENCH_COL_PRIMARY
+    return column_name
+
+
+def canonicalize_column_names(column_names: list[str]) -> list[str]:
+    canonical_columns: list[str] = []
+    for column_name in column_names:
+        canonical_name = canonicalize_column_name(column_name)
+        if canonical_name not in canonical_columns:
+            canonical_columns.append(canonical_name)
+    return canonical_columns
+
+
 def normalize_columns(dataframe: pd.DataFrame) -> pd.DataFrame:
-    if FRENCH_COL_PRIMARY in dataframe.columns and FRENCH_COL_VARIANT in dataframe.columns:
-        dataframe[FRENCH_COL_PRIMARY] = dataframe[FRENCH_COL_PRIMARY].fillna(
-            dataframe[FRENCH_COL_VARIANT]
-        )
-        dataframe = dataframe.drop(columns=[FRENCH_COL_VARIANT])
-    elif FRENCH_COL_VARIANT in dataframe.columns:
-        dataframe = dataframe.rename(columns={FRENCH_COL_VARIANT: FRENCH_COL_PRIMARY})
+    dataframe = dataframe.rename(columns=canonicalize_column_name)
+
+    if dataframe.columns.duplicated().any():
+        dataframe = dataframe.T.groupby(level=0).first().T
 
     return dataframe
 
 
 def align_columns(dataframe: pd.DataFrame, expected_columns: list[str]) -> pd.DataFrame:
-    dataframe = normalize_columns(dataframe)
-
     extra_columns = [column for column in dataframe.columns if column not in expected_columns]
     ordered_columns = expected_columns + extra_columns
     aligned = dataframe.reindex(columns=ordered_columns)
