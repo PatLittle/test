@@ -16,7 +16,11 @@ from azure.storage.blob import BlobServiceClient
 
 DEFAULT_LIVE_CSV_URL = (
     "https://open.canada.ca/data/en/datastore/dump/"
-    "d22d2aca-155b-4978-b5c1-1d39837e1993?bom=True"
+    "d22d2aca-155b-4978-b5c1-1d39837e1993"
+)
+DEFAULT_SCHEMA_URL = (
+    "https://open.canada.ca/data/en/api/3/action/datastore_search"
+    "?resource_id=d22d2aca-155b-4978-b5c1-1d39837e1993&limit=0"
 )
 DEFAULT_OUTPUT_PATH = "DELETED_DATA_REPORT/deleted_merged_report.csv"
 DELETED_BLOB_PATTERN = re.compile(r"^deleted(?:\d{8})?\.csv$", re.IGNORECASE)
@@ -67,13 +71,30 @@ def load_azure_deleted_dataframes(container_client) -> list[pd.DataFrame]:
         try:
             blob_client = container_client.get_blob_client(blob_name)
             csv_content = blob_client.download_blob().readall().decode("utf-8-sig")
-            dataframe = pd.read_csv(StringIO(csv_content))
+            dataframe = pd.read_csv(
+                StringIO(csv_content),
+                dtype=str,
+                keep_default_na=False,
+            )
             dataframes.append(dataframe)
             print(f"Loaded Azure blob {blob_name} with {len(dataframe)} rows.")
         except Exception as exc:
             print(f"Error processing Azure blob {blob_name}: {exc}", file=sys.stderr)
 
     return dataframes
+
+
+def fetch_expected_columns() -> list[str]:
+    schema_url = env("DATASTORE_SCHEMA_URL", DEFAULT_SCHEMA_URL)
+    print(f"Fetching datastore schema: {schema_url}")
+
+    response = requests.get(schema_url, timeout=120)
+    response.raise_for_status()
+
+    fields = response.json()["result"]["fields"]
+    columns = [field["id"] for field in fields if field["id"] != "_id"]
+    print(f"Datastore schema reports {len(columns)} data column(s).")
+    return columns
 
 
 def load_live_dataframe() -> pd.DataFrame:
@@ -83,7 +104,11 @@ def load_live_dataframe() -> pd.DataFrame:
     response = requests.get(live_csv_url, timeout=120)
     response.raise_for_status()
 
-    dataframe = pd.read_csv(StringIO(response.content.decode("utf-8-sig")))
+    dataframe = pd.read_csv(
+        StringIO(response.content.decode("utf-8-sig")),
+        dtype=str,
+        keep_default_na=False,
+    )
     print(f"Loaded live CSV with {len(dataframe)} rows.")
     return dataframe
 
@@ -100,8 +125,21 @@ def normalize_columns(dataframe: pd.DataFrame) -> pd.DataFrame:
     return dataframe
 
 
-def clean_combined_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
+def align_columns(dataframe: pd.DataFrame, expected_columns: list[str]) -> pd.DataFrame:
     dataframe = normalize_columns(dataframe)
+
+    extra_columns = [column for column in dataframe.columns if column not in expected_columns]
+    ordered_columns = expected_columns + extra_columns
+    aligned = dataframe.reindex(columns=ordered_columns)
+
+    missing_columns = [column for column in expected_columns if column not in dataframe.columns]
+    if missing_columns:
+        print(f"Added missing columns: {missing_columns}")
+
+    return aligned
+
+
+def clean_combined_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
     before = len(dataframe)
     dataframe = dataframe.drop_duplicates()
     print(f"Removed {before - len(dataframe)} duplicate row(s).")
@@ -124,8 +162,13 @@ def write_output_csv(dataframe: pd.DataFrame, output_path: Path) -> None:
 
 def main() -> int:
     container_client = build_container_client()
-    all_dataframes = load_azure_deleted_dataframes(container_client)
-    all_dataframes.append(load_live_dataframe())
+    expected_columns = fetch_expected_columns()
+
+    all_dataframes = [
+        align_columns(dataframe, expected_columns)
+        for dataframe in load_azure_deleted_dataframes(container_client)
+    ]
+    all_dataframes.append(align_columns(load_live_dataframe(), expected_columns))
 
     if not all_dataframes:
         print("No DataFrames were loaded from any source.", file=sys.stderr)
