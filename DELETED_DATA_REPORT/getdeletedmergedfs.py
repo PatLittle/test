@@ -24,6 +24,12 @@ DEFAULT_SCHEMA_URL = (
     "?resource_id=d22d2aca-155b-4978-b5c1-1d39837e1993&limit=0"
 )
 DEFAULT_OUTPUT_PATH = "DELETED_DATA_REPORT/deleted_merged_report.csv"
+DEFAULT_README_PATH = "DELETED_DATA_REPORT/README.md"
+ORG_SUMMARY_PATH = "DELETED_DATA_REPORT/deleted_records_by_org.csv"
+YEAR_SUMMARY_PATH = "DELETED_DATA_REPORT/deleted_records_by_year.csv"
+YEAR_ORG_SUMMARY_PATH = "DELETED_DATA_REPORT/deleted_records_by_year_by_org.csv"
+RECORD_ID_COLUMN = "Record ID / Identificateur du dossier"
+ORG_COLUMN = "Organization / Organisation"
 DELETED_BLOB_PATTERN = re.compile(r"^deleted(?:\d{8})?\.csv$", re.IGNORECASE)
 FRENCH_COL_PRIMARY = "Title (French) / Titre (français)"
 FRENCH_COL_VARIANT = "Title (French) / Titre (francais)"
@@ -193,6 +199,127 @@ def align_columns(dataframe: pd.DataFrame, expected_columns: list[str]) -> pd.Da
     return aligned
 
 
+def build_summary_tables(dataframe: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    working = dataframe.copy()
+    working[ORG_COLUMN] = working.get(ORG_COLUMN, "").fillna("").astype(str).str.strip()
+    working["_year"] = pd.to_datetime(working.get(DATE_COLUMN, ""), errors="coerce", format="mixed").dt.year
+
+    by_org = (
+        working.loc[working[ORG_COLUMN] != ""]
+        .groupby(ORG_COLUMN, dropna=False)
+        .size()
+        .reset_index(name="deleted_record_count")
+        .sort_values(by=["deleted_record_count", ORG_COLUMN], ascending=[False, True])
+        .reset_index(drop=True)
+    )
+
+    by_year = (
+        working.loc[working["_year"].notna()]
+        .groupby("_year", dropna=False)
+        .size()
+        .reset_index(name="deleted_record_count")
+        .rename(columns={"_year": "year"})
+        .astype({"year": "int64"})
+        .sort_values(by="year", ascending=False)
+        .reset_index(drop=True)
+    )
+
+    by_year_by_org = (
+        working.loc[working["_year"].notna() & (working[ORG_COLUMN] != "")]
+        .groupby(["_year", ORG_COLUMN], dropna=False)
+        .size()
+        .reset_index(name="deleted_record_count")
+        .rename(columns={"_year": "year"})
+        .astype({"year": "int64"})
+        .sort_values(
+            by=["year", "deleted_record_count", ORG_COLUMN],
+            ascending=[False, False, True],
+        )
+        .reset_index(drop=True)
+    )
+
+    return by_org, by_year, by_year_by_org
+
+
+def write_csv(dataframe: pd.DataFrame, output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    dataframe.to_csv(output_path, index=False, encoding="utf-8-sig")
+    print(f"Wrote {output_path} ({len(dataframe)} rows).")
+
+
+def build_mermaid_year_chart(year_summary: pd.DataFrame) -> str:
+    if year_summary.empty:
+        return "```mermaid\nxychart-beta\n    title \"Deleted Records by Year\"\n    x-axis []\n    y-axis \"Deleted records\" 0 --> 1\n    line []\n```"
+
+    years = ", ".join(str(year) for year in year_summary["year"].tolist())
+    counts = ", ".join(str(count) for count in year_summary["deleted_record_count"].tolist())
+    max_count = int(year_summary["deleted_record_count"].max())
+    upper_bound = max_count if max_count > 0 else 1
+    return (
+        "```mermaid\n"
+        "xychart-beta\n"
+        "    title \"Deleted Records by Year\"\n"
+        f"    x-axis [{years}]\n"
+        f"    y-axis \"Deleted records\" 0 --> {upper_bound}\n"
+        f"    line [{counts}]\n"
+        "```"
+    )
+
+
+def dataframe_to_markdown_table(dataframe: pd.DataFrame) -> str:
+    if dataframe.empty:
+        return "| Organization | Deleted records |\n| --- | ---: |\n| No data | 0 |"
+
+    header = "| Organization | Deleted records |"
+    divider = "| --- | ---: |"
+    rows = [
+        f"| {row[ORG_COLUMN].replace('|', '\\|')} | {int(row['deleted_record_count'])} |"
+        for _, row in dataframe.iterrows()
+    ]
+    return "\n".join([header, divider, *rows])
+
+
+def build_readme(
+    final_df: pd.DataFrame,
+    by_org: pd.DataFrame,
+    by_year: pd.DataFrame,
+    readme_path: Path,
+) -> None:
+    top_10_orgs = by_org.head(10)
+    chart = build_mermaid_year_chart(by_year)
+    top_10_table = dataframe_to_markdown_table(top_10_orgs)
+    nonempty_dates = pd.to_datetime(final_df.get(DATE_COLUMN, ""), errors="coerce", format="mixed").notna().sum()
+
+    content = f"""# DELETED_DATA_REPORT
+
+[![GitHub last commit](https://img.shields.io/github/last-commit/PatLittle/test?path=%2FDELETED_DATA_REPORT&display_timestamp=committer&style=flat-square)](https://flatgithub.com/PatLittle/test/blob/main/DELETED_DATA_REPORT/deleted_merged_report.csv?filename=DELETED_DATA_REPORT%2Fdeleted_merged_report.csv)
+
+`DELETED_DATA_REPORT` is the generated deleted-datasets reporting area for this repository. The main report merges historical Azure `deleted*.csv` blobs with the current Open Canada deleted-datasets feed, normalizes headers and datatypes, and writes derived summaries for quick analysis.
+
+Current outputs:
+
+- `deleted_merged_report.csv`: canonical merged deleted-records dataset
+- `deleted_records_by_org.csv`: deleted record counts by organization, most to least
+- `deleted_records_by_year.csv`: deleted record counts by year, recent to oldest
+- `deleted_records_by_year_by_org.csv`: deleted record counts by year by organization, recent to oldest and most to least within each year
+- `deleted_merged_report_wayback.csv`: incremental Wayback enrichment for dataset IDs when available
+
+Rows in merged report: `{len(final_df)}`
+
+Rows with parseable deletion date: `{nonempty_dates}`
+
+## Deleted Records By Year
+
+{chart}
+
+## Top 10 Organizations By Deleted Records
+
+{top_10_table}
+"""
+    readme_path.write_text(content, encoding="utf-8")
+    print(f"Wrote {readme_path}.")
+
+
 def clean_combined_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
     before = len(dataframe)
     dataframe = dataframe.drop_duplicates()
@@ -220,9 +347,7 @@ def clean_combined_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
 
 
 def write_output_csv(dataframe: pd.DataFrame, output_path: Path) -> None:
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    dataframe.to_csv(output_path, index=False, encoding="utf-8-sig")
-    print(f"Wrote final CSV to {output_path} ({len(dataframe)} rows).")
+    write_csv(dataframe, output_path)
 
 
 def main() -> int:
@@ -245,6 +370,12 @@ def main() -> int:
     final_df = clean_combined_dataframe(combined_df)
     output_path = Path(env("OUTPUT_CSV_PATH", DEFAULT_OUTPUT_PATH))
     write_output_csv(final_df, output_path)
+
+    by_org, by_year, by_year_by_org = build_summary_tables(final_df)
+    write_csv(by_org, Path(env("ORG_SUMMARY_PATH", ORG_SUMMARY_PATH)))
+    write_csv(by_year, Path(env("YEAR_SUMMARY_PATH", YEAR_SUMMARY_PATH)))
+    write_csv(by_year_by_org, Path(env("YEAR_ORG_SUMMARY_PATH", YEAR_ORG_SUMMARY_PATH)))
+    build_readme(final_df, by_org, by_year, Path(env("README_PATH", DEFAULT_README_PATH)))
     return 0
 
 
