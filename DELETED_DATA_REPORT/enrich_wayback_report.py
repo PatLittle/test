@@ -75,7 +75,6 @@ def select_rows_to_check(source: pd.DataFrame, existing: pd.DataFrame):
     existing_ids = existing[RECORD_ID_COLUMN].astype(str).str.strip()
     existing_status = existing["status"].astype(str).str.strip().str.lower()
 
-    # only treat non-error as "done"
     completed_ids = set(existing_ids[existing_status != "error"])
     error_ids = set(existing_ids[existing_status == "error"])
 
@@ -85,21 +84,27 @@ def select_rows_to_check(source: pd.DataFrame, existing: pd.DataFrame):
     unchecked = unchecked[normalized_source_ids.loc[unchecked.index] != ""]
     retry_errors = retry_errors.drop_duplicates(subset=[RECORD_ID_COLUMN])
 
+    unchecked_total = len(unchecked)
+    error_total = len(retry_errors)
+
     selected_unchecked = unchecked.head(MAX_URLS_PER_RUN)
-    remaining = MAX_URLS_PER_RUN - len(selected_unchecked)
-    selected_errors = retry_errors.head(max(remaining, 0))
+    remaining_capacity = MAX_URLS_PER_RUN - len(selected_unchecked)
+    selected_errors = retry_errors.head(max(remaining_capacity, 0))
 
     selected = pd.concat([selected_unchecked, selected_errors], ignore_index=True)
 
     metrics = {
-        "unchecked_total": len(unchecked),
-        "error_total": len(retry_errors),
+        "max_urls_per_run": MAX_URLS_PER_RUN,
+        "unchecked_total": unchecked_total,
+        "unchecked_remaining": max(unchecked_total - len(selected_unchecked), 0),
+        "error_total": error_total,
+        "error_remaining": max(error_total - len(selected_errors), 0),
+        "selected_unchecked": len(selected_unchecked),
+        "selected_errors": len(selected_errors),
         "selected_total": len(selected),
     }
 
     return selected, metrics
-
-
 # =========================
 # WAYBACK FETCH WITH RETRY
 # =========================
