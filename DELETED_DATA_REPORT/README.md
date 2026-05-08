@@ -13,9 +13,9 @@ Current outputs:
 - `deleted_merged_report_wayback.csv`: incremental Wayback enrichment for dataset IDs when available
 
 <!-- GENERATED:STATS_START -->
-Rows in merged report: `3909`
+Rows in merged report: `3934`
 
-Rows with parseable deletion date: `3909`
+Rows with parseable deletion date: `3934`
 <!-- GENERATED:STATS_END -->
 
 ## Deleted Records By Year
@@ -26,7 +26,7 @@ xychart-beta
     title "Deleted Records by Year"
     x-axis [2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
     y-axis "Deleted records" 0 --> 1840
-    line [72, 1840, 306, 253, 174, 201, 274, 339, 30, 280, 140]
+    line [72, 1840, 306, 253, 174, 201, 274, 339, 30, 280, 165]
 ```
 <!-- GENERATED:YEAR_CHART_END -->
 
@@ -36,13 +36,13 @@ xychart-beta
 | Organization | Deleted records |
 | --- | ---: |
 | Agriculture and Agri-Food Canada \| Agriculture et Agroalimentaire Canada | 1663 |
-| Environment and Climate Change Canada \| Environnement et Changement climatique Canada | 325 |
-| Fisheries and Oceans Canada \| Pêches et Océans Canada | 196 |
+| Environment and Climate Change Canada \| Environnement et Changement climatique Canada | 327 |
+| Fisheries and Oceans Canada \| Pêches et Océans Canada | 201 |
 | Parks Canada \| Parcs Canada | 192 |
 | Government and Municipalities of Québec \| Gouvernement et municipalités du Québec | 112 |
 | Library and Archives Canada \| Bibliothèque et Archives Canada | 108 |
 | Communications Security Establishment Canada \| Centre de la sécurité des télécommunications Canada | 98 |
+| Canada Revenue Agency \| Agence du revenu du Canada | 81 |
 | Employment and Social Development Canada \| Emploi et Développement social Canada | 81 |
-| Canada Revenue Agency \| Agence du revenu du Canada | 79 |
 | Department of Finance Canada \| Ministère des Finances Canada | 74 |
 <!-- GENERATED:TOP_ORGS_END -->
