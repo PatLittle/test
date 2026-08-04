@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Briefing note and ATI data-matching report." />
+    <title>BN × ATI Report</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-utility@1.9.2/dist/gcds-utility.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.40.0/dist/gcds/gcds.css"
+    />
+    <script
+      type="module"
+      src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.40.0/dist/gcds/gcds.esm.js"
+    ></script>
+
+    <link rel="stylesheet" href="./assets/app.css" />
+
+    <style>
+      .report-section {
+        width: 100%;
+        margin-inline: auto;
+      }
+
+      .table-wrap {
+        max-width: 100%;
+        overflow-x: auto;
+        margin-block: 1.5rem;
+      }
+
+      .chart-wrap {
+        position: relative;
+        width: min(71.25rem, 100%);
+        height: 36rem;
+        margin-inline: auto;
+      }
+
+      .dt-details {
+        max-width: 72rem;
+        padding: 1rem;
+        white-space: normal;
+      }
+
+      .dt-details dl {
+        display: grid;
+        grid-template-columns: minmax(10rem, 16rem) 1fr;
+        gap: .5rem 1rem;
+      }
+
+      .dt-details dt {
+        font-weight: 700;
+      }
+
+      .dt-details dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .open-check {
+        color: #0b6b2b;
+        font-size: 1.35rem;
+        font-weight: 800;
+      }
+
+      .empty-state {
+        padding: 2rem;
+        text-align: center;
+      }
+
+      @media (max-width: 48rem) {
+        .dt-details dl {
+          display: block;
+        }
+
+        .dt-details dd {
+          margin-bottom: .75rem;
+        }
+
+        .chart-wrap {
+          height: 30rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <gcds-header lang-href="#" skip-to-href="#main-content">
+      <gcds-breadcrumbs slot="breadcrumb">
+        <gcds-breadcrumbs-item href="./">BN × ATI Report</gcds-breadcrumbs-item>
+      </gcds-breadcrumbs>
+    </gcds-header>
+
+    <gcds-container
+      id="main-content"
+      main-container
+      size="xl"
+      centered
+      tag="main"
+    >
+      <section class="report-section">
+        <gcds-heading tag="h1">BN × ATI Report</gcds-heading>
+        <gcds-text>
+          This pre-built report finds briefing-note reference numbers in completed
+          Access to Information summaries, combines ATI informal-request usage
+          metrics, and identifies records available through Open by Default.
+        </gcds-text>
+      </section>
+
+      <section id="section-1" class="report-section">
+        <gcds-heading tag="h2">Matched records</gcds-heading>
+        <gcds-text id="bn-ati-stats">Loading report statistics…</gcds-text>
+
+        <div class="table-wrap">
+          <table id="report" class="display nowrap" style="width:100%"></table>
+        </div>
+      </section>
+
+      <section id="section-2" class="report-section">
+        <gcds-heading tag="h2">Weak briefing-note identifiers</gcds-heading>
+        <gcds-text>
+          Counts of weak identifiers that can produce false-positive matches,
+          grouped by organization.
+        </gcds-text>
+
+        <div class="chart-wrap">
+          <canvas
+            id="weakChart"
+            aria-label="Stacked bar chart of weak briefing-note identifiers by organization"
+          ></canvas>
+        </div>
+
+        <gcds-details details-title="Chart data">
+          <div class="table-wrap">
+            <table id="weakTable" style="min-width: 60rem;">
+              <thead>
+                <tr>
+                  <th>owner_org</th>
+                  <th>c</th>
+                  <th>1</th>
+                  <th>0</th>
+                  <th>NA</th>
+                  <th>na</th>
+                  <th>-</th>
+                  <th>REDACTED</th>
+                  <th>[REDACTED]</th>
+                  <th>TBD-PM-00</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </gcds-details>
+      </section>
+
+      <gcds-date-modified>{{ build_date }}</gcds-date-modified>
+    </gcds-container>
+
+    <gcds-footer display="full"></gcds-footer>
+
+    <script type="module" src="./assets/app.js"></script>
+  </body>
+</html>
