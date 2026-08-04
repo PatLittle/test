@@ -46,8 +46,8 @@ def load_cache() -> dict[str, dict[str, Any]]:
 
 
 def create_client() -> DocumentCloud:
-    username = os.getenv("DOCUMENTCLOUD_USERNAME")
-    password = os.getenv("DOCUMENTCLOUD_PASSWORD")
+    username = os.getenv("DC_USERNAME")
+    password = os.getenv("DC_PASSWORD")
     if username and password:
         return DocumentCloud(username, password)
     return DocumentCloud()
