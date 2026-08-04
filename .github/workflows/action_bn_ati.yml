@@ -46,8 +46,8 @@ jobs:
 
       - name: Update persistent DocumentCloud cache
         env:
-          DOCUMENTCLOUD_USERNAME: ${{ secrets.DOCUMENTCLOUD_USERNAME }}
-          DOCUMENTCLOUD_PASSWORD: ${{ secrets.DOCUMENTCLOUD_PASSWORD }}
+          DC_USERNAME: ${{ secrets.DC_USERNAME }}
+          DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
         run: python scripts/update_doccloud_cache.py
 
       - name: Build SQLite report database and page
