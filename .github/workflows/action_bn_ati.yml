@@ -61,8 +61,28 @@ jobs:
       - name: Install web dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Inject SQLite byte length for GitHub Pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          app = Path("src/app.js")
+          db = Path("docs/data.sqlite")
+          text = app.read_text(encoding="utf-8")
+          marker = "        url: databaseUrl,\n"
+          if marker not in text:
+              raise SystemExit("Could not find sql.js-httpvfs database config marker in src/app.js")
+          length = db.stat().st_size
+          replacement = marker + f"        databaseLengthBytes: {length},\n"
+          app.write_text(text.replace(marker, replacement, 1), encoding="utf-8")
+          print(f"Injected databaseLengthBytes={length:,} into build source")
+          PY
+
       - name: Bundle browser application
         run: npm run build
+
+      - name: Restore source after generated build configuration
+        run: git checkout -- src/app.js
 
       - name: Disable Jekyll
         run: touch docs/.nojekyll
@@ -80,18 +100,25 @@ jobs:
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
+      - name: Stage report at /BN-ATI/
+        working-directory: .
+        run: |
+          rm -rf _site
+          mkdir -p _site/BN-ATI
+          cp -a BN_ATI_REPORT/docs/. _site/BN-ATI/
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: BN_ATI_REPORT/docs
+          path: _site
 
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}BN-ATI/
     runs-on: ubuntu-latest
     needs: build
 
