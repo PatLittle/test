@@ -1,6 +1,22 @@
 # BN × ATI report
 
-This project builds a pre-generated SQLite-backed static report and deploys it to GitHub Pages.
+This project builds a pre-generated SQLite-backed static report for the repository's existing GitHub Pages site.
+
+## Published location
+
+The repository is configured for legacy GitHub Pages from the `main` branch repository root. The workflow therefore copies the generated report to:
+
+```text
+/BN-ATI/
+```
+
+Published URL:
+
+```text
+https://patlittle.github.io/test/BN-ATI/
+```
+
+`BN_ATI_REPORT/docs/` is the intermediate build directory. It is not the canonical public URL.
 
 ## Build pipeline
 
@@ -21,8 +37,26 @@ This project builds a pre-generated SQLite-backed static report and deploys it t
 3. `npm run build`
    - Bundles DataTables, Chart.js, and `sql.js-httpvfs`.
    - Copies the SQLite worker and WASM files into `docs/assets`.
+   - The workflow injects the exact SQLite byte length before bundling so `sql.js-httpvfs` works correctly when GitHub Pages serves the SQLite file with compression.
 
-4. GitHub Actions commits the persistent cache and generated `docs` files, then deploys `docs` to GitHub Pages.
+4. `.github/workflows/action_bn_ati.yml`
+   - Builds the report.
+   - Copies `BN_ATI_REPORT/docs/` to the repository-root `BN-ATI/` directory.
+   - Commits the persistent DocumentCloud cache and published `BN-ATI/` site back to `main`.
+   - GitHub's legacy Pages build then serves it automatically.
+
+## Other repository sites
+
+The repository root remains the CKAN Toolbox site. The other generated sites are published by `.github/workflows/deploy.yml` into their branch-root Pages paths:
+
+```text
+/                 CKAN Toolbox
+/BN/              BN + ATI Match Explorer
+/VALIDATION/      Validation site
+/BN-ATI/          BN × ATI Report
+```
+
+The deleted-data workflows update report data only and do not deploy or replace the GitHub Pages site.
 
 ## DocumentCloud cache
 
@@ -48,17 +82,19 @@ Under **Settings → Actions → General → Workflow permissions**, select:
 Read and write permissions
 ```
 
-Under **Settings → Pages → Build and deployment**, select:
+GitHub Pages should remain configured as:
 
 ```text
-Source: GitHub Actions
+Source: Deploy from a branch
+Branch: main
+Folder: / (root)
 ```
 
-DocumentCloud public searches may work without credentials. For authenticated access, create these repository secrets:
+For authenticated DocumentCloud access, configure repository secrets:
 
 ```text
-DOCUMENTCLOUD_USERNAME
-DOCUMENTCLOUD_PASSWORD
+DC_USERNAME
+DC_PASSWORD
 ```
 
 ## Local build
