@@ -63,21 +63,59 @@ jobs:
       - name: Install web dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Inject SQLite byte length for GitHub Pages
+      - name: Prepare chunked SQLite for GitHub Pages
         run: |
           python - <<'PY'
           from pathlib import Path
+          import shutil
 
           app = Path("src/app.js")
           db = Path("docs/data.sqlite")
+          out_dir = Path("docs/db")
+
+          # 1 MiB server chunks; exactly divisible by SQLite's 4096-byte page size.
+          server_chunk_size = 1024 * 1024
+          request_chunk_size = 4096
+          suffix_length = 3
+
+          if out_dir.exists():
+              shutil.rmtree(out_dir)
+          out_dir.mkdir(parents=True)
+
+          database_length = db.stat().st_size
+          with db.open("rb") as source:
+              index = 0
+              while True:
+                  block = source.read(server_chunk_size)
+                  if not block:
+                      break
+                  (out_dir / f"data.sqlite.{index:0{suffix_length}d}").write_bytes(block)
+                  index += 1
+
           text = app.read_text(encoding="utf-8")
-          marker = "        url: databaseUrl,\n"
-          if marker not in text:
-              raise SystemExit("Could not find sql.js-httpvfs database config marker in src/app.js")
-          length = db.stat().st_size
-          replacement = marker + f"        databaseLengthBytes: {length},\n"
-          app.write_text(text.replace(marker, replacement, 1), encoding="utf-8")
-          print(f"Injected databaseLengthBytes={length:,} into build source")
+          old_url = 'const databaseUrl = new URL("../data.sqlite", import.meta.url).toString();'
+          new_url = 'const databaseUrlPrefix = new URL("../db/data.sqlite.", import.meta.url).toString();'
+          if old_url not in text:
+              raise SystemExit("Could not find databaseUrl declaration in src/app.js")
+          text = text.replace(old_url, new_url, 1)
+
+          old_config = '''        serverMode: "full",
+        requestChunkSize: 4096,
+        url: databaseUrl,'''
+          new_config = f'''        serverMode: "chunked",
+        requestChunkSize: {request_chunk_size},
+        urlPrefix: databaseUrlPrefix,
+        serverChunkSize: {server_chunk_size},
+        databaseLengthBytes: {database_length},
+        suffixLength: {suffix_length},'''
+          if old_config not in text:
+              raise SystemExit("Could not find sql.js-httpvfs full-mode config in src/app.js")
+          text = text.replace(old_config, new_config, 1)
+          app.write_text(text, encoding="utf-8")
+
+          print(f"SQLite bytes: {database_length:,}")
+          print(f"Created {index:,} chunks in {out_dir}")
+          print("Bundling app with sql.js-httpvfs serverMode=chunked")
           PY
 
       - name: Bundle browser application
