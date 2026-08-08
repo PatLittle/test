@@ -73,7 +73,6 @@ jobs:
           db = Path("docs/data.sqlite")
           out_dir = Path("docs/db")
 
-          # 1 MiB server chunks; exactly divisible by SQLite's 4096-byte page size.
           server_chunk_size = 1024 * 1024
           request_chunk_size = 4096
           suffix_length = 3
@@ -89,7 +88,8 @@ jobs:
                   block = source.read(server_chunk_size)
                   if not block:
                       break
-                  (out_dir / f"data.sqlite.{index:0{suffix_length}d}").write_bytes(block)
+                  chunk_name = f"data.sqlite.{index:0{suffix_length}d}"
+                  (out_dir / chunk_name).write_bytes(block)
                   index += 1
 
           text = app.read_text(encoding="utf-8")
@@ -99,15 +99,19 @@ jobs:
               raise SystemExit("Could not find databaseUrl declaration in src/app.js")
           text = text.replace(old_url, new_url, 1)
 
-          old_config = '''        serverMode: "full",
-        requestChunkSize: 4096,
-        url: databaseUrl,'''
-          new_config = f'''        serverMode: "chunked",
-        requestChunkSize: {request_chunk_size},
-        urlPrefix: databaseUrlPrefix,
-        serverChunkSize: {server_chunk_size},
-        databaseLengthBytes: {database_length},
-        suffixLength: {suffix_length},'''
+          old_config = (
+              '        serverMode: "full",\n'
+              '        requestChunkSize: 4096,\n'
+              '        url: databaseUrl,'
+          )
+          new_config = (
+              '        serverMode: "chunked",\n'
+              f'        requestChunkSize: {request_chunk_size},\n'
+              '        urlPrefix: databaseUrlPrefix,\n'
+              f'        serverChunkSize: {server_chunk_size},\n'
+              f'        databaseLengthBytes: {database_length},\n'
+              f'        suffixLength: {suffix_length},'
+          )
           if old_config not in text:
               raise SystemExit("Could not find sql.js-httpvfs full-mode config in src/app.js")
           text = text.replace(old_config, new_config, 1)
