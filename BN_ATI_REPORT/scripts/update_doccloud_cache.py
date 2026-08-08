@@ -12,22 +12,35 @@ from documentcloud import DocumentCloud
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "data" / "documentcloud_cache.jsonl"
-QUERY = "organization:38956 created_at:[NOW-3YEAR TO NOW-2YEAR]"
+QUERY = "organization:38956 created_at:[NOW-2YEAR TO NOW-1YEAR]"
 PER_PAGE = 100
 
 REQUEST_NUMBER_RE = re.compile(r"\b[A-Z]-\d{4}-\d{3,6}\b", re.IGNORECASE)
 
 
-def text(value: Any) -> str:
-    return "" if value is None else str(value).strip()
+def scalar_text(value: Any) -> str:
+    """Flatten list-valued DocumentCloud metadata into a single clean string."""
+    if value is None:
+        return ""
+    if isinstance(value, (list, tuple)):
+        if not value:
+            return ""
+        return scalar_text(value[0])
+    return str(value).strip()
 
 
 def first_value(data: dict[str, Any], keys: tuple[str, ...]) -> str:
     for key in keys:
         value = data.get(key)
-        if value not in (None, ""):
-            return text(value)
+        if value not in (None, "", [], ()):
+            return scalar_text(value)
     return ""
+
+
+def normalize_request_number(value: Any) -> str:
+    candidate = scalar_text(value)
+    match = REQUEST_NUMBER_RE.search(candidate)
+    return match.group(0).upper() if match else ""
 
 
 def load_cache() -> dict[str, dict[str, Any]]:
@@ -58,10 +71,10 @@ def document_to_record(document: Any) -> dict[str, Any]:
     if not isinstance(metadata, dict):
         metadata = {}
 
-    title = text(getattr(document, "title", ""))
-    description = text(getattr(document, "description", ""))
+    title = scalar_text(getattr(document, "title", ""))
+    description = scalar_text(getattr(document, "description", ""))
 
-    owner_org = first_value(
+    organization_label = first_value(
         metadata,
         (
             "owner_org",
@@ -70,35 +83,38 @@ def document_to_record(document: Any) -> dict[str, Any]:
             "owner_organization",
         ),
     )
-    request_number = first_value(
-        metadata,
-        (
-            "request_number",
-            "ati_request_number",
-            "request_no",
-            "ati_number",
-        ),
+
+    request_number = normalize_request_number(
+        first_value(
+            metadata,
+            (
+                "request_number",
+                "ati_request_number",
+                "request_no",
+                "ati_number",
+            ),
+        )
     )
     if not request_number:
-        match = REQUEST_NUMBER_RE.search(f"{title} {description}")
-        request_number = match.group(0) if match else ""
+        request_number = normalize_request_number(f"{title} {description}")
 
-    canonical_url = text(
+    canonical_url = scalar_text(
         getattr(document, "canonical_url", "")
         or getattr(document, "url", "")
     )
 
     return {
-        "documentcloud_id": text(getattr(document, "id", "")),
-        "owner_org": owner_org.lower(),
-        "request_number": request_number.upper(),
+        "documentcloud_id": scalar_text(getattr(document, "id", "")),
+        # This is a source organization label, not necessarily a CKAN owner_org slug.
+        "owner_org": organization_label.lower(),
+        "request_number": request_number,
         "open_by_default_url": canonical_url,
         "documentcloud_title": title,
         "documentcloud_description": description,
-        "documentcloud_source": text(getattr(document, "source", "")),
-        "documentcloud_created_at": text(getattr(document, "created_at", "")),
-        "documentcloud_updated_at": text(getattr(document, "updated_at", "")),
-        "documentcloud_language": text(getattr(document, "language", "")),
+        "documentcloud_source": scalar_text(getattr(document, "source", "")),
+        "documentcloud_created_at": scalar_text(getattr(document, "created_at", "")),
+        "documentcloud_updated_at": scalar_text(getattr(document, "updated_at", "")),
+        "documentcloud_language": scalar_text(getattr(document, "language", "")),
         "documentcloud_metadata_json": json.dumps(
             metadata, ensure_ascii=False, sort_keys=True
         ),
