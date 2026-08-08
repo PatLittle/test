@@ -1,4 +1,4 @@
-name: Build and deploy BN ATI report
+name: Build BN ATI report
 
 on:
   workflow_dispatch:
@@ -8,16 +8,18 @@ on:
     branches:
       - main
     paths:
-      - "BN_ATI_REPORT/**"
+      - "BN_ATI_REPORT/scripts/**"
+      - "BN_ATI_REPORT/src/**"
+      - "BN_ATI_REPORT/templates/**"
+      - "BN_ATI_REPORT/package.json"
+      - "BN_ATI_REPORT/package-lock.json"
       - ".github/workflows/action_bn_ati.yml"
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: bn-ati-pages
+  group: bn-ati-build
   cancel-in-progress: false
 
 jobs:
@@ -87,42 +89,23 @@ jobs:
       - name: Disable Jekyll
         run: touch docs/.nojekyll
 
-      - name: Commit refreshed cache and generated site
+      - name: Publish report to /BN-ATI/
+        working-directory: .
+        run: |
+          rm -rf BN-ATI
+          mkdir -p BN-ATI
+          cp -a BN_ATI_REPORT/docs/. BN-ATI/
+
+      - name: Commit refreshed cache and published site
+        working-directory: .
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/documentcloud_cache.jsonl docs/
+          git add BN_ATI_REPORT/data/documentcloud_cache.jsonl BN_ATI_REPORT/docs/ BN-ATI/
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
           else
-            git commit -m "Update BN ATI report ($(date -u +'%Y-%m-%dT%H:%M:%SZ'))"
+            git commit -m "Update BN ATI report [skip ci]"
             git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
-
-      - name: Stage report at /BN-ATI/
-        working-directory: .
-        run: |
-          rm -rf _site
-          mkdir -p _site/BN-ATI
-          cp -a BN_ATI_REPORT/docs/. _site/BN-ATI/
-
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}BN-ATI/
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-      - name: Deploy GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
