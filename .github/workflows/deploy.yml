@@ -18,33 +18,29 @@ on:
           - incremental
           - backfill
         default: incremental
-      publish-db:
-        description: "Commit BN data.sqlite to repo"
-        type: boolean
-        default: true
   schedule:
     - cron: "15 6 * * *"
   push:
     branches:
-      - BN-only
-    paths-ignore:
-      - docs/data.sqlite
+      - main
+    paths:
+      - "VALIDATION/scripts/**"
+      - "VALIDATION/requirements.txt"
+      - "BN/build_db.py"
+      - "BN/build_page.py"
+      - "BN/templates/**"
+      - ".github/workflows/deploy.yml"
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages"
+  group: validation-bn-build
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      USERNAME: plittle
-      PASSWORD: 'pTr8antq$85$c$A'
 
     steps:
       - name: Checkout repository
@@ -106,48 +102,25 @@ jobs:
           mkdir -p "$SITE_DIR"
           python VALIDATION/scripts/build_site.py
 
-      - name: Build BN site (docs output)
+      - name: Build BN site
         env:
-          DC_USERNAME: ${{ env.USERNAME }}
-          DC_PASSWORD: ${{ env.PASSWORD }}
+          DC_USERNAME: ${{ secrets.DC_USERNAME }}
+          DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
           DOCCLOUD_MODE: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs['doccloud-mode'] || 'incremental' }}
           DOCCLOUD_INCREMENTAL_DAYS: "10"
           DOCCLOUD_BACKFILL_SINCE: "2021-01-01"
         run: |
+          rm -rf docs
           python BN/build_db.py
           BN_DB_URL='./data.sqlite' python BN/build_page.py
-
-      - name: Commit BN database to repo (optional)
-        if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && github.event.inputs['publish-db'] == 'true') }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -f docs/data.sqlite
-          git diff --cached --quiet && echo "No DB changes" || git commit -m "Update BN data.sqlite [skip ci]"
-          git push
-
-      - name: Stage BN site
-        run: |
           rm -rf public/BN
           mv docs public/BN
 
-      - name: Create root index
+      - name: Publish generated sites into legacy Pages paths
         run: |
-          cat > public/index.html <<'HTML'
-          <!doctype html><meta charset="utf-8">
-          <title>Sites</title>
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <style>
-            body { font-family: system-ui, -apple-system, sans-serif; padding: 2rem; }
-            h1 { font-size: 1.5rem; }
-            ul { padding-left: 1.25rem; }
-          </style>
-          <h1>Published Sites</h1>
-          <ul>
-            <li><a href="VALIDATION/">Validation Site</a></li>
-            <li><a href="BN/">BN + ATI Match Explorer</a></li>
-          </ul>
-          HTML
+          cp -a public/VALIDATION/. VALIDATION/
+          cp -a public/BN/. BN/
+          touch VALIDATION/.nojekyll BN/.nojekyll
 
       - name: Remove intermediate artifacts
         run: |
@@ -155,21 +128,16 @@ jobs:
                 VALIDATION/validation.jsonl \
                 VALIDATION/validation_enriched.jsonl \
                 od-do-canada.jsonl.gz
-          echo "Final artifact footprint:"
-          du -sh public || true
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Commit generated sites
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add VALIDATION/ BN/
+          if git diff --cached --quiet; then
+            echo "No generated site changes."
+          else
+            git commit -m "Update Validation and BN sites [skip ci]"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
