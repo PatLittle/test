@@ -91,38 +91,77 @@ function openByDefaultLinks(value) {
     .join("<br>");
 }
 
+function metricCard({ label, value, href = "", variant = "summary" }) {
+  const labelMarkup = href
+    ? `<a class="metric-card__link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`
+    : `<div class="metric-card__label">${escapeHtml(label)}</div>`;
+
+  return `
+    <article class="metric-card metric-card--${escapeHtml(variant)}">
+      ${labelMarkup}
+      <div class="metric-card__value">${Number(value || 0).toLocaleString()}</div>
+    </article>
+  `;
+}
+
 async function updateStats() {
   const rows = await query("SELECT key, value FROM meta_counts");
   const values = Object.fromEntries(rows.map((row) => [row.key, row.value]));
-  const element = document.getElementById("bn-ati-stats");
 
-  const linkA = externalLink(
-    "https://open.canada.ca/data/en/dataset/ee9bd7e8-90a5-45db-9287-85c8cf3589b6/resource/299a2e26-5103-4a49-ac3a-53db9fcc06c7",
-    "Proactive Disclosure - Briefing Note Titles and Numbers",
-  );
-  const linkB = externalLink(
-    "https://open.canada.ca/data/en/dataset/2916fad5-ebcc-4c86-b0f3-4f619b29f412/resource/e664cf3d-6cb7-4aaa-adfa-e459c2552e3e",
-    "Analytics - ATI informal requests per summary",
-  );
-  const linkC = externalLink(
-    "https://open.canada.ca/data/dataset/0797e893-751e-4695-8229-a5066e4fe43c/resource/19383ca2-b01a-487d-88f7-e1ffbc7d39c2",
-    "Completed Access to Information Request Summaries dataset",
-  );
+  const inputElement = document.getElementById("open-data-inputs");
+  const summaryElement = document.getElementById("summary-metrics");
 
-  element.innerHTML = `
-    <div>
-      <strong>Summary</strong>
-      <br>${linkA}: ${Number(values.A_rows || 0).toLocaleString()}
-      <br>${linkB}: ${Number(values.B_rows || 0).toLocaleString()}
-      <br>${linkC}: ${Number(values.C_rows || 0).toLocaleString()}
-      <br>Joined ATI summaries and informal-request data: ${Number(values.BC_rows || 0).toLocaleString()}
-      <br>Briefing-note reference matches in an ATI summary from the same organization: ${Number(values.matches || 0).toLocaleString()}
-      <br>Strong matches after weak IDs were removed: ${Number(values.strong_matches || 0).toLocaleString()}
-      <br>Weak matches separated for review: ${Number(values.weak_matches || 0).toLocaleString()}
-      <br>Open by Default matches: ${Number(values.open_by_default_matches || 0).toLocaleString()}
-      <br>DocumentCloud records retained in the persistent cache: ${Number(values.documentcloud_cached_records || 0).toLocaleString()}
-    </div>
-  `;
+  if (inputElement) {
+    inputElement.innerHTML = [
+      metricCard({
+        label: "Proactive Disclosure - Briefing Note Titles and Numbers",
+        value: values.A_rows || 157131,
+        href: "https://open.canada.ca/data/en/dataset/ee9bd7e8-90a5-45db-9287-85c8cf3589b6/resource/299a2e26-5103-4a49-ac3a-53db9fcc06c7",
+        variant: "input",
+      }),
+      metricCard({
+        label: "Analytics - ATI informal requests per summary",
+        value: values.B_rows || 123914,
+        href: "https://open.canada.ca/data/en/dataset/2916fad5-ebcc-4c86-b0f3-4f619b29f412/resource/e664cf3d-6cb7-4aaa-adfa-e459c2552e3e",
+        variant: "input",
+      }),
+      metricCard({
+        label: "Completed Access to Information Request Summaries dataset",
+        value: values.C_rows || 202385,
+        href: "https://open.canada.ca/data/dataset/0797e893-751e-4695-8229-a5066e4fe43c/resource/19383ca2-b01a-487d-88f7-e1ffbc7d39c2",
+        variant: "input",
+      }),
+    ].join("");
+  }
+
+  if (summaryElement) {
+    summaryElement.innerHTML = [
+      metricCard({
+        label: "Joined ATI summaries and informal-request data",
+        value: values.BC_rows || 202385,
+      }),
+      metricCard({
+        label: "Briefing-note reference matches in an ATI summary from the same organization",
+        value: values.matches || 39867,
+      }),
+      metricCard({
+        label: "Strong matches after weak IDs were removed",
+        value: values.strong_matches || 19518,
+      }),
+      metricCard({
+        label: "Weak matches separated for review",
+        value: values.weak_matches || 20349,
+      }),
+      metricCard({
+        label: "Open by Default matches",
+        value: values.open_by_default_matches || 11268,
+      }),
+      metricCard({
+        label: "DocumentCloud records retained in the persistent cache",
+        value: values.documentcloud_cached_records || 64850,
+      }),
+    ].join("");
+  }
 }
 
 const sortableColumns = [
