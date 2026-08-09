@@ -23,17 +23,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  update-documentcloud:
+    name: Update DocumentCloud cache
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     defaults:
       run:
         working-directory: BN_ATI_REPORT
 
     steps:
-      - name: Check out repository
+      - name: Check out main
         uses: actions/checkout@v4
         with:
+          ref: main
           fetch-depth: 0
 
       - name: Set up Python
@@ -50,15 +53,73 @@ jobs:
         env:
           DC_USERNAME: ${{ secrets.DC_USERNAME }}
           DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
-        run: | 
-          python scripts/update_doccloud_cache.py
-          ls -lath
-          df -h
-          
-      - name: Build SQLite report database and page
+          PYTHONUNBUFFERED: "1"
         run: |
-          python scripts/build_report.py
-          ls -lath
+          echo "=== DocumentCloud update start ==="
+          date -u
+          free -h
+          df -h
+          python -u scripts/update_doccloud_cache.py
+          echo "=== DocumentCloud update complete ==="
+          date -u
+          ls -lh data/documentcloud_cache.jsonl
+          free -h
+          df -h
+
+      - name: Commit refreshed DocumentCloud cache
+        working-directory: .
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add BN_ATI_REPORT/data/documentcloud_cache.jsonl
+          if git diff --cached --quiet; then
+            echo "No DocumentCloud cache changes to commit."
+          else
+            git commit -m "Update DocumentCloud cache [skip ci]"
+            git pull --rebase --autostash origin main
+            git push origin HEAD:main
+          fi
+
+  build-report:
+    name: Build and publish BN ATI report
+    needs: update-documentcloud
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    defaults:
+      run:
+        working-directory: BN_ATI_REPORT
+
+    steps:
+      - name: Check out refreshed main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: BN_ATI_REPORT/scripts/requirements.txt
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Build SQLite report database and page
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          echo "=== report build start ==="
+          date -u
+          free -h
+          df -h
+          python -u scripts/build_report.py
+          echo "=== report build complete ==="
+          date -u
+          ls -lh docs/data.sqlite docs/index.html
+          free -h
           df -h
 
       - name: Set up Node.js
@@ -144,16 +205,16 @@ jobs:
           mkdir -p BN-ATI
           cp -a BN_ATI_REPORT/docs/. BN-ATI/
 
-      - name: Commit refreshed cache and published site
+      - name: Commit generated report and published site
         working-directory: .
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add BN_ATI_REPORT/data/documentcloud_cache.jsonl BN_ATI_REPORT/docs/ BN-ATI/
+          git add BN_ATI_REPORT/docs/ BN-ATI/
           if git diff --cached --quiet; then
-            echo "No generated changes to commit."
+            echo "No generated report changes to commit."
           else
             git commit -m "Update BN ATI report [skip ci]"
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
+            git pull --rebase --autostash origin main
+            git push origin HEAD:main
           fi
