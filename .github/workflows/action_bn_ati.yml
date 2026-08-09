@@ -50,10 +50,16 @@ jobs:
         env:
           DC_USERNAME: ${{ secrets.DC_USERNAME }}
           DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
-        run: python scripts/update_doccloud_cache.py
-
+        run: | 
+          python scripts/update_doccloud_cache.py
+          ls -lath
+          df -h
+          
       - name: Build SQLite report database and page
-        run: python scripts/build_report.py
+        run: |
+          python scripts/build_report.py
+          ls -lath
+          df -h
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
