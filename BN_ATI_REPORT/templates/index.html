@@ -27,6 +27,106 @@
         margin-inline: auto;
       }
 
+      .section-block {
+        margin-block: 2rem 2.5rem;
+      }
+
+      .section-subheading {
+        margin-block: 1.5rem .75rem;
+        font-size: 1.35rem;
+        line-height: 1.25;
+        font-weight: 700;
+        color: #26374a;
+      }
+
+      .lineage-figure {
+        width: min(71.25rem, 100%);
+        margin: 1rem auto 2.5rem;
+      }
+
+      .lineage-figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border: 1px solid #d6dbe1;
+        border-radius: .75rem;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(15, 23, 42, .08);
+      }
+
+      .metrics-grid {
+        display: grid;
+        gap: 1rem;
+        margin-block: 1rem 2rem;
+      }
+
+      .open-data-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .summary-grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+      }
+
+      .metric-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+        min-height: 10.5rem;
+        padding: 1rem 1.1rem;
+        border: 1px solid #cbd5e1;
+        border-radius: .65rem;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(15, 23, 42, .08);
+      }
+
+      .metric-card--input {
+        min-height: 12rem;
+        border-top: .3rem solid #2b6cb0;
+      }
+
+      .metric-card--summary {
+        min-height: 9.5rem;
+        border-top: .3rem solid #3b7d6b;
+      }
+
+      .metric-card__label,
+      .metric-card__link {
+        display: block;
+        font-size: .95rem;
+        line-height: 1.35;
+        font-weight: 700;
+        overflow-wrap: anywhere;
+      }
+
+      .metric-card__link {
+        color: #284f7a;
+        text-decoration: underline;
+        text-underline-offset: .16em;
+      }
+
+      .metric-card__value {
+        margin-top: 1.25rem;
+        font-size: clamp(2.3rem, 4vw, 3.8rem);
+        line-height: .95;
+        font-weight: 800;
+        letter-spacing: -.035em;
+        color: #0f4c81;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .metric-card--summary .metric-card__value {
+        font-size: clamp(1.8rem, 2.4vw, 2.7rem);
+        color: #256b57;
+      }
+
+      .metrics-loading {
+        grid-column: 1 / -1;
+        padding: 1rem;
+        color: #475569;
+      }
+
       .table-wrap {
         max-width: 100%;
         overflow-x: auto;
@@ -72,7 +172,39 @@
         text-align: center;
       }
 
+      .licence-area {
+        margin-top: 3rem;
+        padding: 1.5rem 0;
+        border-top: 1px solid #d6dbe1;
+      }
+
+      .licence-area p {
+        margin: 0;
+      }
+
+      @media (max-width: 64rem) {
+        .summary-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
       @media (max-width: 48rem) {
+        .open-data-grid,
+        .summary-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .metric-card,
+        .metric-card--input,
+        .metric-card--summary {
+          min-height: 8rem;
+        }
+
+        .metric-card__value,
+        .metric-card--summary .metric-card__value {
+          font-size: 2.4rem;
+        }
+
         .dt-details dl {
           display: block;
         }
@@ -111,16 +243,40 @@
         </gcds-text>
       </section>
 
-      <section id="section-1" class="report-section">
+      <section class="report-section section-block" aria-labelledby="pipeline-heading">
+        <gcds-heading id="pipeline-heading" tag="h2">Data pipeline</gcds-heading>
+        <gcds-text>
+          The report combines three Open Government datasets, organization aliases,
+          and a persistent DocumentCloud cache before publishing the matched records
+          through a pre-built SQLite database.
+        </gcds-text>
+        <figure class="lineage-figure">
+          <img
+            src="./data-lineage.svg"
+            alt="BN and ATI report data pipeline showing three Open Government inputs, CKAN organization aliases, DocumentCloud enrichment, matching steps, SQLite output tables, and the published static report."
+          />
+        </figure>
+      </section>
+
+      <section id="section-1" class="report-section section-block">
         <gcds-heading tag="h2">Matched records</gcds-heading>
-        <gcds-text id="bn-ati-stats">Loading report statistics…</gcds-text>
+
+        <h3 class="section-subheading">Open Data Inputs</h3>
+        <div id="open-data-inputs" class="metrics-grid open-data-grid" aria-live="polite">
+          <div class="metrics-loading">Loading Open Data input counts…</div>
+        </div>
+
+        <h3 class="section-subheading">Summary metrics</h3>
+        <div id="summary-metrics" class="metrics-grid summary-grid" aria-live="polite">
+          <div class="metrics-loading">Loading report metrics…</div>
+        </div>
 
         <div class="table-wrap">
           <table id="report" class="display nowrap" style="width:100%"></table>
         </div>
       </section>
 
-      <section id="section-2" class="report-section">
+      <section id="section-2" class="report-section section-block">
         <gcds-heading tag="h2">Weak briefing-note identifiers</gcds-heading>
         <gcds-text>
           Counts of weak identifiers that can produce false-positive matches,
@@ -156,6 +312,18 @@
             </table>
           </div>
         </gcds-details>
+      </section>
+
+      <section class="report-section licence-area" aria-labelledby="licence-heading">
+        <gcds-heading id="licence-heading" tag="h2">Licence</gcds-heading>
+        <p>
+          Information licensed under the
+          <a
+            href="https://open.canada.ca/en/open-government-licence-canada"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Open Government Licence – Canada</a>.
+        </p>
       </section>
 
       <gcds-date-modified>{{ build_date }}</gcds-date-modified>
