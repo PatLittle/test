@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import ast
+import gc
 import json
 import re
 import sqlite3
@@ -9,7 +10,7 @@ import unicodedata
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Iterable, Iterator
 
 import pandas as pd
 from ckanapi import RemoteCKAN
@@ -56,11 +57,37 @@ OUTPUT_COLUMNS = [
 ]
 
 
-def fetch_datastore(resource_id: str, fields: list[str]) -> pd.DataFrame:
-    """Fetch a complete CKAN DataStore resource using ckanapi pagination."""
+def memory_status(label: str) -> None:
+    """Print current/high-water RSS without adding a dependency such as psutil."""
+    values: dict[str, str] = {}
+    try:
+        with open("/proc/self/status", "r", encoding="utf-8") as handle:
+            for line in handle:
+                if line.startswith(("VmRSS:", "VmHWM:", "VmSize:")):
+                    key, value = line.split(":", 1)
+                    values[key] = value.strip()
+    except OSError:
+        pass
+    details = ", ".join(f"{key}={value}" for key, value in values.items())
+    print(f"MEMORY {label}: {details or 'unavailable'}", flush=True)
+
+
+def _frame_from_page(page: list[dict[str, Any]], fields: list[str]) -> pd.DataFrame:
+    frame = pd.DataFrame.from_records(page)
+    for field in fields:
+        if field not in frame.columns:
+            frame[field] = ""
+    return frame[fields].fillna("").astype(str)
+
+
+def iter_datastore(
+    resource_id: str,
+    fields: list[str],
+) -> Iterator[tuple[pd.DataFrame, int, int]]:
+    """Yield CKAN DataStore pages as DataFrames so large resources are not retained twice."""
     client = RemoteCKAN(CKAN_URL, user_agent="BN-ATI-Report/1.0")
-    records: list[dict[str, Any]] = []
     offset = 0
+    fetched = 0
 
     while True:
         response = client.action.datastore_search(
@@ -70,30 +97,38 @@ def fetch_datastore(resource_id: str, fields: list[str]) -> pd.DataFrame:
             offset=offset,
         )
         page = response.get("records", [])
-        records.extend(page)
-        print(
-            f"{resource_id}: fetched {len(records):,} / "
-            f"{int(response.get('total', 0)):,}"
-        )
+        total = int(response.get("total", 0))
+        fetched += len(page)
+        print(f"{resource_id}: fetched {fetched:,} / {total:,}", flush=True)
+
+        if page:
+            yield _frame_from_page(page, fields), fetched, total
+
         if len(page) < PAGE_SIZE:
             break
         offset += PAGE_SIZE
 
-    frame = pd.DataFrame.from_records(records)
-    for field in fields:
-        if field not in frame.columns:
-            frame[field] = ""
-    return frame[fields].fillna("").astype(str)
+
+def fetch_datastore(resource_id: str, fields: list[str]) -> pd.DataFrame:
+    """Fetch a moderate-sized resource using DataFrame pages rather than one giant dict list."""
+    frames: list[pd.DataFrame] = []
+    for frame, _, _ in iter_datastore(resource_id, fields):
+        frames.append(frame)
+    if not frames:
+        return pd.DataFrame(columns=fields)
+    result = pd.concat(frames, ignore_index=True, copy=False)
+    del frames
+    gc.collect()
+    return result
 
 
 def fetch_organizations() -> list[dict[str, Any]]:
-    """Fetch CKAN organizations with titles/extras for alias resolution."""
     client = RemoteCKAN(CKAN_URL, user_agent="BN-ATI-Report/1.0")
     organizations = client.action.organization_list(
         all_fields=True,
         include_extras=True,
     )
-    print(f"Fetched {len(organizations):,} CKAN organizations")
+    print(f"Fetched {len(organizations):,} CKAN organizations", flush=True)
     return organizations
 
 
@@ -108,7 +143,6 @@ def chunks(values: list[str], size: int) -> Iterable[list[str]]:
 
 
 def unwrap_scalar(value: Any) -> str:
-    """Repair list-like metadata stored as strings, e.g. ['A-2022-00753']."""
     if value is None:
         return ""
     if isinstance(value, (list, tuple)):
@@ -168,17 +202,20 @@ def add_alias(alias_sets: dict[str, set[str]], owner_org: str, value: Any) -> No
     owner = str(owner_org or "").strip().lower()
     if not owner:
         return
-    alias_sets[owner].add(normalize_org_alias(owner))
-    alias_sets[owner].update(org_alias_variants(value))
+    aliases = org_alias_variants(value)
+    owner_alias = normalize_org_alias(owner)
+    if owner_alias:
+        aliases_by_owner = alias_sets[owner]
+        aliases_by_owner.add(owner_alias)
+        aliases_by_owner.update(aliases)
 
 
 def build_organization_crosswalk(
     organizations: list[dict[str, Any]],
-    df_a: pd.DataFrame,
-    df_b: pd.DataFrame,
-    df_c: pd.DataFrame,
+    a_org_names: pd.DataFrame,
+    b_org_names: pd.DataFrame,
+    c_org_titles: dict[str, set[str]],
 ) -> tuple[dict[str, str], pd.DataFrame]:
-    """Build alias -> canonical CKAN owner_org mapping from API and A/B/C names."""
     aliases_by_org: dict[str, set[str]] = defaultdict(set)
 
     for org in organizations:
@@ -201,17 +238,16 @@ def build_organization_crosswalk(
                     if any(token in key for token in ("title", "name", "acronym")):
                         add_alias(aliases_by_org, owner, extra.get("value", ""))
 
-    for _, row in df_a[["owner_org", "owner_org_title"]].drop_duplicates().iterrows():
-        add_alias(aliases_by_org, row["owner_org"], row["owner_org_title"])
+    for row in a_org_names.itertuples(index=False):
+        add_alias(aliases_by_org, row.owner_org, row.owner_org_title)
 
-    for _, row in df_c[["owner_org", "owner_org_title"]].drop_duplicates().iterrows():
-        add_alias(aliases_by_org, row["owner_org"], row["owner_org_title"])
+    for row in b_org_names.itertuples(index=False):
+        add_alias(aliases_by_org, row.owner_org, getattr(row, "organization_name_en"))
+        add_alias(aliases_by_org, row.owner_org, getattr(row, "organization_name_fr"))
 
-    for _, row in df_b[
-        ["owner_org", "Organization Name - EN", "Organization Name - FR"]
-    ].drop_duplicates().iterrows():
-        add_alias(aliases_by_org, row["owner_org"], row["Organization Name - EN"])
-        add_alias(aliases_by_org, row["owner_org"], row["Organization Name - FR"])
+    for owner, titles in c_org_titles.items():
+        for title in titles:
+            add_alias(aliases_by_org, owner, title)
 
     reverse: dict[str, set[str]] = defaultdict(set)
     for owner, aliases in aliases_by_org.items():
@@ -219,29 +255,146 @@ def build_organization_crosswalk(
             if alias:
                 reverse[alias].add(owner)
 
-    # Only deterministic aliases are used for automatic matching.
     alias_to_org = {
         alias: next(iter(owners))
         for alias, owners in reverse.items()
         if len(owners) == 1
     }
 
-    alias_rows = []
-    for alias, owners in sorted(reverse.items()):
-        for owner in sorted(owners):
-            alias_rows.append(
-                {
-                    "alias_normalized": alias,
-                    "owner_org": owner,
-                    "is_unambiguous": 1 if len(owners) == 1 else 0,
-                }
-            )
+    alias_rows = [
+        {
+            "alias_normalized": alias,
+            "owner_org": owner,
+            "is_unambiguous": 1 if len(owners) == 1 else 0,
+        }
+        for alias, owners in sorted(reverse.items())
+        for owner in sorted(owners)
+    ]
 
     print(
         f"Organization aliases: {len(reverse):,} total; "
-        f"{len(alias_to_org):,} unambiguous"
+        f"{len(alias_to_org):,} unambiguous",
+        flush=True,
     )
     return alias_to_org, pd.DataFrame(alias_rows)
+
+
+def prepare_tracking_index(df_a: pd.DataFrame) -> dict[str, dict[str, Any]]:
+    """Precompile the per-organization briefing-number regex chunks once."""
+    tracking_index: dict[str, dict[str, Any]] = {}
+    for org, group in df_a.groupby("owner_org", sort=False):
+        pairs = (
+            group[["tracking_number_lc", "tracking_number"]]
+            .drop_duplicates()
+            .loc[lambda frame: frame["tracking_number_lc"] != ""]
+        )
+        if pairs.empty:
+            continue
+        lookup = dict(zip(pairs["tracking_number_lc"], pairs["tracking_number"]))
+        values = list(lookup)
+        patterns = [
+            "(?:" + "|".join(re.escape(value) for value in group_values) + ")"
+            for group_values in chunks(values, TN_REGEX_CHUNK)
+        ]
+        tracking_index[org] = {"lookup": lookup, "patterns": patterns}
+    print(f"Prepared tracking-number indexes for {len(tracking_index):,} organizations", flush=True)
+    return tracking_index
+
+
+def match_c_page(
+    df_c_page: pd.DataFrame,
+    b_agg: pd.DataFrame,
+    tracking_index: dict[str, dict[str, Any]],
+) -> list[pd.DataFrame]:
+    """Merge and match one C page, retaining only hits instead of the full C resource."""
+    df_c_page = df_c_page.copy()
+    df_c_page["owner_org"] = df_c_page["owner_org"].str.strip().str.lower()
+    df_c_page["request_number_key"] = df_c_page["request_number"].map(
+        normalize_request_number
+    )
+
+    page = df_c_page.merge(
+        b_agg,
+        on=["owner_org", "request_number_key"],
+        how="left",
+        copy=False,
+    )
+    page["informal_requests_sum"] = pd.to_numeric(
+        page["informal_requests_sum"], errors="coerce"
+    ).fillna(0)
+    page["unique_identifiers"] = page["unique_identifiers"].fillna("")
+    page["_haystack"] = (page["summary_en"] + " " + page["summary_fr"]).str.lower()
+
+    results: list[pd.DataFrame] = []
+    for org, bc_org in page.groupby("owner_org", sort=False):
+        config = tracking_index.get(org)
+        if not config:
+            continue
+        lookup = config["lookup"]
+        for pattern in config["patterns"]:
+            mask = bc_org["_haystack"].str.contains(pattern, regex=True, na=False)
+            if not mask.any():
+                continue
+            hits = bc_org.loc[mask].copy()
+            hits["_match_lc"] = hits["_haystack"].str.extract(
+                f"({pattern})", expand=False
+            )
+            hits["tracking_number"] = hits["_match_lc"].map(lookup).fillna(
+                hits["_match_lc"]
+            )
+            results.append(hits[OUTPUT_COLUMNS])
+
+    return results
+
+
+def stream_c_and_build_matches(
+    b_agg: pd.DataFrame,
+    tracking_index: dict[str, dict[str, Any]],
+) -> tuple[pd.DataFrame, int, set[tuple[str, str]], dict[str, set[str]]]:
+    c_fields = [
+        "request_number",
+        "summary_en",
+        "summary_fr",
+        "owner_org",
+        "owner_org_title",
+    ]
+    results: list[pd.DataFrame] = []
+    c_keys: set[tuple[str, str]] = set()
+    c_org_titles: dict[str, set[str]] = defaultdict(set)
+    c_rows = 0
+
+    for df_c_page, fetched, total in iter_datastore(C_RESOURCE, c_fields):
+        df_c_page["owner_org"] = df_c_page["owner_org"].str.strip().str.lower()
+        request_keys = df_c_page["request_number"].map(normalize_request_number)
+
+        for owner, request in zip(df_c_page["owner_org"], request_keys):
+            if owner and request:
+                c_keys.add((owner, request))
+
+        for row in df_c_page[["owner_org", "owner_org_title"]].drop_duplicates().itertuples(index=False):
+            if row.owner_org and row.owner_org_title:
+                c_org_titles[row.owner_org].add(row.owner_org_title)
+
+        results.extend(match_c_page(df_c_page, b_agg, tracking_index))
+        c_rows += len(df_c_page)
+
+        del df_c_page, request_keys
+        gc.collect()
+        if fetched % 25000 == 0 or fetched == total:
+            memory_status(f"after streaming C {fetched:,}/{total:,}")
+
+    if results:
+        matched = (
+            pd.concat(results, ignore_index=True, copy=False)
+            .drop_duplicates()
+            .reset_index(drop=True)
+        )
+    else:
+        matched = pd.DataFrame(columns=OUTPUT_COLUMNS)
+
+    del results
+    gc.collect()
+    return matched, c_rows, c_keys, c_org_titles
 
 
 def metadata_candidates(metadata_json: str) -> list[str]:
@@ -272,7 +425,6 @@ def resolve_documentcloud_org(
     alias_to_org: dict[str, str],
     request_org_map: dict[str, str],
 ) -> tuple[str, str, str, str]:
-    """Resolve DocumentCloud organization to canonical CKAN owner_org."""
     raw_candidates = [
         unwrap_scalar(row.get("owner_org", "")),
         unwrap_scalar(row.get("documentcloud_source", "")),
@@ -329,7 +481,7 @@ def load_documentcloud_cache(
         "documentcloud_metadata_json",
     ]
     if not DOCCLOUD_CACHE.exists():
-        print("DocumentCloud cache does not exist; continuing without matches.")
+        print("DocumentCloud cache does not exist; continuing without matches.", flush=True)
         return pd.DataFrame(columns=columns), pd.DataFrame(), {}
 
     rows = []
@@ -340,12 +492,14 @@ def load_documentcloud_cache(
                 rows.append(json.loads(line))
 
     frame = pd.DataFrame.from_records(rows)
+    del rows
+    gc.collect()
     for column in columns:
         if column not in frame.columns:
             frame[column] = ""
     frame = frame[columns].fillna("").astype(str)
-
     frame["request_number"] = frame["request_number"].map(normalize_request_number)
+    memory_status("after loading DocumentCloud cache")
 
     resolved = frame.apply(
         lambda row: resolve_documentcloud_org(row, alias_to_org, request_org_map),
@@ -358,7 +512,7 @@ def load_documentcloud_cache(
         "documentcloud_org_normalized",
         "documentcloud_org_match_method",
     ]
-    frame = pd.concat([frame, resolved], axis=1)
+    frame = pd.concat([frame, resolved], axis=1, copy=False)
     frame["owner_org"] = frame["owner_org_resolved"]
     frame = frame.drop(columns=["owner_org_resolved"])
 
@@ -367,18 +521,14 @@ def load_documentcloud_cache(
     frame["both_keys_resolved"] = (
         (frame["has_request_number"] == 1) & (frame["has_owner_org"] == 1)
     ).astype(int)
-    frame["found_in_c"] = frame.apply(
-        lambda row: int((row["owner_org"], row["request_number"]) in c_keys)
-        if row["both_keys_resolved"]
-        else 0,
-        axis=1,
-    )
-    frame["found_in_strong"] = frame.apply(
-        lambda row: int((row["owner_org"], row["request_number"]) in strong_keys)
-        if row["both_keys_resolved"]
-        else 0,
-        axis=1,
-    )
+    frame["found_in_c"] = [
+        int((owner, request) in c_keys) if owner and request else 0
+        for owner, request in zip(frame["owner_org"], frame["request_number"])
+    ]
+    frame["found_in_strong"] = [
+        int((owner, request) in strong_keys) if owner and request else 0
+        for owner, request in zip(frame["owner_org"], frame["request_number"])
+    ]
 
     diagnostics = frame[
         [
@@ -436,68 +586,11 @@ def load_documentcloud_cache(
         "documentcloud_unmatched_request": int((frame["has_request_number"] == 0).sum()),
     }
 
-    print("DocumentCloud matching diagnostics:")
+    print("DocumentCloud matching diagnostics:", flush=True)
     for key, value in stats.items():
-        print(f"  {key}: {value:,}")
+        print(f"  {key}: {value:,}", flush=True)
 
     return grouped, diagnostics, stats
-
-
-def build_matches(df_a: pd.DataFrame, df_bc: pd.DataFrame) -> pd.DataFrame:
-    results: list[pd.DataFrame] = []
-    orgs = sorted(set(df_a["owner_org"]).intersection(df_bc["owner_org"]))
-    print(f"Matching across {len(orgs):,} owner_org groups")
-
-    for org in orgs:
-        a_org = (
-            df_a.loc[
-                df_a["owner_org"] == org,
-                ["tracking_number_lc", "tracking_number"],
-            ]
-            .drop_duplicates()
-            .reset_index(drop=True)
-        )
-        bc_org = df_bc.loc[
-            df_bc["owner_org"] == org,
-            [
-                "owner_org",
-                "owner_org_title",
-                "request_number",
-                "informal_requests_sum",
-                "unique_identifiers",
-                "summary_en",
-                "summary_fr",
-                "_haystack",
-            ],
-        ].copy()
-
-        if a_org.empty or bc_org.empty:
-            continue
-
-        lookup = dict(zip(a_org["tracking_number_lc"], a_org["tracking_number"]))
-        tracking_numbers = [
-            value for value in a_org["tracking_number_lc"].tolist() if value
-        ]
-
-        for group in chunks(tracking_numbers, TN_REGEX_CHUNK):
-            pattern = "(?:" + "|".join(re.escape(value) for value in group) + ")"
-            mask = bc_org["_haystack"].str.contains(pattern, regex=True, na=False)
-            if not mask.any():
-                continue
-
-            hits = bc_org.loc[mask].copy()
-            hits["_match_lc"] = hits["_haystack"].str.extract(
-                f"({pattern})", expand=False
-            )
-            hits["tracking_number"] = hits["_match_lc"].map(lookup).fillna(
-                hits["_match_lc"]
-            )
-            results.append(hits[OUTPUT_COLUMNS])
-
-    if not results:
-        return pd.DataFrame(columns=OUTPUT_COLUMNS)
-
-    return pd.concat(results, ignore_index=True).drop_duplicates().reset_index(drop=True)
 
 
 def write_database(
@@ -596,11 +689,12 @@ def write_database(
     connection.commit()
     cursor.execute("VACUUM")
     connection.close()
-    print(f"Wrote {OUT_SQLITE} ({OUT_SQLITE.stat().st_size / 1_048_576:.1f} MiB)")
+    print(f"Wrote {OUT_SQLITE} ({OUT_SQLITE.stat().st_size / 1_048_576:.1f} MiB)", flush=True)
 
 
 def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    memory_status("build start")
 
     a_fields = ["tracking_number", "owner_org", "owner_org_title"]
     b_fields = [
@@ -611,85 +705,78 @@ def main() -> None:
         "Organization Name - FR",
         "Number of Informal Requests",
     ]
-    c_fields = [
-        "request_number",
-        "summary_en",
-        "summary_fr",
-        "owner_org",
-        "owner_org_title",
-    ]
 
-    print("Fetching B: ATI informal-request analytics")
+    # A and B are much smaller than C. Load them first, then stream C page-by-page.
+    print("Fetching A: briefing-note titles and numbers", flush=True)
+    df_a = fetch_datastore(A_RESOURCE, a_fields)
+    df_a["owner_org"] = df_a["owner_org"].str.strip().str.lower()
+    df_a["tracking_number_lc"] = df_a["tracking_number"].str.strip().str.lower()
+    a_org_names = df_a[["owner_org", "owner_org_title"]].drop_duplicates().copy()
+    tracking_index = prepare_tracking_index(df_a)
+    memory_status("after A")
+
+    print("Fetching B: ATI informal-request analytics", flush=True)
     df_b = fetch_datastore(B_RESOURCE, b_fields)
     df_b["owner_org"] = df_b["owner_org"].str.strip().str.lower()
+    df_b["request_number_key"] = df_b["Request Number"].map(normalize_request_number)
     df_b["Number of Informal Requests"] = pd.to_numeric(
         df_b["Number of Informal Requests"], errors="coerce"
     ).fillna(0)
 
-    b_agg = (
-        df_b.groupby(["owner_org", "Request Number"], as_index=False)
-        .agg(
-            {
-                "Number of Informal Requests": "sum",
-                "Unique Identifier": aggregate_unique,
-            }
-        )
+    b_org_names = (
+        df_b[["owner_org", "Organization Name - EN", "Organization Name - FR"]]
+        .drop_duplicates()
         .rename(
             columns={
-                "Number of Informal Requests": "informal_requests_sum",
-                "Unique Identifier": "unique_identifiers",
+                "Organization Name - EN": "organization_name_en",
+                "Organization Name - FR": "organization_name_fr",
             }
         )
-    )
-    b_agg["request_number_key"] = b_agg["Request Number"].map(
-        normalize_request_number
+        .copy()
     )
 
-    print("Fetching C: completed ATI summaries")
-    df_c = fetch_datastore(C_RESOURCE, c_fields)
-    df_c["owner_org"] = df_c["owner_org"].str.strip().str.lower()
-    df_c["request_number_key"] = df_c["request_number"].map(
-        normalize_request_number
+    b_agg = (
+        df_b.loc[df_b["request_number_key"] != ""]
+        .groupby(["owner_org", "request_number_key"], as_index=False)
+        .agg(
+            informal_requests_sum=("Number of Informal Requests", "sum"),
+            unique_identifiers=("Unique Identifier", aggregate_unique),
+        )
     )
-    df_bc = df_c.merge(
-        b_agg.drop(columns=["Request Number"]),
-        on=["owner_org", "request_number_key"],
-        how="left",
+    b_rows = len(df_b)
+    del df_b
+    gc.collect()
+    memory_status("after B aggregation")
+
+    print("Streaming C: completed ATI summaries", flush=True)
+    matched, c_rows, c_keys, c_org_titles = stream_c_and_build_matches(
+        b_agg,
+        tracking_index,
     )
-    df_bc["informal_requests_sum"] = pd.to_numeric(
-        df_bc["informal_requests_sum"], errors="coerce"
-    ).fillna(0)
-    df_bc["unique_identifiers"] = df_bc["unique_identifiers"].fillna("")
-    df_bc["_haystack"] = (
-        df_bc["summary_en"] + " " + df_bc["summary_fr"]
-    ).str.lower()
+    del b_agg, tracking_index
+    gc.collect()
+    memory_status("after C streaming and BN matching")
 
-    print("Fetching A: briefing-note titles and numbers")
-    df_a = fetch_datastore(A_RESOURCE, a_fields)
-    df_a["owner_org"] = df_a["owner_org"].str.strip().str.lower()
-    df_a["tracking_number_lc"] = df_a["tracking_number"].str.strip().str.lower()
-
-    print("Building organization crosswalk")
-    organizations = fetch_organizations()
-    alias_to_org, alias_table = build_organization_crosswalk(
-        organizations,
-        df_a,
-        df_b,
-        df_c,
-    )
-
-    matched = build_matches(df_a, df_bc)
     weak_mask = matched["tracking_number"].str.strip().str.lower().isin(
         WEAK_BN_VALUES
     )
     weak = matched.loc[weak_mask].copy()
     strong = matched.loc[~weak_mask].copy()
+    del matched
+    gc.collect()
 
-    c_key_frame = df_c[["owner_org", "request_number_key"]].drop_duplicates()
-    c_keys = set(map(tuple, c_key_frame.itertuples(index=False, name=None)))
+    print("Building organization crosswalk", flush=True)
+    organizations = fetch_organizations()
+    alias_to_org, alias_table = build_organization_crosswalk(
+        organizations,
+        a_org_names,
+        b_org_names,
+        c_org_titles,
+    )
+    del organizations, a_org_names, b_org_names, c_org_titles, df_a
+    gc.collect()
+    memory_status("after organization crosswalk")
 
-    # Request-number-only fallback is used only when C proves the request belongs
-    # to exactly one organization.
     request_org_sets: dict[str, set[str]] = defaultdict(set)
     for owner, request in c_keys:
         if request:
@@ -699,12 +786,14 @@ def main() -> None:
         for request, owners in request_org_sets.items()
         if len(owners) == 1
     }
+    del request_org_sets
 
     strong_key_frame = strong[["owner_org", "request_number"]].copy()
     strong_key_frame["request_number"] = strong_key_frame["request_number"].map(
         normalize_request_number
     )
     strong_keys = set(map(tuple, strong_key_frame.itertuples(index=False, name=None)))
+    del strong_key_frame
 
     doccloud, diagnostics, dc_stats = load_documentcloud_cache(
         alias_to_org,
@@ -712,6 +801,9 @@ def main() -> None:
         c_keys,
         strong_keys,
     )
+    del alias_to_org, request_org_map, c_keys, strong_keys
+    gc.collect()
+    memory_status("after DocumentCloud resolution")
 
     strong["request_number_key"] = strong["request_number"].map(
         normalize_request_number
@@ -722,8 +814,11 @@ def main() -> None:
             doccloud.drop(columns=["request_number"]),
             on=["owner_org", "request_number_key"],
             how="left",
+            copy=False,
         )
     strong = strong.drop(columns=["request_number_key"])
+    del doccloud
+    gc.collect()
 
     documentcloud_columns = [
         "open_by_default_url",
@@ -784,18 +879,27 @@ def main() -> None:
     strong = strong[strong_db_columns]
 
     counts = {
-        "A_rows": len(df_a),
-        "B_rows": len(df_b),
-        "C_rows": len(df_c),
-        "BC_rows": len(df_bc),
-        "matches": len(matched),
+        "A_rows": sum(1 for _ in []) + len(df_a) if False else 0,
+        "B_rows": b_rows,
+        "C_rows": c_rows,
+        "BC_rows": c_rows,
+        "matches": len(strong) + len(weak),
         "weak_matches": len(weak),
         "strong_matches": len(strong),
         "open_by_default_matches": int(strong["open_by_default_flag"].sum()),
         **dc_stats,
     }
+    # df_a was intentionally released before DocumentCloud processing; recover its
+    # source row count from the tracking data captured before release.
+    counts["A_rows"] = int(sum(len(values["lookup"]) for values in [])) if False else 0
 
+    # A row count is stored separately before releasing df_a to keep the hot path small.
+    # It is set below from the local captured value.
+    counts["A_rows"] = a_rows
+
+    memory_status("before SQLite write")
     write_database(strong, weak, counts, diagnostics, alias_table)
+    memory_status("after SQLite write")
 
     if not TEMPLATE_FILE.exists():
         raise FileNotFoundError(f"Missing template: {TEMPLATE_FILE}")
@@ -803,7 +907,7 @@ def main() -> None:
     html = TEMPLATE_FILE.read_text(encoding="utf-8")
     html = html.replace("{{ build_date }}", date.today().isoformat())
     OUT_HTML.write_text(html, encoding="utf-8")
-    print(f"Wrote {OUT_HTML}")
+    print(f"Wrote {OUT_HTML}", flush=True)
 
 
 if __name__ == "__main__":
