@@ -20,11 +20,50 @@ permissions:
 
 concurrency:
   group: bn-ati-build
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
+  detect-changes:
+    name: Detect build inputs
+    runs-on: ubuntu-latest
+    outputs:
+      documentcloud_changed: ${{ steps.changes.outputs.documentcloud_changed }}
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Detect DocumentCloud updater changes
+        id: changes
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          changed=false
+          if [ "$EVENT_NAME" = "push" ]; then
+            if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ]; then
+              files="$(git diff --name-only "$BEFORE" "$SHA")"
+            else
+              files="$(git show --pretty='' --name-only "$SHA")"
+            fi
+            echo "$files"
+            if printf '%s\n' "$files" | grep -Fxq "BN_ATI_REPORT/scripts/update_doccloud_cache.py"; then
+              changed=true
+            fi
+          fi
+          echo "documentcloud_changed=$changed" >> "$GITHUB_OUTPUT"
+
   update-documentcloud:
     name: Update DocumentCloud cache
+    needs: detect-changes
+    if: >-
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      needs.detect-changes.outputs.documentcloud_changed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -82,7 +121,13 @@ jobs:
 
   build-report:
     name: Build and publish BN ATI report
-    needs: update-documentcloud
+    needs:
+      - detect-changes
+      - update-documentcloud
+    if: >-
+      always() &&
+      needs.detect-changes.result == 'success' &&
+      (needs.update-documentcloud.result == 'success' || needs.update-documentcloud.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
