@@ -208,19 +208,22 @@ jobs:
           request_chunk_size = 4096
           suffix_length = 3
 
-          hasher = hashlib.sha256()
+          db_hasher = hashlib.sha256()
           with db.open("rb") as source:
               while True:
                   block = source.read(4 * 1024 * 1024)
                   if not block:
                       break
-                  hasher.update(block)
-          database_hash = hasher.hexdigest()
-          build_id = database_hash[:16]
+                  db_hasher.update(block)
+          database_hash = db_hasher.hexdigest()
+          database_build_id = database_hash[:16]
+          app_source_hash = hashlib.sha256(app.read_bytes()).hexdigest()
+          asset_build_id = hashlib.sha256(
+              f"{database_hash}:{app_source_hash}".encode("utf-8")
+          ).hexdigest()[:16]
           database_length = db.stat().st_size
 
           out_root.mkdir(parents=True, exist_ok=True)
-          # Remove the legacy unversioned chunk files from earlier builds.
           for path in out_root.glob("data.sqlite.*"):
               if path.is_file():
                   path.unlink()
@@ -228,14 +231,18 @@ jobs:
           previous_versions = []
           if manifest_file.exists():
               try:
-                  previous_versions = json.loads(manifest_file.read_text(encoding="utf-8")).get("versions", [])
+                  previous_versions = json.loads(
+                      manifest_file.read_text(encoding="utf-8")
+                  ).get("versions", [])
               except Exception:
                   previous_versions = []
 
-          versions = [build_id] + [value for value in previous_versions if value != build_id]
-          versions = versions[:2]  # current + one previous version for cached HTML/app.js clients
+          versions = [database_build_id] + [
+              value for value in previous_versions if value != database_build_id
+          ]
+          versions = versions[:2]
 
-          build_dir = out_root / build_id
+          build_dir = out_root / database_build_id
           if build_dir.exists():
               shutil.rmtree(build_dir)
           build_dir.mkdir(parents=True)
@@ -260,13 +267,20 @@ jobs:
                   shutil.rmtree(path)
 
           manifest_file.write_text(
-              json.dumps({"current": build_id, "versions": versions}, indent=2) + "\n",
+              json.dumps({
+                  "current": database_build_id,
+                  "versions": versions,
+                  "asset_build_id": asset_build_id,
+              }, indent=2) + "\n",
               encoding="utf-8",
           )
 
           text = app.read_text(encoding="utf-8")
           old_url = 'const databaseUrl = new URL("../data.sqlite", import.meta.url).toString();'
-          new_url = f'const databaseUrlPrefix = new URL("../db/{build_id}/data.sqlite.", import.meta.url).toString();'
+          new_url = (
+              f'const databaseUrlPrefix = new URL("../db/{database_build_id}/data.sqlite.", '
+              'import.meta.url).toString();'
+          )
           if old_url not in text:
               raise SystemExit("Could not find databaseUrl declaration in src/app.js")
           text = text.replace(old_url, new_url, 1)
@@ -290,14 +304,15 @@ jobs:
 
           html_text = html.read_text(encoding="utf-8")
           old_script = '<script type="module" src="./assets/app.js"></script>'
-          new_script = f'<script type="module" src="./assets/app.js?v={build_id}"></script>'
+          new_script = f'<script type="module" src="./assets/app.js?v={asset_build_id}"></script>'
           if old_script not in html_text:
               raise SystemExit("Could not find app.js script tag in docs/index.html")
           html.write_text(html_text.replace(old_script, new_script, 1), encoding="utf-8")
 
           print(f"SQLite SHA-256: {database_hash}")
           print(f"SQLite bytes: {database_length:,}")
-          print(f"Build ID: {build_id}")
+          print(f"Database build ID: {database_build_id}")
+          print(f"Asset build ID: {asset_build_id}")
           print(f"Created {index:,} chunks in {build_dir}")
           print(f"Retained chunk generations: {versions}")
           PY
