@@ -35,6 +35,7 @@ WEAK_BN_VALUES = {
     for value in (
         "c",
         "1",
+        "#1",
         "0",
         "NA",
         "na",
@@ -707,7 +708,6 @@ def main() -> None:
         "Number of Informal Requests",
     ]
 
-    # A/B are manageable. C contains the long summaries and is streamed page-by-page.
     print("Fetching A: briefing-note titles and numbers", flush=True)
     df_a = fetch_datastore(A_RESOURCE, a_fields)
     a_rows = len(df_a)
