@@ -12,7 +12,7 @@ from documentcloud import DocumentCloud
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE_FILE = ROOT / "data" / "documentcloud_cache.jsonl"
-QUERY = "organization:38956 created_at:[NOW-2YEAR TO NOW-1YEAR]"
+QUERY = "organization:38956 created_at:[NOW-1YEAR TO NOW-10DAY]"
 PER_PAGE = 100
 
 REQUEST_NUMBER_RE = re.compile(r"\b[A-Z]-\d{4}-\d{3,6}\b", re.IGNORECASE)
