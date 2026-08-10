@@ -27,9 +27,6 @@ const A_RESOURCE = "299a2e26-5103-4a49-ac3a-53db9fcc06c7";
 const B_RESOURCE = "e664cf3d-6cb7-4aaa-adfa-e459c2552e3e";
 const C_RESOURCE = "19383ca2-b01a-487d-88f7-e1ffbc7d39c2";
 
-// Keep all sql.js-httpvfs calls serialized. Rapid DataTables redraws and the
-// chart/stat queries can otherwise overlap while HTTP-backed SQLite pages are
-// still being populated.
 let queryChain = Promise.resolve();
 function query(sql, params = []) {
   const operation = queryChain.then(() => worker.db.query(sql, params));
@@ -513,17 +510,24 @@ function renderTimeline(events, errors = []) {
   if (!events.length) {
     return `<p class="timeline-status">No dated events were returned for this record.${errors.length ? ` Some CKAN lookups failed: ${escapeHtml(errors.join(", "))}.` : ""}</p>`;
   }
-  const items = events.map((event) => `
-    <div class="timeline-event">
-      <div class="timeline-event__date">${escapeHtml(event.displayDate || monthYearLabel(event.date))}</div>
-      <div class="timeline-event__source">${escapeHtml(event.source)}</div>
-      <div class="timeline-event__label">${escapeHtml(event.label)}</div>
-    </div>
-  `).join("");
+
+  const rows = [];
+  for (let index = 0; index < events.length; index += 4) {
+    const rowEvents = events.slice(index, index + 4);
+    const items = rowEvents.map((event) => `
+      <div class="timeline-event">
+        <div class="timeline-event__date">${escapeHtml(event.displayDate || monthYearLabel(event.date))}</div>
+        <div class="timeline-event__source">${escapeHtml(event.source)}</div>
+        <div class="timeline-event__label">${escapeHtml(event.label)}</div>
+      </div>
+    `).join("");
+    rows.push(`<div class="record-timeline">${items}</div>`);
+  }
+
   const warning = errors.length
     ? `<p class="timeline-status">Some CKAN timeline lookups could not be loaded: ${escapeHtml(errors.join(", "))}.</p>`
     : "";
-  return `${warning}<div class="record-timeline">${items}</div>`;
+  return `${warning}${rows.join("")}`;
 }
 
 function detailValue(record, field) {
