@@ -27,8 +27,14 @@ const A_RESOURCE = "299a2e26-5103-4a49-ac3a-53db9fcc06c7";
 const B_RESOURCE = "e664cf3d-6cb7-4aaa-adfa-e459c2552e3e";
 const C_RESOURCE = "19383ca2-b01a-487d-88f7-e1ffbc7d39c2";
 
-async function query(sql, params = []) {
-  return worker.db.query(sql, params);
+// Keep all sql.js-httpvfs calls serialized. Rapid DataTables redraws and the
+// chart/stat queries can otherwise overlap while HTTP-backed SQLite pages are
+// still being populated.
+let queryChain = Promise.resolve();
+function query(sql, params = []) {
+  const operation = queryChain.then(() => worker.db.query(sql, params));
+  queryChain = operation.catch(() => undefined);
+  return operation;
 }
 
 function escapeHtml(value) {
@@ -47,28 +53,20 @@ function externalLink(url, label) {
 }
 
 function ownerLink(ownerOrg, label = ownerOrg) {
-  const url =
-    "https://search.open.canada.ca/briefing_titles/?owner_org=" +
-    encodeURIComponent(ownerOrg);
+  const url = "https://search.open.canada.ca/briefing_titles/?owner_org=" + encodeURIComponent(ownerOrg);
   return externalLink(url, label || ownerOrg);
 }
 
 function trackingLink(ownerOrg, trackingNumber) {
-  const url =
-    "https://search.open.canada.ca/briefing_titles/record/" +
-    encodeURIComponent(ownerOrg) +
-    "," +
-    encodeURIComponent(trackingNumber);
+  const url = "https://search.open.canada.ca/briefing_titles/record/" +
+    encodeURIComponent(ownerOrg) + "," + encodeURIComponent(trackingNumber);
   return externalLink(url, trackingNumber);
 }
 
 function requestLink(ownerOrg, requestNumber) {
   const filters = `owner_org:${ownerOrg}|request_number:${requestNumber}`;
-  const url =
-    "https://open.canada.ca/data/en/dataset/" +
-    "0797e893-751e-4695-8229-a5066e4fe43c/resource/" +
-    "19383ca2-b01a-487d-88f7-e1ffbc7d39c2?filters=" +
-    encodeURIComponent(filters);
+  const url = "https://open.canada.ca/data/en/dataset/0797e893-751e-4695-8229-a5066e4fe43c/resource/" +
+    "19383ca2-b01a-487d-88f7-e1ffbc7d39c2?filters=" + encodeURIComponent(filters);
   return externalLink(url, requestNumber);
 }
 
@@ -77,13 +75,10 @@ function uidLinks(value) {
     .split(";")
     .map((item) => item.trim())
     .filter(Boolean)
-    .map((identifier) =>
-      externalLink(
-        "https://open.canada.ca/en/search/ati/reference/" +
-          encodeURIComponent(identifier),
-        identifier,
-      ),
-    )
+    .map((identifier) => externalLink(
+      "https://open.canada.ca/en/search/ati/reference/" + encodeURIComponent(identifier),
+      identifier,
+    ))
     .join("<br>");
 }
 
@@ -100,7 +95,6 @@ function metricCard({ label, value, href = "", variant = "summary" }) {
   const labelMarkup = href
     ? `<a class="metric-card__link" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`
     : `<div class="metric-card__label">${escapeHtml(label)}</div>`;
-
   return `
     <article class="metric-card metric-card--${escapeHtml(variant)}">
       ${labelMarkup}
@@ -112,7 +106,6 @@ function metricCard({ label, value, href = "", variant = "summary" }) {
 async function updateStats() {
   const rows = await query("SELECT key, value FROM meta_counts");
   const values = Object.fromEntries(rows.map((row) => [row.key, row.value]));
-
   const inputElement = document.getElementById("open-data-inputs");
   const summaryElement = document.getElementById("summary-metrics");
 
@@ -141,39 +134,27 @@ async function updateStats() {
 
   if (summaryElement) {
     summaryElement.innerHTML = [
-      metricCard({
-        label: "Joined ATI summaries and informal-request data",
-        value: values.BC_rows || 202385,
-      }),
-      metricCard({
-        label: "Briefing-note reference matches in an ATI summary from the same organization",
-        value: values.matches || 39867,
-      }),
-      metricCard({
-        label: "Strong matches after weak IDs were removed",
-        value: values.strong_matches || 19518,
-      }),
-      metricCard({
-        label: "Weak matches separated for review",
-        value: values.weak_matches || 20349,
-        variant: "weak",
-      }),
-      metricCard({
-        label: "Open by Default matches",
-        value: values.open_by_default_matches || 11268,
-      }),
-      metricCard({
-        label: "DocumentCloud records retained in the persistent cache",
-        value: values.documentcloud_cached_records || 64850,
-      }),
+      metricCard({ label: "Joined ATI summaries and informal-request data", value: values.BC_rows || 202385 }),
+      metricCard({ label: "Briefing-note reference matches in an ATI summary from the same organization", value: values.matches || 39867 }),
+      metricCard({ label: "Strong matches after weak IDs were removed", value: values.strong_matches || 19518 }),
+      metricCard({ label: "Weak matches separated for review", value: values.weak_matches || 20349, variant: "weak" }),
+      metricCard({ label: "Open by Default matches", value: values.open_by_default_matches || 11268 }),
+      metricCard({ label: "DocumentCloud records retained in the persistent cache", value: values.documentcloud_cached_records || 64850 }),
     ].join("");
   }
 }
 
 function summaryPreview(value, length = 20) {
   const text = String(value ?? "").trim();
-  if (text.length <= length) return text;
-  return `${text.slice(0, length)}…`;
+  return text.length <= length ? text : `${text.slice(0, length)}…`;
+}
+
+function debounce(fn, delay = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
 }
 
 function buildServerFilters(request) {
@@ -183,18 +164,13 @@ function buildServerFilters(request) {
 
   if (globalSearch) {
     clauses.push(`(
-      tracking_number LIKE ? OR
-      owner_org LIKE ? OR
-      owner_org_title LIKE ? OR
-      summary_en LIKE ? OR
-      request_number LIKE ? OR
-      unique_identifiers LIKE ?
+      tracking_number LIKE ? OR owner_org LIKE ? OR owner_org_title LIKE ? OR
+      summary_en LIKE ? OR request_number LIKE ? OR unique_identifiers LIKE ?
     )`);
     params.push(...Array(6).fill(`%${globalSearch}%`));
   }
 
   const columnSearches = request.columns?.map((column) => String(column.search?.value || "").trim()) || [];
-
   if (columnSearches[0]) {
     clauses.push("tracking_number LIKE ?");
     params.push(`%${columnSearches[0]}%`);
@@ -218,11 +194,7 @@ function buildServerFilters(request) {
       params.push(Number(match[2]));
     }
   }
-
-  return {
-    where: clauses.length ? `WHERE ${clauses.join(" AND ")}` : "",
-    params,
-  };
+  return { where: clauses.length ? `WHERE ${clauses.join(" AND ")}` : "", params };
 }
 
 const sortableColumns = [
@@ -237,7 +209,7 @@ const sortableColumns = [
 const table = new DataTable("#report", {
   serverSide: true,
   processing: true,
-  searchDelay: 300,
+  searchDelay: 350,
   scrollX: false,
   autoWidth: false,
   pageLength: 25,
@@ -249,28 +221,18 @@ const table = new DataTable("#report", {
       const length = Math.min(Number(request.length || 25), 100);
       const orderIndex = Number(request.order?.[0]?.column || 0);
       const orderColumn = sortableColumns[orderIndex] || "tracking_number";
-      const orderDirection =
-        String(request.order?.[0]?.dir).toLowerCase() === "desc" ? "DESC" : "ASC";
+      const orderDirection = String(request.order?.[0]?.dir).toLowerCase() === "desc" ? "DESC" : "ASC";
       const filters = buildServerFilters(request);
 
       const totalRows = await query("SELECT COUNT(*) AS count FROM strong_matches");
-      const filteredRows = await query(
-        `SELECT COUNT(*) AS count FROM strong_matches ${filters.where}`,
-        filters.params,
-      );
+      const filteredRows = await query(`SELECT COUNT(*) AS count FROM strong_matches ${filters.where}`, filters.params);
       const rows = await query(
-        `SELECT
-           id,
-           owner_org,
-           owner_org_title,
-           tracking_number,
-           summary_en,
-           informal_requests_sum,
-           open_by_default_flag
-         FROM strong_matches
-         ${filters.where}
-         ORDER BY ${orderColumn} ${orderDirection}
-         LIMIT ? OFFSET ?`,
+        `SELECT id, owner_org, owner_org_title, tracking_number, summary_en,
+                informal_requests_sum, open_by_default_flag
+           FROM strong_matches
+           ${filters.where}
+           ORDER BY ${orderColumn} ${orderDirection}
+           LIMIT ? OFFSET ?`,
         [...filters.params, length, start],
       );
 
@@ -282,12 +244,7 @@ const table = new DataTable("#report", {
       });
     } catch (error) {
       console.error(error);
-      callback({
-        draw: request.draw,
-        recordsTotal: 0,
-        recordsFiltered: 0,
-        data: [],
-      });
+      callback({ draw: request.draw, recordsTotal: 0, recordsFiltered: 0, data: [] });
     }
   },
   columns: [
@@ -295,8 +252,7 @@ const table = new DataTable("#report", {
       title: "Reference number",
       data: "tracking_number",
       width: "16%",
-      render: (value, type, row) =>
-        type === "display" ? trackingLink(row.owner_org, value) : value,
+      render: (value, type, row) => type === "display" ? trackingLink(row.owner_org, value) : value,
     },
     {
       title: "Organization",
@@ -311,26 +267,23 @@ const table = new DataTable("#report", {
       title: "ATI summary",
       data: "summary_en",
       width: "28%",
-      render: (value, type) =>
-        type === "display" ? escapeHtml(summaryPreview(value, 20)) : value,
+      render: (value, type) => type === "display" ? escapeHtml(summaryPreview(value, 20)) : value,
     },
     {
       title: "Online",
       data: "open_by_default_flag",
       width: "8%",
       className: "dt-center",
-      render: (value, type) =>
-        type === "display" && Number(value)
-          ? '<span class="open-check" aria-label="Available online">✓</span>'
-          : type === "display" ? "" : Number(value),
+      render: (value, type) => type === "display" && Number(value)
+        ? '<span class="open-check" aria-label="Available online">✓</span>'
+        : type === "display" ? "" : Number(value),
     },
     {
       title: "Informal requests",
       data: "informal_requests_sum",
       width: "12%",
       className: "dt-right",
-      render: (value, type) =>
-        type === "display" ? Number(value || 0).toLocaleString() : Number(value || 0),
+      render: (value, type) => type === "display" ? Number(value || 0).toLocaleString() : Number(value || 0),
     },
     {
       title: "Details",
@@ -339,10 +292,9 @@ const table = new DataTable("#report", {
       orderable: false,
       searchable: false,
       className: "dt-center",
-      render: (value, type) =>
-        type === "display"
-          ? `<button type="button" class="details-button" data-record-id="${Number(value)}">Details</button>`
-          : value,
+      render: (value, type) => type === "display"
+        ? `<button type="button" class="details-button" data-record-id="${Number(value)}">Details</button>`
+        : value,
     },
   ],
   initComplete: function () {
@@ -350,7 +302,6 @@ const table = new DataTable("#report", {
     const thead = document.querySelector("#report thead");
     const filterRow = document.createElement("tr");
     filterRow.className = "column-filters";
-
     const filterDefinitions = [
       { type: "text", placeholder: "Filter reference" },
       { type: "text", placeholder: "Filter organization" },
@@ -369,94 +320,138 @@ const table = new DataTable("#report", {
         input.placeholder = definition.placeholder;
         input.setAttribute("aria-label", definition.placeholder);
         input.addEventListener("click", (event) => event.stopPropagation());
-        input.addEventListener("input", () => {
-          api.column(index).search(input.value).draw();
-        });
+        const redraw = debounce(() => api.column(index).search(input.value).draw(), 300);
+        input.addEventListener("input", redraw);
         th.appendChild(input);
       } else if (definition.type === "select") {
         const select = document.createElement("select");
         select.className = "column-filter";
         select.setAttribute("aria-label", "Filter online availability");
-        select.innerHTML = `
-          <option value="">All</option>
-          <option value="1">Online</option>
-          <option value="0">Not online</option>
-        `;
+        select.innerHTML = '<option value="">All</option><option value="1">Online</option><option value="0">Not online</option>';
         select.addEventListener("click", (event) => event.stopPropagation());
-        select.addEventListener("change", () => {
-          api.column(index).search(select.value).draw();
-        });
+        select.addEventListener("change", () => api.column(index).search(select.value).draw());
         th.appendChild(select);
       }
       filterRow.appendChild(th);
     });
-
     thead.appendChild(filterRow);
   },
 });
+
+function jsonpRequest(url, timeoutMs = 15000) {
+  return new Promise((resolve, reject) => {
+    const callbackName = `__ckan_jsonp_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+    const script = document.createElement("script");
+    let settled = false;
+
+    const cleanup = () => {
+      delete window[callbackName];
+      script.remove();
+    };
+    const timer = setTimeout(() => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      reject(new Error("CKAN JSONP request timed out"));
+    }, timeoutMs);
+
+    window[callbackName] = (payload) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      cleanup();
+      resolve(payload);
+    };
+    script.onerror = () => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      cleanup();
+      reject(new Error("CKAN JSONP script failed to load"));
+    };
+
+    url.searchParams.set("callback", callbackName);
+    script.src = url.toString();
+    script.async = true;
+    document.head.appendChild(script);
+  });
+}
 
 async function datastoreSearch(resourceId, filters) {
   const url = new URL(CKAN_API);
   url.searchParams.set("resource_id", resourceId);
   url.searchParams.set("limit", "100");
   url.searchParams.set("filters", JSON.stringify(filters));
-
-  const response = await fetch(url.toString(), {
-    headers: { Accept: "application/json" },
-  });
-  if (!response.ok) {
-    throw new Error(`CKAN ${response.status}: ${response.statusText}`);
-  }
-  const payload = await response.json();
-  if (!payload.success) {
-    throw new Error("CKAN API returned success=false");
-  }
+  const payload = await jsonpRequest(url);
+  if (!payload?.success) throw new Error("CKAN API returned success=false");
   return payload.result?.records || [];
-}
-
-function humanizeFieldName(value) {
-  return String(value)
-    .replace(/[_-]+/g, " ")
-    .replace(/\b\w/g, (character) => character.toUpperCase());
 }
 
 function parseDateValue(value) {
   const text = String(value ?? "").trim();
   if (!text) return null;
-  const direct = new Date(text);
-  if (!Number.isNaN(direct.getTime())) return direct;
-  const dateOnly = text.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  if (dateOnly) {
-    const parsed = new Date(`${dateOnly[1]}-${dateOnly[2]}-${dateOnly[3]}T00:00:00Z`);
-    if (!Number.isNaN(parsed.getTime())) return parsed;
-  }
-  return null;
+  const parsed = new Date(text);
+  return Number.isNaN(parsed.getTime()) ? null : parsed;
 }
 
-function addDateFieldEvents(events, row, source) {
-  for (const [field, value] of Object.entries(row || {})) {
-    if (!/(date|created|updated|modified|received)/i.test(field)) continue;
-    const parsed = parseDateValue(value);
-    if (!parsed) continue;
+function monthEndDate(yearValue, monthValue) {
+  const year = Number(yearValue);
+  const month = Number(monthValue);
+  if (!year || !month || month < 1 || month > 12) return null;
+  return new Date(Date.UTC(year, month, 0));
+}
+
+function monthYearLabel(date) {
+  return date.toLocaleDateString("en-CA", { year: "numeric", month: "long", timeZone: "UTC" });
+}
+
+function addBriefingNoteEvents(events, rows) {
+  for (const row of rows) {
+    const received = parseDateValue(row.date_received);
+    if (received) {
+      events.push({
+        date: received,
+        displayDate: received.toLocaleDateString("en-CA", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }),
+        source: "Briefing note",
+        label: "Briefing Note Received",
+      });
+    }
+  }
+}
+
+function addInformalRequestEvents(events, rows) {
+  const totals = new Map();
+  for (const row of rows) {
+    const date = monthEndDate(row.Year, row.Month);
+    if (!date) continue;
+    const key = `${row.Year}-${row.Month}`;
+    const current = totals.get(key) || { date, count: 0 };
+    current.count += Number(row["Number of Informal Requests"] || 0);
+    totals.set(key, current);
+  }
+
+  for (const { date, count } of totals.values()) {
+    const rounded = Number.isInteger(count) ? count : Number(count.toFixed(2));
     events.push({
-      date: parsed,
-      source,
-      label: humanizeFieldName(field),
-      raw: String(value),
+      date,
+      displayDate: monthYearLabel(date),
+      source: "ATI analytics",
+      label: `${rounded.toLocaleString()} Informal Request${rounded === 1 ? "" : "s"}`,
     });
   }
 }
 
-function addYearMonthEvent(events, row, source, yearKey, monthKey, label) {
-  const year = Number(row?.[yearKey]);
-  const month = Number(row?.[monthKey]);
-  if (!year || !month || month < 1 || month > 12) return;
-  events.push({
-    date: new Date(Date.UTC(year, month - 1, 1)),
-    source,
-    label,
-    raw: `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}`,
-  });
+function addRequestCompletedEvents(events, rows) {
+  for (const row of rows) {
+    const date = monthEndDate(row.year, row.month);
+    if (!date) continue;
+    events.push({
+      date,
+      displayDate: monthYearLabel(date),
+      source: "ATI summary",
+      label: "Request Completed",
+    });
+  }
 }
 
 function addDocumentCloudEvents(events, record) {
@@ -465,15 +460,15 @@ function addDocumentCloudEvents(events, record) {
     ["documentcloud_updated_at", "Document updated"],
   ];
   for (const [field, label] of fields) {
-    const values = String(record[field] || "")
-      .split(";")
-      .map((value) => value.trim())
-      .filter(Boolean);
-    for (const value of values) {
-      const parsed = parseDateValue(value);
-      if (parsed) {
-        events.push({ date: parsed, source: "DocumentCloud", label, raw: value });
-      }
+    for (const value of String(record[field] || "").split(";").map((item) => item.trim()).filter(Boolean)) {
+      const date = parseDateValue(value);
+      if (!date) continue;
+      events.push({
+        date,
+        displayDate: date.toLocaleDateString("en-CA", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }),
+        source: "DocumentCloud",
+        label,
+      });
     }
   }
 }
@@ -495,63 +490,21 @@ async function buildTimeline(record) {
   const events = [];
   addDocumentCloudEvents(events, record);
 
-  const requests = [
-    datastoreSearch(A_RESOURCE, {
-      owner_org: record.owner_org,
-      tracking_number: record.tracking_number,
-    }),
-    datastoreSearch(B_RESOURCE, {
-      owner_org: record.owner_org,
-      "Request Number": record.request_number,
-    }),
-    datastoreSearch(C_RESOURCE, {
-      owner_org: record.owner_org,
-      request_number: record.request_number,
-    }),
-  ];
-
-  const [aResult, bResult, cResult] = await Promise.allSettled(requests);
+  const [aResult, bResult, cResult] = await Promise.allSettled([
+    datastoreSearch(A_RESOURCE, { owner_org: record.owner_org, tracking_number: record.tracking_number }),
+    datastoreSearch(B_RESOURCE, { owner_org: record.owner_org, "Request Number": record.request_number }),
+    datastoreSearch(C_RESOURCE, { owner_org: record.owner_org, request_number: record.request_number }),
+  ]);
   const errors = [];
 
-  if (aResult.status === "fulfilled") {
-    for (const row of aResult.value) {
-      addDateFieldEvents(events, row, "Briefing note");
-    }
-  } else {
-    errors.push("Briefing note dates");
-  }
+  if (aResult.status === "fulfilled") addBriefingNoteEvents(events, aResult.value);
+  else errors.push("briefing-note received date");
 
-  if (bResult.status === "fulfilled") {
-    for (const row of bResult.value) {
-      addYearMonthEvent(
-        events,
-        row,
-        "ATI analytics",
-        "Year",
-        "Month",
-        "Informal request analytics period",
-      );
-      addDateFieldEvents(events, row, "ATI analytics");
-    }
-  } else {
-    errors.push("ATI analytics dates");
-  }
+  if (bResult.status === "fulfilled") addInformalRequestEvents(events, bResult.value);
+  else errors.push("informal-request dates");
 
-  if (cResult.status === "fulfilled") {
-    for (const row of cResult.value) {
-      addYearMonthEvent(
-        events,
-        row,
-        "ATI summary",
-        "year",
-        "month",
-        "ATI summary reporting period",
-      );
-      addDateFieldEvents(events, row, "ATI summary");
-    }
-  } else {
-    errors.push("ATI summary dates");
-  }
+  if (cResult.status === "fulfilled") addRequestCompletedEvents(events, cResult.value);
+  else errors.push("request-completed date");
 
   return { events: deduplicateTimelineEvents(events), errors };
 }
@@ -560,15 +513,13 @@ function renderTimeline(events, errors = []) {
   if (!events.length) {
     return `<p class="timeline-status">No dated events were returned for this record.${errors.length ? ` Some CKAN lookups failed: ${escapeHtml(errors.join(", "))}.` : ""}</p>`;
   }
-
   const items = events.map((event) => `
     <div class="timeline-event">
-      <div class="timeline-event__date">${escapeHtml(event.date.toLocaleDateString("en-CA", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" }))}</div>
+      <div class="timeline-event__date">${escapeHtml(event.displayDate || monthYearLabel(event.date))}</div>
       <div class="timeline-event__source">${escapeHtml(event.source)}</div>
       <div class="timeline-event__label">${escapeHtml(event.label)}</div>
     </div>
   `).join("");
-
   const warning = errors.length
     ? `<p class="timeline-status">Some CKAN timeline lookups could not be loaded: ${escapeHtml(errors.join(", "))}.</p>`
     : "";
@@ -577,30 +528,14 @@ function renderTimeline(events, errors = []) {
 
 function detailValue(record, field) {
   const value = record[field];
-  if (field === "owner_org") {
-    return ownerLink(record.owner_org || "", record.owner_org_title || record.owner_org || "");
-  }
-  if (field === "tracking_number") {
-    return trackingLink(record.owner_org || "", value || "");
-  }
-  if (field === "request_number") {
-    return requestLink(record.owner_org || "", value || "");
-  }
-  if (field === "unique_identifiers") {
-    return uidLinks(value || "") || "—";
-  }
-  if (field === "open_by_default_url") {
-    return openByDefaultLinks(value || "") || "Not found";
-  }
-  if (field === "open_by_default_flag") {
-    return Number(value) ? '<span class="open-check">✓ Available online</span>' : "Not found online";
-  }
-  if (field === "informal_requests_sum") {
-    return Number(value || 0).toLocaleString();
-  }
-  if (field === "documentcloud_metadata_json") {
-    return `<pre>${escapeHtml(value || "")}</pre>`;
-  }
+  if (field === "owner_org") return ownerLink(record.owner_org || "", record.owner_org_title || record.owner_org || "");
+  if (field === "tracking_number") return trackingLink(record.owner_org || "", value || "");
+  if (field === "request_number") return requestLink(record.owner_org || "", value || "");
+  if (field === "unique_identifiers") return uidLinks(value || "") || "—";
+  if (field === "open_by_default_url") return openByDefaultLinks(value || "") || "Not found";
+  if (field === "open_by_default_flag") return Number(value) ? '<span class="open-check">✓ Available online</span>' : "Not found online";
+  if (field === "informal_requests_sum") return Number(value || 0).toLocaleString();
+  if (field === "documentcloud_metadata_json") return `<pre>${escapeHtml(value || "")}</pre>`;
   return escapeHtml(value || "—");
 }
 
@@ -628,7 +563,6 @@ function renderRecordDetails(record) {
     ["documentcloud_org_match_method", "DocumentCloud organization match method"],
     ["documentcloud_metadata_json", "DocumentCloud metadata"],
   ];
-
   return `
     <section class="timeline-section" aria-labelledby="record-timeline-heading">
       <h3 id="record-timeline-heading">Record timeline</h3>
@@ -637,10 +571,7 @@ function renderRecordDetails(record) {
       </div>
     </section>
     <dl class="record-details-grid">
-      ${fields.map(([field, label]) => `
-        <dt>${escapeHtml(label)}</dt>
-        <dd>${detailValue(record, field)}</dd>
-      `).join("")}
+      ${fields.map(([field, label]) => `<dt>${escapeHtml(label)}</dt><dd>${detailValue(record, field)}</dd>`).join("")}
     </dl>
   `;
 }
@@ -651,10 +582,7 @@ const dialogTitle = document.getElementById("record-dialog-title");
 const dialogClose = document.getElementById("record-dialog-close");
 
 async function openRecordDetails(id) {
-  const rows = await query(
-    `SELECT * FROM strong_matches WHERE id = ? LIMIT 1`,
-    [Number(id)],
-  );
+  const rows = await query("SELECT * FROM strong_matches WHERE id = ? LIMIT 1", [Number(id)]);
   const record = rows[0];
   if (!record) return;
 
@@ -665,15 +593,11 @@ async function openRecordDetails(id) {
   try {
     const timeline = await buildTimeline(record);
     const timelineElement = document.getElementById("record-timeline-content");
-    if (timelineElement) {
-      timelineElement.innerHTML = renderTimeline(timeline.events, timeline.errors);
-    }
+    if (timelineElement) timelineElement.innerHTML = renderTimeline(timeline.events, timeline.errors);
   } catch (error) {
     console.error(error);
     const timelineElement = document.getElementById("record-timeline-content");
-    if (timelineElement) {
-      timelineElement.innerHTML = `<p class="timeline-status">The record details loaded, but timeline dates could not be retrieved from CKAN.</p>`;
-    }
+    if (timelineElement) timelineElement.innerHTML = '<p class="timeline-status">The record details loaded, but timeline dates could not be retrieved from CKAN.</p>';
   }
 }
 
@@ -690,8 +614,7 @@ dialog.addEventListener("click", (event) => {
 
 async function renderWeakSection() {
   const rows = await query(`
-    SELECT
-      owner_org,
+    SELECT owner_org,
       SUM(CASE WHEN lower(tracking_number) = 'c' THEN 1 ELSE 0 END) AS c,
       SUM(CASE WHEN tracking_number = '1' THEN 1 ELSE 0 END) AS one,
       SUM(CASE WHEN tracking_number = '0' THEN 1 ELSE 0 END) AS zero,
@@ -708,109 +631,56 @@ async function renderWeakSection() {
   `);
 
   const definitions = [
-    ["c", "c"],
-    ["1", "one"],
-    ["0", "zero"],
-    ["NA", "upper_na"],
-    ["na", "lower_na"],
-    ["-", "dash"],
-    ["REDACTED", "redacted"],
-    ["[REDACTED]", "bracketed_redacted"],
-    ["TBD-PM-00", "tbd"],
+    ["c", "c"], ["1", "one"], ["0", "zero"], ["NA", "upper_na"], ["na", "lower_na"],
+    ["-", "dash"], ["REDACTED", "redacted"], ["[REDACTED]", "bracketed_redacted"], ["TBD-PM-00", "tbd"],
   ];
+  const palette = ["#26374a", "#2b8a3e", "#1971c2", "#f08c00", "#c92a2a", "#6741d9", "#087f5b", "#5f3dc4", "#495057"];
 
-  const palette = [
-    "#26374a",
-    "#2b8a3e",
-    "#1971c2",
-    "#f08c00",
-    "#c92a2a",
-    "#6741d9",
-    "#087f5b",
-    "#5f3dc4",
-    "#495057",
-  ];
-
-  new Chart(document.getElementById("weakChart"), {
-    type: "bar",
-    data: {
-      labels: rows.map((row) => row.owner_org),
-      datasets: definitions.map(([label, key], index) => ({
-        label,
-        data: rows.map((row) => Number(row[key] || 0)),
-        backgroundColor: palette[index],
-        stack: "weak-identifiers",
-      })),
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      interaction: {
-        mode: "index",
-        intersect: false,
+  const canvas = document.getElementById("weakChart");
+  if (canvas) {
+    new Chart(canvas, {
+      type: "bar",
+      data: {
+        labels: rows.map((row) => row.owner_org),
+        datasets: definitions.map(([label, key], index) => ({
+          label,
+          data: rows.map((row) => Number(row[key] || 0)),
+          backgroundColor: palette[index],
+          stack: "weak-identifiers",
+        })),
       },
-      scales: {
-        x: {
-          stacked: true,
-          ticks: {
-            font: { size: 14 },
-            maxRotation: 55,
-            minRotation: 25,
-          },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: "index", intersect: false },
+        scales: {
+          x: { stacked: true, ticks: { font: { size: 14 }, maxRotation: 55, minRotation: 25 } },
+          y: { stacked: true, beginAtZero: true, ticks: { precision: 0, font: { size: 14 } } },
         },
-        y: {
-          stacked: true,
-          beginAtZero: true,
-          ticks: {
-            precision: 0,
-            font: { size: 14 },
-          },
+        plugins: {
+          legend: { position: "top", labels: { font: { size: 15 } } },
+          title: { display: true, text: "Weak briefing-note identifiers by organization", font: { size: 22 } },
         },
       },
-      plugins: {
-        legend: {
-          position: "top",
-          labels: {
-            font: { size: 15 },
-          },
-        },
-        title: {
-          display: true,
-          text: "Weak briefing-note identifiers by organization",
-          font: { size: 22 },
-        },
-      },
-    },
-  });
+    });
+  }
 
   const tbody = document.querySelector("#weakTable tbody");
+  if (!tbody) return;
   const fragment = document.createDocumentFragment();
-
   for (const row of rows) {
     const tr = document.createElement("tr");
-    const values = [
-      row.owner_org,
-      row.c,
-      row.one,
-      row.zero,
-      row.upper_na,
-      row.lower_na,
-      row.dash,
-      row.redacted,
-      row.bracketed_redacted,
-      row.tbd,
-      row.total,
-    ];
-
-    for (const value of values) {
+    for (const value of [row.owner_org, row.c, row.one, row.zero, row.upper_na, row.lower_na, row.dash, row.redacted, row.bracketed_redacted, row.tbd, row.total]) {
       const td = document.createElement("td");
       td.textContent = String(value ?? "");
       tr.appendChild(td);
     }
     fragment.appendChild(tr);
   }
-
   tbody.replaceChildren(fragment);
 }
 
-await Promise.all([updateStats(), renderWeakSection()]);
+const startupResults = await Promise.allSettled([updateStats(), renderWeakSection()]);
+startupResults.forEach((result) => {
+  if (result.status === "rejected") console.error("BN ATI startup section failed", result.reason);
+});
