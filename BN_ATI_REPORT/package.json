@@ -4,13 +4,13 @@
   "version": "1.0.0",
   "scripts": {
     "build:web": "esbuild src/app.js --bundle --minify --format=esm --target=es2022 --outdir=docs/assets --loader:.css=css",
-    "copy:sqlite-assets": "mkdir -p docs/assets && cp node_modules/sql.js-httpvfs/dist/sqlite.worker.js docs/assets/sqlite.worker.js && cp node_modules/sql.js-httpvfs/dist/sql-wasm.wasm docs/assets/sql-wasm.wasm",
+    "copy:sqlite-assets": "mkdir -p docs/assets && rm -f docs/assets/sqlite.worker.js && cp node_modules/sql.js/dist/sql-wasm.wasm docs/assets/sql-wasm.wasm",
     "build": "npm run build:web && npm run copy:sqlite-assets"
   },
   "dependencies": {
     "chart.js": "4.4.9",
     "datatables.net-dt": "2.3.2",
-    "sql.js-httpvfs": "0.8.12"
+    "sql.js": "1.14.1"
   },
   "devDependencies": {
     "esbuild": "0.25.5"
