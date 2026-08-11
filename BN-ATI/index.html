@@ -495,6 +495,18 @@
         }
       }
     </style>
+
+    <style id="bn-funnel-styles">
+      .bn-funnel-section { margin: 1.75rem 0 2rem; padding: 1.25rem 1.35rem 1.4rem; border: 1px solid #d6dbe1; border-radius: .55rem; background: #fbfcfd; }
+      .bn-funnel-section h3 { margin: 0 0 .45rem; color: #26374a; font-size: 1.35rem; }
+      .bn-funnel-section p { margin: 0 0 1rem; max-width: 75rem; }
+      .bn-funnel-scope { margin-bottom: .65rem; color: #52606d; font-size: .9rem; font-weight: 700; }
+      .bn-funnel-chart { width: 100%; min-height: 28rem; }
+      .bn-funnel-chart svg { display: block; width: 100%; height: auto; min-height: 28rem; }
+      .bn-funnel-summary { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin-top: .65rem; padding-top: .75rem; border-top: 1px solid #d6dbe1; font-size: .9rem; }
+      .bn-funnel-summary strong { color: #26374a; }
+      @media (max-width: 48rem) { .bn-funnel-section { padding-inline: .8rem; } .bn-funnel-chart svg { min-height: 22rem; } }
+    </style>
   </head>
 
   <body>
@@ -552,6 +564,19 @@
         <div id="summary-metrics" class="metrics-grid summary-grid" aria-live="polite">
           <div class="metrics-loading">Loading report metrics…</div>
         </div>
+
+
+        <section id="bn-funnel-section" class="bn-funnel-section" aria-labelledby="bn-funnel-heading">
+          <h3 id="bn-funnel-heading">Briefing Note Match Funnel</h3>
+          <p>
+            This Sankey starts with briefing notes in the selected organization and year,
+            then shows which BNs were referenced in an ATI summary, which survived weak-ID
+            review, and whether strong matches had informal requests and/or were found online.
+          </p>
+          <div id="bn-funnel-scope" class="bn-funnel-scope">Loading briefing-note funnel…</div>
+          <div id="bn-funnel-chart" class="bn-funnel-chart" role="img" aria-label="Briefing Note Match Funnel"></div>
+          <div id="bn-funnel-summary" class="bn-funnel-summary" aria-live="polite"></div>
+        </section>
 
         <div id="database-status" class="database-status" role="status">Loading report database…</div>
 
@@ -643,5 +668,6 @@
     <gcds-footer display="full"></gcds-footer>
 
     <script type="module" src="./assets/app.js?v=c8b5856a4e7ef639"></script>
+    <script type="module" src="./bn-funnel.js"></script>
   </body>
 </html>
