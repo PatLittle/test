@@ -176,10 +176,17 @@ jobs:
           db = Path("docs/data.sqlite")
           connection = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
           result = connection.execute("PRAGMA quick_check").fetchall()
+          facet_columns = connection.execute(
+              "PRAGMA table_info(strong_matches)"
+          ).fetchall()
           connection.close()
           print("SQLite quick_check:", result)
           if result != [("ok",)]:
               raise SystemExit("SQLite integrity check failed")
+          names = {row[1] for row in facet_columns}
+          required = {"briefing_note_date_received", "briefing_note_year"}
+          if not required.issubset(names):
+              raise SystemExit(f"Missing facet columns: {sorted(required - names)}")
           PY
 
       - name: Set up Node.js
@@ -190,117 +197,33 @@ jobs:
       - name: Install web dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Prepare versioned chunked SQLite for GitHub Pages
+      - name: Prepare cache-busted full SQLite for GitHub Pages
         run: |
           python - <<'PY'
           from pathlib import Path
           import hashlib
-          import json
           import shutil
 
           app = Path("src/app.js")
           html = Path("docs/index.html")
           db = Path("docs/data.sqlite")
-          out_root = Path("docs/db")
-          manifest_file = out_root / "versions.json"
 
-          server_chunk_size = 1024 * 1024
-          request_chunk_size = 4096
-          suffix_length = 3
-
-          db_hasher = hashlib.sha256()
-          with db.open("rb") as source:
-              while True:
-                  block = source.read(4 * 1024 * 1024)
-                  if not block:
-                      break
-                  db_hasher.update(block)
-          database_hash = db_hasher.hexdigest()
-          database_build_id = database_hash[:16]
+          db_hash = hashlib.sha256(db.read_bytes()).hexdigest()
+          database_build_id = db_hash[:16]
           app_source_hash = hashlib.sha256(app.read_bytes()).hexdigest()
           asset_build_id = hashlib.sha256(
-              f"{database_hash}:{app_source_hash}".encode("utf-8")
+              f"{db_hash}:{app_source_hash}".encode("utf-8")
           ).hexdigest()[:16]
-          database_length = db.stat().st_size
-
-          out_root.mkdir(parents=True, exist_ok=True)
-          for path in out_root.glob("data.sqlite.*"):
-              if path.is_file():
-                  path.unlink()
-
-          previous_versions = []
-          if manifest_file.exists():
-              try:
-                  previous_versions = json.loads(
-                      manifest_file.read_text(encoding="utf-8")
-                  ).get("versions", [])
-              except Exception:
-                  previous_versions = []
-
-          versions = [database_build_id] + [
-              value for value in previous_versions if value != database_build_id
-          ]
-          versions = versions[:2]
-
-          build_dir = out_root / database_build_id
-          if build_dir.exists():
-              shutil.rmtree(build_dir)
-          build_dir.mkdir(parents=True)
-
-          chunk_hasher = hashlib.sha256()
-          with db.open("rb") as source:
-              index = 0
-              while True:
-                  block = source.read(server_chunk_size)
-                  if not block:
-                      break
-                  chunk_hasher.update(block)
-                  chunk_name = f"data.sqlite.{index:0{suffix_length}d}"
-                  (build_dir / chunk_name).write_bytes(block)
-                  index += 1
-
-          if chunk_hasher.hexdigest() != database_hash:
-              raise SystemExit("Chunked SQLite bytes do not match source database")
-
-          for path in out_root.iterdir():
-              if path.is_dir() and path.name not in versions:
-                  shutil.rmtree(path)
-
-          manifest_file.write_text(
-              json.dumps({
-                  "current": database_build_id,
-                  "versions": versions,
-                  "asset_build_id": asset_build_id,
-              }, indent=2) + "\n",
-              encoding="utf-8",
-          )
 
           text = app.read_text(encoding="utf-8")
           old_url = 'const databaseUrl = new URL("../data.sqlite", import.meta.url).toString();'
           new_url = (
-              f'const databaseUrlPrefix = new URL("../db/{database_build_id}/data.sqlite.", '
+              f'const databaseUrl = new URL("../data.sqlite?v={database_build_id}", '
               'import.meta.url).toString();'
           )
           if old_url not in text:
               raise SystemExit("Could not find databaseUrl declaration in src/app.js")
-          text = text.replace(old_url, new_url, 1)
-
-          old_config = (
-              '        serverMode: "full",\n'
-              '        requestChunkSize: 4096,\n'
-              '        url: databaseUrl,'
-          )
-          new_config = (
-              '        serverMode: "chunked",\n'
-              f'        requestChunkSize: {request_chunk_size},\n'
-              '        urlPrefix: databaseUrlPrefix,\n'
-              f'        serverChunkSize: {server_chunk_size},\n'
-              f'        databaseLengthBytes: {database_length},\n'
-              f'        suffixLength: {suffix_length},'
-          )
-          if old_config not in text:
-              raise SystemExit("Could not find sql.js-httpvfs full-mode config in src/app.js")
-          app.write_text(text.replace(old_config, new_config, 1), encoding="utf-8")
+          app.write_text(text.replace(old_url, new_url, 1), encoding="utf-8")
 
           html_text = html.read_text(encoding="utf-8")
           old_script = '<script type="module" src="./assets/app.js"></script>'
@@ -309,16 +232,26 @@ jobs:
               raise SystemExit("Could not find app.js script tag in docs/index.html")
           html.write_text(html_text.replace(old_script, new_script, 1), encoding="utf-8")
 
-          print(f"SQLite SHA-256: {database_hash}")
-          print(f"SQLite bytes: {database_length:,}")
+          shutil.rmtree("docs/db", ignore_errors=True)
+          print(f"SQLite SHA-256: {db_hash}")
+          print(f"SQLite bytes: {db.stat().st_size:,}")
           print(f"Database build ID: {database_build_id}")
           print(f"Asset build ID: {asset_build_id}")
-          print(f"Created {index:,} chunks in {build_dir}")
-          print(f"Retained chunk generations: {versions}")
+          print("Using one complete SQLite download; HTTP range/chunk reads are disabled.")
           PY
 
       - name: Bundle browser application
         run: npm run build
+
+      - name: Verify browser assets
+        run: |
+          test -f docs/assets/app.js
+          test -f docs/assets/app.css
+          test -f docs/assets/sql-wasm.wasm
+          test ! -f docs/assets/sqlite.worker.js
+          test ! -d docs/db
+          grep -q "data.sqlite" docs/assets/app.js
+          echo "Browser assets verified: full sql.js database loader, no HTTP-VFS worker/chunks."
 
       - name: Restore source after generated build configuration
         run: git checkout -- src/app.js
