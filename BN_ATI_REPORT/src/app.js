@@ -1,37 +1,77 @@
-import { createDbWorker } from "sql.js-httpvfs";
+import initSqlJs from "sql.js";
 import DataTable from "datatables.net-dt";
 import "datatables.net-dt/css/dataTables.dataTables.css";
 import Chart from "chart.js/auto";
 
-const workerUrl = new URL("./sqlite.worker.js", import.meta.url).toString();
 const wasmUrl = new URL("./sql-wasm.wasm", import.meta.url).toString();
 const databaseUrl = new URL("../data.sqlite", import.meta.url).toString();
-
-const worker = await createDbWorker(
-  [
-    {
-      from: "inline",
-      config: {
-        serverMode: "full",
-        requestChunkSize: 4096,
-        url: databaseUrl,
-      },
-    },
-  ],
-  workerUrl,
-  wasmUrl,
-);
-
 const CKAN_API = "https://open.canada.ca/data/api/action/datastore_search";
 const A_RESOURCE = "299a2e26-5103-4a49-ac3a-53db9fcc06c7";
 const B_RESOURCE = "e664cf3d-6cb7-4aaa-adfa-e459c2552e3e";
 const C_RESOURCE = "19383ca2-b01a-487d-88f7-e1ffbc7d39c2";
 
-let queryChain = Promise.resolve();
-function query(sql, params = []) {
-  const operation = queryChain.then(() => worker.db.query(sql, params));
-  queryChain = operation.catch(() => undefined);
-  return operation;
+const databaseStatus = document.getElementById("database-status");
+
+function setDatabaseStatus(message, isError = false) {
+  if (!databaseStatus) return;
+  databaseStatus.textContent = message;
+  databaseStatus.classList.toggle("database-status--error", isError);
+}
+
+async function fetchDatabase() {
+  let lastError;
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      setDatabaseStatus(`Loading report database…${attempt > 1 ? ` retry ${attempt}` : ""}`);
+      const response = await fetch(databaseUrl, {
+        cache: attempt === 1 ? "default" : "reload",
+      });
+      if (!response.ok) throw new Error(`Database request failed: HTTP ${response.status}`);
+      const buffer = await response.arrayBuffer();
+      const bytes = new Uint8Array(buffer);
+      const signature = new TextDecoder("ascii").decode(bytes.slice(0, 16));
+      if (!signature.startsWith("SQLite format 3")) {
+        throw new Error("Downloaded report database does not have a valid SQLite header");
+      }
+      return bytes;
+    } catch (error) {
+      lastError = error;
+      if (attempt < 3) await new Promise((resolve) => setTimeout(resolve, 500 * attempt));
+    }
+  }
+  throw lastError || new Error("Unable to load report database");
+}
+
+let db;
+try {
+  const SQL = await initSqlJs({ locateFile: () => wasmUrl });
+  const databaseBytes = await fetchDatabase();
+  db = new SQL.Database(databaseBytes);
+  const check = querySync("PRAGMA quick_check");
+  if (check[0]?.quick_check !== "ok") {
+    throw new Error(`SQLite integrity check failed in browser: ${JSON.stringify(check)}`);
+  }
+  setDatabaseStatus(`Report database loaded (${(databaseBytes.byteLength / 1_048_576).toFixed(1)} MiB).`);
+} catch (error) {
+  console.error(error);
+  setDatabaseStatus(`Could not load the report database: ${error.message || error}`, true);
+  throw error;
+}
+
+function querySync(sql, params = []) {
+  const statement = db.prepare(sql);
+  const rows = [];
+  try {
+    if (params.length) statement.bind(params);
+    while (statement.step()) rows.push(statement.getAsObject());
+  } finally {
+    statement.free();
+  }
+  return rows;
+}
+
+async function query(sql, params = []) {
+  return querySync(sql, params);
 }
 
 function escapeHtml(value) {
@@ -154,17 +194,64 @@ function debounce(fn, delay = 300) {
   };
 }
 
+const facetState = {
+  organization: "",
+  year: "",
+};
+
+async function populateFacets() {
+  const organizationSelect = document.getElementById("facet-organization");
+  const yearSelect = document.getElementById("facet-year");
+
+  const organizations = await query(`
+    SELECT owner_org, MAX(owner_org_title) AS owner_org_title, COUNT(*) AS count
+    FROM strong_matches
+    GROUP BY owner_org
+    ORDER BY owner_org_title COLLATE NOCASE, owner_org COLLATE NOCASE
+  `);
+  const years = await query(`
+    SELECT briefing_note_year, COUNT(*) AS count
+    FROM strong_matches
+    WHERE briefing_note_year <> ''
+    GROUP BY briefing_note_year
+    ORDER BY briefing_note_year DESC
+  `);
+
+  if (organizationSelect) {
+    organizationSelect.innerHTML = '<option value="">All organizations</option>' + organizations.map((row) => {
+      const label = row.owner_org_title || row.owner_org;
+      return `<option value="${escapeHtml(row.owner_org)}">${escapeHtml(label)} (${Number(row.count).toLocaleString()})</option>`;
+    }).join("");
+  }
+
+  if (yearSelect) {
+    yearSelect.innerHTML = '<option value="">All briefing-note years</option>' + years.map((row) =>
+      `<option value="${escapeHtml(row.briefing_note_year)}">${escapeHtml(row.briefing_note_year)} (${Number(row.count).toLocaleString()})</option>`
+    ).join("");
+  }
+}
+
 function buildServerFilters(request) {
   const clauses = [];
   const params = [];
   const globalSearch = String(request.search?.value || "").trim();
 
+  if (facetState.organization) {
+    clauses.push("owner_org = ?");
+    params.push(facetState.organization);
+  }
+  if (facetState.year) {
+    clauses.push("briefing_note_year = ?");
+    params.push(facetState.year);
+  }
+
   if (globalSearch) {
     clauses.push(`(
       tracking_number LIKE ? OR owner_org LIKE ? OR owner_org_title LIKE ? OR
-      summary_en LIKE ? OR request_number LIKE ? OR unique_identifiers LIKE ?
+      summary_en LIKE ? OR request_number LIKE ? OR unique_identifiers LIKE ? OR
+      briefing_note_year LIKE ?
     )`);
-    params.push(...Array(6).fill(`%${globalSearch}%`));
+    params.push(...Array(7).fill(`%${globalSearch}%`));
   }
 
   const columnSearches = request.columns?.map((column) => String(column.search?.value || "").trim()) || [];
@@ -193,6 +280,8 @@ function buildServerFilters(request) {
   }
   return { where: clauses.length ? `WHERE ${clauses.join(" AND ")}` : "", params };
 }
+
+await populateFacets();
 
 const sortableColumns = [
   "tracking_number",
@@ -225,7 +314,7 @@ const table = new DataTable("#report", {
       const filteredRows = await query(`SELECT COUNT(*) AS count FROM strong_matches ${filters.where}`, filters.params);
       const rows = await query(
         `SELECT id, owner_org, owner_org_title, tracking_number, summary_en,
-                informal_requests_sum, open_by_default_flag
+                informal_requests_sum, open_by_default_flag, briefing_note_year
            FROM strong_matches
            ${filters.where}
            ORDER BY ${orderColumn} ${orderDirection}
@@ -333,6 +422,31 @@ const table = new DataTable("#report", {
     });
     thead.appendChild(filterRow);
   },
+});
+
+const organizationFacet = document.getElementById("facet-organization");
+const yearFacet = document.getElementById("facet-year");
+const clearFacets = document.getElementById("facet-clear");
+
+organizationFacet?.addEventListener("change", () => {
+  facetState.organization = organizationFacet.value;
+  table.ajax.reload(null, true);
+});
+yearFacet?.addEventListener("change", () => {
+  facetState.year = yearFacet.value;
+  table.ajax.reload(null, true);
+});
+clearFacets?.addEventListener("click", () => {
+  facetState.organization = "";
+  facetState.year = "";
+  if (organizationFacet) organizationFacet.value = "";
+  if (yearFacet) yearFacet.value = "";
+  table.search("");
+  table.columns().search("");
+  document.querySelectorAll("#report .column-filter").forEach((control) => {
+    control.value = "";
+  });
+  table.ajax.reload(null, true);
 });
 
 function jsonpRequest(url, timeoutMs = 15000) {
@@ -496,10 +610,8 @@ async function buildTimeline(record) {
 
   if (aResult.status === "fulfilled") addBriefingNoteEvents(events, aResult.value);
   else errors.push("briefing-note received date");
-
   if (bResult.status === "fulfilled") addInformalRequestEvents(events, bResult.value);
   else errors.push("informal-request dates");
-
   if (cResult.status === "fulfilled") addRequestCompletedEvents(events, cResult.value);
   else errors.push("request-completed date");
 
@@ -546,6 +658,8 @@ function detailValue(record, field) {
 function renderRecordDetails(record) {
   const fields = [
     ["tracking_number", "Briefing note reference number"],
+    ["briefing_note_date_received", "Briefing note received"],
+    ["briefing_note_year", "Briefing note year"],
     ["owner_org", "Organization"],
     ["owner_org_title", "Organization title"],
     ["request_number", "ATI request"],
@@ -621,6 +735,7 @@ async function renderWeakSection() {
     SELECT owner_org,
       SUM(CASE WHEN lower(tracking_number) = 'c' THEN 1 ELSE 0 END) AS c,
       SUM(CASE WHEN tracking_number = '1' THEN 1 ELSE 0 END) AS one,
+      SUM(CASE WHEN tracking_number = '#1' THEN 1 ELSE 0 END) AS hash_one,
       SUM(CASE WHEN tracking_number = '0' THEN 1 ELSE 0 END) AS zero,
       SUM(CASE WHEN tracking_number = 'NA' THEN 1 ELSE 0 END) AS upper_na,
       SUM(CASE WHEN tracking_number = 'na' THEN 1 ELSE 0 END) AS lower_na,
@@ -635,10 +750,10 @@ async function renderWeakSection() {
   `);
 
   const definitions = [
-    ["c", "c"], ["1", "one"], ["0", "zero"], ["NA", "upper_na"], ["na", "lower_na"],
+    ["c", "c"], ["1", "one"], ["#1", "hash_one"], ["0", "zero"], ["NA", "upper_na"], ["na", "lower_na"],
     ["-", "dash"], ["REDACTED", "redacted"], ["[REDACTED]", "bracketed_redacted"], ["TBD-PM-00", "tbd"],
   ];
-  const palette = ["#26374a", "#2b8a3e", "#1971c2", "#f08c00", "#c92a2a", "#6741d9", "#087f5b", "#5f3dc4", "#495057"];
+  const palette = ["#26374a", "#2b8a3e", "#8f3f71", "#1971c2", "#f08c00", "#c92a2a", "#6741d9", "#087f5b", "#5f3dc4", "#495057"];
 
   const canvas = document.getElementById("weakChart");
   if (canvas) {
@@ -674,7 +789,7 @@ async function renderWeakSection() {
   const fragment = document.createDocumentFragment();
   for (const row of rows) {
     const tr = document.createElement("tr");
-    for (const value of [row.owner_org, row.c, row.one, row.zero, row.upper_na, row.lower_na, row.dash, row.redacted, row.bracketed_redacted, row.tbd, row.total]) {
+    for (const value of [row.owner_org, row.c, row.one, row.hash_one, row.zero, row.upper_na, row.lower_na, row.dash, row.redacted, row.bracketed_redacted, row.tbd, row.total]) {
       const td = document.createElement("td");
       td.textContent = String(value ?? "");
       tr.appendChild(td);
