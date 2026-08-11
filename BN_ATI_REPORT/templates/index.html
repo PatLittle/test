@@ -39,30 +39,45 @@
         color: #26374a;
       }
 
+      .pipeline-banner {
+        width: 100%;
+        margin-block: 2rem 2.5rem;
+        padding: 1.75rem 2rem;
+        background: #f1f3f5;
+        border-block: 1px solid #d6dbe1;
+      }
+
       .pipeline-hero {
         display: grid;
-        grid-template-columns: minmax(16rem, .8fr) minmax(24rem, 1.2fr);
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
         gap: 2rem;
         align-items: center;
       }
 
-      .pipeline-copy {
+      .pipeline-copy,
+      .lineage-figure {
         min-width: 0;
       }
 
       .lineage-figure {
-        width: min(42.75rem, 100%);
-        margin: 0 0 0 auto;
+        width: 100%;
+        margin: 0;
       }
 
       .lineage-figure img {
         display: block;
         width: 100%;
         height: auto;
-        border: 1px solid #d6dbe1;
-        border-radius: .75rem;
+        border: 1px solid #c9d0d7;
+        border-radius: .55rem;
         background: #fff;
-        box-shadow: 0 2px 8px rgba(15, 23, 42, .08);
+        box-shadow: 0 2px 6px rgba(15, 23, 42, .06);
+      }
+
+      .lineage-figure figcaption {
+        margin-top: .45rem;
+        text-align: right;
+        font-size: .85rem;
       }
 
       .metrics-grid {
@@ -148,6 +163,68 @@
         color: #475569;
       }
 
+      .database-status {
+        margin: 1.25rem 0 .75rem;
+        padding: .65rem .85rem;
+        border-left: .3rem solid #55758f;
+        background: #eef4f7;
+        color: #31465a;
+        font-size: .9rem;
+      }
+
+      .database-status--error {
+        border-left-color: #b42318;
+        background: #fff0ef;
+        color: #8a1c13;
+      }
+
+      .table-facets {
+        display: grid;
+        grid-template-columns: minmax(14rem, 1fr) minmax(12rem, .65fr) auto;
+        gap: 1rem;
+        align-items: end;
+        margin-block: 1rem;
+        padding: 1rem;
+        border: 1px solid #d5dbe1;
+        border-radius: .4rem;
+        background: #f5f7fa;
+      }
+
+      .facet-field label {
+        display: block;
+        margin-bottom: .35rem;
+        font-weight: 700;
+        color: #26374a;
+      }
+
+      .facet-select {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 2.55rem;
+        padding: .45rem .55rem;
+        border: 1px solid #7d8b99;
+        border-radius: .25rem;
+        background: #fff;
+        font: inherit;
+      }
+
+      .facet-clear {
+        min-height: 2.55rem;
+        padding: .45rem .8rem;
+        border: 1px solid #284f7a;
+        border-radius: .25rem;
+        background: #fff;
+        color: #284f7a;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .facet-clear:hover,
+      .facet-clear:focus-visible {
+        background: #eaf2f8;
+      }
+
       .table-wrap {
         width: 100%;
         margin-block: 1.5rem;
@@ -211,11 +288,6 @@
         color: #0b6b2b;
         font-size: 1.35rem;
         font-weight: 800;
-      }
-
-      .empty-state {
-        padding: 2rem;
-        text-align: center;
       }
 
       .record-dialog {
@@ -308,11 +380,11 @@
 
       .record-timeline {
         position: relative;
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1rem;
-        align-items: flex-start;
-        overflow-x: auto;
-        padding: 1.3rem .25rem .4rem;
+        align-items: start;
+        padding: 1.3rem .25rem .9rem;
       }
 
       .record-timeline::before {
@@ -328,8 +400,7 @@
       .timeline-event {
         position: relative;
         z-index: 1;
-        flex: 1 0 10.5rem;
-        min-width: 10.5rem;
+        min-width: 0;
         padding-top: 1.35rem;
       }
 
@@ -377,21 +448,18 @@
       }
 
       @media (max-width: 64rem) {
-        .pipeline-hero {
-          grid-template-columns: 1fr;
-        }
-
-        .lineage-figure {
-          width: min(42.75rem, 100%);
-          margin-inline: auto;
-        }
-
         .summary-grid {
           grid-template-columns: repeat(3, minmax(0, 1fr));
         }
       }
 
       @media (max-width: 48rem) {
+        .pipeline-banner {
+          padding: 1.25rem;
+        }
+
+        .pipeline-hero,
+        .table-facets,
         .open-data-grid,
         .summary-grid {
           grid-template-columns: 1fr;
@@ -416,6 +484,10 @@
 
         .record-details-grid dd {
           margin-bottom: .8rem;
+        }
+
+        .record-timeline {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .chart-wrap {
@@ -448,21 +520,24 @@
         </gcds-text>
       </section>
 
-      <section class="report-section section-block pipeline-hero" aria-labelledby="pipeline-heading">
-        <div class="pipeline-copy">
-          <gcds-heading id="pipeline-heading" tag="h2">Data pipeline</gcds-heading>
-          <gcds-text>
-            The report combines three Open Government datasets, organization aliases,
-            and a persistent DocumentCloud cache before publishing the matched records
-            through a pre-built SQLite database.
-          </gcds-text>
+      <section class="pipeline-banner" aria-labelledby="pipeline-heading">
+        <div class="pipeline-hero">
+          <div class="pipeline-copy">
+            <gcds-heading id="pipeline-heading" tag="h2">Data pipeline</gcds-heading>
+            <gcds-text>
+              The report combines three Open Government datasets, CKAN organization aliases,
+              and the persistent DocumentCloud cache. Records are matched by organization,
+              ATI request and briefing-note reference before being published in the report.
+            </gcds-text>
+          </div>
+          <figure class="lineage-figure">
+            <img
+              src="./data-lineage-simple.svg"
+              alt="Simplified BN and ATI data pipeline showing the three Open Government inputs, CKAN organization aliases, DocumentCloud enrichment, record matching, SQLite and the static report."
+            />
+            <figcaption><a href="./data-lineage.svg" target="_blank" rel="noopener noreferrer">View detailed pipeline diagram</a></figcaption>
+          </figure>
         </div>
-        <figure class="lineage-figure">
-          <img
-            src="./data-lineage.svg"
-            alt="BN and ATI report data pipeline showing three Open Government inputs, CKAN organization aliases, DocumentCloud enrichment, matching steps, SQLite output tables, and the published static report."
-          />
-        </figure>
       </section>
 
       <section id="section-1" class="report-section section-block">
@@ -476,6 +551,24 @@
         <h3 class="section-subheading">Summary metrics</h3>
         <div id="summary-metrics" class="metrics-grid summary-grid" aria-live="polite">
           <div class="metrics-loading">Loading report metrics…</div>
+        </div>
+
+        <div id="database-status" class="database-status" role="status">Loading report database…</div>
+
+        <div class="table-facets" aria-label="Matched record facets">
+          <div class="facet-field">
+            <label for="facet-organization">Organization</label>
+            <select id="facet-organization" class="facet-select">
+              <option value="">All organizations</option>
+            </select>
+          </div>
+          <div class="facet-field">
+            <label for="facet-year">Briefing-note year</label>
+            <select id="facet-year" class="facet-select">
+              <option value="">All briefing-note years</option>
+            </select>
+          </div>
+          <button id="facet-clear" class="facet-clear" type="button">Clear filters</button>
         </div>
 
         <div class="table-wrap">
@@ -505,6 +598,7 @@
                   <th>owner_org</th>
                   <th>c</th>
                   <th>1</th>
+                  <th>#1</th>
                   <th>0</th>
                   <th>NA</th>
                   <th>na</th>
