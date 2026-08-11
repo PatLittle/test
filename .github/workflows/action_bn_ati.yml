@@ -152,7 +152,7 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Build SQLite report database and page
+      - name: Build SQLite report database, page, and BN funnel
         env:
           PYTHONUNBUFFERED: "1"
         run: |
@@ -161,9 +161,10 @@ jobs:
           free -h
           df -h
           python -u scripts/build_report.py
+          python -u scripts/build_bn_funnel.py
           echo "=== report build complete ==="
           date -u
-          ls -lh docs/data.sqlite docs/index.html
+          ls -lh docs/data.sqlite docs/index.html docs/bn-funnel.json docs/bn-funnel.js
           free -h
           df -h
 
@@ -248,10 +249,14 @@ jobs:
           test -f docs/assets/app.js
           test -f docs/assets/app.css
           test -f docs/assets/sql-wasm.wasm
+          test -f docs/bn-funnel.json
+          test -f docs/bn-funnel.js
           test ! -f docs/assets/sqlite.worker.js
           test ! -d docs/db
           grep -q "data.sqlite" docs/assets/app.js
-          echo "Browser assets verified: full sql.js database loader, no HTTP-VFS worker/chunks."
+          grep -q "bn-funnel.js" docs/index.html
+          grep -q "Briefing Note Match Funnel" docs/index.html
+          echo "Browser assets verified: full sql.js database loader and BN Sankey funnel assets."
 
       - name: Restore source after generated build configuration
         run: git checkout -- src/app.js
