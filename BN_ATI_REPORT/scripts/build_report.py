@@ -5,6 +5,7 @@ import ast
 import gc
 import json
 import re
+import shutil
 import sqlite3
 import unicodedata
 from collections import defaultdict
@@ -50,6 +51,8 @@ OUTPUT_COLUMNS = [
     "owner_org",
     "owner_org_title",
     "tracking_number",
+    "briefing_note_date_received",
+    "briefing_note_year",
     "request_number",
     "informal_requests_sum",
     "unique_identifiers",
@@ -173,6 +176,11 @@ def normalize_request_number(value: Any) -> str:
     return match.group(0).upper() if match else ""
 
 
+def briefing_year(value: Any) -> str:
+    match = re.match(r"^\s*(\d{4})", str(value or ""))
+    return match.group(1) if match else ""
+
+
 def normalize_org_alias(value: Any) -> str:
     text = unwrap_scalar(value)
     text = unicodedata.normalize("NFKC", text).casefold()
@@ -279,20 +287,41 @@ def build_organization_crosswalk(
 
 
 def prepare_tracking_index(df_a: pd.DataFrame) -> dict[str, dict[str, Any]]:
-    """Prebuild per-organization briefing-number regex chunks."""
+    """Prebuild per-organization briefing-number regex chunks and BN date lookup."""
     tracking_index: dict[str, dict[str, Any]] = {}
     for org, group in df_a.groupby("owner_org", sort=False):
-        pairs = group[["tracking_number_lc", "tracking_number"]].drop_duplicates()
+        pairs = group[
+            ["tracking_number_lc", "tracking_number", "date_received"]
+        ].drop_duplicates().copy()
         pairs = pairs.loc[pairs["tracking_number_lc"] != ""]
         if pairs.empty:
             continue
+
+        pairs["_has_date"] = pairs["date_received"].str.strip().ne("")
+        pairs = (
+            pairs.sort_values(
+                ["tracking_number_lc", "_has_date", "date_received"],
+                ascending=[True, False, True],
+            )
+            .drop_duplicates("tracking_number_lc", keep="first")
+        )
+
         lookup = dict(zip(pairs["tracking_number_lc"], pairs["tracking_number"]))
+        date_lookup = dict(zip(pairs["tracking_number_lc"], pairs["date_received"]))
+        year_lookup = {
+            key: briefing_year(value) for key, value in date_lookup.items()
+        }
         values = list(lookup)
         patterns = [
             "(?:" + "|".join(re.escape(value) for value in group_values) + ")"
             for group_values in chunks(values, TN_REGEX_CHUNK)
         ]
-        tracking_index[org] = {"lookup": lookup, "patterns": patterns}
+        tracking_index[org] = {
+            "lookup": lookup,
+            "date_lookup": date_lookup,
+            "year_lookup": year_lookup,
+            "patterns": patterns,
+        }
     print(
         f"Prepared tracking-number indexes for {len(tracking_index):,} organizations",
         flush=True,
@@ -328,6 +357,8 @@ def match_c_page(
         if not config:
             continue
         lookup = config["lookup"]
+        date_lookup = config["date_lookup"]
+        year_lookup = config["year_lookup"]
         for pattern in config["patterns"]:
             mask = bc_org["_haystack"].str.contains(pattern, regex=True, na=False)
             if not mask.any():
@@ -338,6 +369,12 @@ def match_c_page(
             )
             hits["tracking_number"] = hits["_match_lc"].map(lookup).fillna(
                 hits["_match_lc"]
+            )
+            hits["briefing_note_date_received"] = (
+                hits["_match_lc"].map(date_lookup).fillna("")
+            )
+            hits["briefing_note_year"] = (
+                hits["_match_lc"].map(year_lookup).fillna("")
             )
             results.append(hits[OUTPUT_COLUMNS])
 
@@ -616,6 +653,8 @@ def write_database(
             owner_org TEXT NOT NULL,
             owner_org_title TEXT NOT NULL DEFAULT '',
             tracking_number TEXT NOT NULL,
+            briefing_note_date_received TEXT NOT NULL DEFAULT '',
+            briefing_note_year TEXT NOT NULL DEFAULT '',
             request_number TEXT NOT NULL,
             informal_requests_sum REAL NOT NULL DEFAULT 0,
             unique_identifiers TEXT NOT NULL DEFAULT '',
@@ -648,6 +687,8 @@ def write_database(
         );
 
         CREATE INDEX idx_strong_owner_org ON strong_matches(owner_org);
+        CREATE INDEX idx_strong_briefing_year ON strong_matches(briefing_note_year);
+        CREATE INDEX idx_strong_owner_year ON strong_matches(owner_org, briefing_note_year);
         CREATE INDEX idx_strong_tracking_number ON strong_matches(tracking_number);
         CREATE INDEX idx_strong_request_number ON strong_matches(request_number);
         CREATE INDEX idx_strong_informal ON strong_matches(informal_requests_sum);
@@ -698,7 +739,7 @@ def main() -> None:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     memory_status("build start")
 
-    a_fields = ["tracking_number", "owner_org", "owner_org_title"]
+    a_fields = ["tracking_number", "owner_org", "owner_org_title", "date_received"]
     b_fields = [
         "Request Number",
         "Unique Identifier",
@@ -861,6 +902,8 @@ def main() -> None:
         "owner_org",
         "owner_org_title",
         "tracking_number",
+        "briefing_note_date_received",
+        "briefing_note_year",
         "request_number",
         "informal_requests_sum",
         "unique_identifiers",
@@ -904,6 +947,12 @@ def main() -> None:
     html = TEMPLATE_FILE.read_text(encoding="utf-8")
     html = html.replace("{{ build_date }}", date.today().isoformat())
     OUT_HTML.write_text(html, encoding="utf-8")
+
+    for asset_name in ("data-lineage.svg", "data-lineage-simple.svg"):
+        source = TEMPLATE_FILE.parent / asset_name
+        if source.exists():
+            shutil.copy2(source, OUT_DIR / asset_name)
+
     print(f"Wrote {OUT_HTML}", flush=True)
 
 
