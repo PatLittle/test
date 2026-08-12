@@ -13,6 +13,14 @@
   margin-inline: auto;
 }
 
+#transparency-context .pipeline-hero {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr) !important;
+}
+
+#transparency-context .lineage-figure img {
+  width: 100% !important;
+}
+
 #report,
 #report th,
 #report td {
@@ -45,5 +53,9 @@
   .pipeline-banner {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+  }
+
+  #transparency-context .pipeline-hero {
+    grid-template-columns: 1fr !important;
   }
 }
