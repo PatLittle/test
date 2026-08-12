@@ -537,12 +537,12 @@
           <div class="pipeline-copy">
             <gcds-heading id="pipeline-heading" tag="h2">Data pipeline</gcds-heading>
              <gcds-text>
-              The information displayed on the frontend is fed from a data automation layer that combines Open Government datasets for ATI Summaries, Informal re-request analytics, and BN Titles, <br>
-              with Department identifiers from Open.Canada.ca's CKAN API, and links it to records published on <a href="https://theijf.org/open-by-default">theijf.org/open-by-default</a>. <br>
-              We keep a copy of only the records from Open-by-Default relevant to the BN ATIs, and only the metadata.
-              <br> Compared to a database TheIJF advertises at over 1,500GB, we are working with a SQLlite DB under 50MB, hopefully keeping webworkers happy enough with the job. <br>
-              Since TheIJF is using a Document Cloud for their document hosting, their API gives lots of options to search, collect, and retive both the metadata and document files too. This service is attentive
-              on usage and limit ananomous users to 25 requests/second. There is no set limit for registered users, but they will not let you to rebuild a full corpus of 10,000s documents more than occasionlly. We just get the last 7 days of changes when we run the Data pipeline, but can always add a longer window if any backfill is needed. 
+              <p>The information displayed on the frontend is fed from a data automation layer that combines Open Government datasets for ATI Summaries, Informal re-request analytics, and BN Titles,
+              with Department identifiers from Open.Canada.ca's CKAN API, and links it to records published on <a href="https://theijf.org/open-by-default">theijf.org/open-by-default</a>.
+              We keep a copy of only the records from Open-by-Default relevant to the BN ATIs, and only the metadata.</p>
+         <p> Compared to a database TheIJF advertises at over 1,500GB, we are working with a SQLlite DB under 50MB, hopefully keeping webworkers happy enough with the job. </p>
+              Since TheIJF is using a Document Cloud for their document hosting, their API gives lots of options to search, collect, and retive both the metadata and document files too. <a href="https://api.www.documentcloud.org/api/documents/">API docs </a> from the documentCloud team here, In the Django REST viewer the have, everything can be navigated by clicking around the endpoint tree. This service is attentive
+              on usage and limit ananomous users to 25 requests/second. There is no set limit for registered users, but they will not let you to rebuild a full corpus of 10,000s documents more than occasionlly. <p>We just get the last 7 days of changes when we run the Data pipeline, but can always add a longer window if any backfill is needed.</p> 
              
             </gcds-text>
           </div>
