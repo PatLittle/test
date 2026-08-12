@@ -5,5 +5,8 @@ venv/
 BN/data.sqlite
 docs/data.sqlite
 
+node_modules/
+**/node_modules/
+
 __pycache__/
 *.pyc
