@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Briefing note and ATI transparency workflow</title>
+  <desc id="desc">A five-stage workflow connecting briefing note titles and numbers, formal ATI requests, completed access to information requests, informal requests for ATI records, and repositories and discovery.</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#26374a" flood-opacity=".18"/></filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7fafc"/><stop offset="1" stop-color="#eef3f7"/></linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8d98a5"/></marker>
+    <style>
+      .brand{font:700 31px Arial,sans-serif;fill:#111}.panel{fill:#fff;stroke:#d5dbe1;stroke-width:2;rx:20}.head{font:700 24px Arial,sans-serif;fill:#fff}.body{font:18px Arial,sans-serif;fill:#1f2937}.small{font:15px Arial,sans-serif;fill:#475569}.label{font:700 18px Arial,sans-serif;fill:#26374a}.arrow{fill:none;stroke:#8d98a5;stroke-width:10;stroke-linecap:round;stroke-linejoin:round;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g transform="translate(55 42)">
+    <rect x="0" y="0" width="30" height="38" fill="#e11"/><rect x="70" y="0" width="30" height="38" fill="#e11"/>
+    <path d="M50 4l5 11 10-4-4 10 9 5-11 3 2 12-11-7-11 7 2-12-11-3 9-5-4-10 10 4z" fill="#e11"/>
+    <text x="125" y="30" class="brand">Treasury Board of Canada Secretariat</text>
+  </g>
+
+  <path class="arrow" d="M330 490H365"/><path class="arrow" d="M635 490H670"/><path class="arrow" d="M940 490H975"/><path class="arrow" d="M1245 490H1280"/>
+  <path class="arrow" d="M1430 710V800H170V720"/>
+
+  <g transform="translate(40 170)" filter="url(#shadow)">
+    <rect class="panel" width="290" height="545"/>
+    <path d="M0 20Q0 0 20 0H270Q290 0 290 20V95H0z" fill="#2f6f9f"/>
+    <text x="24" y="42" class="head">Briefing Note Titles</text><text x="24" y="72" class="head">and Numbers</text>
+    <rect x="22" y="120" width="246" height="46" rx="23" fill="#f8fafc" stroke="#cbd5e1"/><text x="40" y="149" class="small">Search</text>
+    <g class="small"><rect x="22" y="185" width="90" height="34" rx="17" fill="#edf2f7"/><text x="34" y="207">Organization</text><rect x="120" y="185" width="62" height="34" rx="17" fill="#edf2f7"/><text x="138" y="207">Year</text><rect x="190" y="185" width="68" height="34" rx="17" fill="#edf2f7"/><text x="205" y="207">Month</text></g>
+    <rect x="22" y="245" width="246" height="250" rx="12" fill="#fff" stroke="#d5dbe1"/>
+    <text x="38" y="280" class="small">Reference Number</text><text x="180" y="280" class="label">58043962</text>
+    <text x="38" y="320" class="label">Policy Guidance on the</text><text x="38" y="346" class="label">Disclosure of Historical Records</text>
+    <line x1="38" y1="365" x2="250" y2="365" stroke="#d5dbe1"/>
+    <text x="38" y="400" class="body">Office of the Chief Human</text><text x="38" y="424" class="body">Resources Officer</text>
+    <line x1="38" y1="442" x2="250" y2="442" stroke="#d5dbe1"/>
+    <text x="38" y="478" class="small">Treasury Board of Canada Secretariat</text>
+  </g>
+
+  <g transform="translate(345 170)" filter="url(#shadow)">
+    <rect class="panel" width="290" height="545"/>
+    <path d="M0 20Q0 0 20 0H270Q290 0 290 20V95H0z" fill="#2aa7b8"/>
+    <text x="24" y="58" class="head">Formal ATI Request</text>
+    <text x="25" y="132" class="small" fill="#6b21a8">Canada.ca › TBS Secretariat ›</text><text x="25" y="158" class="small" fill="#6b21a8">Access to information and privacy</text>
+    <text x="25" y="205" class="label">Make an access to information</text><text x="25" y="232" class="label">or personal information request</text>
+    <rect x="25" y="250" width="45" height="6" fill="#d52b1e"/>
+    <text x="25" y="292" class="body">Access to information and privacy</text><text x="25" y="317" class="body">gives the right to access records held</text><text x="25" y="342" class="body">by government institutions.</text>
+    <rect x="25" y="368" width="112" height="42" rx="5" fill="#26374a"/><text x="43" y="395" class="small" fill="#fff">Make a request</text>
+    <text x="25" y="452" class="label">Sections</text><text x="42" y="486" class="small">○ Types of ATIP requests</text><text x="42" y="514" class="small">○ What you will need</text>
+  </g>
+
+  <g transform="translate(650 170)" filter="url(#shadow)">
+    <rect class="panel" width="290" height="545"/>
+    <path d="M0 20Q0 0 20 0H270Q290 0 290 20V95H0z" fill="#8f3d94"/>
+    <text x="24" y="42" class="head">Completed Access to</text><text x="24" y="72" class="head">Information Requests</text>
+    <rect x="22" y="125" width="246" height="190" rx="12" fill="#fff" stroke="#d5dbe1"/>
+    <text x="36" y="162" class="label">Summary of Request</text><rect x="36" y="180" width="210" height="100" rx="8" fill="#edf2f7"/>
+    <text x="48" y="210" class="small">Request for Briefing Note to the</text><text x="48" y="234" class="small">President of the Treasury Board -</text><text x="48" y="258" class="small">58043962: Policy Guidance...</text>
+    <rect x="22" y="335" width="246" height="150" rx="12" fill="#fff" stroke="#d5dbe1"/>
+    <text x="40" y="372" class="small">Request Number</text><text x="40" y="398" class="label">A-2024-01672</text><text x="40" y="438" class="small">Disposition</text><text x="40" y="465" class="label">Disclosed in part</text>
+  </g>
+
+  <g transform="translate(955 170)" filter="url(#shadow)">
+    <rect class="panel" width="290" height="545"/>
+    <path d="M0 20Q0 0 20 0H270Q290 0 290 20V95H0z" fill="#8f3d94"/>
+    <text x="24" y="42" class="head">Informal Request</text><text x="24" y="72" class="head">for ATI Records</text>
+    <text x="25" y="142" class="label">Request a Copy of Previously</text><text x="25" y="168" class="label">Disclosed Records</text><text x="25" y="194" class="small">(Based on A-2024-01672)</text>
+    <text x="25" y="242" class="body">Re-Request details for image</text><text x="25" y="268" class="body">58043962 (A-2024-01672)...</text>
+    <text x="25" y="320" class="label">Requestor Category</text><rect x="25" y="335" width="240" height="42" rx="6" fill="#fff" stroke="#cbd5e1"/><text x="40" y="362" class="small">- Select -</text>
+    <text x="25" y="414" class="label">Given Name</text><rect x="25" y="430" width="240" height="42" rx="6" fill="#fff" stroke="#cbd5e1"/>
+    <text x="25" y="505" class="label">Family Name</text>
+  </g>
+
+  <g transform="translate(1260 170)" filter="url(#shadow)">
+    <rect class="panel" width="300" height="545"/>
+    <path d="M0 20Q0 0 20 0H280Q300 0 300 20V95H0z" fill="#55b7c5"/>
+    <text x="24" y="42" class="head">Repositories &amp;</text><text x="24" y="72" class="head">Discovery</text>
+    <rect x="22" y="122" width="256" height="48" rx="24" fill="#fff" stroke="#cbd5e1"/><text x="40" y="144" class="small">Search indexed documents across</text><text x="40" y="162" class="small">all connected projects...</text>
+    <rect x="22" y="198" width="118" height="245" rx="10" fill="#fff" stroke="#d5dbe1"/><rect x="150" y="198" width="128" height="245" rx="10" fill="#fff" stroke="#d5dbe1"/>
+    <text x="34" y="236" class="label">IJF - Open by</text><text x="34" y="260" class="label">Default</text><text x="34" y="305" class="small">68,042 Documents</text><text x="34" y="330" class="small">7,433,812 Pages</text>
+    <text x="162" y="236" class="label">ETHOS &amp; ERIS</text><text x="162" y="260" class="small">Specialized ATI</text><text x="162" y="305" class="small">Cross-referenced</text><text x="162" y="330" class="small">records</text>
+    <rect x="34" y="465" width="96" height="38" rx="5" fill="#26374a"/><text x="45" y="490" class="small" fill="#fff">Browse IJF</text><rect x="162" y="465" width="104" height="38" rx="5" fill="#26374a"/><text x="174" y="490" class="small" fill="#fff">Browse E&amp;E</text>
+  </g>
+</svg>
