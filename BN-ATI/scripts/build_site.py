@@ -40,10 +40,46 @@ def inject_ui_overrides() -> None:
     html_path.write_text(html, encoding="utf-8")
 
 
+def inject_solution_banner() -> None:
+    """Add the transparency-context banner immediately above the licence section."""
+    html_path = ROOT / "index.html"
+    html = html_path.read_text(encoding="utf-8")
+
+    if 'id="transparency-context"' in html:
+        return
+
+    banner = '''
+      <section id="transparency-context" class="pipeline-banner" aria-labelledby="transparency-context-heading">
+        <div class="pipeline-hero">
+          <figure class="lineage-figure">
+            <img
+              src="./formal-ati-pipeline.svg"
+              alt="Workflow connecting briefing note titles and numbers, formal ATI requests, completed access to information requests, informal ATI record requests, and repositories and discovery."
+            />
+          </figure>
+          <div class="pipeline-copy">
+            <h2 id="transparency-context-heading">What does this help solve?</h2>
+            <br />
+            <h3>Where does this fit?</h3>
+            <p>This tool adds connection to transparency disclosures across Open.Canada.ca.</p>
+          </div>
+        </div>
+      </section>
+
+'''
+
+    licence_anchor = '      <section class="report-section licence-area"'
+    if licence_anchor not in html:
+        raise RuntimeError("Could not find licence section anchor for transparency context banner")
+    html = html.replace(licence_anchor, banner + licence_anchor, 1)
+    html_path.write_text(html, encoding="utf-8")
+
+
 def main() -> None:
     build_report.main()
     build_bn_funnel.main()
     inject_ui_overrides()
+    inject_solution_banner()
     print(f"Built consolidated site in {ROOT}", flush=True)
 
 
