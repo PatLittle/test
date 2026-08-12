@@ -109,11 +109,12 @@ function renderSankey(totals) {
   }
 
   const width = 1200;
-  const height = 560;
+  const height = 680;
   const nodeWidth = 18;
   const top = 82;
   const usable = 350;
   const gap = 28;
+  const outcomeGap = 68;
   const scale = usable / total;
   const xs = [45, 330, 625, 920];
 
@@ -136,7 +137,7 @@ function renderSankey(totals) {
   for (const [key, value, label, color] of outcomeValues) {
     const h = nodeHeight(value);
     nodes[key] = { x: xs[3], y: outcomeY, h, value, label, color };
-    if (value > 0) outcomeY += h + 20;
+    if (value > 0) outcomeY += Math.max(h, 18) + outcomeGap;
   }
 
   const svg = svgElement("svg", {
@@ -220,8 +221,16 @@ function render() {
   renderSummary(totals);
 }
 
+function moveFacetsAboveFunnel() {
+  const funnelSection = document.getElementById("bn-funnel-section");
+  const facets = document.querySelector(".table-facets");
+  if (!funnelSection || !facets || funnelSection.previousElementSibling === facets) return;
+  funnelSection.parentNode.insertBefore(facets, funnelSection);
+}
+
 async function initialize() {
   if (!chartElement) return;
+  moveFacetsAboveFunnel();
   try {
     rows = await loadData();
     render();
