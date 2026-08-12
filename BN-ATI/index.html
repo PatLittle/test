@@ -527,9 +527,9 @@
       <section class="report-section">
         <gcds-heading tag="h1">BN × ATI Report</gcds-heading>
         <gcds-text>
-          This pre-built report finds briefing-note reference numbers in completed
-          Access to Information summaries, combines ATI informal-request usage
-          metrics, and identifies records available through Open by Default.
+          Has someone already made an ATIP for that briefing note? Have other people
+          used the disclosed Access to Information summary to make an informal re-request?<br>
+          Has the full version already been published on one of the independent collections of ATI packages?
         </gcds-text>
       </section>
 
@@ -538,9 +538,13 @@
           <div class="pipeline-copy">
             <gcds-heading id="pipeline-heading" tag="h2">Data pipeline</gcds-heading>
             <gcds-text>
-              The report combines three Open Government datasets, CKAN organization aliases,
-              and the persistent DocumentCloud cache. Records are matched by organization,
-              ATI request and briefing-note reference before being published in the report.
+              The information displayed on the frontend is fed from a data automation layer that combines Open Government datasets for ATI Summaries, Informal re-request analytics, and BN Titles, <br>
+              with Department identifiers from Open.Canada.ca's CKAN API, and links it to records published on <a href="https://theijf.org/open-by-default">theijf.org/open-by-default</a>. 
+              We keep a copy of only the records from Open-by-Default relevant to the BN ATIs, and only the metadata.
+              Compared to a database TheIJF advertises at over 1,500GB, we are working with a SQLlite DB under 50MB, hopefully keeping webworkers happy enough with the job. 
+              Since TheIJF is using a Document Cloud for their document hosting, their API gives lots of options to search, collect, and retive both the metadata and document files too. This service is attentive
+              on usage and limit ananomous users to 25 requests/second. There is no set limit for registered users, but they will not let you to rebuild a full corpus of 10,000s documents more than occasionlly. We just get the last 7 days of changes when we run the Data pipeline, but can always add a longer window if any backfill is needed. 
+             
             </gcds-text>
           </div>
           <figure class="lineage-figure">
@@ -646,13 +650,12 @@
         <div class="pipeline-hero">
           <figure class="lineage-figure">
             <img
-              src="./formal-ati-pipeline.svg"
+              src="./ChatGPT Image Aug 12, 2026, 01_42_31 AM.png"
               alt="Workflow connecting briefing note titles and numbers, formal ATI requests, completed access to information requests, informal ATI record requests, and repositories and discovery."
             />
           </figure>
           <div class="pipeline-copy">
             <h2 id="transparency-context-heading">What does this help solve?</h2>
-            <br />
             <h3>Where does this fit?</h3>
             <p>This tool adds connection to transparency disclosures across Open.Canada.ca.</p>
           </div>
@@ -662,7 +665,7 @@
       <section class="report-section licence-area" aria-labelledby="licence-heading">
         <gcds-heading id="licence-heading" tag="h2">Licence</gcds-heading>
         <p>
-          Information licensed under the
+          Information licensed under the<br>
           <a
             href="https://open.canada.ca/en/open-government-licence-canada"
             target="_blank"
