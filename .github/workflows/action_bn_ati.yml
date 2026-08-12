@@ -238,7 +238,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add BN-ATI/
+          git add BN-ATI/index.html BN-ATI/data.sqlite BN-ATI/bn-funnel.json BN-ATI/bn-funnel.js BN-ATI/ui-overrides.css BN-ATI/data-lineage.svg BN-ATI/data-lineage-simple.svg BN-ATI/assets/ BN-ATI/.nojekyll
+          if [ -f BN-ATI/package-lock.json ]; then git add BN-ATI/package-lock.json; fi
           if git diff --cached --quiet; then
             echo "No generated report changes to commit."
           else
