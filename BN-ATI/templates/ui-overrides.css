@@ -1,0 +1,49 @@
+.pipeline-banner {
+  box-sizing: border-box;
+  width: 100vw !important;
+  max-width: none !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  padding-left: max(2rem, calc((100vw - 71.25rem) / 2)) !important;
+  padding-right: max(2rem, calc((100vw - 71.25rem) / 2)) !important;
+}
+
+.pipeline-hero {
+  width: min(71.25rem, 100%);
+  margin-inline: auto;
+}
+
+#report,
+#report th,
+#report td {
+  font-size: .82rem !important;
+  line-height: 1.25 !important;
+}
+
+#report thead th {
+  font-size: .79rem !important;
+}
+
+#report .column-filter {
+  font-size: .75rem !important;
+  padding: .32rem .38rem !important;
+}
+
+#report .details-button {
+  font-size: .75rem !important;
+  padding: .3rem .48rem !important;
+}
+
+@media (max-width: 75.25rem) {
+  .pipeline-banner {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+@media (max-width: 48rem) {
+  .pipeline-banner {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
