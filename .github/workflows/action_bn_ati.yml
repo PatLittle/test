@@ -8,11 +8,11 @@ on:
     branches:
       - main
     paths:
-      - "BN_ATI_REPORT/scripts/**"
-      - "BN_ATI_REPORT/src/**"
-      - "BN_ATI_REPORT/templates/**"
-      - "BN_ATI_REPORT/package.json"
-      - "BN_ATI_REPORT/package-lock.json"
+      - "BN-ATI/scripts/**"
+      - "BN-ATI/src/**"
+      - "BN-ATI/templates/**"
+      - "BN-ATI/package.json"
+      - "BN-ATI/package-lock.json"
       - ".github/workflows/action_bn_ati.yml"
 
 permissions:
@@ -28,7 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       documentcloud_changed: ${{ steps.changes.outputs.documentcloud_changed }}
-
     steps:
       - name: Check out main
         uses: actions/checkout@v4
@@ -51,7 +50,7 @@ jobs:
               files="$(git show --pretty='' --name-only "$SHA")"
             fi
             echo "$files"
-            if printf '%s\n' "$files" | grep -Fxq "BN_ATI_REPORT/scripts/update_doccloud_cache.py"; then
+            if printf '%s\n' "$files" | grep -Fxq "BN-ATI/scripts/update_doccloud_cache.py"; then
               changed=true
             fi
           fi
@@ -66,11 +65,9 @@ jobs:
       needs.detect-changes.outputs.documentcloud_changed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 30
-
     defaults:
       run:
-        working-directory: BN_ATI_REPORT
-
+        working-directory: BN-ATI
     steps:
       - name: Check out main
         uses: actions/checkout@v4
@@ -83,7 +80,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: BN_ATI_REPORT/scripts/requirements.txt
+          cache-dependency-path: BN-ATI/scripts/requirements.txt
 
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
@@ -93,24 +90,14 @@ jobs:
           DC_USERNAME: ${{ secrets.DC_USERNAME }}
           DC_PASSWORD: ${{ secrets.DC_PASSWORD }}
           PYTHONUNBUFFERED: "1"
-        run: |
-          echo "=== DocumentCloud update start ==="
-          date -u
-          free -h
-          df -h
-          python -u scripts/update_doccloud_cache.py
-          echo "=== DocumentCloud update complete ==="
-          date -u
-          ls -lh data/documentcloud_cache.jsonl
-          free -h
-          df -h
+        run: python -u scripts/update_doccloud_cache.py
 
       - name: Commit refreshed DocumentCloud cache
         working-directory: .
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add BN_ATI_REPORT/data/documentcloud_cache.jsonl
+          git add BN-ATI/data/documentcloud_cache.jsonl
           if git diff --cached --quiet; then
             echo "No DocumentCloud cache changes to commit."
           else
@@ -130,11 +117,9 @@ jobs:
       (needs.update-documentcloud.result == 'success' || needs.update-documentcloud.result == 'skipped')
     runs-on: ubuntu-latest
     timeout-minutes: 60
-
     defaults:
       run:
-        working-directory: BN_ATI_REPORT
-
+        working-directory: BN-ATI
     steps:
       - name: Check out refreshed main
         uses: actions/checkout@v4
@@ -147,26 +132,20 @@ jobs:
         with:
           python-version: "3.12"
           cache: pip
-          cache-dependency-path: BN_ATI_REPORT/scripts/requirements.txt
+          cache-dependency-path: BN-ATI/scripts/requirements.txt
 
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Build SQLite report database, page, and BN funnel
+      - name: Build report directly in BN-ATI
         env:
           PYTHONUNBUFFERED: "1"
         run: |
-          echo "=== report build start ==="
-          date -u
+          echo "=== consolidated BN-ATI build start ==="
           free -h
           df -h
-          python -u scripts/build_report.py
-          python -u scripts/build_bn_funnel.py
-          echo "=== report build complete ==="
-          date -u
-          ls -lh docs/data.sqlite docs/index.html docs/bn-funnel.json docs/bn-funnel.js
-          free -h
-          df -h
+          python -u scripts/build_site.py
+          ls -lh data.sqlite index.html bn-funnel.json bn-funnel.js ui-overrides.css
 
       - name: Verify SQLite database integrity
         run: |
@@ -174,12 +153,10 @@ jobs:
           import sqlite3
           from pathlib import Path
 
-          db = Path("docs/data.sqlite")
+          db = Path("data.sqlite")
           connection = sqlite3.connect(f"file:{db}?mode=ro", uri=True)
           result = connection.execute("PRAGMA quick_check").fetchall()
-          facet_columns = connection.execute(
-              "PRAGMA table_info(strong_matches)"
-          ).fetchall()
+          facet_columns = connection.execute("PRAGMA table_info(strong_matches)").fetchall()
           connection.close()
           print("SQLite quick_check:", result)
           if result != [("ok",)]:
@@ -203,11 +180,10 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import hashlib
-          import shutil
 
           app = Path("src/app.js")
-          html = Path("docs/index.html")
-          db = Path("docs/data.sqlite")
+          html = Path("index.html")
+          db = Path("data.sqlite")
 
           db_hash = hashlib.sha256(db.read_bytes()).hexdigest()
           database_build_id = db_hash[:16]
@@ -230,15 +206,11 @@ jobs:
           old_script = '<script type="module" src="./assets/app.js"></script>'
           new_script = f'<script type="module" src="./assets/app.js?v={asset_build_id}"></script>'
           if old_script not in html_text:
-              raise SystemExit("Could not find app.js script tag in docs/index.html")
+              raise SystemExit("Could not find app.js script tag in index.html")
           html.write_text(html_text.replace(old_script, new_script, 1), encoding="utf-8")
-
-          shutil.rmtree("docs/db", ignore_errors=True)
           print(f"SQLite SHA-256: {db_hash}")
-          print(f"SQLite bytes: {db.stat().st_size:,}")
           print(f"Database build ID: {database_build_id}")
           print(f"Asset build ID: {asset_build_id}")
-          print("Using one complete SQLite download; HTTP range/chunk reads are disabled.")
           PY
 
       - name: Bundle browser application
@@ -246,37 +218,27 @@ jobs:
 
       - name: Verify browser assets
         run: |
-          test -f docs/assets/app.js
-          test -f docs/assets/app.css
-          test -f docs/assets/sql-wasm.wasm
-          test -f docs/bn-funnel.json
-          test -f docs/bn-funnel.js
-          test ! -f docs/assets/sqlite.worker.js
-          test ! -d docs/db
-          grep -q "data.sqlite" docs/assets/app.js
-          grep -q "bn-funnel.js" docs/index.html
-          grep -q "Briefing Note Match Funnel" docs/index.html
-          echo "Browser assets verified: full sql.js database loader and BN Sankey funnel assets."
+          test -f assets/app.js
+          test -f assets/app.css
+          test -f assets/sql-wasm.wasm
+          test ! -f assets/sqlite.worker.js
+          grep -q "data.sqlite" assets/app.js
+          grep -q "bn-funnel.js" index.html
+          grep -q "ui-overrides.css" index.html
+          echo "Consolidated BN-ATI browser assets verified."
 
       - name: Restore source after generated build configuration
         run: git checkout -- src/app.js
 
       - name: Disable Jekyll
-        run: touch docs/.nojekyll
+        run: touch .nojekyll
 
-      - name: Publish report to /BN-ATI/
-        working-directory: .
-        run: |
-          rm -rf BN-ATI
-          mkdir -p BN-ATI
-          cp -a BN_ATI_REPORT/docs/. BN-ATI/
-
-      - name: Commit generated report and published site
+      - name: Commit generated BN-ATI site
         working-directory: .
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add BN_ATI_REPORT/docs/ BN-ATI/
+          git add BN-ATI/
           if git diff --cached --quiet; then
             echo "No generated report changes to commit."
           else
