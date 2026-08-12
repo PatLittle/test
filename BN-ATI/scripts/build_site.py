@@ -54,15 +54,20 @@ def inject_solution_banner() -> None:
         <div class="pipeline-hero">
           <figure class="lineage-figure">
             <img
-              src="./formal-ati-pipeline.svg"
+              src="./End2End2Open.png"
               alt="Workflow connecting briefing note titles and numbers, formal ATI requests, completed access to information requests, informal ATI record requests, and repositories and discovery."
             />
           </figure>
           <div class="pipeline-copy">
-            <h2 id="transparency-context-heading">What does this help solve?</h2>
-            <br />
-            <h3>Where does this fit?</h3>
-            <p>This tool adds connection to transparency disclosures across Open.Canada.ca.</p>
+            <h2 id="transparency-context-heading">What does this help solve? where could this fit?</h2>
+            <br/>
+            <ol><li>Has anyone heard an ATIP Office say things are slow in the office, they have all the people they need all equiped with the tools they need?</li>
+            <li>Have you ever heard someone who submitted an informal re-request through the portal say they ended up getting it within a few minutes and in a convenient way?</li>
+            <li>Nothing is faster or more convient than just viewing transparey disclosures online.</li>
+            <li>It is a literal impossiblity to produce a greater operational for the GC. This diverts volumne away from costly GC processes with ATIP staff manually emailing back and forth with re-requestors.</li> <li>Or in some cases, taking digital content off of internet connected systems, then mailing it on a (single use) USB Drive in a bubblewrapped envelope to the requestor.<li>
+            <li>Here each request produces 0 incremental costs, not even the usage based IT costs as service delivers is voluntary by 3rd party systems, mostly civic tech organizations</li>  
+            </ol>
+            <p>This tool adds connection to transparency disclosures across Open.Canada.ca, allowinga a night and day improvement in service experience on 1000s of transactions with Canadians.</p> 
           </div>
         </div>
       </section>
