@@ -1,112 +1,116 @@
 # BN × ATI report
 
-This project builds a pre-generated SQLite-backed static report for the repository's existing GitHub Pages site.
+This directory contains both the source and the published files for the BN × ATI static report.
 
 ## Published location
 
-The repository is configured for legacy GitHub Pages from the `main` branch repository root. The workflow therefore copies the generated report to:
-
-```text
-/BN-ATI/
-```
-
-Published URL:
+The repository uses legacy GitHub Pages from the `main` branch repository root, so this directory is served directly at:
 
 ```text
 https://patlittle.github.io/test/BN-ATI/
 ```
 
-`BN_ATI_REPORT/docs/` is the intermediate build directory. It is not the canonical public URL.
+There is no longer a separate `BN_ATI_REPORT/` source tree or intermediate `docs/` copy. Keeping the source, persistent cache, and generated site together avoids maintaining two parallel copies of the report.
+
+## Directory structure
+
+```text
+BN-ATI/
+├── README.md
+├── package.json
+├── package-lock.json          # generated/updated by npm
+├── data/
+│   └── documentcloud_cache.jsonl
+├── scripts/
+│   ├── build_report.py
+│   ├── build_bn_funnel.py
+│   ├── build_site.py
+│   ├── update_doccloud_cache.py
+│   └── requirements.txt
+├── src/
+│   └── app.js
+├── templates/
+│   ├── index.html
+│   ├── bn-funnel.js
+│   ├── ui-overrides.css
+│   ├── data-lineage.svg
+│   └── data-lineage-simple.svg
+├── assets/                    # generated browser bundle
+├── index.html                 # generated published page
+├── data.sqlite                # generated report database
+├── bn-funnel.json             # generated BN funnel data
+├── bn-funnel.js               # generated funnel browser script
+├── ui-overrides.css           # generated UI overrides
+└── .nojekyll
+```
 
 ## Build pipeline
 
 1. `scripts/update_doccloud_cache.py`
    - Loads `data/documentcloud_cache.jsonl`.
-   - Queries only DocumentCloud records created in the last ten days.
-   - Upserts the returned records by DocumentCloud ID.
-   - Rewrites the complete cache, preserving records from previous days.
+   - Queries DocumentCloud records created in the last ten days.
+   - Upserts returned records by DocumentCloud ID.
+   - Preserves the historical cache that has already been backfilled.
 
 2. `scripts/build_report.py`
-   - Uses `ckanapi` to download the three Open Government DataStore resources.
+   - Downloads the three Open Government DataStore resources.
    - Aggregates ATI informal-request counts.
    - Matches briefing-note tracking numbers inside ATI summary text within the same `owner_org`.
    - Separates weak IDs.
-   - Merges the persistent DocumentCloud cache on `owner_org + request_number`.
-   - Writes `docs/data.sqlite` and renders `docs/index.html`.
+   - Merges the persistent DocumentCloud cache.
+   - Produces the SQLite-backed report.
 
-3. `npm run build`
-   - Bundles DataTables, Chart.js, and `sql.js-httpvfs`.
-   - Copies the SQLite worker and WASM files into `docs/assets`.
-   - The workflow injects the exact SQLite byte length before bundling so `sql.js-httpvfs` works correctly when GitHub Pages serves the SQLite file with compression.
+3. `scripts/build_bn_funnel.py`
+   - Starts from the unique briefing-note population.
+   - Produces the BN-perspective Sankey/funnel data by organization and briefing-note year.
 
-4. `.github/workflows/action_bn_ati.yml`
-   - Builds the report.
-   - Copies `BN_ATI_REPORT/docs/` to the repository-root `BN-ATI/` directory.
-   - Commits the persistent DocumentCloud cache and published `BN-ATI/` site back to `main`.
-   - GitHub's legacy Pages build then serves it automatically.
+4. `scripts/build_site.py`
+   - Runs the report and funnel builders with output redirected directly into `BN-ATI/`.
+   - Copies the UI override stylesheet used by the published page.
 
-## Other repository sites
+5. `npm run build`
+   - Bundles DataTables, Chart.js, and sql.js browser assets directly into `BN-ATI/assets/`.
 
-The repository root remains the CKAN Toolbox site. The other generated sites are published by `.github/workflows/deploy.yml` into their branch-root Pages paths:
-
-```text
-/                 CKAN Toolbox
-/BN/              BN + ATI Match Explorer
-/VALIDATION/      Validation site
-/BN-ATI/          BN × ATI Report
-```
-
-The deleted-data workflows update report data only and do not deploy or replace the GitHub Pages site.
+6. `.github/workflows/action_bn_ati.yml`
+   - Builds directly inside `BN-ATI/`.
+   - Verifies SQLite integrity and the generated browser assets.
+   - Commits only the generated site files back to `main`.
+   - GitHub Pages serves the directory directly.
 
 ## DocumentCloud cache
 
-The cache is intentionally committed at:
+The persistent cache is:
 
 ```text
-BN_ATI_REPORT/data/documentcloud_cache.jsonl
+BN-ATI/data/documentcloud_cache.jsonl
 ```
 
-Each daily run queries only:
+The normal rolling query remains:
 
 ```text
 organization:38956 created_at:[NOW-10DAY TO NOW]
 ```
 
-Existing records remain in the cache, while recent records are inserted or refreshed by ID.
-
-## Required repository settings
-
-Under **Settings → Actions → General → Workflow permissions**, select:
-
-```text
-Read and write permissions
-```
-
-GitHub Pages should remain configured as:
-
-```text
-Source: Deploy from a branch
-Branch: main
-Folder: / (root)
-```
-
-For authenticated DocumentCloud access, configure repository secrets:
-
-```text
-DC_USERNAME
-DC_PASSWORD
-```
+Historical data already in the cache is retained.
 
 ## Local build
 
 ```bash
-cd BN_ATI_REPORT
+cd BN-ATI
 python -m pip install -r scripts/requirements.txt
-python scripts/update_doccloud_cache.py
-python scripts/build_report.py
+python scripts/build_site.py
 npm install
 npm run build
-python -m http.server 8000 --directory docs
+python -m http.server 8000 --directory .
 ```
 
-Open `http://localhost:8000/`. Do not open `docs/index.html` directly with a `file:` URL because the SQLite range requests require HTTP.
+Open `http://localhost:8000/`.
+
+## Other repository sites
+
+```text
+/                 CKAN Toolbox
+/BN/              BN site
+/VALIDATION/      Validation site
+/BN-ATI/          BN × ATI Report
+```
