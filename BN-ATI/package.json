@@ -3,8 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build:web": "esbuild src/app.js --bundle --minify --format=esm --target=es2022 --outdir=docs/assets --loader:.css=css",
-    "copy:sqlite-assets": "mkdir -p docs/assets && rm -f docs/assets/sqlite.worker.js && cp node_modules/sql.js/dist/sql-wasm.wasm docs/assets/sql-wasm.wasm",
+    "build:web": "esbuild src/app.js --bundle --minify --format=esm --target=es2022 --outdir=assets --loader:.css=css",
+    "copy:sqlite-assets": "mkdir -p assets && rm -f assets/sqlite.worker.js && cp node_modules/sql.js/dist/sql-wasm.wasm assets/sql-wasm.wasm",
     "build": "npm run build:web && npm run copy:sqlite-assets"
   },
   "dependencies": {
