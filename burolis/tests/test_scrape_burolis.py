@@ -1,4 +1,6 @@
+import csv
 import importlib.util
+import json
 import sys
 import tempfile
 import unittest
@@ -97,6 +99,99 @@ class OutputTests(unittest.TestCase):
             csv_bytes = (Path(temp_dir) / "burolis_bilingual.csv").read_bytes()
             self.assertNotIn(b"\r", csv_bytes)
             self.assertNotIn(b"Line one \n", csv_bytes)
+
+
+class ChangeLogTests(unittest.TestCase):
+    def test_detects_content_and_row_changes_but_not_order_changes(self):
+        old_en = [
+            {"serviceId": 1, "name": "One"},
+            {"serviceId": 2, "name": "Two"},
+        ]
+        old_fr = [
+            {"serviceId": 1, "name": "Un"},
+            {"serviceId": 2, "name": "Deux"},
+        ]
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output_dir = Path(temp_dir)
+            (output_dir / "burolis_en.json").write_text(
+                json.dumps(old_en), encoding="utf-8"
+            )
+            (output_dir / "burolis_fr.json").write_text(
+                json.dumps(old_fr), encoding="utf-8"
+            )
+
+            self.assertFalse(
+                scraper.datasets_changed(
+                    list(reversed(old_en)), list(reversed(old_fr)), output_dir
+                )
+            )
+            changed_fr = [*old_fr]
+            changed_fr[0] = {"serviceId": 1, "name": "Un modifié"}
+            self.assertTrue(
+                scraper.datasets_changed(old_en, changed_fr, output_dir)
+            )
+            self.assertTrue(
+                scraper.datasets_changed(old_en[:-1], old_fr, output_dir)
+            )
+
+    def test_keeps_one_row_per_day_and_preserves_daily_change(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "timeseries.csv"
+            scraper.update_timeseries("2026-09-23", 10, 10, False, path)
+            scraper.update_timeseries("2026-09-23", 11, 10, True, path)
+            scraper.update_timeseries("2026-09-23", 11, 10, False, path)
+            scraper.update_timeseries("2026-09-30", 11, 10, False, path)
+
+            with path.open(encoding="utf-8", newline="") as source:
+                rows = list(csv.DictReader(source))
+
+        self.assertEqual(
+            rows,
+            [
+                {
+                    "date": "2026-09-23",
+                    "rows_en": "11",
+                    "rows_fr": "10",
+                    "change_detected": "1",
+                },
+                {
+                    "date": "2026-09-30",
+                    "rows_en": "11",
+                    "rows_fr": "10",
+                    "change_detected": "0",
+                },
+            ],
+        )
+
+    def test_builds_requested_mermaid_charts(self):
+        en = [
+            {
+                "serviceId": 1,
+                "provision": "5-1-a",
+                "langObligationId": 1,
+                "institutionCode": "AAA",
+            },
+            {
+                "serviceId": 2,
+                "provision": "5-1-a",
+                "langObligationId": 2,
+                "institutionCode": "AAA",
+            },
+            {
+                "serviceId": 3,
+                "provision": "6-1-a",
+                "langObligationId": 2,
+                "institutionCode": "BBB",
+            },
+        ]
+        readme = scraper.build_readme(en, en, en, "2026-09-23", True)
+
+        self.assertEqual(readme.count("pie showData"), 2)
+        self.assertIn("xychart-beta", readme)
+        self.assertIn('"5-1-a" : 2', readme)
+        self.assertIn('x-axis ["AAA", "BBB"]', readme)
+        self.assertIn("Updated in UTC on **2026-09-23**", readme)
 
 
 if __name__ == "__main__":

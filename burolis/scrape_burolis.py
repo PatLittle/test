@@ -3,10 +3,13 @@
 
 from __future__ import annotations
 
+import csv
 import json
 import re
 import time
+from collections import Counter
 from collections.abc import Iterable
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +27,9 @@ PAGE_SIZE = 1_000
 REQUEST_TIMEOUT = 120
 MAX_PAGES = 1_000
 OUTPUT_DIR = Path(__file__).resolve().parent / "data"
+TIMESERIES_PATH = OUTPUT_DIR / "burolis_timeseries.csv"
+README_PATH = Path(__file__).resolve().parent / "README.md"
+TIMESERIES_FIELDS = ("date", "rows_en", "rows_fr", "change_detected")
 
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -247,6 +253,37 @@ def _records_by_id(records: list[Record], language: str) -> dict[Any, Record]:
     return indexed
 
 
+def load_saved_records(path: Path) -> list[Record] | None:
+    """Load a prior JSON snapshot, or return None before the first snapshot."""
+    if not path.exists():
+        return None
+    with path.open(encoding="utf-8") as source:
+        records = json.load(source)
+    if not isinstance(records, list) or not all(
+        isinstance(record, dict) for record in records
+    ):
+        raise RuntimeError(f"Expected a JSON record array in {path}")
+    return records
+
+
+def datasets_changed(
+    records_en: list[Record],
+    records_fr: list[Record],
+    output_dir: Path = OUTPUT_DIR,
+) -> bool:
+    """Compare new records with the saved snapshots, independent of row order."""
+    previous_en = load_saved_records(output_dir / "burolis_en.json")
+    previous_fr = load_saved_records(output_dir / "burolis_fr.json")
+    if previous_en is None or previous_fr is None:
+        return True
+    return (
+        _records_by_id(previous_en, "saved EN")
+        != _records_by_id(records_en, "new EN")
+        or _records_by_id(previous_fr, "saved FR")
+        != _records_by_id(records_fr, "new FR")
+    )
+
+
 def merge_languages(records_en: list[Record], records_fr: list[Record]) -> list[Record]:
     """Merge on serviceId and suffix only fields that differ anywhere."""
     en_by_id = _records_by_id(records_en, "EN")
@@ -320,14 +357,203 @@ def save_outputs(
     )
 
 
+def update_timeseries(
+    run_date: str,
+    rows_en: int,
+    rows_fr: int,
+    change_detected: bool,
+    path: Path = TIMESERIES_PATH,
+) -> None:
+    """Add or update one UTC calendar-day entry in the change log."""
+    datetime.strptime(run_date, "%Y-%m-%d")
+    rows_by_date: dict[str, dict[str, str]] = {}
+
+    if path.exists():
+        with path.open(encoding="utf-8-sig", newline="") as source:
+            reader = csv.DictReader(source)
+            if tuple(reader.fieldnames or ()) != TIMESERIES_FIELDS:
+                raise RuntimeError(
+                    f"Unexpected columns in {path}; expected {TIMESERIES_FIELDS}"
+                )
+            for row in reader:
+                datetime.strptime(row["date"], "%Y-%m-%d")
+                int(row["rows_en"])
+                int(row["rows_fr"])
+                if row["change_detected"] not in {"0", "1"}:
+                    raise RuntimeError(
+                        f"Invalid change_detected value in {path}: "
+                        f"{row['change_detected']!r}"
+                    )
+                rows_by_date[row["date"]] = row
+
+    previous_today = rows_by_date.get(run_date)
+    daily_change = int(change_detected)
+    if previous_today is not None:
+        daily_change |= int(previous_today["change_detected"])
+
+    rows_by_date[run_date] = {
+        "date": run_date,
+        "rows_en": str(rows_en),
+        "rows_fr": str(rows_fr),
+        "change_detected": str(daily_change),
+    }
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as output:
+        writer = csv.DictWriter(
+            output, fieldnames=TIMESERIES_FIELDS, lineterminator="\n"
+        )
+        writer.writeheader()
+        writer.writerows(rows_by_date[date] for date in sorted(rows_by_date))
+
+
+def _chart_label(value: Any) -> str:
+    if value is None or str(value).strip() == "":
+        return "(blank)"
+    return str(value).strip()
+
+
+def _counts(records: list[Record], field: str) -> Counter[str]:
+    return Counter(_chart_label(record.get(field)) for record in records)
+
+
+def _mermaid_pie(title: str, counts: Counter[str]) -> str:
+    lines = ["```mermaid", "pie showData", f"    title {title}"]
+    for label, count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"    {json.dumps(label, ensure_ascii=False)} : {count}")
+    lines.append("```")
+    return "\n".join(lines)
+
+
+def _mermaid_bar(title: str, counts: Counter[str], limit: int = 25) -> str:
+    top_counts = sorted(counts.items(), key=lambda item: (-item[1], item[0]))[
+        :limit
+    ]
+    labels = ", ".join(json.dumps(label, ensure_ascii=False) for label, _ in top_counts)
+    values = ", ".join(str(count) for _, count in top_counts)
+    maximum = max((count for _, count in top_counts), default=0)
+    return "\n".join(
+        [
+            "```mermaid",
+            "xychart-beta",
+            f"    title {json.dumps(title, ensure_ascii=False)}",
+            f"    x-axis [{labels}]",
+            f'    y-axis "Services" 0 --> {maximum}',
+            f"    bar [{values}]",
+            "```",
+        ]
+    )
+
+
+def build_readme(
+    records_en: list[Record],
+    records_fr: list[Record],
+    merged: list[Record],
+    run_date: str,
+    change_detected: bool,
+) -> str:
+    """Build the generated project README and its Mermaid charts."""
+    provision_counts = _counts(records_en, "provision")
+    obligation_counts = _counts(records_en, "langObligationId")
+    institution_counts = _counts(records_en, "institutionCode")
+    institution_total = len(
+        {
+            record.get("institutionCode")
+            for record in records_en
+            if record.get("institutionCode") not in {None, ""}
+        }
+    )
+
+    return f"""# Burolis bilingual data
+
+This directory contains a weekly bilingual snapshot of the Treasury Board of
+Canada Secretariat's [Burolis directory]({BASE_URL}). The scraper downloads all
+English and French results, merges them on `serviceId`, and keeps separate
+`_en` and `_fr` columns only when a field differs between the two languages.
+
+## Current snapshot
+
+Updated in UTC on **{run_date}**. Change detected: **{"yes" if change_detected else "no"}**.
+
+| Measure | Count |
+| --- | ---: |
+| English records | {len(records_en):,} |
+| French records | {len(records_fr):,} |
+| Merged services | {len(merged):,} |
+| Institution codes | {institution_total:,} |
+| Provision values | {len(provision_counts):,} |
+
+## Provision counts
+
+{_mermaid_pie("Services by provision", provision_counts)}
+
+## Language obligation ID
+
+{_mermaid_pie("Services by language obligation ID", obligation_counts)}
+
+## Top 25 institutions by service count
+
+Labels use the source `institutionCode` field.
+
+{_mermaid_bar("Top 25 institutions by service count", institution_counts)}
+
+## Data files
+
+- `data/burolis_en.json`
+- `data/burolis_fr.json`
+- `data/burolis_bilingual.json`
+- `data/burolis_bilingual.jsonl`
+- `data/burolis_bilingual.csv`
+- `data/burolis_timeseries.csv`
+
+The time series has one row per UTC date. `change_detected` is `1` when either
+language's row count or any record content changed from the prior snapshot, and
+`0` otherwise. Multiple runs on the same date update one row; once a change is
+detected that day's value remains `1`.
+
+## Run locally
+
+```bash
+python -m pip install -r burolis/requirements.txt
+python burolis/scrape_burolis.py
+```
+
+The scheduled GitHub Actions workflow runs on a GitHub-hosted Ubuntu runner.
+Responses containing the TBS `Request Rejected` page are treated as failures,
+so rejected or incomplete responses cannot replace the saved snapshot.
+"""
+
+
+def write_readme(content: str, path: Path = README_PATH) -> None:
+    path.write_text(content, encoding="utf-8", newline="\n")
+
+
 def main() -> None:
     records_en = download_language(EN_URL, "en")
     records_fr = download_language(FR_URL, "fr")
+    change_detected = datasets_changed(records_en, records_fr)
     merged = merge_languages(records_en, records_fr)
     save_outputs(records_en, records_fr, merged)
+    run_date = datetime.now(timezone.utc).date().isoformat()
+    update_timeseries(
+        run_date,
+        len(records_en),
+        len(records_fr),
+        change_detected,
+    )
+    write_readme(
+        build_readme(
+            records_en,
+            records_fr,
+            merged,
+            run_date,
+            change_detected,
+        )
+    )
     print(f"EN: {len(records_en):,}")
     print(f"FR: {len(records_fr):,}")
     print(f"Merged: {len(merged):,}")
+    print(f"Change detected: {int(change_detected)}")
     print(f"Saved data in {OUTPUT_DIR}")
 
 
