@@ -1,0 +1,58 @@
+name: Update OpenData2OpenMaps GeoJSON
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 9 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-opendata2openmaps
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Convert open data to GeoJSON
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install requests shapely
+
+      - name: Build GAC GeoJSON
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python -u OpenData2OpenMaps/scripts/gac_to_geojson.py
+
+      - name: Build TBS FCSI GeoJSON
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python -u OpenData2OpenMaps/scripts/tbs_to_geojson.py
+
+      - name: Commit changed GeoJSON
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add OpenData2OpenMaps/geodata/
+          if git diff --cached --quiet; then
+            echo "No GeoJSON changes to commit."
+          else
+            git commit -m "Update OpenData2OpenMaps GeoJSON [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
