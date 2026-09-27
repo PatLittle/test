@@ -46,7 +46,7 @@ def get_json(url: str) -> dict[str, Any]:
 def clean(value: Any) -> str | None:
     if not value:
         return None
-    value = re.sub(r"(?i)<br\\s*/?>", " ", str(value))
+    value = re.sub(r"(?i)<br\s*/?>", " ", str(value))
     value = re.sub(r"<[^>]+>", "", value)
     return " ".join(html.unescape(value).split()) or None
 
@@ -59,7 +59,7 @@ def canonical_office_key(office: dict[str, Any], lat: float, lon: float) -> str:
     en = office.get("eng", {})
     url = clean(en.get("internet"))
     if url:
-        url = re.sub(r"([?&])lang=(eng|fra)(&|$)", r"\\1", url, flags=re.I)
+        url = re.sub(r"([?&])lang=(eng|fra)(&|$)", r"\1", url, flags=re.I)
         return url.rstrip("?&").lower()
     return "|".join([
         f"{lat:.5f}",
