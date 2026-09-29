@@ -129,6 +129,25 @@ jobs:
                 VALIDATION/validation_enriched.jsonl \
                 od-do-canada.jsonl.gz
 
+      - name: Remove oversized generated HTML files
+        shell: bash
+        run: |
+          threshold_bytes=99500000
+          removed=0
+
+          echo "Removing generated HTML files that are 99.5 MB or larger..."
+          while IFS= read -r -d '' file; do
+            size_bytes=$(stat -c%s "$file")
+            if [ "$size_bytes" -ge "$threshold_bytes" ]; then
+              size_mb=$(awk "BEGIN { printf \"%.2f\", $size_bytes / 1000000 }")
+              echo "Removing oversized HTML: $file ($size_mb MB)"
+              rm -f "$file"
+              removed=$((removed + 1))
+            fi
+          done < <(find VALIDATION BN -type f -name '*.html' -print0)
+
+          echo "Removed $removed oversized HTML file(s)."
+
       - name: Commit generated sites
         run: |
           git config user.name "github-actions[bot]"
