@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Global Affairs Canada | Affaires mondiales Canada (GCDS theme)." />
+  <title>Global Affairs Canada | Affaires mondiales Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Global Affairs Canada | Affaires mondiales Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Global-Affairs-Canada-Affaires-mondiales-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 52 · Success: 45 · Failure: 7 · Other: 0 · URL types: 1 · Latest: <time>2026-03-24 16:01:50.114693</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">52</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">45</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">7</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>52</td><td>45</td><td>7</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-03-24 16:01:50.114693"
+          data-status="success"
+          data-resource="9665b984-b544-4754-84b2-46a0665622e6"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Data Reference Standard on Countries, Territories and Geographic areas "
+          data-dataset-fr="Norme référentielle relative aux données sur les Pays, territoires et régions géographiques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4729e72e-c229-470d-800b-dec34d5ddf38.html"><code>4729e72e-c229-470d-800b-dec34d5ddf38</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Data Reference Standard on Countries, Territories and Geographic areas </span><span data-lang="fr" style="display:none">Norme référentielle relative aux données sur les Pays, territoires et régions géographiques</span><div class="small"><code>cac6fd9f-594a-4bcd-bf17-10295812d4c5</code></div></td>
+        <td><span data-lang="en">Data Reference Standard on Countries, Territories and Geographic areas</span><span data-lang="fr" style="display:none">Norme de référence des données relatives aux pays, territoires et zones géographiques</span><div class="small"><code>9665b984-b544-4754-84b2-46a0665622e6</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:01:50.114693</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 17:47:25.084115"
+          data-status="failure"
+          data-resource="0e9be5cf-b27b-4bbb-b964-8ca8ae57b8a1"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5084cc6f-bf5b-4725-a93f-e0e036a017b8.html"><code>5084cc6f-bf5b-4725-a93f-e0e036a017b8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-04-01</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-04-01</span><div class="small"><code>0e9be5cf-b27b-4bbb-b964-8ca8ae57b8a1</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-20 17:47:25.084115</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:34:54.41007"
+          data-status="success"
+          data-resource="02c00bd0-19ac-4aca-9328-e52ed362e5d8"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/93d32276-a8cd-4132-8712-1a4c11035a56.html"><code>93d32276-a8cd-4132-8712-1a4c11035a56</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-03-01</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-03-01</span><div class="small"><code>02c00bd0-19ac-4aca-9328-e52ed362e5d8</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:34:54.41007</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:32:36.486911"
+          data-status="success"
+          data-resource="9eb24511-2204-4c94-a776-160c261022a6"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a4e521ef-e93c-4d04-b891-efc9679e1f69.html"><code>a4e521ef-e93c-4d04-b891-efc9679e1f69</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-03-01</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-03-01</span><div class="small"><code>9eb24511-2204-4c94-a776-160c261022a6</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:32:36.486911</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:05:52.822941"
+          data-status="success"
+          data-resource="da31e090-9bb2-4b80-8275-61c14274aa7e"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Consular Service Standard Performance Results- 4.1.2, 4.2.1, 4.2.2"
+          data-dataset-fr="Résultats de performance de la norme de service consulaire- 4.1.2, 4.2.1, 4.2.2"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/41e7b0e0-d778-45a2-b65b-0c3fed245a89.html"><code>41e7b0e0-d778-45a2-b65b-0c3fed245a89</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Consular Service Standard Performance Results- 4.1.2, 4.2.1, 4.2.2</span><span data-lang="fr" style="display:none">Résultats de performance de la norme de service consulaire- 4.1.2, 4.2.1, 4.2.2</span><div class="small"><code>e1968eb1-e5e6-4ed2-9830-533dedf7ab44</code></div></td>
+        <td><span data-lang="en">Consular Service Standard Performance Results- 4.1.2, 4.2.1, 4.2.2</span><span data-lang="fr" style="display:none">Résultats de performance de la norme de service consulaire- 4.1.2, 4.2.1, 4.2.2</span><div class="small"><code>da31e090-9bb2-4b80-8275-61c14274aa7e</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:05:52.822941</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:04:10.799952"
+          data-status="success"
+          data-resource="9e500789-dcf4-42d7-8b71-107eb8ca4946"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Consular Service Standard Performance Results- 4.1.2, 4.2.1, 4.2.2"
+          data-dataset-fr="Résultats de performance de la norme de service consulaire- 4.1.2, 4.2.1, 4.2.2"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ad4cd8bc-4f2c-4bdb-86f9-711cf2a9c7c9.html"><code>ad4cd8bc-4f2c-4bdb-86f9-711cf2a9c7c9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Consular Service Standard Performance Results- 4.1.2, 4.2.1, 4.2.2</span><span data-lang="fr" style="display:none">Résultats de performance de la norme de service consulaire- 4.1.2, 4.2.1, 4.2.2</span><div class="small"><code>e1968eb1-e5e6-4ed2-9830-533dedf7ab44</code></div></td>
+        <td><span data-lang="en">Consular Service Standard Performance Results- 4.1.2, 4.2.1, 4.2.2</span><span data-lang="fr" style="display:none">Résultats de performance de la norme de service consulaire- 4.1.2, 4.2.1, 4.2.2</span><div class="small"><code>9e500789-dcf4-42d7-8b71-107eb8ca4946</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:04:10.799952</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:56:16.106366"
+          data-status="success"
+          data-resource="aa175254-ca02-4675-bc8e-84cc3818edcc"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Security and Emergency Management Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)"
+          data-dataset-fr="Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ee6031e0-64b7-4852-937b-6a10e643d3f0.html"><code>ee6031e0-64b7-4852-937b-6a10e643d3f0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>4f50bc90-714d-4041-8863-7fa6e6346502</code></div></td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>aa175254-ca02-4675-bc8e-84cc3818edcc</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:56:16.106366</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:52:10.777975"
+          data-status="success"
+          data-resource="01930d2a-6431-425e-9275-f0f08fe406d1"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Security and Emergency Management Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)"
+          data-dataset-fr="Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2d1d89c8-e0e0-41c6-a4d0-5c6b5b73b3cc.html"><code>2d1d89c8-e0e0-41c6-a4d0-5c6b5b73b3cc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>4f50bc90-714d-4041-8863-7fa6e6346502</code></div></td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>01930d2a-6431-425e-9275-f0f08fe406d1</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:52:10.777975</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:47:56.695199"
+          data-status="success"
+          data-resource="0abc9dfc-f49e-4d1f-afb1-82ca368d7f5c"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Security and Emergency Management Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities"
+          data-dataset-fr="Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a696076b-6ae8-4577-bea2-80b4c0c1615a.html"><code>a696076b-6ae8-4577-bea2-80b4c0c1615a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>100b3a1d-ce92-4722-a1ae-651d788092de</code></div></td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>0abc9dfc-f49e-4d1f-afb1-82ca368d7f5c</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:47:56.695199</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:43:00.886698"
+          data-status="success"
+          data-resource="2118444e-2499-4370-a0fb-fae15187aeed"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Security and Emergency Management Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities"
+          data-dataset-fr="Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/eb30354c-5021-4d9a-bf0e-407f7e639aff.html"><code>eb30354c-5021-4d9a-bf0e-407f7e639aff</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>100b3a1d-ce92-4722-a1ae-651d788092de</code></div></td>
+        <td><span data-lang="en">Security and Emergency Management Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements de la Sécurité et gestion des urgences, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>2118444e-2499-4370-a0fb-fae15187aeed</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:43:00.886698</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:37:39.530448"
+          data-status="success"
+          data-resource="943cfca0-24a6-4755-a2c0-b0e4fc6c8ba6"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Lobbying Act - Designated Public Office Holders (DPOH) in GAC"
+          data-dataset-fr="Loi sur le lobbying - Titulaires de charge publique désigné (TCPD) à AMC"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9c7f99c4-5ee4-4332-9bf7-311301bfee12.html"><code>9c7f99c4-5ee4-4332-9bf7-311301bfee12</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Lobbying Act - Designated Public Office Holders (DPOH) in GAC</span><span data-lang="fr" style="display:none">Loi sur le lobbying - Titulaires de charge publique désigné (TCPD) à AMC</span><div class="small"><code>995218d2-b983-40d3-ac77-c1be92889408</code></div></td>
+        <td><span data-lang="en">Lobbying Act - Designated Public Office Holders (DPOH) in GAC</span><span data-lang="fr" style="display:none">Loi sur le lobbying - Titulaires de charge publique désigné (TCPD) à AMC</span><div class="small"><code>943cfca0-24a6-4755-a2c0-b0e4fc6c8ba6</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:37:39.530448</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:27:30.519567"
+          data-status="success"
+          data-resource="50922a0c-503c-4368-aad4-29ce2a99993a"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Data set: Her Voice, Her Choice commitment to sexual and reproductive health and rights ($650 million, 2017-2020) "
+          data-dataset-fr="Ensemble de données. Sa voix, son choix : engagement en matière de santé et de droits sexuels et reproductifs (650 millions de dollars, de 2017 à 2020)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/23346005-aec9-4999-9d0e-89b89da291cd.html"><code>23346005-aec9-4999-9d0e-89b89da291cd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Data set: Her Voice, Her Choice commitment to sexual and reproductive health and rights ($650 million, 2017-2020) </span><span data-lang="fr" style="display:none">Ensemble de données. Sa voix, son choix : engagement en matière de santé et de droits sexuels et reproductifs (650 millions de dollars, de 2017 à 2020)</span><div class="small"><code>6718cff2-25c0-417d-9f68-0729859d152b</code></div></td>
+        <td><span data-lang="en">Data set: Her Voice, Her Choice commitment to sexual and reproductive health and rights ($650 million, 2017-2020) </span><span data-lang="fr" style="display:none">Ensemble de données. Sa voix, son choix : engagement en matière de santé et de droits sexuels et reproductifs (650 millions de dollars, de 2017 à 2020).</span><div class="small"><code>50922a0c-503c-4368-aad4-29ce2a99993a</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:27:30.519567</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:08:39.982854"
+          data-status="success"
+          data-resource="5f93dc2b-8752-4021-af24-c312e312bc77"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/68ba440c-6e4e-4075-aa0c-77898c11bb4f.html"><code>68ba440c-6e4e-4075-aa0c-77898c11bb4f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. 2018-19</span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada. 2018-19</span><div class="small"><code>5f93dc2b-8752-4021-af24-c312e312bc77</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:08:39.982854</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:04:29.740032"
+          data-status="success"
+          data-resource="3f6e1a17-d342-43ce-a24e-5b67e84f85ad"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0134c245-9e9e-40ee-bed0-5adeca262338.html"><code>0134c245-9e9e-40ee-bed0-5adeca262338</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. 2019-20</span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada. 2019-20</span><div class="small"><code>3f6e1a17-d342-43ce-a24e-5b67e84f85ad</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:04:29.740032</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 13:59:44.110687"
+          data-status="success"
+          data-resource="1893bdc3-30ba-4624-983d-65970f988ea0"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5772f22d-d866-4d3b-9dc4-6bb373637997.html"><code>5772f22d-d866-4d3b-9dc4-6bb373637997</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. 2019-20</span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada. 2019-20</span><div class="small"><code>1893bdc3-30ba-4624-983d-65970f988ea0</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 13:59:44.110687</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 13:10:32.882224"
+          data-status="success"
+          data-resource="993c912c-e59a-459c-a144-abe44e46ee1a"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="International Scholarships"
+          data-dataset-fr="Bourses internationales"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1ba5af89-c82e-4463-bb9e-88c845b769a9.html"><code>1ba5af89-c82e-4463-bb9e-88c845b769a9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">International Scholarships</span><span data-lang="fr" style="display:none">Bourses internationales</span><div class="small"><code>cc19bcda-3b32-47f9-9031-fad06be4cbfd</code></div></td>
+        <td><span data-lang="en">International Scholarships - 2019-10-31</span><span data-lang="fr" style="display:none">Bourses internationales - 2019-10-3</span><div class="small"><code>993c912c-e59a-459c-a144-abe44e46ee1a</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 13:10:32.882224</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 18:49:11.586085"
+          data-status="success"
+          data-resource="7444c834-f585-4ad4-8579-79a41513fc97"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Common Services Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)"
+          data-dataset-fr="Rapport sur les engagements des Services communs, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/31746f3b-6494-4fa0-a614-b4fe01305449.html"><code>31746f3b-6494-4fa0-a614-b4fe01305449</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>15e62132-46a7-4f8c-8885-717406955257</code></div></td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>7444c834-f585-4ad4-8579-79a41513fc97</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 18:49:11.586085</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 18:21:00.960694"
+          data-status="success"
+          data-resource="667064d5-5fc0-446f-8257-434141708e64"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Common Services Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)"
+          data-dataset-fr="Rapport sur les engagements des Services communs, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/670f5bd2-bba9-44c9-90b9-3a083d7cee3a.html"><code>670f5bd2-bba9-44c9-90b9-3a083d7cee3a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>15e62132-46a7-4f8c-8885-717406955257</code></div></td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to the Program Alignment Architecture (PAA)</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation à l&#x27;architecture d&#x27;alignment des programmes (AAP)</span><div class="small"><code>667064d5-5fc0-446f-8257-434141708e64</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 18:21:00.960694</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 17:16:29.281837"
+          data-status="success"
+          data-resource="57d4811e-f582-4c5e-83ec-ddb705d2d893"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Common Services Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities"
+          data-dataset-fr="Rapport sur les engagements des Services communs, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4439146b-131e-41ef-ad65-1b932b20b14d.html"><code>4439146b-131e-41ef-ad65-1b932b20b14d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>bd6f8c13-eb10-43c7-b3cf-43f918d1c547</code></div></td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>57d4811e-f582-4c5e-83ec-ddb705d2d893</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 17:16:29.281837</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 17:07:14.585894"
+          data-status="success"
+          data-resource="42209626-6c2f-4ded-9794-c7f3cb07abb3"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Common Services Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities"
+          data-dataset-fr="Rapport sur les engagements des Services communs, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/78d41b56-8936-4400-903c-b0ea8920303b.html"><code>78d41b56-8936-4400-903c-b0ea8920303b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>bd6f8c13-eb10-43c7-b3cf-43f918d1c547</code></div></td>
+        <td><span data-lang="en">Common Services Commitment Report, Showing Alignment to Global Affairs Canada&#x27;s Departmental Priorities</span><span data-lang="fr" style="display:none">Rapport sur les engagements des Services communs, présentant l’harmonisation aux priorités ministérielles d’Affaires mondiales Canada</span><div class="small"><code>42209626-6c2f-4ded-9794-c7f3cb07abb3</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 17:07:14.585894</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:03:52.457165"
+          data-status="success"
+          data-resource="528d9c26-cc8c-4f98-ac68-2d3b5b918ec8"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8c556ae0-6e0b-4854-bccb-905886440919.html"><code>8c556ae0-6e0b-4854-bccb-905886440919</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-05-03</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-05-03</span><div class="small"><code>528d9c26-cc8c-4f98-ac68-2d3b5b918ec8</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:03:52.457165</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:03:31.90163"
+          data-status="success"
+          data-resource="fdadd2b7-e93f-4808-ac5b-1f597f05a538"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a369b1cc-adad-47ac-a707-8ab82e80fda8.html"><code>a369b1cc-adad-47ac-a707-8ab82e80fda8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-05-31</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-05-31</span><div class="small"><code>fdadd2b7-e93f-4808-ac5b-1f597f05a538</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:03:31.90163</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:03:08.679033"
+          data-status="success"
+          data-resource="bb3263a1-3de3-4870-b9ad-5344008e07d5"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/df728df2-c792-4e46-8589-4381e1e25fda.html"><code>df728df2-c792-4e46-8589-4381e1e25fda</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-07-08</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-07-08</span><div class="small"><code>bb3263a1-3de3-4870-b9ad-5344008e07d5</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:03:08.679033</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:02:46.644563"
+          data-status="success"
+          data-resource="30ccc2b5-7dd3-40b1-aa8b-8ca0df0ac3d7"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/bcc777f7-696d-4732-8d53-845554274e3e.html"><code>bcc777f7-696d-4732-8d53-845554274e3e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-09-03</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 2021-09-03</span><div class="small"><code>30ccc2b5-7dd3-40b1-aa8b-8ca0df0ac3d7</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:02:46.644563</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:02:25.148034"
+          data-status="success"
+          data-resource="ce2dba55-5d0b-4b1a-a512-8835cd47d1f2"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2ee071d3-5fe2-494b-afe8-8cb39691bd3b.html"><code>2ee071d3-5fe2-494b-afe8-8cb39691bd3b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-09-03</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 2021-09-03</span><div class="small"><code>ce2dba55-5d0b-4b1a-a512-8835cd47d1f2</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:02:25.148034</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:02:06.097203"
+          data-status="success"
+          data-resource="5fd6d9d2-b27c-4960-99b4-8863be2e0c1f"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c1bd79ab-833d-410f-bcdb-4e49da2d5c42.html"><code>c1bd79ab-833d-410f-bcdb-4e49da2d5c42</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-08-04</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-08-04</span><div class="small"><code>5fd6d9d2-b27c-4960-99b4-8863be2e0c1f</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:02:06.097203</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:01:44.107422"
+          data-status="success"
+          data-resource="a6613785-8b10-4a0e-9264-23b0d3c2fd00"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/25d3267e-3f23-4561-b8dc-0a0b00ab0a7b.html"><code>25d3267e-3f23-4561-b8dc-0a0b00ab0a7b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-08-04</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-08-04</span><div class="small"><code>a6613785-8b10-4a0e-9264-23b0d3c2fd00</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:01:44.107422</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:01:23.584461"
+          data-status="success"
+          data-resource="b9a3897a-9b55-42b1-a394-ab7335afa134"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/dd9b3204-281e-4003-91a2-e73390385e05.html"><code>dd9b3204-281e-4003-91a2-e73390385e05</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-07-08</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-07-08</span><div class="small"><code>b9a3897a-9b55-42b1-a394-ab7335afa134</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:01:23.584461</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:01:00.779974"
+          data-status="success"
+          data-resource="5131b75c-7cfa-4022-9d9d-b16d602024f7"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1368ee2e-d146-48cf-af9d-75b20790c8ef.html"><code>1368ee2e-d146-48cf-af9d-75b20790c8ef</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-05-03</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-05-03</span><div class="small"><code>5131b75c-7cfa-4022-9d9d-b16d602024f7</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:01:00.779974</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 15:00:37.387204"
+          data-status="success"
+          data-resource="16cf4112-31d9-4137-950d-c06ecdfe97c3"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/21a4e253-e380-4998-b538-894602eb72b4.html"><code>21a4e253-e380-4998-b538-894602eb72b4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-04-01</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-04-01</span><div class="small"><code>16cf4112-31d9-4137-950d-c06ecdfe97c3</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 15:00:37.387204</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:54:22.02286"
+          data-status="success"
+          data-resource="51339f12-ae90-4c94-8253-34a85ebb026c"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Repatriation of Canadian citizens and permanent residents due to corona virus on assisted departures and facilitated flights"
+          data-dataset-fr="Rapatriement de citoyens canadiens et de résidents permanents avec des départs assistés et de vols facilités en raison du virus coronavirus"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/064a2761-fe6b-4ea2-815b-bddc1b7eec71.html"><code>064a2761-fe6b-4ea2-815b-bddc1b7eec71</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Repatriation of Canadian citizens and permanent residents due to corona virus on assisted departures and facilitated flights</span><span data-lang="fr" style="display:none">Rapatriement de citoyens canadiens et de résidents permanents avec des départs assistés et de vols facilités en raison du virus coronavirus</span><div class="small"><code>e185cdc7-9b8b-4d0d-b26a-6aacf68e0509</code></div></td>
+        <td><span data-lang="en">Number of Canadian citizens and permanent residents repatriated (by air or sea) because of the coronavirus pandemic, by country from which they are repatriated. Disclaimer: Operation has concluded July 17, 2020</span><span data-lang="fr" style="display:none">Nombre de citoyens canadiens et résidents permanents rapatriés (par voie aérienne ou par mer) en raison de la pandémie de coronavirus, par pays de départ. Avis de non-responsabilité : Cette opération s’est conclue le 17 juillet 2020</span><div class="small"><code>51339f12-ae90-4c94-8253-34a85ebb026c</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:54:22.02286</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:53:06.327661"
+          data-status="success"
+          data-resource="ca565047-9610-4141-b27d-5352efb00147"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Number of Canadian abroad registrants per region daily percent changes"
+          data-dataset-fr="Nombre d&#x27;inscrits canadiens à l&#x27;étranger par région, changements quotidiens en pourcentage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f98c6094-48f0-4610-8d09-0ab0b15645b5.html"><code>f98c6094-48f0-4610-8d09-0ab0b15645b5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Number of Canadian abroad registrants per region daily percent changes</span><span data-lang="fr" style="display:none">Nombre d&#x27;inscrits canadiens à l&#x27;étranger par région, changements quotidiens en pourcentage</span><div class="small"><code>c06b68a6-0b75-420a-bf2d-05c0d6b874e0</code></div></td>
+        <td><span data-lang="en">Number of Canadian abroad registrants per region daily percent changes</span><span data-lang="fr" style="display:none">Nombre d&#x27;inscrits canadiens à l&#x27;étranger par région, changements quotidiens en pourcentage</span><div class="small"><code>ca565047-9610-4141-b27d-5352efb00147</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:53:06.327661</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:52:11.160825"
+          data-status="success"
+          data-resource="1973ac01-b3fc-4ae6-be32-71f5de9c3108"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Number of Canadian Abroad Registrants per region and country daily count"
+          data-dataset-fr="Nombre d&#x27;inscrits canadiens à l&#x27;étranger par région et pays, nombre quotidien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e75187a1-9dc9-4225-8b0e-fe379342a491.html"><code>e75187a1-9dc9-4225-8b0e-fe379342a491</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Number of Canadian Abroad Registrants per region and country daily count</span><span data-lang="fr" style="display:none">Nombre d&#x27;inscrits canadiens à l&#x27;étranger par région et pays, nombre quotidien</span><div class="small"><code>219daf65-7336-4dc8-8fd4-360bcad9ffeb</code></div></td>
+        <td><span data-lang="en">Number of Canadian Abroad Registrants per region and country daily count </span><span data-lang="fr" style="display:none">Nombre d&#x27;inscrits canadiens à l&#x27;étranger par région et pays, nombre quotidien</span><div class="small"><code>1973ac01-b3fc-4ae6-be32-71f5de9c3108</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:52:11.160825</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:47:06.060736"
+          data-status="success"
+          data-resource="bd673a57-a073-4978-842d-8096fbb71baa"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b340fb22-7302-4018-9003-e37dc2c3f896.html"><code>b340fb22-7302-4018-9003-e37dc2c3f896</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-02-01</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-02-01</span><div class="small"><code>bd673a57-a073-4978-842d-8096fbb71baa</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:47:06.060736</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:46:44.401084"
+          data-status="success"
+          data-resource="1a70e9ee-5a06-47e8-baf9-6624daa4da7b"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/26e76654-77de-4aed-9ef9-9110a87d43f2.html"><code>26e76654-77de-4aed-9ef9-9110a87d43f2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>1a70e9ee-5a06-47e8-baf9-6624daa4da7b</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:46:44.401084</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:45:58.802877"
+          data-status="success"
+          data-resource="97e8477d-4c1c-4bfb-8eb7-cd9ccfcdb708"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2895c708-b9ba-4a8a-8457-a963b6a02c52.html"><code>2895c708-b9ba-4a8a-8457-a963b6a02c52</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-02-01</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-02-01</span><div class="small"><code>97e8477d-4c1c-4bfb-8eb7-cd9ccfcdb708</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:45:58.802877</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:45:30.500167"
+          data-status="success"
+          data-resource="189952ce-b80e-4fd3-83d3-da3e9641e07e"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b8a6003d-fc01-425f-b175-d0b67e662750.html"><code>b8a6003d-fc01-425f-b175-d0b67e662750</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>189952ce-b80e-4fd3-83d3-da3e9641e07e</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:45:30.500167</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:38:00.017003"
+          data-status="success"
+          data-resource="babaa34e-0f79-48c7-9183-ccac024c695d"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0f13f92e-a7be-4a59-a4c2-ca58f1393fa2.html"><code>0f13f92e-a7be-4a59-a4c2-ca58f1393fa2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. - 2020-21</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada - 2020-21</span><div class="small"><code>babaa34e-0f79-48c7-9183-ccac024c695d</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:38:00.017003</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-17 14:37:32.107199"
+          data-status="success"
+          data-resource="e73deaea-301d-492d-96c9-07bec1827678"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/673e1441-ed8d-4b1a-8b20-452a5319b8b8.html"><code>673e1441-ed8d-4b1a-8b20-452a5319b8b8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. - 2021-22</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada - 2021-22</span><div class="small"><code>e73deaea-301d-492d-96c9-07bec1827678</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-17 14:37:32.107199</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 15:09:14.189842"
+          data-status="success"
+          data-resource="d2866110-3e29-4037-a8a6-1098c1834da2"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Handbook of Export and Import Commodity Codes - 2012"
+          data-dataset-fr="Manuel des codes des marchandises pour l&#x27;exportation et l&#x27;importation - 2012"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8871cd56-ec3c-4252-b4a2-def1e7c5f709.html"><code>8871cd56-ec3c-4252-b4a2-def1e7c5f709</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Handbook of Export and Import Commodity Codes - 2012</span><span data-lang="fr" style="display:none">Manuel des codes des marchandises pour l&#x27;exportation et l&#x27;importation - 2012</span><div class="small"><code>732e592c-e38f-469e-be9e-cd86bb843187</code></div></td>
+        <td><span data-lang="en">Handbook of Export and Import Commodity Codes - 2012</span><span data-lang="fr" style="display:none">Manuel des codes des marchandises pour l&#x27;exportation et l&#x27;importation - 2012</span><div class="small"><code>d2866110-3e29-4037-a8a6-1098c1834da2</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-15 15:09:14.189842</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:49:13.458912"
+          data-status="success"
+          data-resource="15d03785-f1ec-45b2-9ac1-087ae2d5fbe8"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/60bad1f6-f61d-4cce-9685-bcdd1abc8501.html"><code>60bad1f6-f61d-4cce-9685-bcdd1abc8501</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. - 2020-21</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada - 2020-21</span><div class="small"><code>15d03785-f1ec-45b2-9ac1-087ae2d5fbe8</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:49:13.458912</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:49:12.422869"
+          data-status="success"
+          data-resource="9684bff4-0599-42b0-ae8b-c199cce5054d"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2"
+          data-dataset-fr="3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/77b37ffb-37a9-49a8-bc89-bf583428b460.html"><code>77b37ffb-37a9-49a8-bc89-bf583428b460</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">3.5.2: Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada</span><div class="small"><code>dafecd72-7b1a-43eb-be5f-48707d77349c</code></div></td>
+        <td><span data-lang="en">Global Affairs Canada&#x27;s Departmental Results Framework (DRF) Indicator 3.5.2. - 2021-22</span><span data-lang="fr" style="display:none">3.5.2 : Indicateur du cadre de résultat ministériel (CRM) 3.5.2. d&#x27;Affaires mondiales Canada - 2021-22</span><div class="small"><code>9684bff4-0599-42b0-ae8b-c199cce5054d</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:49:12.422869</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:37:49.560966"
+          data-status="success"
+          data-resource="331554f6-7f24-43e5-8d64-59a6afedc262"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="COVID-19 Emergency Loan Program"
+          data-dataset-fr="Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e73e4046-a988-4605-9f4f-dd2237970048.html"><code>e73e4046-a988-4605-9f4f-dd2237970048</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger</span><div class="small"><code>2af1a7f4-431e-41c7-8c67-fe2348ccf031</code></div></td>
+        <td><span data-lang="en">COVID-19 Emergency Loan Program 2021-05-31</span><span data-lang="fr" style="display:none">Le programme de prêts d&#x27;urgence COVID-19 pour les Canadiens à l&#x27;étranger 202`1-05-31</span><div class="small"><code>331554f6-7f24-43e5-8d64-59a6afedc262</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:37:49.560966</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:37:48.726117"
+          data-status="success"
+          data-resource="fb0a45b7-0479-4e5a-93c5-4f45adc4b793"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Total daily global percent increase in number of Canadian abroad registrants"
+          data-dataset-fr="Augmentation quotidienne totale en pourcentage du nombre total d&#x27;inscrits à l&#x27;étranger"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7398d89e-3101-40c2-92e0-34ce569f51da.html"><code>7398d89e-3101-40c2-92e0-34ce569f51da</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Total daily global percent increase in number of Canadian abroad registrants</span><span data-lang="fr" style="display:none">Augmentation quotidienne totale en pourcentage du nombre total d&#x27;inscrits à l&#x27;étranger</span><div class="small"><code>4f6d0489-adea-43ed-a19f-62355d1e9d66</code></div></td>
+        <td><span data-lang="en">Total daily global percent increase in number of Canadian abroad registrants</span><span data-lang="fr" style="display:none">Augmentation quotidienne totale en pourcentage du nombre total d&#x27;inscrits à l&#x27;étranger</span><div class="small"><code>fb0a45b7-0479-4e5a-93c5-4f45adc4b793</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:37:48.726117</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:36:40.553125"
+          data-status="success"
+          data-resource="cddbbbb6-00a9-404b-96ee-9f04e0cdea24"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="The GAC Files episodes"
+          data-dataset-fr="Épisodes des Dossiers d’AMC"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/658da891-84cd-49d5-b1f5-e703df8bf9c7.html"><code>658da891-84cd-49d5-b1f5-e703df8bf9c7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The GAC Files episodes</span><span data-lang="fr" style="display:none">Épisodes des Dossiers d’AMC</span><div class="small"><code>1dff365e-384d-423e-8e40-a3c2fb56f959</code></div></td>
+        <td><span data-lang="en">The GAC Files episodes</span><span data-lang="fr" style="display:none">Épisodes des Dossiers d’AMC</span><div class="small"><code>cddbbbb6-00a9-404b-96ee-9f04e0cdea24</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:36:40.553125</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:48:51.109251"
+          data-status="success"
+          data-resource="0a819fe4-33cb-4b76-aec1-512312b1efc5"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.2"
+          data-dataset-en="Heads of Missions"
+          data-dataset-fr="Chefs de missions"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/92d7f9cd-0cfe-48ae-8280-feb5b597af9d.html"><code>92d7f9cd-0cfe-48ae-8280-feb5b597af9d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Heads of Missions</span><span data-lang="fr" style="display:none">Chefs de missions</span><div class="small"><code>ece743aa-514a-4024-93c6-7f5ed5cd4eb2</code></div></td>
+        <td><span data-lang="en">Heads of Missions by Person Postings - 2026</span><span data-lang="fr" style="display:none">Chefs de mission par personne Annonces - 2026</span><div class="small"><code>0a819fe4-33cb-4b76-aec1-512312b1efc5</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:48:51.109251</time></td>
+      </tr>
+    
+      <tr data-created="2023-01-20 19:43:08.253539"
+          data-status="failure"
+          data-resource="3617ad8f-a4fc-46ce-bd20-075be4086fd7"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.1"
+          data-dataset-en="1.1.1: Percentage of advocacy campaigns which met their stated objectives."
+          data-dataset-fr="1.1.1 : Pourcentage de campagnes de défense des intérêts qui ont permis d’atteindre les objectifs fixés."
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cc69ddf7-50ff-4655-ade2-7aa206c13576.html"><code>cc69ddf7-50ff-4655-ade2-7aa206c13576</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">1.1.1: Percentage of advocacy campaigns which met their stated objectives.</span><span data-lang="fr" style="display:none">1.1.1 : Pourcentage de campagnes de défense des intérêts qui ont permis d’atteindre les objectifs fixés.</span><div class="small"><code>d7d6e059-81d1-456a-ba75-e884d66e25fd</code></div></td>
+        <td><span data-lang="en">1.1.1: Percentage of advocacy campaigns which met their stated objectives 2018-2019</span><span data-lang="fr" style="display:none">1.1.1 : Pourcentage de campagnes de défense des intérêts qui ont permis d’atteindre les objectifs fixés 2018-2019</span><div class="small"><code>3617ad8f-a4fc-46ce-bd20-075be4086fd7</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-01-20 19:43:08.253539</time></td>
+      </tr>
+    
+      <tr data-created="2023-01-20 19:43:07.477916"
+          data-status="failure"
+          data-resource="158199d9-70da-442b-b7ab-12736773eb16"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.1"
+          data-dataset-en="1.1.1: Percentage of advocacy campaigns which met their stated objectives."
+          data-dataset-fr="1.1.1 : Pourcentage de campagnes de défense des intérêts qui ont permis d’atteindre les objectifs fixés."
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2c7521e6-6c7a-4506-9a52-fed571773114.html"><code>2c7521e6-6c7a-4506-9a52-fed571773114</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">1.1.1: Percentage of advocacy campaigns which met their stated objectives.</span><span data-lang="fr" style="display:none">1.1.1 : Pourcentage de campagnes de défense des intérêts qui ont permis d’atteindre les objectifs fixés.</span><div class="small"><code>d7d6e059-81d1-456a-ba75-e884d66e25fd</code></div></td>
+        <td><span data-lang="en">1.1.1: Percentage of advocacy campaigns which met their stated objectives 2019-2020</span><span data-lang="fr" style="display:none">1.1.1: Pourcentage de campagnes de défense des intérêts qui ont permis d’atteindre les objectifs fixés 2019-2020</span><div class="small"><code>158199d9-70da-442b-b7ab-12736773eb16</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-01-20 19:43:07.477916</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-02 14:17:55.601173"
+          data-status="failure"
+          data-resource="6978c913-bee6-439f-8015-54ffaa70941e"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.1"
+          data-dataset-en="5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey "
+          data-dataset-fr="Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e88c7b46-ef1b-4c60-b4d4-f480d4076624.html"><code>e88c7b46-ef1b-4c60-b4d4-f480d4076624</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey </span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage</span><div class="small"><code>8abf5811-8360-45ff-bcec-884c13ee69ad</code></div></td>
+        <td><span data-lang="en">Interdepartmental Working Group on Common Services Abroad Survey 2018-19</span><span data-lang="fr" style="display:none">Groupe de travail interministériel sur les services communs à l’étranger sondage 2018-19</span><div class="small"><code>6978c913-bee6-439f-8015-54ffaa70941e</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-09-02 14:17:55.601173</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-02 14:17:55.329965"
+          data-status="failure"
+          data-resource="acd9818a-3620-46fb-ad87-202a216be38b"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.1"
+          data-dataset-en="5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey "
+          data-dataset-fr="Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4c51882b-d672-4d70-964a-270bb9c02969.html"><code>4c51882b-d672-4d70-964a-270bb9c02969</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey </span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage</span><div class="small"><code>8abf5811-8360-45ff-bcec-884c13ee69ad</code></div></td>
+        <td><span data-lang="en">Interdepartmental Working Group on Common Services Abroad Survey 2019-20 (5.1.1)</span><span data-lang="fr" style="display:none">Groupe de travail interministériel sur les services communs à l’étranger sondage 2019-20 (5.1.1)</span><div class="small"><code>acd9818a-3620-46fb-ad87-202a216be38b</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-09-02 14:17:55.329965</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-02 14:17:55.281024"
+          data-status="failure"
+          data-resource="c59844ea-d99a-4623-9e30-d057891d7734"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.1"
+          data-dataset-en="5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey "
+          data-dataset-fr="Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/fef28824-79f8-4205-a825-b884786b277c.html"><code>fef28824-79f8-4205-a825-b884786b277c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey </span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage</span><div class="small"><code>8abf5811-8360-45ff-bcec-884c13ee69ad</code></div></td>
+        <td><span data-lang="en">Interdepartmental Working Group on Common Services Abroad Survey 2019-20 </span><span data-lang="fr" style="display:none">Groupe de travail interministériel sur les services communs à l’étranger sondage 2019-20 </span><div class="small"><code>c59844ea-d99a-4623-9e30-d057891d7734</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-09-02 14:17:55.281024</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-02 14:17:54.88488"
+          data-status="failure"
+          data-resource="36e77ac1-ff6a-4d9f-9102-966ff1d8be45"
+          data-organization="Global Affairs Canada | Affaires mondiales Canada"
+          data-org="Global Affairs Canada | Affaires mondiales Canada"
+          data-version="v0.1"
+          data-dataset-en="5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey "
+          data-dataset-fr="Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d965ec9d-6683-4626-932f-337118173888.html"><code>d965ec9d-6683-4626-932f-337118173888</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">5.1.1 - DRF Indicator: Interdepartmental Working Group on Common Services Abroad Survey </span><span data-lang="fr" style="display:none">Indicateur du cadre de résultat ministériel (CRM) 5.1.1 : Groupe de travail interministériel sur les services communs à l’étranger sondage</span><div class="small"><code>8abf5811-8360-45ff-bcec-884c13ee69ad</code></div></td>
+        <td><span data-lang="en">Interdepartmental Working Group on Common Services Abroad Survey 2018-19</span><span data-lang="fr" style="display:none">Groupe de travail interministériel sur les services communs à l’étranger sondage 2018-19</span><div class="small"><code>36e77ac1-ff6a-4d9f-9102-966ff1d8be45</code> · upload</div></td>
+        <td>Global Affairs Canada | Affaires mondiales Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-09-02 14:17:54.88488</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [45, 7], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [45], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [7], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

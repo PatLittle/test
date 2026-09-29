@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Public Health Agency of Canada | Agence de la santé publique du Canada (GCDS theme)." />
+  <title>Public Health Agency of Canada | Agence de la santé publique du Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Public Health Agency of Canada | Agence de la santé publique du Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Public-Health-Agency-of-Canada-Agence-de-la-sant-publique-du-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 37 · Success: 30 · Failure: 7 · Other: 0 · URL types: 1 · Latest: <time>2026-01-20 14:41:55.061373</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">37</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">30</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">7</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>37</td><td>30</td><td>7</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-01-20 14:41:55.061373"
+          data-status="success"
+          data-resource="2700dc1e-4e21-47da-bc60-33e688597d2b"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ed07b0e0-6b01-44d1-bc01-762d3bacef65.html"><code>ed07b0e0-6b01-44d1-bc01-762d3bacef65</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Exposure Incident Follow-up Data 2025-2026</span><span data-lang="fr" style="display:none">Données de Suivi des Incidents d&#x27;Exposition 2025-2026</span><div class="small"><code>2700dc1e-4e21-47da-bc60-33e688597d2b</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 14:41:55.061373</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:38:30.795628"
+          data-status="success"
+          data-resource="0358bf51-0d86-4868-88e4-9ecffc4ab1cc"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4d6bfb82-c8f5-4fa7-a27f-cedd81b57d58.html"><code>4d6bfb82-c8f5-4fa7-a27f-cedd81b57d58</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Other Event Data 2025-2026</span><span data-lang="fr" style="display:none">Données d&#x27;autres Événements 2025-2026</span><div class="small"><code>0358bf51-0d86-4868-88e4-9ecffc4ab1cc</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:38:30.795628</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:37:49.251294"
+          data-status="success"
+          data-resource="fb3c60f9-f17c-4955-9a3d-c99ddbe71df0"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cd45bb94-23b2-4f21-a3e7-d12089b3286f.html"><code>cd45bb94-23b2-4f21-a3e7-d12089b3286f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Other Event Data 2025-2026</span><span data-lang="fr" style="display:none">Données d&#x27;autres Événements 2025-2026</span><div class="small"><code>fb3c60f9-f17c-4955-9a3d-c99ddbe71df0</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:37:49.251294</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:36:17.829186"
+          data-status="success"
+          data-resource="ee2a091e-d3ee-4750-b34f-9c1fe6f38416"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f964f370-1fb3-4b75-8956-b8e44ccb3997.html"><code>f964f370-1fb3-4b75-8956-b8e44ccb3997</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Non-exposure Incident Data 2025-2026</span><span data-lang="fr" style="display:none">Données des Incidents Sans Exposition 2025-2026</span><div class="small"><code>ee2a091e-d3ee-4750-b34f-9c1fe6f38416</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:36:17.829186</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:35:46.454407"
+          data-status="success"
+          data-resource="2b5c3841-7467-4ef0-8908-6fd16bdfa92a"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/738428a1-5e01-48e8-b27c-07332f7ddf61.html"><code>738428a1-5e01-48e8-b27c-07332f7ddf61</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Non-exposure Incident Data 2025-2026</span><span data-lang="fr" style="display:none">Données des Incidents Sans Exposition 2025-2026</span><div class="small"><code>2b5c3841-7467-4ef0-8908-6fd16bdfa92a</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:35:46.454407</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:34:42.6292"
+          data-status="success"
+          data-resource="1cb7a034-9034-43c4-a222-d8e0d42e72dc"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0302c7a5-0291-4ffe-8ecc-c9f8e3db932e.html"><code>0302c7a5-0291-4ffe-8ecc-c9f8e3db932e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Exposure Incident Follow-up Data 2025-2026</span><span data-lang="fr" style="display:none">Données de Suivi des Incidents d&#x27;Exposition 2025-2026</span><div class="small"><code>1cb7a034-9034-43c4-a222-d8e0d42e72dc</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:34:42.6292</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:24:52.513623"
+          data-status="success"
+          data-resource="481cef29-6a38-48e4-8e90-6ff5e4965d27"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e4aa7a5f-c55a-463c-a3fc-2db90781f3b3.html"><code>e4aa7a5f-c55a-463c-a3fc-2db90781f3b3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Exposure Incident Notification Data 2025-2026</span><span data-lang="fr" style="display:none">Données de Notification des Incidents d&#x27;Exposition 2025-2026</span><div class="small"><code>481cef29-6a38-48e4-8e90-6ff5e4965d27</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:24:52.513623</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-20 13:23:35.52916"
+          data-status="success"
+          data-resource="42ebcc57-a886-42a4-a796-ff0e1d4739d9"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3fccb97c-a813-47c9-9269-d4c71c2cedb9.html"><code>3fccb97c-a813-47c9-9269-d4c71c2cedb9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Exposure Incident Notification Data 2025-2026</span><span data-lang="fr" style="display:none">Données de Notification des Incidents d&#x27;Exposition 2025-2026</span><div class="small"><code>42ebcc57-a886-42a4-a796-ff0e1d4739d9</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-20 13:23:35.52916</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-19 16:16:29.320607"
+          data-status="success"
+          data-resource="55d0b5e6-e2ff-47eb-ac09-691712736786"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/567a7202-16f0-4848-9959-40719a2b7512.html"><code>567a7202-16f0-4848-9959-40719a2b7512</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries Q2 2025-2026</span><span data-lang="fr" style="display:none">Résumés inspections Q2 2025-2026</span><div class="small"><code>55d0b5e6-e2ff-47eb-ac09-691712736786</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-19 16:16:29.320607</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-19 16:15:41.005058"
+          data-status="success"
+          data-resource="a3651aff-300e-4c51-95bc-2cc93bcf5f1f"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cce3aab8-ca5e-41d4-bd36-37ad92f17d59.html"><code>cce3aab8-ca5e-41d4-bd36-37ad92f17d59</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries Q2 2025-2026</span><span data-lang="fr" style="display:none">Résumés inspections Q2 2025-2026</span><div class="small"><code>a3651aff-300e-4c51-95bc-2cc93bcf5f1f</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-19 16:15:41.005058</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-19 16:15:13.207613"
+          data-status="success"
+          data-resource="e858b586-0cd3-4445-bdec-417756e6f2ad"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/64cf5cf3-ee2e-4897-9399-bd20034c91eb.html"><code>64cf5cf3-ee2e-4897-9399-bd20034c91eb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries Q1 2025-2026</span><span data-lang="fr" style="display:none">Résumés inspections Q1 2025-2026</span><div class="small"><code>e858b586-0cd3-4445-bdec-417756e6f2ad</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-19 16:15:13.207613</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-19 16:14:51.692556"
+          data-status="success"
+          data-resource="157bf79a-9ce0-425a-b79b-b8260da4c66a"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/27600d7d-d1a2-42e3-a109-2310e40f0679.html"><code>27600d7d-d1a2-42e3-a109-2310e40f0679</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries Q1 2025-2026</span><span data-lang="fr" style="display:none">Résumés inspections Q1 2025-2026</span><div class="small"><code>157bf79a-9ce0-425a-b79b-b8260da4c66a</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-19 16:14:51.692556</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-19 16:13:36.683109"
+          data-status="success"
+          data-resource="e16dc889-73fb-4e2e-a03f-827bc51e2d6f"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4c54d0f2-0bd1-4fb8-b979-338d2a0bb8f8.html"><code>4c54d0f2-0bd1-4fb8-b979-338d2a0bb8f8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries 2024-2025</span><span data-lang="fr" style="display:none">Résumés inspections 2024-2025</span><div class="small"><code>e16dc889-73fb-4e2e-a03f-827bc51e2d6f</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-19 16:13:36.683109</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-19 16:13:03.09599"
+          data-status="success"
+          data-resource="7135fdb0-6d3d-41a6-bced-e492f5757d22"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8019a3c7-4ae3-4577-8b9c-e9f49f601a07.html"><code>8019a3c7-4ae3-4577-8b9c-e9f49f601a07</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries 2024-2025</span><span data-lang="fr" style="display:none">Résumés inspections 2024-2025</span><div class="small"><code>7135fdb0-6d3d-41a6-bced-e492f5757d22</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-19 16:13:03.09599</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 15:16:13.429159"
+          data-status="failure"
+          data-resource="ba5b197e-9755-43ec-b473-3af145233399"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Health of People in Canada Dashboard​"
+          data-dataset-fr="Tableau de bord de la santé des personnes au Canada  "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1f2fff38-3a75-43aa-b639-23c759a62f01.html"><code>1f2fff38-3a75-43aa-b639-23c759a62f01</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Health of People in Canada Dashboard​</span><span data-lang="fr" style="display:none">Tableau de bord de la santé des personnes au Canada  </span><div class="small"><code>3632f9e8-22e3-41c6-843f-7ccfaa1128ef</code></div></td>
+        <td><span data-lang="en">Time trend</span><span data-lang="fr" style="display:none">Tendance temporelle</span><div class="small"><code>ba5b197e-9755-43ec-b473-3af145233399</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">45 err</span><span data-lang="fr" style="display:none">45 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-07-07 15:16:13.429159</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 15:15:31.853132"
+          data-status="success"
+          data-resource="718782f3-b7ad-4494-a07f-03381a44a36f"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Health of People in Canada Dashboard​"
+          data-dataset-fr="Tableau de bord de la santé des personnes au Canada  "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/26882baf-ca5e-43a2-b2d4-2271cd8411d4.html"><code>26882baf-ca5e-43a2-b2d4-2271cd8411d4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Health of People in Canada Dashboard​</span><span data-lang="fr" style="display:none">Tableau de bord de la santé des personnes au Canada  </span><div class="small"><code>3632f9e8-22e3-41c6-843f-7ccfaa1128ef</code></div></td>
+        <td><span data-lang="en">Indicator</span><span data-lang="fr" style="display:none">Indicateur</span><div class="small"><code>718782f3-b7ad-4494-a07f-03381a44a36f</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-07 15:15:31.853132</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 15:14:38.722646"
+          data-status="failure"
+          data-resource="3de2e80b-cd61-41d0-b7e7-11f0ca50c5d2"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Health of People in Canada Dashboard​"
+          data-dataset-fr="Tableau de bord de la santé des personnes au Canada  "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5deb0462-1ec0-4f58-82c5-7de516bf87d8.html"><code>5deb0462-1ec0-4f58-82c5-7de516bf87d8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Health of People in Canada Dashboard​</span><span data-lang="fr" style="display:none">Tableau de bord de la santé des personnes au Canada  </span><div class="small"><code>3632f9e8-22e3-41c6-843f-7ccfaa1128ef</code></div></td>
+        <td><span data-lang="en">Benchmark</span><span data-lang="fr" style="display:none">Point de référence</span><div class="small"><code>3de2e80b-cd61-41d0-b7e7-11f0ca50c5d2</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">6 err</span><span data-lang="fr" style="display:none">6 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-07-07 15:14:38.722646</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 15:04:32.566921"
+          data-status="failure"
+          data-resource="8a902145-d952-4dc8-b6e2-accbb8215d46"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Health of People in Canada Dashboard​"
+          data-dataset-fr="Tableau de bord de la santé des personnes au Canada  "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d1b3ae18-dff5-4251-ad56-3708b393b647.html"><code>d1b3ae18-dff5-4251-ad56-3708b393b647</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Health of People in Canada Dashboard​</span><span data-lang="fr" style="display:none">Tableau de bord de la santé des personnes au Canada  </span><div class="small"><code>3632f9e8-22e3-41c6-843f-7ccfaa1128ef</code></div></td>
+        <td><span data-lang="en">Time trend</span><span data-lang="fr" style="display:none">Tendance temporelle</span><div class="small"><code>8a902145-d952-4dc8-b6e2-accbb8215d46</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">45 err</span><span data-lang="fr" style="display:none">45 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-07-07 15:04:32.566921</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 15:03:44.658882"
+          data-status="failure"
+          data-resource="0c63f79c-bbde-4a1a-bdf7-698b6d850455"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Health of People in Canada Dashboard​"
+          data-dataset-fr="Tableau de bord de la santé des personnes au Canada  "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4abdcba0-d57d-47b1-8416-367a14d6c9ce.html"><code>4abdcba0-d57d-47b1-8416-367a14d6c9ce</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Health of People in Canada Dashboard​</span><span data-lang="fr" style="display:none">Tableau de bord de la santé des personnes au Canada  </span><div class="small"><code>3632f9e8-22e3-41c6-843f-7ccfaa1128ef</code></div></td>
+        <td><span data-lang="en">Indicator</span><span data-lang="fr" style="display:none">Indicateur</span><div class="small"><code>0c63f79c-bbde-4a1a-bdf7-698b6d850455</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">138 err</span><span data-lang="fr" style="display:none">138 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-07-07 15:03:44.658882</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 15:02:48.357438"
+          data-status="success"
+          data-resource="f506dcc1-d0e0-41b6-abd7-c69ec77fc648"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Health of People in Canada Dashboard​"
+          data-dataset-fr="Tableau de bord de la santé des personnes au Canada  "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d2f8ffe0-c5f1-4e32-9020-8d0cd62b4dda.html"><code>d2f8ffe0-c5f1-4e32-9020-8d0cd62b4dda</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Health of People in Canada Dashboard​</span><span data-lang="fr" style="display:none">Tableau de bord de la santé des personnes au Canada  </span><div class="small"><code>3632f9e8-22e3-41c6-843f-7ccfaa1128ef</code></div></td>
+        <td><span data-lang="en">Benchmark</span><span data-lang="fr" style="display:none">Point de référence</span><div class="small"><code>f506dcc1-d0e0-41b6-abd7-c69ec77fc648</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-07 15:02:48.357438</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-20 12:57:01.853248"
+          data-status="success"
+          data-resource="9542f68b-40a2-407c-9a75-15e3243ed8d2"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c4619f3a-2ef4-4354-b76d-242d6f4c8798.html"><code>c4619f3a-2ef4-4354-b76d-242d6f4c8798</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Non-exposure incident data Q4 2024-2025 </span><span data-lang="fr" style="display:none">Données des incidents sans exposition Q4 2024-2025 </span><div class="small"><code>9542f68b-40a2-407c-9a75-15e3243ed8d2</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-20 12:57:01.853248</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-20 12:29:22.640839"
+          data-status="success"
+          data-resource="ac6736de-7dfb-43f4-9210-86743e235488"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f755e8e0-d786-4412-96a1-846d2f419ee1.html"><code>f755e8e0-d786-4412-96a1-846d2f419ee1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Exposure incident follow-up data Q4 2024-2025</span><span data-lang="fr" style="display:none">Données de suivi des incidents d&#x27;exposition Q4 2024-2025</span><div class="small"><code>ac6736de-7dfb-43f4-9210-86743e235488</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-20 12:29:22.640839</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-17 12:17:11.373353"
+          data-status="success"
+          data-resource="c5cc7b3c-a8db-4e8e-b79b-19de0afb540c"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/73d496c7-2e99-4511-b365-3aef8119c490.html"><code>73d496c7-2e99-4511-b365-3aef8119c490</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Other event data Q4 2024-2025 </span><span data-lang="fr" style="display:none">Données d&#x27;autres événements Q4 2024-2025 </span><div class="small"><code>c5cc7b3c-a8db-4e8e-b79b-19de0afb540c</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-17 12:17:11.373353</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-17 12:16:28.664252"
+          data-status="success"
+          data-resource="2fc5c376-f92e-4d70-8a51-ab5700cd057a"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/83dfce48-2394-441c-a66a-ed1f9a1205c1.html"><code>83dfce48-2394-441c-a66a-ed1f9a1205c1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Other event data Q4 2024-2025 </span><span data-lang="fr" style="display:none">Données d&#x27;autres événements Q4 2024-2025 </span><div class="small"><code>2fc5c376-f92e-4d70-8a51-ab5700cd057a</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-17 12:16:28.664252</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-17 12:13:57.073466"
+          data-status="success"
+          data-resource="efa0f7a4-aad6-4999-a978-500b78356531"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8eacb9d7-4b29-4bae-80c9-23373aed3330.html"><code>8eacb9d7-4b29-4bae-80c9-23373aed3330</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Non-exposure incident data Q4 2024-2025 </span><span data-lang="fr" style="display:none">Données des incidents sans exposition Q4 2024-2025 </span><div class="small"><code>efa0f7a4-aad6-4999-a978-500b78356531</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-17 12:13:57.073466</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-17 12:06:50.490096"
+          data-status="success"
+          data-resource="d5bfe743-5bf9-4597-895e-03d61db227bc"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Exposure, non-exposure and other reporting data from licensed facilities in Canada"
+          data-dataset-fr="Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/604abcf3-dd1e-4ef6-a9b4-b9def17147c2.html"><code>604abcf3-dd1e-4ef6-a9b4-b9def17147c2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Exposure, non-exposure and other reporting data from licensed facilities in Canada</span><span data-lang="fr" style="display:none">Données sur l&#x27;exposition, la non-exposition et les autres déclarations provenant d&#x27;établissements titulaires de permis au Canada</span><div class="small"><code>c2b10948-097d-4cbf-ab07-8581a77a95d5</code></div></td>
+        <td><span data-lang="en">Exposure incident follow-up data Q4 2024-2025</span><span data-lang="fr" style="display:none">Données de suivi des incidents d&#x27;exposition Q4 2024-2025</span><div class="small"><code>d5bfe743-5bf9-4597-895e-03d61db227bc</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-17 12:06:50.490096</time></td>
+      </tr>
+    
+      <tr data-created="2025-05-28 18:09:26.823715"
+          data-status="success"
+          data-resource="16275b4c-3d66-44e8-93c1-6dc20e8ede5b"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Knowledge, Perceptions, Awareness and Behaviours Relating to Immunization among First Nations and Inuit  "
+          data-dataset-fr="Connaissances, perceptions, sensibilisation et comportements liés à la vaccination chez les Premières nations et les Inuits"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8c2687c9-1f05-4c3c-bfee-7125f0f66674.html"><code>8c2687c9-1f05-4c3c-bfee-7125f0f66674</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Knowledge, Perceptions, Awareness and Behaviours Relating to Immunization among First Nations and Inuit  </span><span data-lang="fr" style="display:none">Connaissances, perceptions, sensibilisation et comportements liés à la vaccination chez les Premières nations et les Inuits</span><div class="small"><code>1e823172-c6c2-4434-b284-14e060cf14bc</code></div></td>
+        <td><span data-lang="en">Knowledge, Perceptions, Awareness and Behaviours Relating to Immunization among First Nations and Inuit  </span><span data-lang="fr" style="display:none">Connaissances, perceptions, sensibilisation et comportements liés à la vaccination chez les Premières nations et les Inuits</span><div class="small"><code>16275b4c-3d66-44e8-93c1-6dc20e8ede5b</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-05-28 18:09:26.823715</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-02 19:22:14.693086"
+          data-status="success"
+          data-resource="4a9d0358-26ba-4f48-951d-a0b12b436d48"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Foodbook 2.0, public use microdata file 2023"
+          data-dataset-fr="L’atlas alimentaire 2.0, fichier de microdonnées à grande diffusion"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/79d07981-b154-479d-b125-56c4b6ef42d0.html"><code>79d07981-b154-479d-b125-56c4b6ef42d0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foodbook 2.0, public use microdata file 2023</span><span data-lang="fr" style="display:none">L’atlas alimentaire 2.0, fichier de microdonnées à grande diffusion</span><div class="small"><code>1efcd118-a3df-4cd0-86ae-e4233386b0c6</code></div></td>
+        <td><span data-lang="en">Foodbook 2.0 Data Dictionary</span><span data-lang="fr" style="display:none">L’atlas alimentaire 2.0 Dictionnaire de données</span><div class="small"><code>4a9d0358-26ba-4f48-951d-a0b12b436d48</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-02 19:22:14.693086</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-02 19:15:27.176624"
+          data-status="success"
+          data-resource="1034a3c9-71f8-4e97-b2ec-e836d34cb64e"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Foodbook 2.0, public use microdata file 2023"
+          data-dataset-fr="L’atlas alimentaire 2.0, fichier de microdonnées à grande diffusion"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3db92dc6-9a86-4db7-87d4-5c86950246af.html"><code>3db92dc6-9a86-4db7-87d4-5c86950246af</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foodbook 2.0, public use microdata file 2023</span><span data-lang="fr" style="display:none">L’atlas alimentaire 2.0, fichier de microdonnées à grande diffusion</span><div class="small"><code>1efcd118-a3df-4cd0-86ae-e4233386b0c6</code></div></td>
+        <td><span data-lang="en">Foodbook 2.0 - public use microdata file 2023</span><span data-lang="fr" style="display:none">L’atlas alimentaire 2.0 - fichier de microdonnées à grande diffusion 2023</span><div class="small"><code>1034a3c9-71f8-4e97-b2ec-e836d34cb64e</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-02 19:15:27.176624</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-02 19:14:10.296859"
+          data-status="success"
+          data-resource="13c847a1-4e78-4ca4-a83b-9c316d5f3f31"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="Foodbook 2.0, public use microdata file 2023"
+          data-dataset-fr="L’atlas alimentaire 2.0, fichier de microdonnées à grande diffusion"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/38d204e8-98c0-4956-aa9f-620cdb1ab059.html"><code>38d204e8-98c0-4956-aa9f-620cdb1ab059</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foodbook 2.0, public use microdata file 2023</span><span data-lang="fr" style="display:none">L’atlas alimentaire 2.0, fichier de microdonnées à grande diffusion</span><div class="small"><code>1efcd118-a3df-4cd0-86ae-e4233386b0c6</code></div></td>
+        <td><span data-lang="en">Foodbook 2.0 - public use microdata file 2023</span><span data-lang="fr" style="display:none">L’atlas alimentaire 2.0 - fichier de microdonnées à grande diffusion 2023</span><div class="small"><code>13c847a1-4e78-4ca4-a83b-9c316d5f3f31</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-02 19:14:10.296859</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:22:19.890365"
+          data-status="success"
+          data-resource="2b38d736-42f1-483b-8bdf-b983eca90c38"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/fda0528a-f0be-494b-b53d-86d4d15b2844.html"><code>fda0528a-f0be-494b-b53d-86d4d15b2844</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries 2023-2024</span><span data-lang="fr" style="display:none">Résumés inspections 202-2024</span><div class="small"><code>2b38d736-42f1-483b-8bdf-b983eca90c38</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:22:19.890365</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:22:18.849363"
+          data-status="success"
+          data-resource="e71f81b6-c5ea-47ec-b2e0-9ad975a37f27"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/13e1c710-3233-45cd-b160-dd291aef7172.html"><code>13e1c710-3233-45cd-b160-dd291aef7172</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries 2023-2024</span><span data-lang="fr" style="display:none">Résumés inspections 202-2024</span><div class="small"><code>e71f81b6-c5ea-47ec-b2e0-9ad975a37f27</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:22:18.849363</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:22:17.75888"
+          data-status="success"
+          data-resource="1c55def7-c052-45d2-86d4-c1ee140f3f03"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/054c294b-d5aa-4141-b287-13f9046ca95b.html"><code>054c294b-d5aa-4141-b287-13f9046ca95b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries 2022-2023</span><span data-lang="fr" style="display:none">Résumé inspections 2022-23 </span><div class="small"><code>1c55def7-c052-45d2-86d4-c1ee140f3f03</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:22:17.75888</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:22:16.70195"
+          data-status="success"
+          data-resource="da77b3af-eb3f-4894-86bd-eeefa58254ad"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.2"
+          data-dataset-en="The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins"
+          data-dataset-fr="Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/63d61883-37b1-49da-801a-d1bc769f345a.html"><code>63d61883-37b1-49da-801a-d1bc769f345a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Public Health Agency of Canada Biosafety and biosecurity inspection summaries for organizations working with human pathogens and toxins</span><span data-lang="fr" style="display:none">Sommaires des inspections de biosécurité de l’Agence de la santé publique du Canada pour les organisations qui travaillent avec des agents pathogènes humains et des toxines</span><div class="small"><code>787e3643-ea0b-4062-bcee-01c048735ec0</code></div></td>
+        <td><span data-lang="en">Inspection Summaries 2022-2023</span><span data-lang="fr" style="display:none">Résumé inspections 2022-2023 </span><div class="small"><code>da77b3af-eb3f-4894-86bd-eeefa58254ad</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:22:16.70195</time></td>
+      </tr>
+    
+      <tr data-created="2024-10-15 13:36:24.590264"
+          data-status="failure"
+          data-resource="fb3dd529-7432-4bfb-b41a-2e632b6700db"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Chronic Disease Surveillance System "
+          data-dataset-fr="Système canadien de surveillance des maladies chroniques "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/38d14c07-730d-48bc-9714-8eac857ffa08.html"><code>38d14c07-730d-48bc-9714-8eac857ffa08</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Chronic Disease Surveillance System </span><span data-lang="fr" style="display:none">Système canadien de surveillance des maladies chroniques </span><div class="small"><code>9525c8c0-554a-461b-a763-f1657acb9c9d</code></div></td>
+        <td><span data-lang="en">Overview of algorithms for the surveillance period 2000/01 to 2022/23</span><span data-lang="fr" style="display:none">Survol des algorithmes de la période de surveillance allant de 2000/01 à 2022/23</span><div class="small"><code>fb3dd529-7432-4bfb-b41a-2e632b6700db</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">1000 err</span><span data-lang="fr" style="display:none">1000 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-10-15 13:36:24.590264</time></td>
+      </tr>
+    
+      <tr data-created="2022-07-28 18:23:37.334137"
+          data-status="failure"
+          data-resource="5d175d20-cd83-4ca2-97c9-fc8bff93ea96"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.1"
+          data-dataset-en="Public Health Infobase - Data on COVID-19 in Canada"
+          data-dataset-fr="Infobase de la santé publique - Données de COVID-19 au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/13c1af77-bf45-4c22-a7c5-22dc8a1db2aa.html"><code>13c1af77-bf45-4c22-a7c5-22dc8a1db2aa</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Public Health Infobase - Data on COVID-19 in Canada</span><span data-lang="fr" style="display:none">Infobase de la santé publique - Données de COVID-19 au Canada</span><div class="small"><code>261c32ab-4cfd-4f81-9dea-7b64065690dc</code></div></td>
+        <td><span data-lang="en">Dictionnaire de données</span><span data-lang="fr" style="display:none">Dictionnaire de données</span><div class="small"><code>5d175d20-cd83-4ca2-97c9-fc8bff93ea96</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-07-28 18:23:37.334137</time></td>
+      </tr>
+    
+      <tr data-created="2022-07-28 18:23:36.515168"
+          data-status="failure"
+          data-resource="0f4bcd22-f5d0-4b26-bbb4-f1a5b1af9b09"
+          data-organization="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-org="Public Health Agency of Canada | Agence de la santé publique du Canada"
+          data-version="v0.1"
+          data-dataset-en="Public Health Infobase - Data on COVID-19 in Canada"
+          data-dataset-fr="Infobase de la santé publique - Données de COVID-19 au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c28d2641-5f42-43d4-8b86-9711d91fd643.html"><code>c28d2641-5f42-43d4-8b86-9711d91fd643</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Public Health Infobase - Data on COVID-19 in Canada</span><span data-lang="fr" style="display:none">Infobase de la santé publique - Données de COVID-19 au Canada</span><div class="small"><code>261c32ab-4cfd-4f81-9dea-7b64065690dc</code></div></td>
+        <td><span data-lang="en">Data Dictionary</span><span data-lang="fr" style="display:none">Data Dictionary</span><div class="small"><code>0f4bcd22-f5d0-4b26-bbb4-f1a5b1af9b09</code> · upload</div></td>
+        <td>Public Health Agency of Canada | Agence de la santé publique du Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-07-28 18:23:36.515168</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [30, 7], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [30], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [7], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

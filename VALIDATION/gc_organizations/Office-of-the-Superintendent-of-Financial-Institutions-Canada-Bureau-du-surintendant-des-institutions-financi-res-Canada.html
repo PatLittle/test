@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada (GCDS theme)." />
+  <title>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Office-of-the-Superintendent-of-Financial-Institutions-Canada-Bureau-du-surintendant-des-institutions-financi-res-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 74 · Success: 74 · Failure: 0 · Other: 0 · URL types: 1 · Latest: <time>2026-04-15 15:23:33.382481</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">74</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">74</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">0</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>74</td><td>74</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-04-15 15:23:33.382481"
+          data-status="success"
+          data-resource="6c9cfdc2-b3ea-4eb9-b564-fd28e7aba16b"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Trust companies"
+          data-dataset-fr="Sociétés de fiducie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/90434e27-30f9-460c-b98a-12960983e7d0.html"><code>90434e27-30f9-460c-b98a-12960983e7d0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Trust companies</span><span data-lang="fr" style="display:none">Sociétés de fiducie</span><div class="small"><code>203bb08d-fdff-46f6-93ec-00e5d1d76a81</code></div></td>
+        <td><span data-lang="en">M4 - Consolidated Balance Sheet (Active)​</span><span data-lang="fr" style="display:none">M4 - Bilan consolidé (Actif)​</span><div class="small"><code>6c9cfdc2-b3ea-4eb9-b564-fd28e7aba16b</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-15 15:23:33.382481</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-15 15:13:03.955908"
+          data-status="success"
+          data-resource="d5e1e6e8-c13c-4224-8b22-521a1661a0ee"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Loan companies"
+          data-dataset-fr="Sociétés de prêt"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d12dfbe0-4bb3-499f-8cb9-8eea89ffa0a6.html"><code>d12dfbe0-4bb3-499f-8cb9-8eea89ffa0a6</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Loan companies</span><span data-lang="fr" style="display:none">Sociétés de prêt</span><div class="small"><code>79c99c29-deff-4093-9c55-fde484d20028</code></div></td>
+        <td><span data-lang="en">M4 - Consolidated Balance Sheet (Active)</span><span data-lang="fr" style="display:none">M4 - Bilan consolidé (Actif)​</span><div class="small"><code>d5e1e6e8-c13c-4224-8b22-521a1661a0ee</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-15 15:13:03.955908</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-15 15:00:29.171349"
+          data-status="success"
+          data-resource="acb4cc1b-e911-4409-beb3-ccc3d660a96b"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Foreign bank branches"
+          data-dataset-fr="Succursales de banques étrangères"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ead55547-3b28-4c18-88ab-970a0f95a25c.html"><code>ead55547-3b28-4c18-88ab-970a0f95a25c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foreign bank branches</span><span data-lang="fr" style="display:none">Succursales de banques étrangères</span><div class="small"><code>c6879faf-2bc7-4c84-999c-0626ae33ec84</code></div></td>
+        <td><span data-lang="en">M4 - Consolidated Balance Sheet (Active)​</span><span data-lang="fr" style="display:none">M4 - Bilan consolidé (Actif)​</span><div class="small"><code>acb4cc1b-e911-4409-beb3-ccc3d660a96b</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-15 15:00:29.171349</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-15 14:43:18.135189"
+          data-status="success"
+          data-resource="d0f6040e-671c-4301-a235-e9e7ba164604"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3129d9ca-f266-4bd8-a174-4f61a637dfc9.html"><code>3129d9ca-f266-4bd8-a174-4f61a637dfc9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">M4 - Consolidated Balance Sheet (Active)​</span><span data-lang="fr" style="display:none">M4 - Bilan consolidé (Actif)​</span><div class="small"><code>d0f6040e-671c-4301-a235-e9e7ba164604</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-15 14:43:18.135189</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-15 14:29:12.95125"
+          data-status="success"
+          data-resource="f1bcf4fd-0a0f-4c9b-86c8-664b3e6ffeb7"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Retail associations"
+          data-dataset-fr="Associations de détail"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ad3535fc-9732-4d9b-bab2-ebcd995def77.html"><code>ad3535fc-9732-4d9b-bab2-ebcd995def77</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Retail associations</span><span data-lang="fr" style="display:none">Associations de détail</span><div class="small"><code>af61ecdd-1a40-4630-8e75-1470e721f318</code></div></td>
+        <td><span data-lang="en">M4 - Consolidated Balance Sheet (Active)​</span><span data-lang="fr" style="display:none">M4 - Bilan consolidé (Actif)​</span><div class="small"><code>f1bcf4fd-0a0f-4c9b-86c8-664b3e6ffeb7</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-15 14:29:12.95125</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-01 15:53:03.823701"
+          data-status="success"
+          data-resource="d064dbae-7b0e-4445-9e71-12e79c78d540"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Who we regulate"
+          data-dataset-fr="Entités réglementées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4efd9353-5b04-413c-afd3-f15a8b2ab7af.html"><code>4efd9353-5b04-413c-afd3-f15a8b2ab7af</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Who we regulate</span><span data-lang="fr" style="display:none">Entités réglementées</span><div class="small"><code>b27ec3ef-7338-4e76-a6fd-128339a92df5</code></div></td>
+        <td><span data-lang="en">Chercher un régime de retraite privé fédéral</span><span data-lang="fr" style="display:none">Chercher un régime de retraite privé fédéral</span><div class="small"><code>d064dbae-7b0e-4445-9e71-12e79c78d540</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-01 15:53:03.823701</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-01 15:40:45.8655"
+          data-status="success"
+          data-resource="2282e8c7-f949-454d-9c34-b6a78d94b162"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Who we regulate"
+          data-dataset-fr="Entités réglementées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9e80af8d-baa7-480f-a202-deeeaae5b646.html"><code>9e80af8d-baa7-480f-a202-deeeaae5b646</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Who we regulate</span><span data-lang="fr" style="display:none">Entités réglementées</span><div class="small"><code>b27ec3ef-7338-4e76-a6fd-128339a92df5</code></div></td>
+        <td><span data-lang="en">Who we regulate – private pension plans</span><span data-lang="fr" style="display:none">Chercher un régime de retraite privé fédéral</span><div class="small"><code>2282e8c7-f949-454d-9c34-b6a78d94b162</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-01 15:40:45.8655</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-01 15:38:27.75409"
+          data-status="success"
+          data-resource="4d9269de-202b-4e50-b7fd-358dfb0a2f2d"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Who we regulate"
+          data-dataset-fr="Entités réglementées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/71a7bd7b-2be1-45b0-a7c3-bb7ec6b89643.html"><code>71a7bd7b-2be1-45b0-a7c3-bb7ec6b89643</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Who we regulate</span><span data-lang="fr" style="display:none">Entités réglementées</span><div class="small"><code>b27ec3ef-7338-4e76-a6fd-128339a92df5</code></div></td>
+        <td><span data-lang="en">Entités réglementées institutions financières</span><span data-lang="fr" style="display:none">Entités réglementées institutions financières</span><div class="small"><code>4d9269de-202b-4e50-b7fd-358dfb0a2f2d</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-01 15:38:27.75409</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-01 15:35:38.356681"
+          data-status="success"
+          data-resource="945045fa-2de0-47d4-aad2-144d69467824"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Who we regulate"
+          data-dataset-fr="Entités réglementées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f9871af7-c26f-4138-bc23-1935ed6a58cb.html"><code>f9871af7-c26f-4138-bc23-1935ed6a58cb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Who we regulate</span><span data-lang="fr" style="display:none">Entités réglementées</span><div class="small"><code>b27ec3ef-7338-4e76-a6fd-128339a92df5</code></div></td>
+        <td><span data-lang="en">Who we regulate financial institutions</span><span data-lang="fr" style="display:none">Entités réglementées institutions financières  (Anglaise)</span><div class="small"><code>945045fa-2de0-47d4-aad2-144d69467824</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-01 15:35:38.356681</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 17:03:36.404847"
+          data-status="success"
+          data-resource="7b45c3f4-0853-4b53-a63a-0981eaa0aeba"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2e92dd5c-0bc5-4796-8a35-14e1ebcee182.html"><code>2e92dd5c-0bc5-4796-8a35-14e1ebcee182</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">MI5 - Mortgage Insurers Supervisory Annual Return (Active)</span><span data-lang="fr" style="display:none">MI5 - Mortgage Insurers Supervisory Annual Return (Actif)</span><div class="small"><code>7b45c3f4-0853-4b53-a63a-0981eaa0aeba</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 17:03:36.404847</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 17:02:25.025568"
+          data-status="success"
+          data-resource="6987c14b-8c4f-4462-9339-1341960d0fc6"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/fd318fe6-d5cc-45fb-8ba4-86c16a8e10b7.html"><code>fd318fe6-d5cc-45fb-8ba4-86c16a8e10b7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">MI -Mortgage Insurance Capital Adequacy Test (Active)</span><span data-lang="fr" style="display:none">MI - Test de suffisance du Capital des assureurs hypothécaire (Actif)</span><div class="small"><code>6987c14b-8c4f-4462-9339-1341960d0fc6</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 17:02:25.025568</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:59:12.679628"
+          data-status="success"
+          data-resource="c046ea03-a121-470d-bd23-20a4d7fd7b20"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c692c09c-5da2-4a3e-871e-e5067a6d763f.html"><code>c692c09c-5da2-4a3e-871e-e5067a6d763f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">PC3 - P&amp;C Supervisory Annual Return (Active)</span><span data-lang="fr" style="display:none">PC3 - P&amp;C Relevé de surveillance annuel (Actif)</span><div class="small"><code>c046ea03-a121-470d-bd23-20a4d7fd7b20</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:59:12.679628</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:57:09.463888"
+          data-status="success"
+          data-resource="1d3afc80-6482-4b27-93e9-91127825232f"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1a937a0a-3834-43ce-8f39-1324a90a4af1.html"><code>1a937a0a-3834-43ce-8f39-1324a90a4af1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">PC2 - P&amp;C Supervisory Quarterly Return (Active)</span><span data-lang="fr" style="display:none">PC2 - P&amp;C Relevé de surveillance trimestriel (Actif)</span><div class="small"><code>1d3afc80-6482-4b27-93e9-91127825232f</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:57:09.463888</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:20:01.320764"
+          data-status="success"
+          data-resource="2658af9f-0676-4d61-8e49-fc8fa612bc69"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b5b5e8a4-8e78-492b-9a3f-a592b4140cfc.html"><code>b5b5e8a4-8e78-492b-9a3f-a592b4140cfc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">PC4 - P&amp;C Minimum Capital Test and Branch Adequacy of Assets Test (Active)</span><span data-lang="fr" style="display:none">PC4 - Test du capital minimal et Test de suffisance de l&#x27;actif des succursales des sociétés d&#x27;assurance multirisque (Actif)</span><div class="small"><code>2658af9f-0676-4d61-8e49-fc8fa612bc69</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:20:01.320764</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:18:44.578577"
+          data-status="success"
+          data-resource="cb137a22-7f85-4e2a-81a9-a6177222c0a8"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/174c2080-6252-42a3-b61a-4192ea33658f.html"><code>174c2080-6252-42a3-b61a-4192ea33658f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">MI4 - Mortgage Insurers Supervisory Quarterly Return (Active)</span><span data-lang="fr" style="display:none">MI4 - Relevé de surveillance trimestriel des assureurs hypothécaires (Actif)</span><div class="small"><code>cb137a22-7f85-4e2a-81a9-a6177222c0a8</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:18:44.578577</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:15:31.967199"
+          data-status="success"
+          data-resource="d4c1d98d-c19e-4730-ab2d-6e64160351a7"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cad9f32d-2547-4741-8d8d-b7b51f1b8343.html"><code>cad9f32d-2547-4741-8d8d-b7b51f1b8343</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">PC1 - P&amp;C Core Financial Statement Return (Active)</span><span data-lang="fr" style="display:none">PC1 - P&amp;C Relevé des états financiers de base (Actif)</span><div class="small"><code>d4c1d98d-c19e-4730-ab2d-6e64160351a7</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:15:31.967199</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:12:16.314989"
+          data-status="success"
+          data-resource="0cf8a4bc-b20e-40a9-bc36-38219652edd2"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0d8a4cec-2c04-4966-915d-d61e3aaf9874.html"><code>0d8a4cec-2c04-4966-915d-d61e3aaf9874</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">MI3 - Mortgage Insurers Core Financial Statement Return (Active)</span><span data-lang="fr" style="display:none">MI3 - Relevé des états financiers de base desassureurs hypothécaires (Actif)</span><div class="small"><code>0cf8a4bc-b20e-40a9-bc36-38219652edd2</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:12:16.314989</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:06:01.400465"
+          data-status="success"
+          data-resource="9df41a7b-87cd-425b-a036-cf650177e5cd"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Trust companies"
+          data-dataset-fr="Sociétés de fiducie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8d9d2680-8f6c-4d06-917c-27924491d87a.html"><code>8d9d2680-8f6c-4d06-917c-27924491d87a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Trust companies</span><span data-lang="fr" style="display:none">Sociétés de fiducie</span><div class="small"><code>203bb08d-fdff-46f6-93ec-00e5d1d76a81</code></div></td>
+        <td><span data-lang="en">P3 - Consolidated Statement Of Income, Retained Earnings &amp; AOCI (Active)</span><span data-lang="fr" style="display:none">P3 - État consolidés des revenus, bénéfices non repartis et AERE (Actif)</span><div class="small"><code>9df41a7b-87cd-425b-a036-cf650177e5cd</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:06:01.400465</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 16:00:54.391076"
+          data-status="success"
+          data-resource="bacbc9e4-c66f-4971-8fa6-562441f2c9b3"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Trust companies"
+          data-dataset-fr="Sociétés de fiducie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/6742ff1f-6bd5-4380-b51d-2abcfbcadece.html"><code>6742ff1f-6bd5-4380-b51d-2abcfbcadece</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Trust companies</span><span data-lang="fr" style="display:none">Sociétés de fiducie</span><div class="small"><code>203bb08d-fdff-46f6-93ec-00e5d1d76a81</code></div></td>
+        <td><span data-lang="en">LR - Leverage Requirements Return (Active)</span><span data-lang="fr" style="display:none">LR - Déclaration du ratio de levier (Actif)</span><div class="small"><code>bacbc9e4-c66f-4971-8fa6-562441f2c9b3</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 16:00:54.391076</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:56:51.181675"
+          data-status="success"
+          data-resource="ddd7f303-7f30-4011-aa3b-aea412aaae6f"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Trust companies"
+          data-dataset-fr="Sociétés de fiducie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0d2bd7cf-b607-48f8-af65-fd92db36ddf7.html"><code>0d2bd7cf-b607-48f8-af65-fd92db36ddf7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Trust companies</span><span data-lang="fr" style="display:none">Sociétés de fiducie</span><div class="small"><code>203bb08d-fdff-46f6-93ec-00e5d1d76a81</code></div></td>
+        <td><span data-lang="en">E3 - Return of Allowances for Expected Credit Losses (Active)​</span><span data-lang="fr" style="display:none">E3 - Relevé Des Provisions Pour Pertes De Crédit Attendues (Actif)​</span><div class="small"><code>ddd7f303-7f30-4011-aa3b-aea412aaae6f</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:56:51.181675</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:55:52.337659"
+          data-status="success"
+          data-resource="352eef00-9f32-4a76-a81d-17f73929f1cd"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Trust companies"
+          data-dataset-fr="Sociétés de fiducie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/79b1fbed-5e45-464a-a8fb-1685f1f53f78.html"><code>79b1fbed-5e45-464a-a8fb-1685f1f53f78</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Trust companies</span><span data-lang="fr" style="display:none">Sociétés de fiducie</span><div class="small"><code>203bb08d-fdff-46f6-93ec-00e5d1d76a81</code></div></td>
+        <td><span data-lang="en">BA – BASEL III Capital Adequacy Reporting - BCAR (Active)</span><span data-lang="fr" style="display:none">BA - Relevé des normes de fonds propres - Bâle III (Actif)</span><div class="small"><code>352eef00-9f32-4a76-a81d-17f73929f1cd</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:55:52.337659</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:46:06.9071"
+          data-status="success"
+          data-resource="39b1b0db-c7df-40be-859e-7281e3fea2f0"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Loan companies"
+          data-dataset-fr="Sociétés de prêt"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/6bddfbaa-e546-4921-b9cd-3a32092d56d1.html"><code>6bddfbaa-e546-4921-b9cd-3a32092d56d1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Loan companies</span><span data-lang="fr" style="display:none">Sociétés de prêt</span><div class="small"><code>79c99c29-deff-4093-9c55-fde484d20028</code></div></td>
+        <td><span data-lang="en">LR - Leverage Requirements Return (Active)​</span><span data-lang="fr" style="display:none">LR - Déclaration du ratio de levier (Actif)​</span><div class="small"><code>39b1b0db-c7df-40be-859e-7281e3fea2f0</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:46:06.9071</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:43:00.980102"
+          data-status="success"
+          data-resource="5253734e-00a4-4fca-877f-71ff75e8085d"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Loan companies"
+          data-dataset-fr="Sociétés de prêt"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d06a4389-6eab-46e0-9b78-fd2d59a9fe43.html"><code>d06a4389-6eab-46e0-9b78-fd2d59a9fe43</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Loan companies</span><span data-lang="fr" style="display:none">Sociétés de prêt</span><div class="small"><code>79c99c29-deff-4093-9c55-fde484d20028</code></div></td>
+        <td><span data-lang="en">BA – BASEL III Capital Adequacy Reporting - BCAR (Active)</span><span data-lang="fr" style="display:none">BA - Relevé des normes de fonds propres - Bâle III (Actif)</span><div class="small"><code>5253734e-00a4-4fca-877f-71ff75e8085d</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:43:00.980102</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:41:05.471125"
+          data-status="success"
+          data-resource="84125792-4c4c-4019-b4f3-53b63f951224"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Loan companies"
+          data-dataset-fr="Sociétés de prêt"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a35a6dfd-ee8f-4f00-b9de-df81a13f29ac.html"><code>a35a6dfd-ee8f-4f00-b9de-df81a13f29ac</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Loan companies</span><span data-lang="fr" style="display:none">Sociétés de prêt</span><div class="small"><code>79c99c29-deff-4093-9c55-fde484d20028</code></div></td>
+        <td><span data-lang="en">P3 - Consolidated Statement Of Income, Retained Earnings &amp; AOCI (Active)</span><span data-lang="fr" style="display:none">P3 - État consolidés des revenus, bénéfices non repartis et AERE (Actif)</span><div class="small"><code>84125792-4c4c-4019-b4f3-53b63f951224</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:41:05.471125</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:35:28.321716"
+          data-status="success"
+          data-resource="3e397a93-828e-47b3-be3e-07ab2d84485a"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Loan companies"
+          data-dataset-fr="Sociétés de prêt"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/39175dd3-027c-4913-86d2-d03d35f8cd6b.html"><code>39175dd3-027c-4913-86d2-d03d35f8cd6b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Loan companies</span><span data-lang="fr" style="display:none">Sociétés de prêt</span><div class="small"><code>79c99c29-deff-4093-9c55-fde484d20028</code></div></td>
+        <td><span data-lang="en">E3 - Return of Allowances for Expected Credit Losses (Active)​</span><span data-lang="fr" style="display:none">E3 - Relevé Des Provisions Pour Pertes De Crédit Attendues (Actif)​</span><div class="small"><code>3e397a93-828e-47b3-be3e-07ab2d84485a</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:35:28.321716</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:27:32.288002"
+          data-status="success"
+          data-resource="f3ddcfbc-a852-4dee-be3c-5b08864c9afe"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/217c4cac-c406-4668-82a9-a686e6369d46.html"><code>217c4cac-c406-4668-82a9-a686e6369d46</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">LF1 - Life Core Financial Statement Return (Active) </span><span data-lang="fr" style="display:none">LF1 - Vie Relevé des états financiers (Actif) </span><div class="small"><code>f3ddcfbc-a852-4dee-be3c-5b08864c9afe</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:27:32.288002</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:12:23.399467"
+          data-status="success"
+          data-resource="c793a709-f547-463f-aa13-7f529e30c617"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2ae7a973-81df-4095-ab5c-e8a77f56d848.html"><code>2ae7a973-81df-4095-ab5c-e8a77f56d848</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">LF3 - Life Supervisory Annual Return (Active)</span><span data-lang="fr" style="display:none">LF3 - Vie Relevé de surveillance annual (Actif)</span><div class="small"><code>c793a709-f547-463f-aa13-7f529e30c617</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:12:23.399467</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 15:09:23.90308"
+          data-status="success"
+          data-resource="563aa4bf-dc3d-4ece-8669-dd68dd6c2fbf"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/906beec7-526b-4ab6-97c5-f66793829780.html"><code>906beec7-526b-4ab6-97c5-f66793829780</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">LF2 - Life Supervisory Quarterly Return (Active)</span><span data-lang="fr" style="display:none">LF2 - Vie Relevé de surveillance trimestiel (Actif)</span><div class="small"><code>563aa4bf-dc3d-4ece-8669-dd68dd6c2fbf</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 15:09:23.90308</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:38:31.701614"
+          data-status="success"
+          data-resource="cc2cae60-cdc4-4428-b64c-cdaa2eb0b700"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/53c13ed7-6248-46a3-9a5d-5658ceb106ac.html"><code>53c13ed7-6248-46a3-9a5d-5658ceb106ac</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">LCQ - LICAT (Active)</span><span data-lang="fr" style="display:none">LCQ – TSAV (Actif)</span><div class="small"><code>cc2cae60-cdc4-4428-b64c-cdaa2eb0b700</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:38:31.701614</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:33:27.437856"
+          data-status="success"
+          data-resource="69b6fcd5-50c9-43bd-bd18-3f4e031854d0"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0ebe1fa1-fcbe-4927-b2dd-4d1f472ef0b3.html"><code>0ebe1fa1-fcbe-4927-b2dd-4d1f472ef0b3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">LCA - LICAT (Active)</span><span data-lang="fr" style="display:none">LCA - TSAV(Actif)</span><div class="small"><code>69b6fcd5-50c9-43bd-bd18-3f4e031854d0</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:33:27.437856</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:29:15.096104"
+          data-status="success"
+          data-resource="8e52a90b-ff30-4ba2-b026-f946ba7b026d"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8459dd91-7e75-4f33-ab39-36c27054b59c.html"><code>8459dd91-7e75-4f33-ab39-36c27054b59c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">LCA - LICAT (Active)</span><span data-lang="fr" style="display:none">LCA - TSAV(Actif)</span><div class="small"><code>8e52a90b-ff30-4ba2-b026-f946ba7b026d</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:29:15.096104</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:25:51.030098"
+          data-status="success"
+          data-resource="1907c224-cef2-40c4-ba0f-4743ed42c904"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/50fec2a0-4441-416e-919b-74d1196f0e56.html"><code>50fec2a0-4441-416e-919b-74d1196f0e56</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">LF1 - Life Core Financial Statement Return (Active) </span><span data-lang="fr" style="display:none">LF1 - Vie Relevé des états financiers (Actif) </span><div class="small"><code>1907c224-cef2-40c4-ba0f-4743ed42c904</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:25:51.030098</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:21:20.129566"
+          data-status="success"
+          data-resource="7a576a78-62eb-4b1b-90e8-18b3f86db668"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/dffd7a09-48e6-48cc-b3cb-dcb8a0a0885a.html"><code>dffd7a09-48e6-48cc-b3cb-dcb8a0a0885a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">LF3 - Life Supervisory Annual Return (Active)</span><span data-lang="fr" style="display:none">LF3 - Vie Relevé de surveillance annual (Actif)</span><div class="small"><code>7a576a78-62eb-4b1b-90e8-18b3f86db668</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:21:20.129566</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:17:31.540506"
+          data-status="success"
+          data-resource="5a730b28-ebaa-4d60-ad47-94f0f8a37688"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/70f7d785-58e7-46e0-aec1-212618c07daf.html"><code>70f7d785-58e7-46e0-aec1-212618c07daf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">LF2 - Life Supervisory Quarterly Return (Active)</span><span data-lang="fr" style="display:none">LF2 - Vie Relevé de surveillance trimestiel (Actif)</span><div class="small"><code>5a730b28-ebaa-4d60-ad47-94f0f8a37688</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:17:31.540506</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 14:01:10.706667"
+          data-status="success"
+          data-resource="7dcb8a09-f089-4282-b2f9-3fbb42432684"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e7f81afb-cd12-41d7-8507-17f6fa09c815.html"><code>e7f81afb-cd12-41d7-8507-17f6fa09c815</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">LCQ - LICAT (Active)</span><span data-lang="fr" style="display:none">LCQ – TSAV (Actif)</span><div class="small"><code>7dcb8a09-f089-4282-b2f9-3fbb42432684</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 14:01:10.706667</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 13:49:14.364334"
+          data-status="success"
+          data-resource="2f534e32-1241-4935-8bad-3678bc432507"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Foreign bank branches"
+          data-dataset-fr="Succursales de banques étrangères"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e49b4942-7bd1-42ff-b51f-757aea22585e.html"><code>e49b4942-7bd1-42ff-b51f-757aea22585e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foreign bank branches</span><span data-lang="fr" style="display:none">Succursales de banques étrangères</span><div class="small"><code>c6879faf-2bc7-4c84-999c-0626ae33ec84</code></div></td>
+        <td><span data-lang="en">P3 - Consolidated Statement Of Income, Retained Earnings &amp; AOCI (Active)</span><span data-lang="fr" style="display:none">P3 - État consolidés des revenus, bénéfices non repartis et AERE (Actif)</span><div class="small"><code>2f534e32-1241-4935-8bad-3678bc432507</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 13:49:14.364334</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 13:30:51.747478"
+          data-status="success"
+          data-resource="cfc1e5fc-624f-42a0-ad82-406332a87c45"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Foreign bank branches"
+          data-dataset-fr="Succursales de banques étrangères"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cd0a1019-fb1c-4ac7-ac01-65833ddf1232.html"><code>cd0a1019-fb1c-4ac7-ac01-65833ddf1232</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foreign bank branches</span><span data-lang="fr" style="display:none">Succursales de banques étrangères</span><div class="small"><code>c6879faf-2bc7-4c84-999c-0626ae33ec84</code></div></td>
+        <td><span data-lang="en">K3 - Supplementary Return for Foreign Bank Branches (Active)</span><span data-lang="fr" style="display:none">K3 - Relevé supplémentaire - Succursales de banques étrangères (Actif)</span><div class="small"><code>cfc1e5fc-624f-42a0-ad82-406332a87c45</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 13:30:51.747478</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:39:25.413043"
+          data-status="success"
+          data-resource="b54894dc-44fe-483b-9625-ccd0e630cb4d"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Foreign bank branches"
+          data-dataset-fr="Succursales de banques étrangères"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/eca22897-bd7a-46d2-a9d9-8946fd5ff868.html"><code>eca22897-bd7a-46d2-a9d9-8946fd5ff868</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foreign bank branches</span><span data-lang="fr" style="display:none">Succursales de banques étrangères</span><div class="small"><code>c6879faf-2bc7-4c84-999c-0626ae33ec84</code></div></td>
+        <td><span data-lang="en">E3 - Return of Allowances for Expected Credit Losses (Active)​</span><span data-lang="fr" style="display:none">E3 - Relevé Des Provisions Pour Pertes De Crédit Attendues (Actif)​</span><div class="small"><code>b54894dc-44fe-483b-9625-ccd0e630cb4d</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:39:25.413043</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:34:01.461668"
+          data-status="success"
+          data-resource="4b433658-6486-49bd-936f-9ea542b67a6c"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Retail associations"
+          data-dataset-fr="Associations de détail"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/695554a0-0f87-4b91-b0c4-5d06982c9e4b.html"><code>695554a0-0f87-4b91-b0c4-5d06982c9e4b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Retail associations</span><span data-lang="fr" style="display:none">Associations de détail</span><div class="small"><code>af61ecdd-1a40-4630-8e75-1470e721f318</code></div></td>
+        <td><span data-lang="en">P3 - Consolidated Statement Of Income, Retained Earnings &amp; AOCI (Active)</span><span data-lang="fr" style="display:none">P3 - État consolidés des revenus, bénéfices non repartis et AERE (Actif)</span><div class="small"><code>4b433658-6486-49bd-936f-9ea542b67a6c</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:34:01.461668</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:31:39.948861"
+          data-status="success"
+          data-resource="cd284239-22c6-4cc3-b049-d52e26da3388"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Retail associations"
+          data-dataset-fr="Associations de détail"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/50fc82af-e2e4-4e85-b051-5cb4758b4ea0.html"><code>50fc82af-e2e4-4e85-b051-5cb4758b4ea0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Retail associations</span><span data-lang="fr" style="display:none">Associations de détail</span><div class="small"><code>af61ecdd-1a40-4630-8e75-1470e721f318</code></div></td>
+        <td><span data-lang="en">LR - Leverage Requirements Return (Active)​</span><span data-lang="fr" style="display:none">LR - Déclaration du ratio de levier (Actif)​</span><div class="small"><code>cd284239-22c6-4cc3-b049-d52e26da3388</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:31:39.948861</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:29:13.700921"
+          data-status="success"
+          data-resource="d131f890-3f05-4d7c-94af-17a55463e638"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Retail associations"
+          data-dataset-fr="Associations de détail"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1d8f0f7a-8866-4c0d-b593-13a8e59b15ef.html"><code>1d8f0f7a-8866-4c0d-b593-13a8e59b15ef</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Retail associations</span><span data-lang="fr" style="display:none">Associations de détail</span><div class="small"><code>af61ecdd-1a40-4630-8e75-1470e721f318</code></div></td>
+        <td><span data-lang="en">E3 - Return of Allowances for Expected Credit Losses (Active)​</span><span data-lang="fr" style="display:none">E3 - Relevé Des Provisions Pour Pertes De Crédit Attendues (Actif)​</span><div class="small"><code>d131f890-3f05-4d7c-94af-17a55463e638</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:29:13.700921</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:26:08.688807"
+          data-status="success"
+          data-resource="d5d1fdfa-e736-4278-856e-73766e2b63a1"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Retail associations"
+          data-dataset-fr="Associations de détail"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9e82127a-10ed-4c6c-8e7e-4eea70f3f1a9.html"><code>9e82127a-10ed-4c6c-8e7e-4eea70f3f1a9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Retail associations</span><span data-lang="fr" style="display:none">Associations de détail</span><div class="small"><code>af61ecdd-1a40-4630-8e75-1470e721f318</code></div></td>
+        <td><span data-lang="en">BA – BASEL III Capital Adequacy Reporting - BCAR (Active)</span><span data-lang="fr" style="display:none">BA - Relevé des normes de fonds propres - Bâle III (Actif)</span><div class="small"><code>d5d1fdfa-e736-4278-856e-73766e2b63a1</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:26:08.688807</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:19:56.455952"
+          data-status="success"
+          data-resource="1f86e088-7d29-49c2-94de-ddbfe6559725"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f26dec99-4e56-4b1a-8a02-72a8e2f58af1.html"><code>f26dec99-4e56-4b1a-8a02-72a8e2f58af1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">E3 - Return of Allowances for Expected Credit Losses (Active)​</span><span data-lang="fr" style="display:none">E3 - Relevé Des Provisions Pour Pertes De Crédit Attendues (Actif)​</span><div class="small"><code>1f86e088-7d29-49c2-94de-ddbfe6559725</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:19:56.455952</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:14:47.994837"
+          data-status="success"
+          data-resource="fe7617f7-a676-4966-aae3-c4cfbab4b935"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/98f72d2e-c822-4c88-808b-185b0576cba3.html"><code>98f72d2e-c822-4c88-808b-185b0576cba3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">BA – BASEL III Capital Adequacy Reporting - BCAR (Active)</span><span data-lang="fr" style="display:none">BA - Relevé des normes de fonds propres - Bâle III (Actif)</span><div class="small"><code>fe7617f7-a676-4966-aae3-c4cfbab4b935</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:14:47.994837</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:09:41.798715"
+          data-status="success"
+          data-resource="027ee7f8-4b87-45cd-a10f-f95d3a5d4e09"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f5026688-82b3-4ae0-b7ac-b9779f475267.html"><code>f5026688-82b3-4ae0-b7ac-b9779f475267</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">P3 - Consolidated Statement Of Income, Retained Earnings &amp; AOCI (Active)​</span><span data-lang="fr" style="display:none">P3 - État consolidés des revenus, bénéfices non repartis et AERE (Actif)​</span><div class="small"><code>027ee7f8-4b87-45cd-a10f-f95d3a5d4e09</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:09:41.798715</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 20:04:22.973606"
+          data-status="success"
+          data-resource="817d4005-aa4a-4c4f-9dad-6ce7eca40700"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a8e07f95-139d-4189-89c7-3cb3644fe272.html"><code>a8e07f95-139d-4189-89c7-3cb3644fe272</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">LR - Leverage Requirements Return (Active)</span><span data-lang="fr" style="display:none">LR - Déclaration du ratio de levier (Actif)​</span><div class="small"><code>817d4005-aa4a-4c4f-9dad-6ce7eca40700</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 20:04:22.973606</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-19 15:27:03.807323"
+          data-status="success"
+          data-resource="b43a8ed9-0d9f-4ecf-ab96-b93f68ccf935"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/07c26b50-ed51-47c8-9741-58a8cf597beb.html"><code>07c26b50-ed51-47c8-9741-58a8cf597beb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">MI1 - Mortgage Insurance Quarterly (Inactive Q4/2022)​</span><span data-lang="fr" style="display:none">MI1 - Relevé financier trimestriel des assureurs hypothécaires canadiens (Inactif T4/2022)​</span><div class="small"><code>b43a8ed9-0d9f-4ecf-ab96-b93f68ccf935</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-19 15:27:03.807323</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 18:43:37.659033"
+          data-status="success"
+          data-resource="4679fcee-29ad-4619-9612-a0ddcb46d84d"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Trust companies"
+          data-dataset-fr="Sociétés de fiducie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e96a3c1f-8a15-4935-97cd-9e0506e95a93.html"><code>e96a3c1f-8a15-4935-97cd-9e0506e95a93</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Trust companies</span><span data-lang="fr" style="display:none">Sociétés de fiducie</span><div class="small"><code>203bb08d-fdff-46f6-93ec-00e5d1d76a81</code></div></td>
+        <td><span data-lang="en">G3 - Capital Adequacy Return (Inactive Q1/2008)​</span><span data-lang="fr" style="display:none">G3 - Normes de fonds propres (Inactif T1/2008)​</span><div class="small"><code>4679fcee-29ad-4619-9612-a0ddcb46d84d</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 18:43:37.659033</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 18:15:56.803514"
+          data-status="success"
+          data-resource="5c362990-9f55-4240-a6e6-ab9fa5f53d5d"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e8a5a7e0-9fc9-4a2c-ac28-d35cc304f8a4.html"><code>e8a5a7e0-9fc9-4a2c-ac28-d35cc304f8a4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">4 - PC-2i Foreign Interim (Inactive Q3/2014)</span><span data-lang="fr" style="display:none">4 - PC-2i étrangère provisoire (Inactif T3/2014)</span><div class="small"><code>5c362990-9f55-4240-a6e6-ab9fa5f53d5d</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 18:15:56.803514</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 18:09:42.216045"
+          data-status="success"
+          data-resource="ee07f4d8-b221-49b3-aacc-654bb27bc35e"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d1a1129b-c3e0-4b13-bf66-34f2b6d82492.html"><code>d1a1129b-c3e0-4b13-bf66-34f2b6d82492</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">3 - PC-1i Canadian Interim (Inactive Q3/2014)</span><span data-lang="fr" style="display:none">3 - PC-1i canadienne provisoire (Inactif T3/2014)</span><div class="small"><code>ee07f4d8-b221-49b3-aacc-654bb27bc35e</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 18:09:42.216045</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 18:03:37.280181"
+          data-status="success"
+          data-resource="f152eb8b-9701-421f-9ee5-819254b1b8ae"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/18c39010-291a-46b2-83f2-1ac08d8412ac.html"><code>18c39010-291a-46b2-83f2-1ac08d8412ac</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">2 - PC-2 Foreign Annual (Inactive Q4/2013)</span><span data-lang="fr" style="display:none">2 - PC-2 étrangère annuelle (Inactive Q4/2013)</span><div class="small"><code>f152eb8b-9701-421f-9ee5-819254b1b8ae</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 18:03:37.280181</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 17:54:12.237808"
+          data-status="success"
+          data-resource="4ec671af-44a1-43cf-9b28-ee6d657d802f"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/fb5a696b-5fc5-4d3c-9656-3e18024ec46b.html"><code>fb5a696b-5fc5-4d3c-9656-3e18024ec46b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">1Q - PC Quarterly  (Inactive Q1/2024)</span><span data-lang="fr" style="display:none">1Q - Relevés Trimenstriel  (Inactif T1/2024)</span><div class="small"><code>4ec671af-44a1-43cf-9b28-ee6d657d802f</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 17:54:12.237808</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 17:50:03.880664"
+          data-status="success"
+          data-resource="11dc94fb-8f90-4451-a386-aa2731ed4f2e"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Property and casualty companies"
+          data-dataset-fr="Sociétés d&#x27;assurances multirisques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7520241b-ff30-4b9e-b253-1d8f83bde194.html"><code>7520241b-ff30-4b9e-b253-1d8f83bde194</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Property and casualty companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurances multirisques</span><div class="small"><code>4c6c515f-7c44-4bb6-ab56-c5f79f75f705</code></div></td>
+        <td><span data-lang="en">1 - PC-1 Canadian Annual (Inactive Q3/2014)​</span><span data-lang="fr" style="display:none">1 - PC-1 canadienne annuelle (Inactif T3/2014)​</span><div class="small"><code>11dc94fb-8f90-4451-a386-aa2731ed4f2e</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 17:50:03.880664</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:41:16.381061"
+          data-status="success"
+          data-resource="f1d7e437-c764-45d3-add0-508002f0b071"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Loan companies"
+          data-dataset-fr="Sociétés de prêt"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e7795492-b967-4856-80b7-6f05481017dc.html"><code>e7795492-b967-4856-80b7-6f05481017dc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Loan companies</span><span data-lang="fr" style="display:none">Sociétés de prêt</span><div class="small"><code>79c99c29-deff-4093-9c55-fde484d20028</code></div></td>
+        <td><span data-lang="en">G3 - Capital Adequacy Return (Inactive Q1/2008)​</span><span data-lang="fr" style="display:none">G3 - Normes de fonds propres (Inactif T1/2008)​</span><div class="small"><code>f1d7e437-c764-45d3-add0-508002f0b071</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:41:16.381061</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:26:19.777216"
+          data-status="success"
+          data-resource="dafda1e3-84dc-44af-a672-408f1836727e"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7c8845e1-bf3a-41d8-ae5b-7435b021644f.html"><code>7c8845e1-bf3a-41d8-ae5b-7435b021644f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">87 - Return 87 / MCCSR-A (Inactive Q4/2017)​</span><span data-lang="fr" style="display:none">87 - Retour 87 / MMPRCE-A (Inactif T4/2017)​</span><div class="small"><code>dafda1e3-84dc-44af-a672-408f1836727e</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:26:19.777216</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:23:51.815565"
+          data-status="success"
+          data-resource="89fe6102-64a1-4648-83a1-d337ad5c075b"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/22433413-cb84-409a-8c89-5cdda1879370.html"><code>22433413-cb84-409a-8c89-5cdda1879370</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">86 - Return 86 / TAAM-A (Inactive Q4/2017)​</span><span data-lang="fr" style="display:none">86 - Retour 86 / TDAMR-A (Inactif T4/2017)​</span><div class="small"><code>89fe6102-64a1-4648-83a1-d337ad5c075b</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:23:51.815565</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:21:08.893708"
+          data-status="success"
+          data-resource="2f5924eb-50c2-441b-8d23-c72acf812563"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/6ac26842-c8ee-49a5-a6f3-19e376433bcb.html"><code>6ac26842-c8ee-49a5-a6f3-19e376433bcb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">77 - Return 77 (Inactive Q4/2010)</span><span data-lang="fr" style="display:none">77 - Retour 77 (Inactif Q4/2010)​</span><div class="small"><code>2f5924eb-50c2-441b-8d23-c72acf812563</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:21:08.893708</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:15:41.021883"
+          data-status="success"
+          data-resource="a0e348aa-64b8-4d42-9a0e-594c70e2aaa5"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/881847d8-6cb7-45ad-8d7c-b51f23536795.html"><code>881847d8-6cb7-45ad-8d7c-b51f23536795</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">56 - Return 56 (Inactive Q4/2010)​</span><span data-lang="fr" style="display:none">56 - Retour 56 (Inactif T4/2010)​</span><div class="small"><code>a0e348aa-64b8-4d42-9a0e-594c70e2aaa5</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:15:41.021883</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:13:05.374922"
+          data-status="success"
+          data-resource="b4703902-2524-427b-b90f-39b8ebab8fbf"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/507efdc9-9b2e-4b74-8b63-5b16545deffe.html"><code>507efdc9-9b2e-4b74-8b63-5b16545deffe</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">20 - Life 2 (Inactive Q3/2014)</span><span data-lang="fr" style="display:none">20 - Vie 2 (Inactif T3/2014)</span><div class="small"><code>b4703902-2524-427b-b90f-39b8ebab8fbf</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:13:05.374922</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:10:11.091171"
+          data-status="success"
+          data-resource="0509d887-1822-402b-a436-ee1d9d85a7fa"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c1813166-26f6-42b1-a91a-9873f75546a9.html"><code>c1813166-26f6-42b1-a91a-9873f75546a9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">10Q - Life Quarterly (Inactive Q4/2023)</span><span data-lang="fr" style="display:none">10Q - Vie trimestrielle (Inactif T4/2023)</span><div class="small"><code>0509d887-1822-402b-a436-ee1d9d85a7fa</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:10:11.091171</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:07:00.275874"
+          data-status="success"
+          data-resource="b46acbcf-1abd-4358-9de9-3a191564def1"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e9ebbeee-d577-46c8-8eda-8b9f420b618d.html"><code>e9ebbeee-d577-46c8-8eda-8b9f420b618d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">10A - Life Annual Supplement (Inactive Q4/2023)</span><span data-lang="fr" style="display:none">10A - Supplément annuel sur la vie (Inactif T4/2023)</span><div class="small"><code>b46acbcf-1abd-4358-9de9-3a191564def1</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:07:00.275874</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 16:04:46.174678"
+          data-status="success"
+          data-resource="1fd9fb51-099b-4e49-b8d8-78a5eb421eda"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Fraternal benefit societies"
+          data-dataset-fr="Sociétés de secours mutuels"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/929216b0-c10a-4dc8-89c6-21ce0ad5aa68.html"><code>929216b0-c10a-4dc8-89c6-21ce0ad5aa68</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fraternal benefit societies</span><span data-lang="fr" style="display:none">Sociétés de secours mutuels</span><div class="small"><code>7ad44bfe-aa26-4b5b-930b-e7845023dd4c</code></div></td>
+        <td><span data-lang="en">10 - Life 1 (Inactive Q3/2014)</span><span data-lang="fr" style="display:none">10 - Vie 1 (Inactif T3/2014)</span><div class="small"><code>1fd9fb51-099b-4e49-b8d8-78a5eb421eda</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 16:04:46.174678</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:55:06.333716"
+          data-status="success"
+          data-resource="b97c29b4-76d5-4dc6-9f93-540908157dcb"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c8a5ee0f-5b0a-47a0-a1db-1867a6e625cc.html"><code>c8a5ee0f-5b0a-47a0-a1db-1867a6e625cc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">87 - Return 87 / MCCSR-A (Inactive Q4/2017)</span><span data-lang="fr" style="display:none">87 - Retour 87 / MMPRCE-A (Inactif T4/2017)</span><div class="small"><code>b97c29b4-76d5-4dc6-9f93-540908157dcb</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:55:06.333716</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:46:41.059398"
+          data-status="success"
+          data-resource="a881674b-642a-4e9c-84c4-70ec061f71ca"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/82d39476-dee0-4b1a-8dd2-d476c6274285.html"><code>82d39476-dee0-4b1a-8dd2-d476c6274285</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">86 - Return 86 / TAAM-A (Inactive Q4/2017)</span><span data-lang="fr" style="display:none">86 - Retour 86 / TDAMR-A (Inactif T4/2017)</span><div class="small"><code>a881674b-642a-4e9c-84c4-70ec061f71ca</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:46:41.059398</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:41:43.79865"
+          data-status="success"
+          data-resource="1dc23ffc-ae5a-46b0-8162-023c00d970f2"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f3eeeed5-c032-4c5a-b076-82d0ee3c805e.html"><code>f3eeeed5-c032-4c5a-b076-82d0ee3c805e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">55 - Return 55-A (Inactive Q3/2005)</span><span data-lang="fr" style="display:none">55 - BSIF 55 (Inactif T3/2005)</span><div class="small"><code>1dc23ffc-ae5a-46b0-8162-023c00d970f2</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:41:43.79865</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:38:01.349284"
+          data-status="success"
+          data-resource="7ec500de-a5b8-481a-97a4-4500ec3efe6a"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/83421638-75d7-47c5-8e1f-ed1c2eec1937.html"><code>83421638-75d7-47c5-8e1f-ed1c2eec1937</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">54 - Return 54 (Inactive Q3/2005)</span><span data-lang="fr" style="display:none">54 - BSIF 54 (Inactif T3/2005)</span><div class="small"><code>7ec500de-a5b8-481a-97a4-4500ec3efe6a</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:38:01.349284</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:33:06.274873"
+          data-status="success"
+          data-resource="1017a532-b70b-45a5-a2be-a75b4e5e3947"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ae269712-28c7-47e0-8ce2-8e53811eb3f0.html"><code>ae269712-28c7-47e0-8ce2-8e53811eb3f0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">20 - Life 2 (Inactive Q3/2014)</span><span data-lang="fr" style="display:none">20 - Vie 2 (Inactif T3/2014)</span><div class="small"><code>1017a532-b70b-45a5-a2be-a75b4e5e3947</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:33:06.274873</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:28:52.055262"
+          data-status="success"
+          data-resource="023628c5-9596-400e-9187-721b849e58af"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b4b2b981-fb00-4af7-9c11-a5ef77bbf631.html"><code>b4b2b981-fb00-4af7-9c11-a5ef77bbf631</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">10Q - Life Quarterly (Inactive Q4/2023)​</span><span data-lang="fr" style="display:none">10Q - Vie trimestrielle (Inactif T4/2023)​</span><div class="small"><code>023628c5-9596-400e-9187-721b849e58af</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:28:52.055262</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:24:32.948118"
+          data-status="success"
+          data-resource="14dd8023-a6de-49b8-832d-a41a6f773a51"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/05e3ed46-0aaa-4978-8645-dc1d801ca816.html"><code>05e3ed46-0aaa-4978-8645-dc1d801ca816</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">10A - Life Annual Supplement (Inactive Q4/2023)​</span><span data-lang="fr" style="display:none">10A - Supplément annuel sur la vie (Inactif T4/2023)​</span><div class="small"><code>14dd8023-a6de-49b8-832d-a41a6f773a51</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:24:32.948118</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-23 15:19:55.862613"
+          data-status="success"
+          data-resource="d8042758-8d77-4d38-abf5-5bdb76c16faa"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Life insurance companies"
+          data-dataset-fr="Sociétés d&#x27;assurance-vie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f4c0d753-4166-4384-86d1-505c7fe3b53b.html"><code>f4c0d753-4166-4384-86d1-505c7fe3b53b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Life insurance companies</span><span data-lang="fr" style="display:none">Sociétés d&#x27;assurance-vie</span><div class="small"><code>1358284b-26e7-4c69-abd8-398d3da2c270</code></div></td>
+        <td><span data-lang="en">10 - Life 1 (Inactive Q3/2014)</span><span data-lang="fr" style="display:none">10 - Vie 1 (Inactif T3/2014)​</span><div class="small"><code>d8042758-8d77-4d38-abf5-5bdb76c16faa</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-23 15:19:55.862613</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-20 21:41:29.389611"
+          data-status="success"
+          data-resource="3c438b04-3ce8-4a4e-a37d-67b112b06d01"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Foreign bank branches"
+          data-dataset-fr="Succursales de banques étrangères"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a290f989-db5c-40b2-bc8d-e115506948cd.html"><code>a290f989-db5c-40b2-bc8d-e115506948cd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Foreign bank branches</span><span data-lang="fr" style="display:none">Succursales de banques étrangères</span><div class="small"><code>c6879faf-2bc7-4c84-999c-0626ae33ec84</code></div></td>
+        <td><span data-lang="en">G3 - Capital Adequacy Return (Inactive Q1/2008)​</span><span data-lang="fr" style="display:none">G3 - Normes de fonds propres (Inactif T1/2008)​</span><div class="small"><code>3c438b04-3ce8-4a4e-a37d-67b112b06d01</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-20 21:41:29.389611</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-20 21:21:42.439848"
+          data-status="success"
+          data-resource="a0a2d4cd-72a3-45a6-8c33-f0e6e01951ca"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Retail associations"
+          data-dataset-fr="Associations de détail"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/59d8f8b9-3d7e-41e5-a6bc-b1f2c3bf8a14.html"><code>59d8f8b9-3d7e-41e5-a6bc-b1f2c3bf8a14</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Retail associations</span><span data-lang="fr" style="display:none">Associations de détail</span><div class="small"><code>af61ecdd-1a40-4630-8e75-1470e721f318</code></div></td>
+        <td><span data-lang="en">G3 - Capital Adequacy Return (Inactive Q1/2008)</span><span data-lang="fr" style="display:none">G3 - Normes de fonds propres (Inactif T1/2008)​</span><div class="small"><code>a0a2d4cd-72a3-45a6-8c33-f0e6e01951ca</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-20 21:21:42.439848</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-20 21:07:18.303707"
+          data-status="success"
+          data-resource="e61851eb-598a-468b-b3ce-f82bcf3744e0"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5c4ea82e-2415-42eb-95db-0cdc51e82f50.html"><code>5c4ea82e-2415-42eb-95db-0cdc51e82f50</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">M3 - Capital Adequacy - Market Risk (Inactive Q4/2007)​</span><span data-lang="fr" style="display:none">M3 - Normes de fonds propres -  Risque de marché (Inactif T4/2007)​</span><div class="small"><code>e61851eb-598a-468b-b3ce-f82bcf3744e0</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-20 21:07:18.303707</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-20 21:06:26.626414"
+          data-status="success"
+          data-resource="b9bc23f2-1bc2-42d1-9ef3-615a6c6eb164"
+          data-organization="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-org="Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada"
+          data-version="v0.2"
+          data-dataset-en="Banks"
+          data-dataset-fr="Banques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e5fdef17-fd08-45dc-8c07-89e0a1542b0e.html"><code>e5fdef17-fd08-45dc-8c07-89e0a1542b0e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Banks</span><span data-lang="fr" style="display:none">Banques</span><div class="small"><code>91ed76b4-a1a2-4f87-9c4c-59cd64f7a9de</code></div></td>
+        <td><span data-lang="en">G3 - Capital Adequacy Return (Inactive Q1/2008)​</span><span data-lang="fr" style="display:none">G3 - Normes de fonds propres (Inactif T1/2008)​</span><div class="small"><code>b9bc23f2-1bc2-42d1-9ef3-615a6c6eb164</code> · upload</div></td>
+        <td>Office of the Superintendent of Financial Institutions Canada | Bureau du surintendant des institutions financières Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-20 21:06:26.626414</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success"], "datasets": [{"label": "Reports", "data": [74], "backgroundColor": ["#2e8540"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [74], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

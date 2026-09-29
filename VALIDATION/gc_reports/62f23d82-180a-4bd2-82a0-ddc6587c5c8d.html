@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Validation Report for 62f23d82-180a-4bd2-82a0-ddc6587c5c8d" />
+  <title>Validation Report 62f23d82-180a-4bd2-82a0-ddc6587c5c8d – GCDS</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1"><code>62f23d82-180a-4bd2-82a0-ddc6587c5c8d</code></div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">Back to index</a>
+            <a class="btn secondary" href="../reports/62f23d82-180a-4bd2-82a0-ddc6587c5c8d.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="kv" style="margin-top:12px">
+          <div>Version</div><div><span class="badge na">v0.1</span></div>
+          <div>Organization</div><div><a href="../gc_organizations/Employment-and-Social-Development-Canada-Emploi-et-D-veloppement-social-Canada.html">Employment and Social Development Canada | Emploi et Développement social Canada</a></div>
+          <div>Dataset</div><div><span data-lang="en">Temporary Foreign Worker Program (TFWP): Positive Labour Market Impact Assessment (LMIA) Employers List</span><span data-lang="fr" style="display:none">Programme des travailleurs étrangers temporaires (PTET): Employeurs ayant obtenu une Étude d&#x27;impact sur le marché du travail (EIMT) positive </span> <span class="small"><code>90fed587-1364-4f33-a9ee-208181dc0b97</code></span>
+          <div>
+            <a class="badge link" href="https://registry.open.canada.ca/dataset/90fed587-1364-4f33-a9ee-208181dc0b97" target="_blank" rel="noopener">edit</a>
+            &nbsp;
+            <a class="badge link" href="https://open.canada.ca/data/en/dataset/90fed587-1364-4f33-a9ee-208181dc0b97" target="_blank" rel="noopener">portal</a>
+          </div>
+        </div>
+          <div>Resource</div><div><span data-lang="en">2024Q1-Employers Who Were Issued a Positive Labour Market Impact Assessment (LMIA) by Program Stream, National Occupational Classification (NOC) 2011 and Business Location, January to March 2024</span><span data-lang="fr" style="display:none">2024T1-Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, janvier à mars 2024</span> <span class="small"><code>418fb224-5ab1-4496-9331-a06387c40fb1</code> · upload</span></div>
+          <div>Status</div><div><span class="badge bad">failure</span></div>
+          <div>Created</div><div><time>2024-06-20 16:40:48.331437</time></div>
+        </div>
+      </section>
+
+      <section data-lang="en"  class="panel">
+      <div class="section">
+        <div class="kv">
+          <div>Valid</div><div><span class="badge bad">FAIL</span></div>
+          <div>Errors</div><div>80</div>
+          <div>Rows</div><div>25589</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="h1" style="font-size:16px">Table 1</div>
+        <div class="kv" style="margin-top:8px"><div>Valid</div><div>&lt;span class=&quot;badge bad&quot;&gt;FAIL&lt;/span&gt;</div><div>Format</div><div>xlsx</div><div>Encoding</div><div>no</div><div>Scheme</div><div>https</div><div>Source</div><div>https://opencanada.blob.core.windows.net/opengovprod/resources/418fb224-5ab1-4496-9331-a06387c40fb1/tfwp_2024q1_pos_fr.xlsx?se=2024-06-20T17%3A40%3A50Z&amp;sp=r&amp;sv=2019-07-07&amp;sr=b&amp;sig=cJYPVvqMt3gneTIj/AU1PnRUBHYUoXgAeBDbBDvJLEE%3D</div><div>Time</div><div>2.907</div><div>Row count</div><div>25589</div><div>Row count</div><div>25589</div><div>Error count</div><div>80</div><div>Error count</div><div>80</div></div>
+        <h4 style="margin:12px 0 6px">Errors</h4><table class="table"><thead><tr><th>Row</th><th>Field</th><th>Code</th><th>Message</th></tr></thead><tbody><tr><td></td><td></td><td>datastore-header-too-long</td><td>Column name Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024 in column 1 is too long for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 2 is blank</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 2 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 3 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 3 is duplicated to header in column(s) 2, 4, 5, 6, 7, 8</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 3 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 4 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 4 is duplicated to header in column(s) 2, 3, 5, 6, 7, 8</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 4 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 5 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 5 is duplicated to header in column(s) 2, 3, 4, 6, 7, 8</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 5 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 6 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 6 is duplicated to header in column(s) 2, 3, 4, 5, 7, 8</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 6 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 7 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 7 is duplicated to header in column(s) 2, 3, 4, 5, 6, 8</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 7 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 8 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 8 is duplicated to header in column(s) 2, 3, 4, 5, 6, 7</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 8 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 1405 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 1540 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25554 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25582 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25583 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25584 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25585 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25586 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25587 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25588 has a missing value in column 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 25589 has a missing value in column 8</td></tr></tbody></table>
+        <h4 style="margin:12px 0 6px">Headers</h4><div class="code">Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024
+
+
+
+
+
+
+</div>
+        <h4 style="margin:12px 0 6px">Raw table JSON</h4><div class="code">{
+  &quot;time&quot;: 2.907,
+  &quot;valid&quot;: false,
+  &quot;error-count&quot;: 80,
+  &quot;row-count&quot;: 25589,
+  &quot;source&quot;: &quot;https://opencanada.blob.core.windows.net/opengovprod/resources/418fb224-5ab1-4496-9331-a06387c40fb1/tfwp_2024q1_pos_fr.xlsx?se=2024-06-20T17%3A40%3A50Z&amp;sp=r&amp;sv=2019-07-07&amp;sr=b&amp;sig=cJYPVvqMt3gneTIj/AU1PnRUBHYUoXgAeBDbBDvJLEE%3D&quot;,
+  &quot;headers&quot;: [
+    &quot;Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;
+  ],
+  &quot;scheme&quot;: &quot;https&quot;,
+  &quot;format&quot;: &quot;xlsx&quot;,
+  &quot;encoding&quot;: &quot;no&quot;,
+  &quot;errors&quot;: [
+    {
+      &quot;code&quot;: &quot;datastore-header-too-long&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 1,
+      &quot;message&quot;: &quot;Column name Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024 in column 1 is too long for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Header in column 2 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Column name  in column 2 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Header in column 3 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Header in column 3 is duplicated to header in column(s) 2, 4, 5, 6, 7, 8&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 4, 5, 6, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Column name  in column 3 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Header in column 4 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Header in column 4 is duplicated to header in column(s) 2, 3, 5, 6, 7, 8&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 5, 6, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Column name  in column 4 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Header in column 5 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Header in column 5 is duplicated to header in column(s) 2, 3, 4, 6, 7, 8&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 6, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Column name  in column 5 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Header in column 6 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Header in column 6 is duplicated to header in column(s) 2, 3, 4, 5, 7, 8&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 5, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Column name  in column 6 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Header in column 7 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Header in column 7 is duplicated to header in column(s) 2, 3, 4, 5, 6, 8&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 5, 6, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Column name  in column 7 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Header in column 8 is blank&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Header in column 8 is duplicated to header in column(s) 2, 3, 4, 5, 6, 7&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 5, 6, 7&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Column name  in column 8 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Québec&quot;,
+        &quot;Agriculture primaire&quot;,
+        &quot;Miel et Co inc.&quot;,
+        &quot;Portneuf, QC G0A 2Y0&quot;,
+        &quot;Inconnu&quot;,
+        1,
+        1
+      ],
+      &quot;row-number&quot;: 1405,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 1405 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Québec&quot;,
+        &quot;Agriculture primaire&quot;,
+        &quot;Vert Nature inc&quot;,
+        &quot;Sherrington, QC J0L 2N0&quot;,
+        &quot;Inconnu&quot;,
+        1,
+        6
+      ],
+      &quot;row-number&quot;: 1540,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 1540 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Les employeurs exerçant leurs activités au Canada avec un siège social à l&#x27;extérieur du Canada&quot;,
+        &quot;Haut salaire&quot;,
+        &quot;Jenoptik Automotive North America LLC&quot;,
+        &quot;Rochester Hills, 48309&quot;,
+        &quot;Partenariat&quot;,
+        2,
+        2
+      ],
+      &quot;row-number&quot;: 25554,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25554 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25582 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25583 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25584 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25585 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25586 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25587 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25588 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Row 25589 has a missing value in column 8&quot;,
+      &quot;message-data&quot;: {}
+    }
+  ]
+}</div>
+      </div></section><section data-lang="fr" style="display:none" class="panel">
+      <div class="section">
+        <div class="kv">
+          <div>Valide</div><div><span class="badge bad">FAIL</span></div>
+          <div>Erreurs</div><div>80</div>
+          <div>Lignes</div><div>25589</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="h1" style="font-size:16px">Table 1</div>
+        <div class="kv" style="margin-top:8px"><div>Valid</div><div>&lt;span class=&quot;badge bad&quot;&gt;FAIL&lt;/span&gt;</div><div>Format</div><div>xlsx</div><div>Encoding</div><div>no</div><div>Scheme</div><div>https</div><div>Source</div><div>https://opencanada.blob.core.windows.net/opengovprod/resources/418fb224-5ab1-4496-9331-a06387c40fb1/tfwp_2024q1_pos_fr.xlsx?se=2024-06-20T17%3A40%3A50Z&amp;sp=r&amp;sv=2019-07-07&amp;sr=b&amp;sig=cJYPVvqMt3gneTIj/AU1PnRUBHYUoXgAeBDbBDvJLEE%3D</div><div>Time</div><div>3.024</div><div>Row count</div><div>25589</div><div>Row count</div><div>25589</div><div>Error count</div><div>80</div><div>Error count</div><div>80</div></div>
+        <h4 style="margin:12px 0 6px">Erreurs</h4><table class="table"><thead><tr><th>Ligne</th><th>Champ</th><th>Code</th><th>Message</th></tr></thead><tbody><tr><td></td><td></td><td>datastore-header-too-long</td><td>Column name Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024 in column 1 is too long for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 2 est vide.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 2 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 3 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 3 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 4, 5, 6, 7, 8.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 3 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 4 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 4 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 5, 6, 7, 8.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 4 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 5 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 5 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 6, 7, 8.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 5 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 6 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 6 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 5, 7, 8.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 6 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 7 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 7 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 5, 6, 8.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 7 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 8 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 8 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 5, 6, 7.</td></tr><tr><td></td><td></td><td>datastore-invalid-header</td><td>Column name  in column 8 is not valid for a DataStore header</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 1405 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 1540 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25554 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25582 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25583 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25584 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25585 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25586 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25587 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25588 de la colonne 8</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 3</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 4</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 5</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 6</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 7</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 25589 de la colonne 8</td></tr></tbody></table>
+        <h4 style="margin:12px 0 6px">En-têtes</h4><div class="code">Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024
+
+
+
+
+
+
+</div>
+        <h4 style="margin:12px 0 6px">JSON brut de la table</h4><div class="code">{
+  &quot;time&quot;: 3.024,
+  &quot;valid&quot;: false,
+  &quot;error-count&quot;: 80,
+  &quot;row-count&quot;: 25589,
+  &quot;source&quot;: &quot;https://opencanada.blob.core.windows.net/opengovprod/resources/418fb224-5ab1-4496-9331-a06387c40fb1/tfwp_2024q1_pos_fr.xlsx?se=2024-06-20T17%3A40%3A50Z&amp;sp=r&amp;sv=2019-07-07&amp;sr=b&amp;sig=cJYPVvqMt3gneTIj/AU1PnRUBHYUoXgAeBDbBDvJLEE%3D&quot;,
+  &quot;headers&quot;: [
+    &quot;Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;,
+    &quot;&quot;
+  ],
+  &quot;scheme&quot;: &quot;https&quot;,
+  &quot;format&quot;: &quot;xlsx&quot;,
+  &quot;encoding&quot;: &quot;no&quot;,
+  &quot;errors&quot;: [
+    {
+      &quot;code&quot;: &quot;datastore-header-too-long&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 1,
+      &quot;message&quot;: &quot;Column name Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024 in column 1 is too long for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;Employeurs ayant obtenu une étude d’impact sur le marché du travail  (EIMT) positive, par volet du programme, classification nationale des professions (CNP) 2011 et lieu de affaires, Janvier à mars 2024&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 2 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Column name  in column 2 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 3 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 3 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 4, 5, 6, 7, 8.&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 4, 5, 6, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Column name  in column 3 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 4 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 4 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 5, 6, 7, 8.&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 5, 6, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Column name  in column 4 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 5 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 5 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 6, 7, 8.&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 6, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Column name  in column 5 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 6 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 6 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 5, 7, 8.&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 5, 7, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Column name  in column 6 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 7 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 7 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 5, 6, 8.&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 5, 6, 8&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Column name  in column 7 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 8 est vide.&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;duplicate-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 8 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 2, 3, 4, 5, 6, 7.&quot;,
+      &quot;message-data&quot;: {
+        &quot;original&quot;: &quot;2&quot;,
+        &quot;column_numbers&quot;: &quot;2, 3, 4, 5, 6, 7&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;datastore-invalid-header&quot;,
+      &quot;row&quot;: [
+        &quot;Province/Territoire&quot;,
+        &quot;Volet du programme&quot;,
+        &quot;Employeur&quot;,
+        &quot;Adresse&quot;,
+        &quot;Profession &quot;,
+        &quot;Incorporer le statut&quot;,
+        &quot;EIMT Approuvés&quot;,
+        &quot;Postes Approuvés&quot;
+      ],
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Column name  in column 8 is not valid for a DataStore header&quot;,
+      &quot;message-data&quot;: {
+        &quot;value&quot;: &quot;&quot;
+      }
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Québec&quot;,
+        &quot;Agriculture primaire&quot;,
+        &quot;Miel et Co inc.&quot;,
+        &quot;Portneuf, QC G0A 2Y0&quot;,
+        &quot;Inconnu&quot;,
+        1,
+        1
+      ],
+      &quot;row-number&quot;: 1405,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 1405 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Québec&quot;,
+        &quot;Agriculture primaire&quot;,
+        &quot;Vert Nature inc&quot;,
+        &quot;Sherrington, QC J0L 2N0&quot;,
+        &quot;Inconnu&quot;,
+        1,
+        6
+      ],
+      &quot;row-number&quot;: 1540,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 1540 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Les employeurs exerçant leurs activités au Canada avec un siège social à l&#x27;extérieur du Canada&quot;,
+        &quot;Haut salaire&quot;,
+        &quot;Jenoptik Automotive North America LLC&quot;,
+        &quot;Rochester Hills, 48309&quot;,
+        &quot;Partenariat&quot;,
+        2,
+        2
+      ],
+      &quot;row-number&quot;: 25554,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25554 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;Remarques:&quot;
+      ],
+      &quot;row-number&quot;: 25582,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25582 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;1. Toutes les informations contenues dans ce rapport proviennent du système d&#x27;EIMT d&#x27;Emploi et Développement social Canada (EDSC).&quot;
+      ],
+      &quot;row-number&quot;: 25583,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25583 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;2. Cette liste exclut tous les noms de personnes, tels que les employeurs d&#x27;aides-soignants ou les noms d&#x27;entreprises qui utilisent ou incluent des noms de personnes. Pour cette raison, la liste n&#x27;est pas complète et ne reflète pas tous les employeurs qui ont demandé ou reçu un LMIA. Si un employeur souhaite contacter l&#x27;ESDC au sujet de l&#x27;exactitude de ses informations, il peut s&#x27;adresser à NA-TFWP-PTET@hrsdc-rhdcc.gc.ca.  &quot;
+      ],
+      &quot;row-number&quot;: 25584,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25584 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;3. Les noms des employeurs sont entrés manuellement dans le Système et peuvent faire l’objet d’erreurs dans la saisie de donnée.           &quot;
+      ],
+      &quot;row-number&quot;: 25585,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25585 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;4. Le système de Classification nationale des professions (CNP) 2011, est utilisé depuis novembre 2016. Avant novembre 2016, les professions classifiées sous le CNP 2006 étaient converti selon les professions correspondantes sous le CNP 2011. Une concordance empirique développée par Statistique Canada a été utilisée pour identifier la classification équivalente.                                                                              &quot;
+      ],
+      &quot;row-number&quot;: 25586,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25586 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;5. À compter de la publication des données du quatrième trimestre 2023 (publié en avril 2024), toutes les EIMT à l&#x27;appui de la \&quot; résidence permanente (RP) seulement \&quot; sont incluses dans les statistiques du PTET, sauf indication contraire. Toutes les données trimestrielles de ce rapport incluent les EIMT de la RP uniquement. Les EIMT à double intention et les postes correspondants sont inclus dans leur volet respectif du PTET (p. ex., bas salaire, haut salaire, etc.), ce qui peut avoir une incidence sur les rapports du programme au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25587,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25587 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;6. Le système EIMT suit uniquement les postes de TET, et non les TET qui obtiennent un permis de travail ou qui entrent au Canada. Ce ne sont pas tous les postes approuvés qui donnent lieu à un permis de travail ou à l&#x27;entrée d&#x27;un TET au Canada. Pour obtenir des renseignements sur le nombre de permis de travail délivrés, veuillez consulter le document Faits et chiffres d’Immigration, Réfugiés et Citoyenneté Canada (IRCC) : http://www.cic.gc.ca/francais/ressources/statistiques/menu-fait.asp&quot;
+      ],
+      &quot;row-number&quot;: 25588,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25588 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 2,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 2&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 3,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 3&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 4,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 4&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 5,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 5&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 6,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 6&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 7,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 7&quot;,
+      &quot;message-data&quot;: {}
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;row&quot;: [
+        &quot;7. Les chiffres apparaissant dans ce communiqué peuvent différer légèrement de ceux rapportés dans les versions précédentes sur les statistiques de l&#x27;EIMT en raison des mises à jour des données qui se produisent au fil du temps.&quot;
+      ],
+      &quot;row-number&quot;: 25589,
+      &quot;column-number&quot;: 8,
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 25589 de la colonne 8&quot;,
+      &quot;message-data&quot;: {}
+    }
+  ]
+}</div>
+      </div></section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+</body>
+</html>

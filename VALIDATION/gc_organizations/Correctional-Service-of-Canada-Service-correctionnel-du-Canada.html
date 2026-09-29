@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Correctional Service of Canada | Service correctionnel du Canada (GCDS theme)." />
+  <title>Correctional Service of Canada | Service correctionnel du Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Correctional Service of Canada | Service correctionnel du Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Correctional-Service-of-Canada-Service-correctionnel-du-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 14 · Success: 14 · Failure: 0 · Other: 0 · URL types: 1 · Latest: <time>2026-01-02 17:22:39.622838</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">14</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">14</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">0</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>14</td><td>14</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-01-02 17:22:39.622838"
+          data-status="success"
+          data-resource="a8473e62-37b6-4f57-9ca1-4dfacf26e209"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/908420f1-4a61-480e-8777-39aafcddf455.html"><code>908420f1-4a61-480e-8777-39aafcddf455</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: December 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : décembre 2021</span><div class="small"><code>a8473e62-37b6-4f57-9ca1-4dfacf26e209</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-02 17:22:39.622838</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-02 17:21:11.731646"
+          data-status="success"
+          data-resource="9f8a1a16-1964-4d1f-895e-6ec7b84ca3f3"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/64e592db-6436-4d60-8cd4-e0b9cbde0efc.html"><code>64e592db-6436-4d60-8cd4-e0b9cbde0efc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: December 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : décembre 2021</span><div class="small"><code>9f8a1a16-1964-4d1f-895e-6ec7b84ca3f3</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-02 17:21:11.731646</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-02 17:19:23.621634"
+          data-status="success"
+          data-resource="1a6cb472-70e9-481f-a36c-40ee1cdb0c6d"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4c792e99-cf9f-4865-b1c2-bfa071679fc2.html"><code>4c792e99-cf9f-4865-b1c2-bfa071679fc2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: September 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : septembre 2021</span><div class="small"><code>1a6cb472-70e9-481f-a36c-40ee1cdb0c6d</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-02 17:19:23.621634</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-02 17:18:52.22055"
+          data-status="success"
+          data-resource="acdc8627-369e-4888-9236-257f99efe92e"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/68c415b2-bedc-4a77-81bb-ce682ad74a6e.html"><code>68c415b2-bedc-4a77-81bb-ce682ad74a6e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: September 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : septembre 2021</span><div class="small"><code>acdc8627-369e-4888-9236-257f99efe92e</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-02 17:18:52.22055</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-02 17:16:24.256009"
+          data-status="success"
+          data-resource="e2c90a06-3477-47e5-95ad-d28aba15ce56"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8cd3ab49-2416-4263-9eed-7cda37b9134e.html"><code>8cd3ab49-2416-4263-9eed-7cda37b9134e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: June 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : juin 2021</span><div class="small"><code>e2c90a06-3477-47e5-95ad-d28aba15ce56</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-02 17:16:24.256009</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-02 17:15:41.415727"
+          data-status="success"
+          data-resource="32d2c58a-8c37-4f92-8dce-2f40a954a5be"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b702fe77-b579-4454-b67f-1e97ff7e7ef3.html"><code>b702fe77-b579-4454-b67f-1e97ff7e7ef3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: June 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : juin 2021</span><div class="small"><code>32d2c58a-8c37-4f92-8dce-2f40a954a5be</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-02 17:15:41.415727</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:38:07.343287"
+          data-status="success"
+          data-resource="f1b1e371-b034-46ab-93d1-8e9ff194ca58"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/33072183-c67e-4112-aef7-f41b78a070f9.html"><code>33072183-c67e-4112-aef7-f41b78a070f9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: January 2021</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : Janvier 2021</span><div class="small"><code>f1b1e371-b034-46ab-93d1-8e9ff194ca58</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:38:07.343287</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:37:36.325996"
+          data-status="success"
+          data-resource="7c8e3244-4ef3-44c1-bce0-1735d877b2ba"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/71e16a5b-8528-4968-9e7e-4c9a6dc35bf3.html"><code>71e16a5b-8528-4968-9e7e-4c9a6dc35bf3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Traitement par agonistes aux opioïdes : Janvier 2021</span><span data-lang="fr" style="display:none">Opioid Agonist Treatment: January 2021</span><div class="small"><code>7c8e3244-4ef3-44c1-bce0-1735d877b2ba</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:37:36.325996</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:32:02.46344"
+          data-status="success"
+          data-resource="63d934aa-386a-482e-be74-2d75f5a2840e"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/721e9563-c86b-4396-838b-1a4a2cfee2d8.html"><code>721e9563-c86b-4396-838b-1a4a2cfee2d8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: March 2020</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : mars 2020</span><div class="small"><code>63d934aa-386a-482e-be74-2d75f5a2840e</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:32:02.46344</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:31:07.853085"
+          data-status="success"
+          data-resource="72641742-2bfe-45ea-9cf5-c46a3d71d59f"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f6ee43e9-0685-4ba6-8183-9ec27a70ce08.html"><code>f6ee43e9-0685-4ba6-8183-9ec27a70ce08</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: March 2020</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : mars 2020</span><div class="small"><code>72641742-2bfe-45ea-9cf5-c46a3d71d59f</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:31:07.853085</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:29:47.356049"
+          data-status="success"
+          data-resource="aee3f5bc-ca72-4beb-934b-283de19460cc"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e8a96c2b-fefb-49b4-a0be-fcb6711b836a.html"><code>e8a96c2b-fefb-49b4-a0be-fcb6711b836a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: December 2019</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : décembre 2019</span><div class="small"><code>aee3f5bc-ca72-4beb-934b-283de19460cc</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:29:47.356049</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:28:58.047599"
+          data-status="success"
+          data-resource="30b85145-13b8-4c02-882c-f8d612bd21c1"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/66508e37-259d-4967-accf-f12a12bec80d.html"><code>66508e37-259d-4967-accf-f12a12bec80d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment: December 2019</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes : décembre 2019</span><div class="small"><code>30b85145-13b8-4c02-882c-f8d612bd21c1</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:28:58.047599</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:11:58.080454"
+          data-status="success"
+          data-resource="2102b3c3-04c4-4517-b312-ef60bef8dc6f"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/707c1916-d04d-4cdf-9ee4-2107959b2451.html"><code>707c1916-d04d-4cdf-9ee4-2107959b2451</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment (OAT) in CSC: July 2019</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes (TAO) au SCC : Juillet 2019</span><div class="small"><code>2102b3c3-04c4-4517-b312-ef60bef8dc6f</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:11:58.080454</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-28 18:09:48.684104"
+          data-status="success"
+          data-resource="641f3f6e-d64a-47c6-ba4b-67f5930328e4"
+          data-organization="Correctional Service of Canada | Service correctionnel du Canada"
+          data-org="Correctional Service of Canada | Service correctionnel du Canada"
+          data-version="v0.2"
+          data-dataset-en="Opioid agonist treatment archives"
+          data-dataset-fr="Archives du traitement par agonistes opioïdes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9f26ce03-a0a4-44a9-9143-d4ff0fc6013f.html"><code>9f26ce03-a0a4-44a9-9143-d4ff0fc6013f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Opioid agonist treatment archives</span><span data-lang="fr" style="display:none">Archives du traitement par agonistes opioïdes</span><div class="small"><code>cb4b563d-23f7-4fe9-8dc1-eac45612a934</code></div></td>
+        <td><span data-lang="en">Opioid Agonist Treatment (OAT) in CSC: July 2019</span><span data-lang="fr" style="display:none">Traitement par agonistes aux opioïdes (TAO) au SCC : Juillet 2019</span><div class="small"><code>641f3f6e-d64a-47c6-ba4b-67f5930328e4</code> · upload</div></td>
+        <td>Correctional Service of Canada | Service correctionnel du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-28 18:09:48.684104</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success"], "datasets": [{"label": "Reports", "data": [14], "backgroundColor": ["#2e8540"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [14], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités (GCDS theme)." />
+  <title>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Department-of-Housing-Infrastructure-and-Communities-Minist-re-du-Logement-de-l-Infrastructure-et-des-Collectivit-s.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 8 · Success: 3 · Failure: 5 · Other: 0 · URL types: 1 · Latest: <time>2025-11-08 00:23:51.03732</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">8</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">3</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">5</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>8</td><td>3</td><td>5</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2025-11-08 00:23:51.03732"
+          data-status="success"
+          data-resource="24881a6c-1464-48d9-af91-6252be9315e9"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.2"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/285c1f7f-6559-4f51-b3c0-b72c36d47284.html"><code>285c1f7f-6559-4f51-b3c0-b72c36d47284</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List  - 2017</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2017</span><div class="small"><code>24881a6c-1464-48d9-af91-6252be9315e9</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-08 00:23:51.03732</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-07 14:45:44.893495"
+          data-status="failure"
+          data-resource="4af81051-d598-467a-b29d-ed3e3f73a741"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.2"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c8dfd116-f648-4529-9698-ae6e3066e4bc.html"><code>c8dfd116-f648-4529-9698-ae6e3066e4bc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List  - 2020</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2020</span><div class="small"><code>4af81051-d598-467a-b29d-ed3e3f73a741</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-11-07 14:45:44.893495</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-07 14:45:24.653156"
+          data-status="failure"
+          data-resource="dd8d935c-3e40-42d1-8de3-2e18f3877000"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.2"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0100a89d-bd31-4538-a12d-a01a7f1fd546.html"><code>0100a89d-bd31-4538-a12d-a01a7f1fd546</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List - 2021</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2021</span><div class="small"><code>dd8d935c-3e40-42d1-8de3-2e18f3877000</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-11-07 14:45:24.653156</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-07 14:44:41.636732"
+          data-status="success"
+          data-resource="df7d26a4-7d1d-488e-a12a-04d03b376d84"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.2"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ac38ede1-c3a7-4d0a-8612-a756190ed72f.html"><code>ac38ede1-c3a7-4d0a-8612-a756190ed72f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List - 2016</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2016</span><div class="small"><code>df7d26a4-7d1d-488e-a12a-04d03b376d84</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-07 14:44:41.636732</time></td>
+      </tr>
+    
+      <tr data-created="2024-09-19 19:11:36.076578"
+          data-status="success"
+          data-resource="80cd9c3c-2fc9-4a4c-bd3d-e71bbd4d79ce"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.1"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/efb67e06-1050-4045-8abe-73df5bb2d8c0.html"><code>efb67e06-1050-4045-8abe-73df5bb2d8c0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List - 2023</span><span data-lang="fr" style="display:none">La liste nationale des fournisseurs de services - 2023</span><div class="small"><code>80cd9c3c-2fc9-4a4c-bd3d-e71bbd4d79ce</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-09-19 19:11:36.076578</time></td>
+      </tr>
+    
+      <tr data-created="2024-09-11 19:28:23.415745"
+          data-status="failure"
+          data-resource="5e3c9df6-ffbd-49a8-a7a7-de9629c2f458"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.1"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/00125deb-98c4-41c0-8d46-afc90cb41506.html"><code>00125deb-98c4-41c0-8d46-afc90cb41506</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List  - 2022</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2022</span><div class="small"><code>5e3c9df6-ffbd-49a8-a7a7-de9629c2f458</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-09-11 19:28:23.415745</time></td>
+      </tr>
+    
+      <tr data-created="2024-01-05 17:50:44.054193"
+          data-status="failure"
+          data-resource="034882c4-60e0-4259-8a13-bcf9c0a93391"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.1"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8d5678e5-3a0d-4308-b476-4ccae324baf3.html"><code>8d5678e5-3a0d-4308-b476-4ccae324baf3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List - 2019</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2019</span><div class="small"><code>034882c4-60e0-4259-8a13-bcf9c0a93391</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">817 err</span><span data-lang="fr" style="display:none">817 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-01-05 17:50:44.054193</time></td>
+      </tr>
+    
+      <tr data-created="2024-01-05 17:50:29.472729"
+          data-status="failure"
+          data-resource="44144384-4780-4ceb-8cd5-3bd9f39fabb0"
+          data-organization="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-org="Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités"
+          data-version="v0.1"
+          data-dataset-en="The National Service Provider List (NSPL)"
+          data-dataset-fr="La Liste nationale des fournisseurs de services (LNFS)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/338be325-98f1-438a-bb85-ddb12569a9a2.html"><code>338be325-98f1-438a-bb85-ddb12569a9a2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The National Service Provider List (NSPL)</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services (LNFS)</span><div class="small"><code>7e0189e3-8595-4e62-a4e9-4fed6f265e10</code></div></td>
+        <td><span data-lang="en">The National Service Provider List  - 2018</span><span data-lang="fr" style="display:none">La Liste nationale des fournisseurs de services - 2018</span><div class="small"><code>44144384-4780-4ceb-8cd5-3bd9f39fabb0</code> · upload</div></td>
+        <td>Department of Housing, Infrastructure and Communities | Ministère du Logement, de l’Infrastructure et des Collectivités</td>
+        <td><span data-lang="en">790 err</span><span data-lang="fr" style="display:none">790 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-01-05 17:50:29.472729</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [3, 5], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [3], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [5], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

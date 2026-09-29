@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire (GCDS theme)." />
+  <title>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Canadian-Nuclear-Safety-Commission-Commission-canadienne-de-s-ret-nucl-aire.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 44 · Success: 35 · Failure: 9 · Other: 0 · URL types: 1 · Latest: <time>2025-12-18 16:15:48.4295</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">44</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">35</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">9</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>44</td><td>35</td><td>9</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2025-12-18 16:15:48.4295"
+          data-status="failure"
+          data-resource="ec15fce5-2c05-4a7b-97a0-c92547838026"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/53fbb55c-9a8e-43d0-b16c-1eed53b1e90c.html"><code>53fbb55c-9a8e-43d0-b16c-1eed53b1e90c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – Definitions (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – Définitions (Français)</span><div class="small"><code>ec15fce5-2c05-4a7b-97a0-c92547838026</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">33 err</span><span data-lang="fr" style="display:none">33 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-12-18 16:15:48.4295</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-18 16:15:23.920807"
+          data-status="failure"
+          data-resource="5719b2b0-6f07-47fc-a808-3fa8baea0b2c"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/15bfc73e-7d70-47ea-943b-b24f8b620d87.html"><code>15bfc73e-7d70-47ea-943b-b24f8b620d87</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – Definitions (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – Définitions (Anglais)</span><div class="small"><code>5719b2b0-6f07-47fc-a808-3fa8baea0b2c</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">33 err</span><span data-lang="fr" style="display:none">33 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-12-18 16:15:23.920807</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-18 16:14:17.66523"
+          data-status="success"
+          data-resource="7d3d3fc4-4c20-4613-89b8-2bedfc57de69"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7becd1bd-076d-457d-bf3d-44c1567e4bfc.html"><code>7becd1bd-076d-457d-bf3d-44c1567e4bfc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2024 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2024 (Français)</span><div class="small"><code>7d3d3fc4-4c20-4613-89b8-2bedfc57de69</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-18 16:14:17.66523</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-18 16:12:42.47556"
+          data-status="success"
+          data-resource="35aebbb8-cb97-410a-954e-e63aec97d4f6"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b803d76a-e3a3-4f7f-9007-c4cb7777bac2.html"><code>b803d76a-e3a3-4f7f-9007-c4cb7777bac2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2024 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2024 (Anglais)</span><div class="small"><code>35aebbb8-cb97-410a-954e-e63aec97d4f6</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-18 16:12:42.47556</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-09 12:26:53.135907"
+          data-status="success"
+          data-resource="67179649-94c4-4c66-a593-e8564574f4d3"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Darlington New Nuclear Project - Information and Reports"
+          data-dataset-fr="Projet de nouvelle centrale nucléaire de Darlington -  Informations et rapports"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/02c7ed04-b931-4bf3-977a-7e6473e70882.html"><code>02c7ed04-b931-4bf3-977a-7e6473e70882</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Darlington New Nuclear Project - Information and Reports</span><span data-lang="fr" style="display:none">Projet de nouvelle centrale nucléaire de Darlington -  Informations et rapports</span><div class="small"><code>0968ddc5-710e-4388-b379-184764df6f4c</code></div></td>
+        <td><span data-lang="en">Registry of Substantive Documents for the Darlington New Nuclear Project - License to Construct</span><span data-lang="fr" style="display:none">Registre des documents de fond pour le Projet de nouvelle centrale nucléaire de Darlington -  permis de construction</span><div class="small"><code>67179649-94c4-4c66-a593-e8564574f4d3</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-09 12:26:53.135907</time></td>
+      </tr>
+    
+      <tr data-created="2025-08-29 18:33:07.097531"
+          data-status="success"
+          data-resource="0767ea53-f4cd-4da4-b9c3-7315f7b94236"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Regulatory Oversight Report on the Use of Nuclear Substances in Canada"
+          data-dataset-fr="Rapport de surveillance réglementaire sur l’utilisation des substances nucléaires au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8945240b-6f4e-4f63-8257-ca8d4fd867f8.html"><code>8945240b-6f4e-4f63-8257-ca8d4fd867f8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Regulatory Oversight Report on the Use of Nuclear Substances in Canada</span><span data-lang="fr" style="display:none">Rapport de surveillance réglementaire sur l’utilisation des substances nucléaires au Canada</span><div class="small"><code>b97a80c8-3081-4a3f-a45d-efc7ae06f543</code></div></td>
+        <td><span data-lang="en">Regulatory Oversight Report on the Use of Nuclear Substances in Canada: 2024 - List of Inspections </span><span data-lang="fr" style="display:none">Rapport de surveillance réglementaire sur l’utilisation des substances nucléaires au Canada: 2024 - Liste d&#x27;inspections</span><div class="small"><code>0767ea53-f4cd-4da4-b9c3-7315f7b94236</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-08-29 18:33:07.097531</time></td>
+      </tr>
+    
+      <tr data-created="2025-08-29 18:32:28.53712"
+          data-status="success"
+          data-resource="66484019-24d7-4f55-a9d3-15dc90db5b72"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Regulatory Oversight Report on the Use of Nuclear Substances in Canada"
+          data-dataset-fr="Rapport de surveillance réglementaire sur l’utilisation des substances nucléaires au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7377db27-9806-49d3-a8f9-af74adf5a39d.html"><code>7377db27-9806-49d3-a8f9-af74adf5a39d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Regulatory Oversight Report on the Use of Nuclear Substances in Canada</span><span data-lang="fr" style="display:none">Rapport de surveillance réglementaire sur l’utilisation des substances nucléaires au Canada</span><div class="small"><code>b97a80c8-3081-4a3f-a45d-efc7ae06f543</code></div></td>
+        <td><span data-lang="en">Regulatory Oversight Report on the Use of Nuclear Substances in Canada: 2024 - List of Inspections </span><span data-lang="fr" style="display:none">Rapport de surveillance réglementaire sur l’utilisation des substances nucléaires au Canada: 2024 - Liste d&#x27;inspections</span><div class="small"><code>66484019-24d7-4f55-a9d3-15dc90db5b72</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-08-29 18:32:28.53712</time></td>
+      </tr>
+    
+      <tr data-created="2025-08-08 14:29:34.406997"
+          data-status="success"
+          data-resource="ebd2597a-7414-4cc4-b241-e9eeecfee866"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Relevant References from the Administrative Monetary Penalty  Issued to New Brunswick Power, 2025-AMP-01"
+          data-dataset-fr="&quot; Références pertinentes de la sanction administrative pécuniaire infligée à Énergie Nouveau-Brunswick, 2025-AMP-01&quot;"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1a1bb2e1-366c-4890-9bd5-3e4ab209f815.html"><code>1a1bb2e1-366c-4890-9bd5-3e4ab209f815</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Relevant References from the Administrative Monetary Penalty  Issued to New Brunswick Power, 2025-AMP-01</span><span data-lang="fr" style="display:none">&quot; Références pertinentes de la sanction administrative pécuniaire infligée à Énergie Nouveau-Brunswick, 2025-AMP-01&quot;</span><div class="small"><code>15ce104b-d0a3-4c0a-997f-2ab020b65256</code></div></td>
+        <td><span data-lang="en">Relevant References from the Administrative Monetary Penalty  Issued to New Brunswick Power, 2025-AMP-01</span><span data-lang="fr" style="display:none">&quot; Références pertinentes de la sanction administrative pécuniaire infligée à Énergie Nouveau-Brunswick, 2025-AMP-01&quot;</span><div class="small"><code>ebd2597a-7414-4cc4-b241-e9eeecfee866</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-08-08 14:29:34.406997</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-24 18:57:58.201729"
+          data-status="success"
+          data-resource="e3d1aa8a-4e05-4876-b1d8-25bbf086fb33"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Radionuclide Release Datasets"
+          data-dataset-fr="Ensembles de données des rejets de radionucléides"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2952a29e-ef14-40ea-bf15-84e33342bc27.html"><code>2952a29e-ef14-40ea-bf15-84e33342bc27</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Radionuclide Release Datasets</span><span data-lang="fr" style="display:none">Ensembles de données des rejets de radionucléides</span><div class="small"><code>6ed50cd9-0d8c-471b-a5f6-26088298870e</code></div></td>
+        <td><span data-lang="en">Metadata</span><span data-lang="fr" style="display:none">Métadonnées</span><div class="small"><code>e3d1aa8a-4e05-4876-b1d8-25bbf086fb33</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-24 18:57:58.201729</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-24 18:57:35.898322"
+          data-status="failure"
+          data-resource="8cf74322-5cad-441e-a7c6-8e2aa7d14849"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Radionuclide Release Datasets"
+          data-dataset-fr="Ensembles de données des rejets de radionucléides"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/44dbe207-cd26-40a2-91cf-6d042a95cd02.html"><code>44dbe207-cd26-40a2-91cf-6d042a95cd02</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Radionuclide Release Datasets</span><span data-lang="fr" style="display:none">Ensembles de données des rejets de radionucléides</span><div class="small"><code>6ed50cd9-0d8c-471b-a5f6-26088298870e</code></div></td>
+        <td><span data-lang="en">Data Dictionary (French)</span><span data-lang="fr" style="display:none">Dictionnaire de données (français)</span><div class="small"><code>8cf74322-5cad-441e-a7c6-8e2aa7d14849</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-07-24 18:57:35.898322</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-24 18:57:15.296919"
+          data-status="failure"
+          data-resource="f4074d4e-f7b2-4eb0-a02d-1326fedc847e"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Radionuclide Release Datasets"
+          data-dataset-fr="Ensembles de données des rejets de radionucléides"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3d3328f9-eaa1-413e-a4ed-251aa9722224.html"><code>3d3328f9-eaa1-413e-a4ed-251aa9722224</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Radionuclide Release Datasets</span><span data-lang="fr" style="display:none">Ensembles de données des rejets de radionucléides</span><div class="small"><code>6ed50cd9-0d8c-471b-a5f6-26088298870e</code></div></td>
+        <td><span data-lang="en">Data Dictionary (English)</span><span data-lang="fr" style="display:none">Dictionnaire de données (angalis)</span><div class="small"><code>f4074d4e-f7b2-4eb0-a02d-1326fedc847e</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-07-24 18:57:15.296919</time></td>
+      </tr>
+    
+      <tr data-created="2025-02-17 02:28:33.417574"
+          data-status="success"
+          data-resource="75fa107b-2b8e-49d3-b479-6f858240d740"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Lost, Stolen and Found Sealed Sources and Radiation Devices"
+          data-dataset-fr="Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/aa3fb021-483f-4d78-8de2-9a3bdc98d522.html"><code>aa3fb021-483f-4d78-8de2-9a3bdc98d522</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Lost, Stolen and Found Sealed Sources and Radiation Devices</span><span data-lang="fr" style="display:none">Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés</span><div class="small"><code>a4d4b53b-143a-4d10-9ded-45abb164d239</code></div></td>
+        <td><span data-lang="en">Lost, stolen, found sealed sources and radiation devices – 2008 to 2024 (French)</span><span data-lang="fr" style="display:none">Sources scellées et appareils à rayonnement perdus, volés ou trouvés – 2008 à 2024 (français)</span><div class="small"><code>75fa107b-2b8e-49d3-b479-6f858240d740</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-02-17 02:28:33.417574</time></td>
+      </tr>
+    
+      <tr data-created="2025-02-17 02:27:39.404611"
+          data-status="success"
+          data-resource="b0fa1965-e5f2-4890-a1a9-04df93ac885e"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Lost, Stolen and Found Sealed Sources and Radiation Devices"
+          data-dataset-fr="Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ad3c5840-ad7f-4ad9-9233-640ec1d4d5c4.html"><code>ad3c5840-ad7f-4ad9-9233-640ec1d4d5c4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Lost, Stolen and Found Sealed Sources and Radiation Devices</span><span data-lang="fr" style="display:none">Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés</span><div class="small"><code>a4d4b53b-143a-4d10-9ded-45abb164d239</code></div></td>
+        <td><span data-lang="en">Lost, stolen, found sealed sources and radiation devices – 2008 to 2024 (English)</span><span data-lang="fr" style="display:none">Sources scellées et appareils à rayonnement perdus, volés ou trouvés – 2008 à 2024 (anglais)</span><div class="small"><code>b0fa1965-e5f2-4890-a1a9-04df93ac885e</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-02-17 02:27:39.404611</time></td>
+      </tr>
+    
+      <tr data-created="2025-02-17 01:46:11.463222"
+          data-status="success"
+          data-resource="1f2cfdb6-9d04-4eca-a56f-3455e8df3d23"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Darlington Relicensing - Information and Reports"
+          data-dataset-fr="Renouvellement de licence Darlington - Informations et rapports"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f2355929-4961-4d5e-85e2-91917dcd4623.html"><code>f2355929-4961-4d5e-85e2-91917dcd4623</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Darlington Relicensing - Information and Reports</span><span data-lang="fr" style="display:none">Renouvellement de licence Darlington - Informations et rapports</span><div class="small"><code>42f3db24-390d-4d53-a0fa-108dca0a3200</code></div></td>
+        <td><span data-lang="en">Darlington Relicensing - Information and Reports - Registry of Substantive Documents for Darlington Relicensing Project</span><span data-lang="fr" style="display:none">Renouvellement de licence pour Darlington - Informations et rapports - Registre des documents importants pour le projet de renouvellement de licence pour Darlington</span><div class="small"><code>1f2cfdb6-9d04-4eca-a56f-3455e8df3d23</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-02-17 01:46:11.463222</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-19 20:23:42.686307"
+          data-status="success"
+          data-resource="6dd6b69c-bac8-43bd-93c1-961c34c8802e"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Regional Information and Monitoring Network"
+          data-dataset-fr="Réseau régional d&#x27;information et de suivi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7f219e2f-3b8c-4f63-9af0-3252d4431fce.html"><code>7f219e2f-3b8c-4f63-9af0-3252d4431fce</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Regional Information and Monitoring Network</span><span data-lang="fr" style="display:none">Réseau régional d&#x27;information et de suivi</span><div class="small"><code>642146ff-9b76-4e03-be9b-30398102445b</code></div></td>
+        <td><span data-lang="en">RIMNet - SRBT</span><span data-lang="fr" style="display:none">RRIS - SRBT</span><div class="small"><code>6dd6b69c-bac8-43bd-93c1-961c34c8802e</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-19 20:23:42.686307</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-19 20:23:06.057922"
+          data-status="success"
+          data-resource="81d17162-095a-4f06-bb80-78d661afb2ac"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Regional Information and Monitoring Network"
+          data-dataset-fr="Réseau régional d&#x27;information et de suivi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0dbe60f7-08da-4777-825e-941b71969c6c.html"><code>0dbe60f7-08da-4777-825e-941b71969c6c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Regional Information and Monitoring Network</span><span data-lang="fr" style="display:none">Réseau régional d&#x27;information et de suivi</span><div class="small"><code>642146ff-9b76-4e03-be9b-30398102445b</code></div></td>
+        <td><span data-lang="en">RIMNet - Nordion</span><span data-lang="fr" style="display:none">RRIS - Nordion</span><div class="small"><code>81d17162-095a-4f06-bb80-78d661afb2ac</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-19 20:23:06.057922</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-19 20:22:30.09211"
+          data-status="success"
+          data-resource="98c3272a-7287-435c-9edd-d0b25786aac3"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Regional Information and Monitoring Network"
+          data-dataset-fr="Réseau régional d&#x27;information et de suivi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2410f929-6f16-4610-a659-22465c271094.html"><code>2410f929-6f16-4610-a659-22465c271094</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Regional Information and Monitoring Network</span><span data-lang="fr" style="display:none">Réseau régional d&#x27;information et de suivi</span><div class="small"><code>642146ff-9b76-4e03-be9b-30398102445b</code></div></td>
+        <td><span data-lang="en">RIMNet - Nuclear Power Demonstration Environment</span><span data-lang="fr" style="display:none">RRIS - Réacteur Nucléaire de Démonstration</span><div class="small"><code>98c3272a-7287-435c-9edd-d0b25786aac3</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-19 20:22:30.09211</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-19 20:21:30.248546"
+          data-status="success"
+          data-resource="7a74d093-7bd8-4cf4-9c18-dad6c918f5c5"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Regional Information and Monitoring Network"
+          data-dataset-fr="Réseau régional d&#x27;information et de suivi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d6973fcb-f4a8-485b-bfb9-e1db913e52e0.html"><code>d6973fcb-f4a8-485b-bfb9-e1db913e52e0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Regional Information and Monitoring Network</span><span data-lang="fr" style="display:none">Réseau régional d&#x27;information et de suivi</span><div class="small"><code>642146ff-9b76-4e03-be9b-30398102445b</code></div></td>
+        <td><span data-lang="en">RIMNet - Chalk River Laboratories</span><span data-lang="fr" style="display:none">RRIS - Laboratoires de Chalk River</span><div class="small"><code>7a74d093-7bd8-4cf4-9c18-dad6c918f5c5</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-19 20:21:30.248546</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:53.48453"
+          data-status="success"
+          data-resource="e538ba9b-3c41-4503-9454-c7d31ce5fda6"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Administrative Monetary Penalties"
+          data-dataset-fr="Les sanctions administratives pécuniaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d45e4469-02d2-4ff3-a351-98656cb43e12.html"><code>d45e4469-02d2-4ff3-a351-98656cb43e12</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Administrative Monetary Penalties</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires</span><div class="small"><code>a30a8985-8f92-49d1-85f0-8f5ad0b8f872</code></div></td>
+        <td><span data-lang="en">Administrative Monetary Penalties - Historical (English)</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires - Historique (Anglais)</span><div class="small"><code>e538ba9b-3c41-4503-9454-c7d31ce5fda6</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:04:53.48453</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:52.662494"
+          data-status="success"
+          data-resource="b38ff8ae-88fc-4587-aa26-6722224234a1"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Administrative Monetary Penalties"
+          data-dataset-fr="Les sanctions administratives pécuniaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5567352c-699d-4c74-a270-f54f726d880c.html"><code>5567352c-699d-4c74-a270-f54f726d880c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Administrative Monetary Penalties</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires</span><div class="small"><code>a30a8985-8f92-49d1-85f0-8f5ad0b8f872</code></div></td>
+        <td><span data-lang="en">Administrative Monetary Penalties - Definitions (English)</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires - Définitions (Anglais)</span><div class="small"><code>b38ff8ae-88fc-4587-aa26-6722224234a1</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:04:52.662494</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:51.839212"
+          data-status="success"
+          data-resource="dccce602-bd4e-4e50-937b-2bf9540b5418"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Administrative Monetary Penalties"
+          data-dataset-fr="Les sanctions administratives pécuniaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7bdfaa99-ae5d-44aa-afe8-fb7bae21cc16.html"><code>7bdfaa99-ae5d-44aa-afe8-fb7bae21cc16</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Administrative Monetary Penalties</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires</span><div class="small"><code>a30a8985-8f92-49d1-85f0-8f5ad0b8f872</code></div></td>
+        <td><span data-lang="en">Administrative Monetary Penalties (English)</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires (Anglais) </span><div class="small"><code>dccce602-bd4e-4e50-937b-2bf9540b5418</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:04:51.839212</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:03.038929"
+          data-status="success"
+          data-resource="a7bd2d3a-d5f0-458c-94ce-524493d8e805"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ce02ec5d-4054-427c-8a42-6533db808145.html"><code>ce02ec5d-4054-427c-8a42-6533db808145</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2023 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2023 (Français)</span><div class="small"><code>a7bd2d3a-d5f0-458c-94ce-524493d8e805</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:03.038929</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:00.305564"
+          data-status="success"
+          data-resource="8ef4aeb6-25b9-4f99-b9a0-b5b7b86c6ea4"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/fe69eb0f-c651-460f-9f0d-d3bf9cd8700c.html"><code>fe69eb0f-c651-460f-9f0d-d3bf9cd8700c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2023 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2023 (Anglais)</span><div class="small"><code>8ef4aeb6-25b9-4f99-b9a0-b5b7b86c6ea4</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:00.305564</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:56.814921"
+          data-status="success"
+          data-resource="29a2c99a-ab5f-47d7-9868-73f3f4bb9497"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9de34168-5455-4b40-a7a0-bf0b173c0977.html"><code>9de34168-5455-4b40-a7a0-bf0b173c0977</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2022 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2022 (Français)</span><div class="small"><code>29a2c99a-ab5f-47d7-9868-73f3f4bb9497</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:56.814921</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:53.677186"
+          data-status="success"
+          data-resource="65586017-d50f-4ff9-bfcd-b612c32e21d4"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/53593c4a-5983-4b2e-b5ea-1d0b74692274.html"><code>53593c4a-5983-4b2e-b5ea-1d0b74692274</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2022 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2022 (Anglais)</span><div class="small"><code>65586017-d50f-4ff9-bfcd-b612c32e21d4</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:53.677186</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:50.475386"
+          data-status="success"
+          data-resource="bf5bf086-0c24-43e5-8156-f8978fa8e847"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c2267dae-1791-4c5a-a712-7c25243585cc.html"><code>c2267dae-1791-4c5a-a712-7c25243585cc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2021 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2021 (Français)</span><div class="small"><code>bf5bf086-0c24-43e5-8156-f8978fa8e847</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:50.475386</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:47.418869"
+          data-status="success"
+          data-resource="147a1943-63d0-423d-90eb-73aa1c5bbe92"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ce4bd650-ca8c-4276-a202-ed99036d21f8.html"><code>ce4bd650-ca8c-4276-a202-ed99036d21f8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2021 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées – 2021 (Anglais)</span><div class="small"><code>147a1943-63d0-423d-90eb-73aa1c5bbe92</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:47.418869</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:44.122409"
+          data-status="success"
+          data-resource="27d87381-8d7b-4765-8639-2fffd5eb547d"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1d52f6aa-a629-4870-a047-83bb928bda33.html"><code>1d52f6aa-a629-4870-a047-83bb928bda33</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2020 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2020 (Francais)</span><div class="small"><code>27d87381-8d7b-4765-8639-2fffd5eb547d</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:44.122409</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:41.116676"
+          data-status="success"
+          data-resource="cca0fdef-30d7-457d-a2b4-5cc366179b68"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/350669fa-a7e3-4e1b-8620-c84cea5cd3a9.html"><code>350669fa-a7e3-4e1b-8620-c84cea5cd3a9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2020 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2020 (Anglais)</span><div class="small"><code>cca0fdef-30d7-457d-a2b4-5cc366179b68</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:41.116676</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:37.830175"
+          data-status="success"
+          data-resource="91fcde92-7ca2-4ceb-b26d-9ecc8a91a27c"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f05a642c-10cf-4fda-9825-cb6d7ace30c5.html"><code>f05a642c-10cf-4fda-9825-cb6d7ace30c5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2019 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2019 (Francais)</span><div class="small"><code>91fcde92-7ca2-4ceb-b26d-9ecc8a91a27c</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:37.830175</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:34.720503"
+          data-status="success"
+          data-resource="aca4ed87-4fed-42f1-996c-3c6c2b08d999"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0bbf3ccd-1d8e-4726-b72d-8d57562395e9.html"><code>0bbf3ccd-1d8e-4726-b72d-8d57562395e9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2019 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2019 (Anglais)</span><div class="small"><code>aca4ed87-4fed-42f1-996c-3c6c2b08d999</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:34.720503</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:31.405963"
+          data-status="success"
+          data-resource="8988886f-c8e9-4452-a968-66f2b3e6b6ae"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5c9e801d-f55c-4ab0-8118-32697aed429c.html"><code>5c9e801d-f55c-4ab0-8118-32697aed429c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2018 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2018 (Français))</span><div class="small"><code>8988886f-c8e9-4452-a968-66f2b3e6b6ae</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:31.405963</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:28.162046"
+          data-status="success"
+          data-resource="b4148cd1-89b5-4ebf-ad55-e7e985ced9fa"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/699aa2d5-1be8-4ce0-9e6d-a7c2920e4e16.html"><code>699aa2d5-1be8-4ce0-9e6d-a7c2920e4e16</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2018 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2018 (Anglais)</span><div class="small"><code>b4148cd1-89b5-4ebf-ad55-e7e985ced9fa</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:28.162046</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:24.481362"
+          data-status="success"
+          data-resource="5745b0de-7e69-4093-8e99-852d27120645"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4515dbcc-e3b4-496c-b053-d42a3e861837.html"><code>4515dbcc-e3b4-496c-b053-d42a3e861837</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2017 (French)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2017 (Français)</span><div class="small"><code>5745b0de-7e69-4093-8e99-852d27120645</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:24.481362</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:16:20.910487"
+          data-status="success"
+          data-resource="9436df93-fe2d-4e78-8fd2-9fa8dc51c7bf"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Sealed Source Tracking System"
+          data-dataset-fr="Système de suivi des sources scellées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4632812b-f4d7-4272-9e53-020f23f7d1c2.html"><code>4632812b-f4d7-4272-9e53-020f23f7d1c2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Sealed Source Tracking System</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées</span><div class="small"><code>3b119925-fd22-4b1b-a01f-7e83e7d5900b</code></div></td>
+        <td><span data-lang="en">Sealed Source Tracking System – 2017 (English)</span><span data-lang="fr" style="display:none">Système de suivi des sources scellées  – 2017 (Anglais)</span><div class="small"><code>9436df93-fe2d-4e78-8fd2-9fa8dc51c7bf</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:16:20.910487</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:57:43.178491"
+          data-status="success"
+          data-resource="1161bd03-15ee-4bf0-9cbe-9562425c9ba0"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.2"
+          data-dataset-en="Application to amend the Power Reactor Operating Licence of the Pickering Nuclear Generating Station (NGS) to operate units 5–8 to December 31, 2026 - Information and Reports"
+          data-dataset-fr="Demande de modification du permis d’exploitation d’un réacteur de puissance pour autoriser l’exploitation des tranches 5 à 8 de la centrale nucléaire de Pickering jusqu’au 31 décembre 2026 - Informations et rapports"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c50159df-b22d-4364-99f6-4efa51780911.html"><code>c50159df-b22d-4364-99f6-4efa51780911</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Application to amend the Power Reactor Operating Licence of the Pickering Nuclear Generating Station (NGS) to operate units 5–8 to December 31, 2026 - Information and Reports</span><span data-lang="fr" style="display:none">Demande de modification du permis d’exploitation d’un réacteur de puissance pour autoriser l’exploitation des tranches 5 à 8 de la centrale nucléaire de Pickering jusqu’au 31 décembre 2026 - Informations et rapports</span><div class="small"><code>cf5e2d1e-5d92-4c19-9713-c5c88b8c6944</code></div></td>
+        <td><span data-lang="en">Document titles which are of importance to Ontario Power Generations (OPG)&#x27;s Application to amend the Power Reactor Operating Licence of the Pickering Nuclear Generating Station (NGS) to operate units 5–8 to December 31, 2026</span><span data-lang="fr" style="display:none">Des titres de documents qui sont importants pour la demande de modification du permis d’exploitation d’un réacteur de puissance pour autoriser l’exploitation des tranches 5 à 8 de la centrale nucléaire de Pickering jusqu’au 31 décembre 2026 d&#x27;Ontario Power Generations (OPG)</span><div class="small"><code>1161bd03-15ee-4bf0-9cbe-9562425c9ba0</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:57:43.178491</time></td>
+      </tr>
+    
+      <tr data-created="2024-03-28 14:45:10.603359"
+          data-status="success"
+          data-resource="5f823c65-739f-4ccb-8179-51cce1ca9076"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="NB Power’s ARC-100 Project at the Point Lepreau Nuclear Generating Station site"
+          data-dataset-fr="Project ARC-100 d&#x27;Énergie NB sur le site de la centrale nucléaire de Point Lepreau"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/07529f3b-b30c-40c5-8f6c-aa9ec80a9701.html"><code>07529f3b-b30c-40c5-8f6c-aa9ec80a9701</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">NB Power’s ARC-100 Project at the Point Lepreau Nuclear Generating Station site</span><span data-lang="fr" style="display:none">Project ARC-100 d&#x27;Énergie NB sur le site de la centrale nucléaire de Point Lepreau</span><div class="small"><code>5345d25c-762b-442d-9dda-64e787a30ca0</code></div></td>
+        <td><span data-lang="en">Registry of documents</span><span data-lang="fr" style="display:none">Registre des documents</span><div class="small"><code>5f823c65-739f-4ccb-8179-51cce1ca9076</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-03-28 14:45:10.603359</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-19 15:24:39.878372"
+          data-status="failure"
+          data-resource="a1a8bd5f-5276-4d43-a76d-479dbe109833"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Regional Information and Monitoring Network"
+          data-dataset-fr="Réseau régional d&#x27;information et de suivi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4568aa8b-c55e-453f-bfee-01ea4518865d.html"><code>4568aa8b-c55e-453f-bfee-01ea4518865d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Regional Information and Monitoring Network</span><span data-lang="fr" style="display:none">Réseau régional d&#x27;information et de suivi</span><div class="small"><code>642146ff-9b76-4e03-be9b-30398102445b</code></div></td>
+        <td><span data-lang="en">RIMNet - Data Dictionary (FR)</span><span data-lang="fr" style="display:none">RRIS - Dictionnaire de données (FR)</span><div class="small"><code>a1a8bd5f-5276-4d43-a76d-479dbe109833</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-19 15:24:39.878372</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-19 15:24:39.833247"
+          data-status="failure"
+          data-resource="49ce1811-174c-4ba8-bc85-de291deec234"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Regional Information and Monitoring Network"
+          data-dataset-fr="Réseau régional d&#x27;information et de suivi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c2301535-2a86-45b8-8465-4045ebc4dc75.html"><code>c2301535-2a86-45b8-8465-4045ebc4dc75</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Regional Information and Monitoring Network</span><span data-lang="fr" style="display:none">Réseau régional d&#x27;information et de suivi</span><div class="small"><code>642146ff-9b76-4e03-be9b-30398102445b</code></div></td>
+        <td><span data-lang="en">RimNet - Data Dictionary (EN)</span><span data-lang="fr" style="display:none">RRIS - Dictionnaire de données (AN)</span><div class="small"><code>49ce1811-174c-4ba8-bc85-de291deec234</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-19 15:24:39.833247</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-18 17:50:40.172046"
+          data-status="failure"
+          data-resource="468b668c-2bdb-4f86-8199-2947f1425ffe"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Lost, Stolen and Found Sealed Sources and Radiation Devices"
+          data-dataset-fr="Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/37631ab6-d370-4d18-af07-64c51e723811.html"><code>37631ab6-d370-4d18-af07-64c51e723811</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Lost, Stolen and Found Sealed Sources and Radiation Devices</span><span data-lang="fr" style="display:none">Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés</span><div class="small"><code>a4d4b53b-143a-4d10-9ded-45abb164d239</code></div></td>
+        <td><span data-lang="en">Lost, stolen, found sealed sources and radiation devices – Definitions (French)</span><span data-lang="fr" style="display:none">Sources scellées et appareils à rayonnement perdus, volés ou trouvés – Définitions (français)</span><div class="small"><code>468b668c-2bdb-4f86-8199-2947f1425ffe</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-18 17:50:40.172046</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-18 17:50:40.125719"
+          data-status="failure"
+          data-resource="29ee781c-ca0c-45b8-ae81-275bc0d960d1"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Lost, Stolen and Found Sealed Sources and Radiation Devices"
+          data-dataset-fr="Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/92ff7fd8-837b-4a50-a56f-02075b608a67.html"><code>92ff7fd8-837b-4a50-a56f-02075b608a67</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Lost, Stolen and Found Sealed Sources and Radiation Devices</span><span data-lang="fr" style="display:none">Ensemble de données sur les sources scellées et les appareils à rayonnement perdus, volés ou trouvés</span><div class="small"><code>a4d4b53b-143a-4d10-9ded-45abb164d239</code></div></td>
+        <td><span data-lang="en">Lost, stolen, found sealed sources and radiation devices – Definitions (English)</span><span data-lang="fr" style="display:none">Sources scellées et appareils à rayonnement perdus, volés ou trouvés – Définitions (anglais)</span><div class="small"><code>29ee781c-ca0c-45b8-ae81-275bc0d960d1</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">11 err</span><span data-lang="fr" style="display:none">11 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-18 17:50:40.125719</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 20:04:44.888767"
+          data-status="success"
+          data-resource="f60088a9-598e-4b37-a232-973d271a706b"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Administrative Monetary Penalties"
+          data-dataset-fr="Les sanctions administratives pécuniaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/65206e00-91d3-4d0e-bf0c-e5c77b9bcb5a.html"><code>65206e00-91d3-4d0e-bf0c-e5c77b9bcb5a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Administrative Monetary Penalties</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires</span><div class="small"><code>a30a8985-8f92-49d1-85f0-8f5ad0b8f872</code></div></td>
+        <td><span data-lang="en">Administrative Monetary Penalties - Historical (French)</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires - Historique (Français)</span><div class="small"><code>f60088a9-598e-4b37-a232-973d271a706b</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 20:04:44.888767</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 20:04:44.780051"
+          data-status="failure"
+          data-resource="e10912e7-f386-4d5f-9651-00fba4e9b717"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Administrative Monetary Penalties"
+          data-dataset-fr="Les sanctions administratives pécuniaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2d5cbd5a-4038-4f8e-b1dd-87fc9a52a11f.html"><code>2d5cbd5a-4038-4f8e-b1dd-87fc9a52a11f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Administrative Monetary Penalties</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires</span><div class="small"><code>a30a8985-8f92-49d1-85f0-8f5ad0b8f872</code></div></td>
+        <td><span data-lang="en">Administrative Monetary Penalties - Definitions (French)</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires - Définitions (Français)</span><div class="small"><code>e10912e7-f386-4d5f-9651-00fba4e9b717</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">5 err</span><span data-lang="fr" style="display:none">5 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-14 20:04:44.780051</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 20:04:44.633918"
+          data-status="success"
+          data-resource="aac569e6-0abc-4009-8180-69d32d55abe0"
+          data-organization="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-org="Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire"
+          data-version="v0.1"
+          data-dataset-en="Administrative Monetary Penalties"
+          data-dataset-fr="Les sanctions administratives pécuniaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/78e6b3c9-4e69-4a97-973d-015aaff42dae.html"><code>78e6b3c9-4e69-4a97-973d-015aaff42dae</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Administrative Monetary Penalties</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires</span><div class="small"><code>a30a8985-8f92-49d1-85f0-8f5ad0b8f872</code></div></td>
+        <td><span data-lang="en">Administrative Monetary Penalties (French)</span><span data-lang="fr" style="display:none">Les sanctions administratives pécuniaires (Français)</span><div class="small"><code>aac569e6-0abc-4009-8180-69d32d55abe0</code> · upload</div></td>
+        <td>Canadian Nuclear Safety Commission | Commission canadienne de sûreté nucléaire</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 20:04:44.633918</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [35, 9], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [35], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [9], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

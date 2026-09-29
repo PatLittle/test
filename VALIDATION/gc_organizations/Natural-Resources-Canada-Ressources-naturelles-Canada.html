@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Natural Resources Canada | Ressources naturelles Canada (GCDS theme)." />
+  <title>Natural Resources Canada | Ressources naturelles Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Natural Resources Canada | Ressources naturelles Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Natural-Resources-Canada-Ressources-naturelles-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 97 · Success: 78 · Failure: 18 · Other: 1 · URL types: 1 · Latest: <time>2026-04-08 13:57:22.33003</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">97</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">78</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">18</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th><th>Running</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>97</td><td>78</td><td>18</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-04-08 13:57:22.33003"
+          data-status="success"
+          data-resource="fcccabad-e478-45b0-8d34-a25b77028c1d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/182eb40a-c035-4a05-a24d-1435e2421db3.html"><code>182eb40a-c035-4a05-a24d-1435e2421db3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">Plug-in hybrid electric vehicles 2012-2026 (2026-07-28)</span><span data-lang="fr" style="display:none">Véhicules hybrides électriques rechargeables 2012-2026 (2026-07-28)</span><div class="small"><code>fcccabad-e478-45b0-8d34-a25b77028c1d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-08 13:57:22.33003</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-08 13:56:44.887922"
+          data-status="success"
+          data-resource="8812228b-a6aa-4303-b3d0-66489225120d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/583e02e3-3473-4b59-8be3-5864d77b6022.html"><code>583e02e3-3473-4b59-8be3-5864d77b6022</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">Plug-in hybrid electric vehicles 2012-2026 (2026-07-28)</span><span data-lang="fr" style="display:none">Véhicules hybrides électriques rechargeables 2012-2026 (2026-07-28)</span><div class="small"><code>8812228b-a6aa-4303-b3d0-66489225120d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-08 13:56:44.887922</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-30 15:21:17.135458"
+          data-status="success"
+          data-resource="2e1a460f-464d-44b7-b711-8870a6eef7b9"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a6ca13e9-0f49-4d43-ab47-0a95089a3308.html"><code>a6ca13e9-0f49-4d43-ab47-0a95089a3308</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">2025 Fuel Consumption Ratings (2026-07-24)</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 2025 (2026-07-24)</span><div class="small"><code>2e1a460f-464d-44b7-b711-8870a6eef7b9</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-30 15:21:17.135458</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-30 15:20:31.021362"
+          data-status="success"
+          data-resource="d589f2bc-9a85-4f65-be2f-20f17debfcb1"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4a8b9502-edc7-4cc2-bfdb-fe19f25d4cd8.html"><code>4a8b9502-edc7-4cc2-bfdb-fe19f25d4cd8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">2025 Fuel Consumption Ratings (2026-07-24)</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 2025 (2026-07-24)</span><div class="small"><code>d589f2bc-9a85-4f65-be2f-20f17debfcb1</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-30 15:20:31.021362</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-24 18:37:11.533925"
+          data-status="success"
+          data-resource="c98b9dc8-b23f-4cd8-8b19-e892da1e4688"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/434b8f5b-b07b-46b3-90cd-e4c1d3d5b1c6.html"><code>434b8f5b-b07b-46b3-90cd-e4c1d3d5b1c6</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">2015-2024 Fuel Consumption Ratings (2026-09-15)</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 2015-2024 (2026-09-15)</span><div class="small"><code>c98b9dc8-b23f-4cd8-8b19-e892da1e4688</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-24 18:37:11.533925</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 17:12:54.5112"
+          data-status="success"
+          data-resource="581ab81d-fe7f-4beb-9f31-e1b8e7552cb6"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8974eb4a-e3ad-4314-9739-a50ee9d501c5.html"><code>8974eb4a-e3ad-4314-9739-a50ee9d501c5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">2015-2024 Fuel Consumption Ratings (2026-09-15)</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 2015-2024 (2026-09-15)</span><div class="small"><code>581ab81d-fe7f-4beb-9f31-e1b8e7552cb6</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 17:12:54.5112</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 15:02:59.079927"
+          data-status="success"
+          data-resource="97fa5898-690d-4c47-a5f2-c40665057ed7"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Compilation of selected publications on permafrost research by the Geological Survey of Canada"
+          data-dataset-fr="Compilation de publications sélectionnées sur la recherche sur le pergélisol menée par la Commission géologique du Canada"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/83ec657e-0dcd-42c3-a009-827adb7b17e1.html"><code>83ec657e-0dcd-42c3-a009-827adb7b17e1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Compilation of selected publications on permafrost research by the Geological Survey of Canada</span><span data-lang="fr" style="display:none">Compilation de publications sélectionnées sur la recherche sur le pergélisol menée par la Commission géologique du Canada</span><div class="small"><code>ae59f8ee-42f8-4946-9622-058d1e789113</code></div></td>
+        <td><span data-lang="en">GSC Permafrost Publication Compilation</span><span data-lang="fr" style="display:none">CGC Compilation Publication Pergélisol</span><div class="small"><code>97fa5898-690d-4c47-a5f2-c40665057ed7</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 15:02:59.079927</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-09 19:12:16.643714"
+          data-status="success"
+          data-resource="0b0f5a42-b00b-4b6a-9185-4d4de1424801"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/71ae8524-856d-49a1-85cf-f894b8ea1db0.html"><code>71ae8524-856d-49a1-85cf-f894b8ea1db0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">Battery-electric vehicles 2012-2026 (2026-09-18)</span><span data-lang="fr" style="display:none">Véhicules électriques à batterie 2012-2026 (2026-09-18)</span><div class="small"><code>0b0f5a42-b00b-4b6a-9185-4d4de1424801</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-09 19:12:16.643714</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-09 19:11:08.479129"
+          data-status="success"
+          data-resource="026e45b4-eb63-451f-b34f-d9308ea3a3d9"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ff9484f4-b288-446e-82e3-0885e3543029.html"><code>ff9484f4-b288-446e-82e3-0885e3543029</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">Battery-electric vehicles 2012-2026 (2026-09-18)</span><span data-lang="fr" style="display:none">Véhicules électriques à batterie 2012-2026 (2026-09-18)</span><div class="small"><code>026e45b4-eb63-451f-b34f-d9308ea3a3d9</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-09 19:11:08.479129</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-03 19:52:50.429495"
+          data-status="success"
+          data-resource="3da9e46c-2c5c-48ee-a417-75ca1b0247f7"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/74f25dfe-83b4-40d6-bb0d-794d29bb4b59.html"><code>74f25dfe-83b4-40d6-bb0d-794d29bb4b59</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">2026 Fuel Consumption Ratings (2026-09-18)</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 2026 (2026-09-18)</span><div class="small"><code>3da9e46c-2c5c-48ee-a417-75ca1b0247f7</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-03 19:52:50.429495</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-03 19:51:47.589891"
+          data-status="success"
+          data-resource="9df1b18d-d036-4783-a61c-99f1f75b3ac5"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7052e3ba-a14f-4aba-8c34-426517e251ad.html"><code>7052e3ba-a14f-4aba-8c34-426517e251ad</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">2026 Fuel Consumption Ratings (2026-09-18)</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 2026 (2026-09-18)</span><div class="small"><code>9df1b18d-d036-4783-a61c-99f1f75b3ac5</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-03 19:51:47.589891</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-13 21:22:36.643686"
+          data-status="success"
+          data-resource="efffb37a-63ff-4b8c-989b-858b37ec98bb"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests"
+          data-dataset-fr="FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ddbf79a8-82b7-4a26-b7f3-db0b028cd72f.html"><code>ddbf79a8-82b7-4a26-b7f3-db0b028cd72f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests</span><span data-lang="fr" style="display:none">FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien</span><div class="small"><code>d9c4d93f-2388-4158-b3cf-49a9ecea6b2c</code></div></td>
+        <td><span data-lang="en">data dictionary</span><span data-lang="fr" style="display:none">dictionnaire des données</span><div class="small"><code>efffb37a-63ff-4b8c-989b-858b37ec98bb</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-13 21:22:36.643686</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-13 19:21:48.765658"
+          data-status="success"
+          data-resource="a178fc93-866c-4248-a5c0-3db42d261b91"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests"
+          data-dataset-fr="FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/11589328-c229-4f5f-bf9c-1b1f20325a73.html"><code>11589328-c229-4f5f-bf9c-1b1f20325a73</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests</span><span data-lang="fr" style="display:none">FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien</span><div class="small"><code>d9c4d93f-2388-4158-b3cf-49a9ecea6b2c</code></div></td>
+        <td><span data-lang="en">seedlings</span><span data-lang="fr" style="display:none">semis</span><div class="small"><code>a178fc93-866c-4248-a5c0-3db42d261b91</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-13 19:21:48.765658</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-13 19:20:47.214389"
+          data-status="success"
+          data-resource="e13a40c6-e11c-420e-9be6-a9bd8d1a67db"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests"
+          data-dataset-fr="FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/534b1068-6b9c-41ad-a95e-786edabe7c23.html"><code>534b1068-6b9c-41ad-a95e-786edabe7c23</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests</span><span data-lang="fr" style="display:none">FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien</span><div class="small"><code>d9c4d93f-2388-4158-b3cf-49a9ecea6b2c</code></div></td>
+        <td><span data-lang="en">understory taxa</span><span data-lang="fr" style="display:none">taxons du sois-bois</span><div class="small"><code>e13a40c6-e11c-420e-9be6-a9bd8d1a67db</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-13 19:20:47.214389</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-13 19:17:26.904223"
+          data-status="success"
+          data-resource="de5e3acc-f0f3-4c12-81f8-9556356a63e6"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests"
+          data-dataset-fr="FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/dee8e915-e791-43e5-aea0-8b064d09c77b.html"><code>dee8e915-e791-43e5-aea0-8b064d09c77b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests</span><span data-lang="fr" style="display:none">FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien</span><div class="small"><code>d9c4d93f-2388-4158-b3cf-49a9ecea6b2c</code></div></td>
+        <td><span data-lang="en">understory cover</span><span data-lang="fr" style="display:none">couvert du sous-bois</span><div class="small"><code>de5e3acc-f0f3-4c12-81f8-9556356a63e6</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-13 19:17:26.904223</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-13 19:13:15.00677"
+          data-status="success"
+          data-resource="39575d14-df43-4d8e-9ff6-26d729d074dd"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests"
+          data-dataset-fr="FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0c0df1f2-edbc-48c6-84f5-4986fab5fa37.html"><code>0c0df1f2-edbc-48c6-84f5-4986fab5fa37</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests</span><span data-lang="fr" style="display:none">FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien</span><div class="small"><code>d9c4d93f-2388-4158-b3cf-49a9ecea6b2c</code></div></td>
+        <td><span data-lang="en">stands</span><span data-lang="fr" style="display:none">peuplements</span><div class="small"><code>39575d14-df43-4d8e-9ff6-26d729d074dd</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-13 19:13:15.00677</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-13 19:10:40.503928"
+          data-status="success"
+          data-resource="969d370f-c7c4-4a43-bb9c-6a948f5d03b9"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests"
+          data-dataset-fr="FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/30714c01-b5bf-4574-a587-c5f5bfe0fc17.html"><code>30714c01-b5bf-4574-a587-c5f5bfe0fc17</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">FunRoots: Root and leaf traits of tree seedlings of seven species in Eastern Canadian Forests</span><span data-lang="fr" style="display:none">FunRoots: Traits racinaires et foliaires de semis de sept espèces d’arbres dans les forêts de l’Est canadien</span><div class="small"><code>d9c4d93f-2388-4158-b3cf-49a9ecea6b2c</code></div></td>
+        <td><span data-lang="en">plots</span><span data-lang="fr" style="display:none">parcelles</span><div class="small"><code>969d370f-c7c4-4a43-bb9c-6a948f5d03b9</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-13 19:10:40.503928</time></td>
+      </tr>
+    
+      <tr data-created="2025-09-30 18:15:44.869951"
+          data-status="success"
+          data-resource="a03ca797-003a-4b4c-8d26-649ca59830c4"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Longevity and fecundity of females from six Trichogramma species depending on the access to hosts and food"
+          data-dataset-fr="Longévité et fécondité de femelles de six espèces de trichogrammes selon l’accès aux hôtes et à la nourriture"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3f30fd03-2a9a-4acc-9df8-49244f3e82d2.html"><code>3f30fd03-2a9a-4acc-9df8-49244f3e82d2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Longevity and fecundity of females from six Trichogramma species depending on the access to hosts and food</span><span data-lang="fr" style="display:none">Longévité et fécondité de femelles de six espèces de trichogrammes selon l’accès aux hôtes et à la nourriture</span><div class="small"><code>b8c6fcfb-f13f-45c1-84fe-039da0e238a8</code></div></td>
+        <td><span data-lang="en">Codebook</span><span data-lang="fr" style="display:none">Dictionnaire de codes</span><div class="small"><code>a03ca797-003a-4b4c-8d26-649ca59830c4</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-09-30 18:15:44.869951</time></td>
+      </tr>
+    
+      <tr data-created="2025-09-30 18:13:25.001135"
+          data-status="success"
+          data-resource="63ce35e4-0383-4a39-9df4-3376824ef11c"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Longevity and fecundity of females from six Trichogramma species depending on the access to hosts and food"
+          data-dataset-fr="Longévité et fécondité de femelles de six espèces de trichogrammes selon l’accès aux hôtes et à la nourriture"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1be818f8-cce9-4930-9eef-8881a0bf1fc0.html"><code>1be818f8-cce9-4930-9eef-8881a0bf1fc0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Longevity and fecundity of females from six Trichogramma species depending on the access to hosts and food</span><span data-lang="fr" style="display:none">Longévité et fécondité de femelles de six espèces de trichogrammes selon l’accès aux hôtes et à la nourriture</span><div class="small"><code>b8c6fcfb-f13f-45c1-84fe-039da0e238a8</code></div></td>
+        <td><span data-lang="en">Data dictionary</span><span data-lang="fr" style="display:none">Dictionnaire de données</span><div class="small"><code>63ce35e4-0383-4a39-9df4-3376824ef11c</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-09-30 18:13:25.001135</time></td>
+      </tr>
+    
+      <tr data-created="2025-09-30 18:12:54.127907"
+          data-status="success"
+          data-resource="62989a8e-1aee-490d-b603-4524cabba8c4"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Longevity and fecundity of females from six Trichogramma species depending on the access to hosts and food"
+          data-dataset-fr="Longévité et fécondité de femelles de six espèces de trichogrammes selon l’accès aux hôtes et à la nourriture"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/da91357d-b852-4850-84b7-ba0b71fd750d.html"><code>da91357d-b852-4850-84b7-ba0b71fd750d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Longevity and fecundity of females from six Trichogramma species depending on the access to hosts and food</span><span data-lang="fr" style="display:none">Longévité et fécondité de femelles de six espèces de trichogrammes selon l’accès aux hôtes et à la nourriture</span><div class="small"><code>b8c6fcfb-f13f-45c1-84fe-039da0e238a8</code></div></td>
+        <td><span data-lang="en">Dataset</span><span data-lang="fr" style="display:none">Jeu de données</span><div class="small"><code>62989a8e-1aee-490d-b603-4524cabba8c4</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-09-30 18:12:54.127907</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-24 16:21:22.023909"
+          data-status="success"
+          data-resource="67a7f9ee-9c47-43a6-ab06-5e7242e12638"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a221155c-a952-4e36-8567-abfe0849b578.html"><code>a221155c-a952-4e36-8567-abfe0849b578</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">1995-2014 Fuel Consumption Ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 1995-2014</span><div class="small"><code>67a7f9ee-9c47-43a6-ab06-5e7242e12638</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-24 16:21:22.023909</time></td>
+      </tr>
+    
+      <tr data-created="2025-03-03 21:07:26.033951"
+          data-status="success"
+          data-resource="42495676-28b7-40f3-b0e0-3d7fe005ca56"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b9a8e2bf-5275-4b4e-86b3-b511842ce135.html"><code>b9a8e2bf-5275-4b4e-86b3-b511842ce135</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">1995-2014 Fuel Consumption Ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant 1995-2014</span><div class="small"><code>42495676-28b7-40f3-b0e0-3d7fe005ca56</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-03-03 21:07:26.033951</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:22.187864"
+          data-status="success"
+          data-resource="135ff275-9b84-482a-a571-e372797acf1b"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Cumulative effects of disturbances on soil nutrients: predominance of antagonistic short-term responses to the salvage logging of insect-killed stands"
+          data-dataset-fr="Effets cumulatifs des perturbations sur les éléments nutritifs du sol: prédominance à court terme des réponses antagonistes à la récupération des peuplements tués par des insecte"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ab425b54-09b2-4d3e-aa27-8a2fee5c30b1.html"><code>ab425b54-09b2-4d3e-aa27-8a2fee5c30b1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Cumulative effects of disturbances on soil nutrients: predominance of antagonistic short-term responses to the salvage logging of insect-killed stands</span><span data-lang="fr" style="display:none">Effets cumulatifs des perturbations sur les éléments nutritifs du sol: prédominance à court terme des réponses antagonistes à la récupération des peuplements tués par des insecte</span><div class="small"><code>aa426a7e-cf6b-4161-b84d-745820afe139</code></div></td>
+        <td><span data-lang="en">Cumulative effects of disturbances on soil nutrients - Data</span><span data-lang="fr" style="display:none">Effets cumulatifs des perturbations sur les éléments nutritifs du sol - Données</span><div class="small"><code>135ff275-9b84-482a-a571-e372797acf1b</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:22.187864</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:30.818781"
+          data-status="success"
+          data-resource="bdc21d3e-b33d-4fe8-89b3-5372d5da13d8"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="NTSC TOPIC - Tree Seed Traits"
+          data-dataset-fr="CNSF TOPIC - Traits des semences d’arbres"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1c5896b7-3a92-465f-b7d9-b5ae5b2ccdb7.html"><code>1c5896b7-3a92-465f-b7d9-b5ae5b2ccdb7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">NTSC TOPIC - Tree Seed Traits</span><span data-lang="fr" style="display:none">CNSF TOPIC - Traits des semences d’arbres</span><div class="small"><code>c3d02090-959d-4762-a5ff-77339c7414b6</code></div></td>
+        <td><span data-lang="en">Data dictionary</span><span data-lang="fr" style="display:none">Dictionnaire des données</span><div class="small"><code>bdc21d3e-b33d-4fe8-89b3-5372d5da13d8</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:30.818781</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:29.243866"
+          data-status="success"
+          data-resource="9c41870c-c7dd-427b-9fc0-f231995b90a2"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="NTSC TOPIC - Tree Seed Traits"
+          data-dataset-fr="CNSF TOPIC - Traits des semences d’arbres"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/72701835-a107-4973-8261-47705c277217.html"><code>72701835-a107-4973-8261-47705c277217</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">NTSC TOPIC - Tree Seed Traits</span><span data-lang="fr" style="display:none">CNSF TOPIC - Traits des semences d’arbres</span><div class="small"><code>c3d02090-959d-4762-a5ff-77339c7414b6</code></div></td>
+        <td><span data-lang="en">Traits data</span><span data-lang="fr" style="display:none">Données traits</span><div class="small"><code>9c41870c-c7dd-427b-9fc0-f231995b90a2</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:29.243866</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:27.780096"
+          data-status="success"
+          data-resource="e7cdad96-569f-4d9b-8de9-4356c741a038"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Alberta - Traits of understory vegetation in Alberta - Specific Leaf Area"
+          data-dataset-fr="TOPIC Alberta - Traits de la végétation de sous-bois en Alberta - Surface foliaire spécifique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8810db65-992a-4c7f-87b8-25f6377e0129.html"><code>8810db65-992a-4c7f-87b8-25f6377e0129</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Alberta - Traits of understory vegetation in Alberta - Specific Leaf Area</span><span data-lang="fr" style="display:none">TOPIC Alberta - Traits de la végétation de sous-bois en Alberta - Surface foliaire spécifique</span><div class="small"><code>1effc7fc-301b-46d1-9fe0-e629f1106631</code></div></td>
+        <td><span data-lang="en">Traits description</span><span data-lang="fr" style="display:none">Description des traits</span><div class="small"><code>e7cdad96-569f-4d9b-8de9-4356c741a038</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:27.780096</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:27.003142"
+          data-status="success"
+          data-resource="e00312d6-3191-4cda-a58e-ee347ee8663a"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Alberta - Traits of understory vegetation in Alberta - Specific Leaf Area"
+          data-dataset-fr="TOPIC Alberta - Traits de la végétation de sous-bois en Alberta - Surface foliaire spécifique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/462a8a83-ad9b-47ee-8631-5b14c0919ecb.html"><code>462a8a83-ad9b-47ee-8631-5b14c0919ecb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Alberta - Traits of understory vegetation in Alberta - Specific Leaf Area</span><span data-lang="fr" style="display:none">TOPIC Alberta - Traits de la végétation de sous-bois en Alberta - Surface foliaire spécifique</span><div class="small"><code>1effc7fc-301b-46d1-9fe0-e629f1106631</code></div></td>
+        <td><span data-lang="en">Data dictionary</span><span data-lang="fr" style="display:none">Dictionnaire des données</span><div class="small"><code>e00312d6-3191-4cda-a58e-ee347ee8663a</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:27.003142</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:26.071884"
+          data-status="success"
+          data-resource="4383bc5a-e829-4271-9080-9fb261105a0d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Alberta - Traits of understory vegetation in Alberta - Specific Leaf Area"
+          data-dataset-fr="TOPIC Alberta - Traits de la végétation de sous-bois en Alberta - Surface foliaire spécifique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3bd1f6cd-325c-4d99-8ee2-3b175c760f28.html"><code>3bd1f6cd-325c-4d99-8ee2-3b175c760f28</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Alberta - Traits of understory vegetation in Alberta - Specific Leaf Area</span><span data-lang="fr" style="display:none">TOPIC Alberta - Traits de la végétation de sous-bois en Alberta - Surface foliaire spécifique</span><div class="small"><code>1effc7fc-301b-46d1-9fe0-e629f1106631</code></div></td>
+        <td><span data-lang="en">Traits data</span><span data-lang="fr" style="display:none">Données traits</span><div class="small"><code>4383bc5a-e829-4271-9080-9fb261105a0d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:17:26.071884</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:22.922182"
+          data-status="success"
+          data-resource="9b81f96c-8b84-426d-ab63-f3dfceb0c7ef"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC CoVitas - Aboveground and belowground plant traits"
+          data-dataset-fr="TOPIC CoVitas - Traits foliaires et racinaires des plantes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4d2abbf1-7dd7-4501-ab73-61f8ec343c25.html"><code>4d2abbf1-7dd7-4501-ab73-61f8ec343c25</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC CoVitas - Aboveground and belowground plant traits</span><span data-lang="fr" style="display:none">TOPIC CoVitas - Traits foliaires et racinaires des plantes</span><div class="small"><code>6c1f77a5-117b-49bf-82d7-c2c0fc020819</code></div></td>
+        <td><span data-lang="en">Traits description</span><span data-lang="fr" style="display:none">Description des traits</span><div class="small"><code>9b81f96c-8b84-426d-ab63-f3dfceb0c7ef</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:22.922182</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:22.11134"
+          data-status="success"
+          data-resource="ede094f4-250c-46f3-a072-d215cec6f721"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC CoVitas - Aboveground and belowground plant traits"
+          data-dataset-fr="TOPIC CoVitas - Traits foliaires et racinaires des plantes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c76956a2-9e4b-4911-9012-942055d156e0.html"><code>c76956a2-9e4b-4911-9012-942055d156e0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC CoVitas - Aboveground and belowground plant traits</span><span data-lang="fr" style="display:none">TOPIC CoVitas - Traits foliaires et racinaires des plantes</span><div class="small"><code>6c1f77a5-117b-49bf-82d7-c2c0fc020819</code></div></td>
+        <td><span data-lang="en">Data dictionary</span><span data-lang="fr" style="display:none">Dictionnaire des données</span><div class="small"><code>ede094f4-250c-46f3-a072-d215cec6f721</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:22.11134</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:20.600798"
+          data-status="success"
+          data-resource="b15b00e3-9a79-4030-9b63-9977f418c3b0"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC CoVitas - Aboveground and belowground plant traits"
+          data-dataset-fr="TOPIC CoVitas - Traits foliaires et racinaires des plantes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5f219e3e-d828-42cc-ac5c-3525bbad360b.html"><code>5f219e3e-d828-42cc-ac5c-3525bbad360b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC CoVitas - Aboveground and belowground plant traits</span><span data-lang="fr" style="display:none">TOPIC CoVitas - Traits foliaires et racinaires des plantes</span><div class="small"><code>6c1f77a5-117b-49bf-82d7-c2c0fc020819</code></div></td>
+        <td><span data-lang="en">Data traits</span><span data-lang="fr" style="display:none">données traits</span><div class="small"><code>b15b00e3-9a79-4030-9b63-9977f418c3b0</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:20.600798</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:19.788004"
+          data-status="success"
+          data-resource="2e3d2dd3-f934-4c5e-aba4-11e055465359"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Sudbury - Leaf traits"
+          data-dataset-fr="TOPIC Sudbury - Traits foliaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5a4786fa-0c62-4c59-b1e2-d25b9cfef21d.html"><code>5a4786fa-0c62-4c59-b1e2-d25b9cfef21d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Sudbury - Leaf traits</span><span data-lang="fr" style="display:none">TOPIC Sudbury - Traits foliaires</span><div class="small"><code>5f0e4a20-f6b5-4549-b34a-46cf72c103fd</code></div></td>
+        <td><span data-lang="en">Traits description</span><span data-lang="fr" style="display:none">Description des traits</span><div class="small"><code>2e3d2dd3-f934-4c5e-aba4-11e055465359</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:19.788004</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:19.07239"
+          data-status="success"
+          data-resource="cd8627e9-df1b-41f5-bde9-626d3da85c95"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Sudbury - Leaf traits"
+          data-dataset-fr="TOPIC Sudbury - Traits foliaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/679185ad-e7d5-471e-a217-09ff96d55642.html"><code>679185ad-e7d5-471e-a217-09ff96d55642</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Sudbury - Leaf traits</span><span data-lang="fr" style="display:none">TOPIC Sudbury - Traits foliaires</span><div class="small"><code>5f0e4a20-f6b5-4549-b34a-46cf72c103fd</code></div></td>
+        <td><span data-lang="en">Data dictionary</span><span data-lang="fr" style="display:none">Dictionnaire des données</span><div class="small"><code>cd8627e9-df1b-41f5-bde9-626d3da85c95</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:19.07239</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:17.982445"
+          data-status="success"
+          data-resource="2a57a675-f619-4420-b5a9-39d2e9deb193"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Sudbury - Leaf traits"
+          data-dataset-fr="TOPIC Sudbury - Traits foliaires"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b1095ed9-e9e6-4f3d-8337-ccb6af0438d2.html"><code>b1095ed9-e9e6-4f3d-8337-ccb6af0438d2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Sudbury - Leaf traits</span><span data-lang="fr" style="display:none">TOPIC Sudbury - Traits foliaires</span><div class="small"><code>5f0e4a20-f6b5-4549-b34a-46cf72c103fd</code></div></td>
+        <td><span data-lang="en">Traits data</span><span data-lang="fr" style="display:none">Données traits</span><div class="small"><code>2a57a675-f619-4420-b5a9-39d2e9deb193</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:17.982445</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:16.040641"
+          data-status="success"
+          data-resource="1aaad66a-3af1-4699-9523-5d7d89971016"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Open - Literature Review Module"
+          data-dataset-fr="TOPIC Ouvert - Module revue de littérature"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c199c9f4-709d-40e8-a55b-ed1ca1888350.html"><code>c199c9f4-709d-40e8-a55b-ed1ca1888350</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Open - Literature Review Module</span><span data-lang="fr" style="display:none">TOPIC Ouvert - Module revue de littérature</span><div class="small"><code>5c598f1f-ec76-4de4-8fe4-82e05165fc49</code></div></td>
+        <td><span data-lang="en">List of scientific references used</span><span data-lang="fr" style="display:none">Liste de références consultées</span><div class="small"><code>1aaad66a-3af1-4699-9523-5d7d89971016</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:16.040641</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:14.809224"
+          data-status="success"
+          data-resource="de87ee25-b0f2-482b-9c69-3eb8ba82063d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="TOPIC Open - Literature Review Module"
+          data-dataset-fr="TOPIC Ouvert - Module revue de littérature"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/75c0ec10-346d-4653-8f3e-821846fe4cf8.html"><code>75c0ec10-346d-4653-8f3e-821846fe4cf8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">TOPIC Open - Literature Review Module</span><span data-lang="fr" style="display:none">TOPIC Ouvert - Module revue de littérature</span><div class="small"><code>5c598f1f-ec76-4de4-8fe4-82e05165fc49</code></div></td>
+        <td><span data-lang="en">Trait data</span><span data-lang="fr" style="display:none">Données de traits</span><div class="small"><code>de87ee25-b0f2-482b-9c69-3eb8ba82063d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:14.809224</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:51:51.192401"
+          data-status="success"
+          data-resource="ed8bf28b-ccb7-45b8-8984-3b8898ec51e8"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Reducing pest risk in birch wood products - The effective heat treatment for bronze birch borer Agrilus anxius (Coleoptera: Buprestidae) prepupae"
+          data-dataset-fr="Réduire le risque des ravageurs dans les produits du bois – Traitements à la chaleur efficace pour les prépupes de l’agrile du bouleau, Agrilus anxius (Coleoptera : Buprestidae)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/69ef4245-c195-40d2-b72d-19b0ea726ec8.html"><code>69ef4245-c195-40d2-b72d-19b0ea726ec8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Reducing pest risk in birch wood products - The effective heat treatment for bronze birch borer Agrilus anxius (Coleoptera: Buprestidae) prepupae</span><span data-lang="fr" style="display:none">Réduire le risque des ravageurs dans les produits du bois – Traitements à la chaleur efficace pour les prépupes de l’agrile du bouleau, Agrilus anxius (Coleoptera : Buprestidae)</span><div class="small"><code>de1f8f2a-2899-4469-8545-f247c717d112</code></div></td>
+        <td><span data-lang="en">Data dictionary</span><span data-lang="fr" style="display:none">Dictionnaire de données</span><div class="small"><code>ed8bf28b-ccb7-45b8-8984-3b8898ec51e8</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:51:51.192401</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:51:50.195982"
+          data-status="success"
+          data-resource="a1b6a35d-a660-49da-9807-a70d112ebf10"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Reducing pest risk in birch wood products - The effective heat treatment for bronze birch borer Agrilus anxius (Coleoptera: Buprestidae) prepupae"
+          data-dataset-fr="Réduire le risque des ravageurs dans les produits du bois – Traitements à la chaleur efficace pour les prépupes de l’agrile du bouleau, Agrilus anxius (Coleoptera : Buprestidae)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8a8c09b7-c92f-4f6b-b96a-ea8eaf751a35.html"><code>8a8c09b7-c92f-4f6b-b96a-ea8eaf751a35</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Reducing pest risk in birch wood products - The effective heat treatment for bronze birch borer Agrilus anxius (Coleoptera: Buprestidae) prepupae</span><span data-lang="fr" style="display:none">Réduire le risque des ravageurs dans les produits du bois – Traitements à la chaleur efficace pour les prépupes de l’agrile du bouleau, Agrilus anxius (Coleoptera : Buprestidae)</span><div class="small"><code>de1f8f2a-2899-4469-8545-f247c717d112</code></div></td>
+        <td><span data-lang="en">Data file</span><span data-lang="fr" style="display:none">Fichiers de données</span><div class="small"><code>a1b6a35d-a660-49da-9807-a70d112ebf10</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:51:50.195982</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:48:02.845085"
+          data-status="success"
+          data-resource="b882bfc2-569d-452c-882a-d84eb9da6982"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cd0e97e3-9548-4e11-96bb-eee987bf4585.html"><code>cd0e97e3-9548-4e11-96bb-eee987bf4585</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">(Original Fuel Consumption Ratings 1995-2014)</span><span data-lang="fr" style="display:none">(Cotes de consommation de carburant originales 1995-2014)</span><div class="small"><code>b882bfc2-569d-452c-882a-d84eb9da6982</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:48:02.845085</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:48:00.934925"
+          data-status="success"
+          data-resource="29bcf157-9297-4d6a-9695-dfd816bc32ca"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.2"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c7e2bfce-565e-440b-be50-00b96935665e.html"><code>c7e2bfce-565e-440b-be50-00b96935665e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">(Original Fuel Consumption Ratings 1995-2014)</span><span data-lang="fr" style="display:none">(Cotes de consommation de carburant originales 1995-2014)</span><div class="small"><code>29bcf157-9297-4d6a-9695-dfd816bc32ca</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:48:00.934925</time></td>
+      </tr>
+    
+      <tr data-created="2024-06-03 13:54:23.667016"
+          data-status="success"
+          data-resource="5cc1bd1a-cd2e-4131-bcaa-6afe4b616fd2"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Datasets deposited for Andrade S. M. M., et al. (in press). The Role of Pheromones and Temporal Mechanisms in the Reproductive Isolation of Monochamus maculosus, Monochamus notatus, and Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology."
+          data-dataset-fr="Ensembles de données déposés pour Andrade S. M. M., et al. (sous presse). Le rôle des phéromones et des mécanismes temporels dans l&#x27;isolement reproductif de Monochamus maculosus, Monochamus notatus, et Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology."
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/903f677e-0fc5-4065-9149-e99e0fa4f0cc.html"><code>903f677e-0fc5-4065-9149-e99e0fa4f0cc</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Datasets deposited for Andrade S. M. M., et al. (in press). The Role of Pheromones and Temporal Mechanisms in the Reproductive Isolation of Monochamus maculosus, Monochamus notatus, and Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology.</span><span data-lang="fr" style="display:none">Ensembles de données déposés pour Andrade S. M. M., et al. (sous presse). Le rôle des phéromones et des mécanismes temporels dans l&#x27;isolement reproductif de Monochamus maculosus, Monochamus notatus, et Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology.</span><div class="small"><code>aaf61ccc-e529-4c60-bb8b-cc76da3ff35a</code></div></td>
+        <td><span data-lang="en">Pheromone_release_quantification_dataset</span><span data-lang="fr" style="display:none">Ensemble_de_données_de_quantification_des_rejets_de_phéromones</span><div class="small"><code>5cc1bd1a-cd2e-4131-bcaa-6afe4b616fd2</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-06-03 13:54:23.667016</time></td>
+      </tr>
+    
+      <tr data-created="2024-05-31 15:21:33.596936"
+          data-status="success"
+          data-resource="ffff9c3b-61b8-47f2-aee1-e7e617a21ac8"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Datasets deposited for Andrade S. M. M., et al. (in press). The Role of Pheromones and Temporal Mechanisms in the Reproductive Isolation of Monochamus maculosus, Monochamus notatus, and Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology."
+          data-dataset-fr="Ensembles de données déposés pour Andrade S. M. M., et al. (sous presse). Le rôle des phéromones et des mécanismes temporels dans l&#x27;isolement reproductif de Monochamus maculosus, Monochamus notatus, et Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology."
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ef9193ef-86d0-474c-b13c-1d8ca15e102e.html"><code>ef9193ef-86d0-474c-b13c-1d8ca15e102e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Datasets deposited for Andrade S. M. M., et al. (in press). The Role of Pheromones and Temporal Mechanisms in the Reproductive Isolation of Monochamus maculosus, Monochamus notatus, and Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology.</span><span data-lang="fr" style="display:none">Ensembles de données déposés pour Andrade S. M. M., et al. (sous presse). Le rôle des phéromones et des mécanismes temporels dans l&#x27;isolement reproductif de Monochamus maculosus, Monochamus notatus, et Monochamus scutellatus (Coleoptera: Cerambycidae). Environmental Entomology.</span><div class="small"><code>aaf61ccc-e529-4c60-bb8b-cc76da3ff35a</code></div></td>
+        <td><span data-lang="en">Diel_and_phenological_patterns_of_flight_activity_dataset</span><span data-lang="fr" style="display:none">Modèles journaliers_et_phénologiques_de_l&#x27;ensemble_de_données_sur_l&#x27;activité_de_vol</span><div class="small"><code>ffff9c3b-61b8-47f2-aee1-e7e617a21ac8</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-05-31 15:21:33.596936</time></td>
+      </tr>
+    
+      <tr data-created="2024-03-08 16:28:37.334412"
+          data-status="success"
+          data-resource="601d9187-93fb-497f-9571-46929961c106"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Determinants of mating success in a lek-mating species"
+          data-dataset-fr="Déterminants du succès de l&#x27;accouplement chez une espèce formant des leks"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/61505ac8-7a11-4eed-890d-d381dc828d77.html"><code>61505ac8-7a11-4eed-890d-d381dc828d77</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Determinants of mating success in a lek-mating species</span><span data-lang="fr" style="display:none">Déterminants du succès de l&#x27;accouplement chez une espèce formant des leks</span><div class="small"><code>6e5122f6-098e-47e1-a43c-7908f28cf5fe</code></div></td>
+        <td><span data-lang="en">Determinants of mating success in a lek-mating species</span><span data-lang="fr" style="display:none">Déterminants du succès de l&#x27;accouplement chez une espèce formant des leks</span><div class="small"><code>601d9187-93fb-497f-9571-46929961c106</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-03-08 16:28:37.334412</time></td>
+      </tr>
+    
+      <tr data-created="2024-02-19 19:48:12.143469"
+          data-status="failure"
+          data-resource="ab438e3a-0cca-466a-b8c9-f0e2afa525e5"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/1061d323-a14b-442e-8fac-4f07b2611c5c.html"><code>1061d323-a14b-442e-8fac-4f07b2611c5c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">Understanding the tables</span><span data-lang="fr" style="display:none">Explication des tableaux</span><div class="small"><code>ab438e3a-0cca-466a-b8c9-f0e2afa525e5</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">25 err</span><span data-lang="fr" style="display:none">25 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-02-19 19:48:12.143469</time></td>
+      </tr>
+    
+      <tr data-created="2024-02-19 19:44:34.25643"
+          data-status="failure"
+          data-resource="ec44c747-a640-4481-bcf0-a2ea7ca8f249"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Fuel consumption ratings"
+          data-dataset-fr="Cotes de consommation de carburant"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b8c34ddf-7962-44a5-8f2a-ecb8b8c871e3.html"><code>b8c34ddf-7962-44a5-8f2a-ecb8b8c871e3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Fuel consumption ratings</span><span data-lang="fr" style="display:none">Cotes de consommation de carburant</span><div class="small"><code>98f1a129-f628-4ce4-b24d-6f16bf24dd64</code></div></td>
+        <td><span data-lang="en">Understanding the tables</span><span data-lang="fr" style="display:none">Explication des tableaux</span><div class="small"><code>ec44c747-a640-4481-bcf0-a2ea7ca8f249</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">24 err</span><span data-lang="fr" style="display:none">24 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-02-19 19:44:34.25643</time></td>
+      </tr>
+    
+      <tr data-created="2023-11-30 13:42:27.34061"
+          data-status="failure"
+          data-resource="9b58b526-9a30-4678-b666-17a702526ca4"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Modernizing Canada&#x27;s Radioactive Waste Policy: Comments and Ideas Submitted"
+          data-dataset-fr="Modernisation de la politique canadienne en matière de déchets radioactifs : commentaires et idées soumis"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cc9582c0-65cd-4997-b7a1-fccd627592dc.html"><code>cc9582c0-65cd-4997-b7a1-fccd627592dc</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Modernizing Canada&#x27;s Radioactive Waste Policy: Comments and Ideas Submitted</span><span data-lang="fr" style="display:none">Modernisation de la politique canadienne en matière de déchets radioactifs : commentaires et idées soumis</span><div class="small"><code>c634aace-67fa-404a-addf-0f4e2a807024</code></div></td>
+        <td><span data-lang="en">Comments and Ideas Submitted on the Draft Policy (2022)</span><span data-lang="fr" style="display:none">Commentaires et Idées Soumis sur l&#x27;Ébauche de la Politique (2022)</span><div class="small"><code>9b58b526-9a30-4678-b666-17a702526ca4</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">293 err</span><span data-lang="fr" style="display:none">293 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-11-30 13:42:27.34061</time></td>
+      </tr>
+    
+      <tr data-created="2023-11-30 13:42:26.871297"
+          data-status="failure"
+          data-resource="b12f101c-3760-40f9-84a2-90ea0ef191e1"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Modernizing Canada&#x27;s Radioactive Waste Policy: Comments and Ideas Submitted"
+          data-dataset-fr="Modernisation de la politique canadienne en matière de déchets radioactifs : commentaires et idées soumis"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2b9a8a70-a181-4e47-aa09-ce4ce148c485.html"><code>2b9a8a70-a181-4e47-aa09-ce4ce148c485</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Modernizing Canada&#x27;s Radioactive Waste Policy: Comments and Ideas Submitted</span><span data-lang="fr" style="display:none">Modernisation de la politique canadienne en matière de déchets radioactifs : commentaires et idées soumis</span><div class="small"><code>c634aace-67fa-404a-addf-0f4e2a807024</code></div></td>
+        <td><span data-lang="en">Comments and Ideas Submitted During Engagement (2020-2021) </span><span data-lang="fr" style="display:none">Commentaires et Idées Soumis Pendant la Mobilisation (2020-2021)</span><div class="small"><code>b12f101c-3760-40f9-84a2-90ea0ef191e1</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-11-30 13:42:26.871297</time></td>
+      </tr>
+    
+      <tr data-created="2023-09-18 13:58:58.015317"
+          data-status="success"
+          data-resource="d5f8ff1a-9b4e-4133-aa6b-b5a7eceeced0"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context"
+          data-dataset-fr="La réponse énantiospécifique d&#x27;Ips avulsus à l&#x27;ipsdienol varie selon le contexte sémiochimique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f69fce9c-fd75-4831-abd2-67cf756fa27f.html"><code>f69fce9c-fd75-4831-abd2-67cf756fa27f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context</span><span data-lang="fr" style="display:none">La réponse énantiospécifique d&#x27;Ips avulsus à l&#x27;ipsdienol varie selon le contexte sémiochimique</span><div class="small"><code>197171a9-9d38-42bf-8a98-891f35f6f539</code></div></td>
+        <td><span data-lang="en">Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context</span><span data-lang="fr" style="display:none">La réponse énantiospécifique d&#x27;Ips avulsus à l&#x27;ipsdienol varie selon le contexte sémiochimique</span><div class="small"><code>d5f8ff1a-9b4e-4133-aa6b-b5a7eceeced0</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2023-09-18 13:58:58.015317</time></td>
+      </tr>
+    
+      <tr data-created="2023-09-18 13:58:57.751252"
+          data-status="success"
+          data-resource="7fae3cbe-f6ec-4223-89c2-8a7d51f15935"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context"
+          data-dataset-fr="La réponse énantiospécifique d&#x27;Ips avulsus à l&#x27;ipsdienol varie selon le contexte sémiochimique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/db346dbd-8389-4413-a478-4b2a176aad81.html"><code>db346dbd-8389-4413-a478-4b2a176aad81</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context</span><span data-lang="fr" style="display:none">La réponse énantiospécifique d&#x27;Ips avulsus à l&#x27;ipsdienol varie selon le contexte sémiochimique</span><div class="small"><code>197171a9-9d38-42bf-8a98-891f35f6f539</code></div></td>
+        <td><span data-lang="en">Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context</span><span data-lang="fr" style="display:none">Enantiospecific response of Ips avulsus to ipsdienol varies depending on semiochemical context</span><div class="small"><code>7fae3cbe-f6ec-4223-89c2-8a7d51f15935</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2023-09-18 13:58:57.751252</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-11 16:05:43.44486"
+          data-status="failure"
+          data-resource="74630e73-1212-4122-8c7c-db00733ead41"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="SBW L2 and L4 samples from Ottawa River valley, North Shore and New Brunswick 1998-2022"
+          data-dataset-fr="Échantillons de TBE L2 et L4 de l’Outaouais, la Côte Nord et le Nouveau Brunswick 1998-2022"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4875280e-2a6e-43dc-b09b-bfa697cfdf6a.html"><code>4875280e-2a6e-43dc-b09b-bfa697cfdf6a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">SBW L2 and L4 samples from Ottawa River valley, North Shore and New Brunswick 1998-2022</span><span data-lang="fr" style="display:none">Échantillons de TBE L2 et L4 de l’Outaouais, la Côte Nord et le Nouveau Brunswick 1998-2022</span><div class="small"><code>42ca63ee-aa9a-4437-8810-7d54d328229e</code></div></td>
+        <td><span data-lang="en">SBW L2 and L4 samples from Ottawa River valley, North Shore and New Brunswick 1998-2022</span><span data-lang="fr" style="display:none">Échantillons de TBE L2 et L4 de l’Outaouais, la Côte Nord et le Nouveau Brunswick 1998-2022</span><div class="small"><code>74630e73-1212-4122-8c7c-db00733ead41</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">279 err</span><span data-lang="fr" style="display:none">279 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-11 16:05:43.44486</time></td>
+      </tr>
+    
+      <tr data-created="2023-06-05 19:43:00.182354"
+          data-status="failure"
+          data-resource="8b055072-ebfb-47b6-8963-74efc33a6f8d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Frequency of Tranosema rostrale and Elachertus cacoeciae in spruce budworm larvae exposed in the field Armagh/Epaule 1987-2022"
+          data-dataset-fr="Fréquence de Tranosema rostrale et Elachertus cacoeciae dans des larves de la tordeuse des bourgeons de l’épinette exposées sur le terrain Armagh/Epaule 1987-2022"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/88f364e9-3a5c-40a3-aad3-3a78b9f0c226.html"><code>88f364e9-3a5c-40a3-aad3-3a78b9f0c226</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Frequency of Tranosema rostrale and Elachertus cacoeciae in spruce budworm larvae exposed in the field Armagh/Epaule 1987-2022</span><span data-lang="fr" style="display:none">Fréquence de Tranosema rostrale et Elachertus cacoeciae dans des larves de la tordeuse des bourgeons de l’épinette exposées sur le terrain Armagh/Epaule 1987-2022</span><div class="small"><code>e0a0c997-e048-4785-b25d-7cf060f5fdc6</code></div></td>
+        <td><span data-lang="en">Frequency of Tranosema rostrale and Elachertus cacoeciae in spruce budworm larvae exposed in the field Armagh/Epaule 1987-2022</span><span data-lang="fr" style="display:none">Fréquence de Tranosema rostrale et Elachertus cacoeciae dans des larves de la tordeuse des bourgeons de l’épinette exposées sur le terrain Armagh/Epaule 1987-2022</span><div class="small"><code>8b055072-ebfb-47b6-8963-74efc33a6f8d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1000 err</span><span data-lang="fr" style="display:none">1000 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-06-05 19:43:00.182354</time></td>
+      </tr>
+    
+      <tr data-created="2023-02-01 15:28:17.038289"
+          data-status="failure"
+          data-resource="7253c27f-e7e9-4b43-9b4f-0cd48b06af7d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="GEOSCAN Publications by Year"
+          data-dataset-fr="Publications de GEOSCAN par année"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f9894d9b-e435-4a97-87ee-f906fa6cc393.html"><code>f9894d9b-e435-4a97-87ee-f906fa6cc393</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">GEOSCAN Publications by Year</span><span data-lang="fr" style="display:none">Publications de GEOSCAN par année</span><div class="small"><code>5edde67e-43ed-4add-959d-3db54916aa08</code></div></td>
+        <td><span data-lang="en">GEOSCAN Dataset for DataHub Team 1.xlsx</span><span data-lang="fr" style="display:none">GEOSCAN Dataset for DataHub Team 1.xlsx</span><div class="small"><code>7253c27f-e7e9-4b43-9b4f-0cd48b06af7d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">530 err</span><span data-lang="fr" style="display:none">530 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-02-01 15:28:17.038289</time></td>
+      </tr>
+    
+      <tr data-created="2022-11-30 19:25:54.263442"
+          data-status="failure"
+          data-resource="025f4f0b-9826-4be6-b95e-0c288706274a"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Data from a mating-disruption trial against SBW in New Brunswick in 2021"
+          data-dataset-fr="Données d&#x27;un essai de confusion sexuelle de la TBE au Nouveau Brunswick en 2021"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/12382e70-8250-46c8-93e7-e8b92002bd5a.html"><code>12382e70-8250-46c8-93e7-e8b92002bd5a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Data from a mating-disruption trial against SBW in New Brunswick in 2021</span><span data-lang="fr" style="display:none">Données d&#x27;un essai de confusion sexuelle de la TBE au Nouveau Brunswick en 2021</span><div class="small"><code>f53ee229-a482-499b-9d69-efb50b1bbfb9</code></div></td>
+        <td><span data-lang="en">Data from a mating-disruption trial against SBW in New Brunswick in 2021</span><span data-lang="fr" style="display:none">Données d&#x27;un essai de confusion sexuelle de la TBE au Nouveau Brunswick en 2021</span><div class="small"><code>025f4f0b-9826-4be6-b95e-0c288706274a</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-11-30 19:25:54.263442</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-27 12:47:55.463053"
+          data-status="success"
+          data-resource="43a0d0ce-6b6d-48fc-8ed1-72d5cbee0c63"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Defoliation-induced changes in foliage quality during a spruce budworm outbreak"
+          data-dataset-fr="Changements dans la qualité du feuillage induits par la défoliation lors d&#x27;une épidémie de tordeuse des bourgeons de l&#x27;épinette"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9960e419-26a2-46f7-b93d-aab44000f3d7.html"><code>9960e419-26a2-46f7-b93d-aab44000f3d7</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Defoliation-induced changes in foliage quality during a spruce budworm outbreak</span><span data-lang="fr" style="display:none">Changements dans la qualité du feuillage induits par la défoliation lors d&#x27;une épidémie de tordeuse des bourgeons de l&#x27;épinette</span><div class="small"><code>278a6e45-508f-485c-bb2f-41cc305f302a</code></div></td>
+        <td><span data-lang="en">Metadata_FR</span><span data-lang="fr" style="display:none">Métadonnées_Français</span><div class="small"><code>43a0d0ce-6b6d-48fc-8ed1-72d5cbee0c63</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-27 12:47:55.463053</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-27 12:47:54.868969"
+          data-status="success"
+          data-resource="6bddcf05-fafe-4ab1-84fa-3f9745b2dbc7"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Defoliation-induced changes in foliage quality during a spruce budworm outbreak"
+          data-dataset-fr="Changements dans la qualité du feuillage induits par la défoliation lors d&#x27;une épidémie de tordeuse des bourgeons de l&#x27;épinette"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4ddc8053-afcc-4828-b742-73be7c4cb23d.html"><code>4ddc8053-afcc-4828-b742-73be7c4cb23d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Defoliation-induced changes in foliage quality during a spruce budworm outbreak</span><span data-lang="fr" style="display:none">Changements dans la qualité du feuillage induits par la défoliation lors d&#x27;une épidémie de tordeuse des bourgeons de l&#x27;épinette</span><div class="small"><code>278a6e45-508f-485c-bb2f-41cc305f302a</code></div></td>
+        <td><span data-lang="en">Metadata_EN</span><span data-lang="fr" style="display:none">Métadonnées_Anglais</span><div class="small"><code>6bddcf05-fafe-4ab1-84fa-3f9745b2dbc7</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-27 12:47:54.868969</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 20:18:08.994541"
+          data-status="running"
+          data-resource="76265edc-d47e-47fe-8556-725be3620d03"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="unknown"
+          data-dataset-en="Cumulative effects of disturbances on soil nutrients: predominance of antagonistic short-term responses to the salvage logging of insect-killed stands"
+          data-dataset-fr="Effets cumulatifs des perturbations sur les éléments nutritifs du sol: prédominance à court terme des réponses antagonistes à la récupération des peuplements tués par des insecte"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3ccdf642-e7af-466c-ac6f-1f53d30690f8.html"><code>3ccdf642-e7af-466c-ac6f-1f53d30690f8</code></a>
+          <div class="subtle"><span class="badge na">unknown</span></div>
+        </td>
+        <td><span data-lang="en">Cumulative effects of disturbances on soil nutrients: predominance of antagonistic short-term responses to the salvage logging of insect-killed stands</span><span data-lang="fr" style="display:none">Effets cumulatifs des perturbations sur les éléments nutritifs du sol: prédominance à court terme des réponses antagonistes à la récupération des peuplements tués par des insecte</span><div class="small"><code>aa426a7e-cf6b-4161-b84d-745820afe139</code></div></td>
+        <td><span data-lang="en">Cumulative effects of disturbances on soil nutrients - Metadata</span><span data-lang="fr" style="display:none">Effets cumulatifs des perturbations sur les éléments nutritifs du sol - Métadonnées</span><div class="small"><code>76265edc-d47e-47fe-8556-725be3620d03</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge na">running</span></td>
+        <td><time>2022-04-14 20:18:08.994541</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:40.67637"
+          data-status="failure"
+          data-resource="a91524b2-7465-4f3a-a3b1-36e8bd57b7f0"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Generation Energy Idea and Comment Submissions"
+          data-dataset-fr="Idées et commentaires du Génération Énergie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c2098c85-dc26-4690-8267-fc69b22e968b.html"><code>c2098c85-dc26-4690-8267-fc69b22e968b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Generation Energy Idea and Comment Submissions</span><span data-lang="fr" style="display:none">Idées et commentaires du Génération Énergie</span><div class="small"><code>7faa991d-7d49-49ee-b1ff-78c2246988c1</code></div></td>
+        <td><span data-lang="en">Generation Energy Submissions</span><span data-lang="fr" style="display:none">Submissions de Génération Énergie</span><div class="small"><code>a91524b2-7465-4f3a-a3b1-36e8bd57b7f0</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:40.67637</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:40.620595"
+          data-status="failure"
+          data-resource="02a7c4e7-d173-4837-9fe2-771a059b7d05"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Generation Energy Idea and Comment Submissions"
+          data-dataset-fr="Idées et commentaires du Génération Énergie"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5877410a-fd3f-4d13-96ad-5d2ba1ce9849.html"><code>5877410a-fd3f-4d13-96ad-5d2ba1ce9849</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Generation Energy Idea and Comment Submissions</span><span data-lang="fr" style="display:none">Idées et commentaires du Génération Énergie</span><div class="small"><code>7faa991d-7d49-49ee-b1ff-78c2246988c1</code></div></td>
+        <td><span data-lang="en">Generation Energy Themes</span><span data-lang="fr" style="display:none">Catégories de Génération Énergie</span><div class="small"><code>02a7c4e7-d173-4837-9fe2-771a059b7d05</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:40.620595</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:18.89429"
+          data-status="failure"
+          data-resource="06c0d392-d3c1-4236-b0a7-15ede7a3be5f"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Soil organic carbon bioreactivity in the spruce feathermoss forests of Quebec (Canada)"
+          data-dataset-fr="Bioréactivité du carbone dans les sols de la pessière à mousses au Québec (Canada)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d17baa0e-7393-4971-a5ab-9af0ca533e92.html"><code>d17baa0e-7393-4971-a5ab-9af0ca533e92</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Soil organic carbon bioreactivity in the spruce feathermoss forests of Quebec (Canada)</span><span data-lang="fr" style="display:none">Bioréactivité du carbone dans les sols de la pessière à mousses au Québec (Canada)</span><div class="small"><code>611911cf-e58a-4efa-9acf-c19bd0767e10</code></div></td>
+        <td><span data-lang="en">Soil organic carbon bioreactivity in the spruce feathermoss forests of Quebec - Data</span><span data-lang="fr" style="display:none">Bioréactivité du carbone dans les sols de la pessière à mousses au Québec - Données</span><div class="small"><code>06c0d392-d3c1-4236-b0a7-15ede7a3be5f</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:18.89429</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:18.815013"
+          data-status="failure"
+          data-resource="a44729f2-5676-4b8d-834b-63f700978051"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Growth of jack pine and black spruce in response to leachates from lichen, Sphagnum spp. and feather mosses"
+          data-dataset-fr="Croissance du pin gris et de l’épinette noire en réponse à l’application de lessivats de lichens, sphaignes et mousses hypnacées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/53d3ac88-a9fd-4024-b5ec-01a36d5bb09e.html"><code>53d3ac88-a9fd-4024-b5ec-01a36d5bb09e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Growth of jack pine and black spruce in response to leachates from lichen, Sphagnum spp. and feather mosses</span><span data-lang="fr" style="display:none">Croissance du pin gris et de l’épinette noire en réponse à l’application de lessivats de lichens, sphaignes et mousses hypnacées</span><div class="small"><code>0f3008be-d40e-4179-a2cc-cfaccf3720a1</code></div></td>
+        <td><span data-lang="en">Growth of jack pine and black spruce in response to leachates from lichen, Sphagnum spp. and feather mosses - Data</span><span data-lang="fr" style="display:none">Croissance du pin gris et de l’épinette noire en réponse à l’application de lessivats de lichens, sphaignes et mousses hypnacées - Données</span><div class="small"><code>a44729f2-5676-4b8d-834b-63f700978051</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:18.815013</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:18.757092"
+          data-status="failure"
+          data-resource="a45da5a4-768c-4325-90b1-db788ac1566e"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Growth of jack pine and black spruce in response to leachates from lichen, Sphagnum spp. and feather mosses"
+          data-dataset-fr="Croissance du pin gris et de l’épinette noire en réponse à l’application de lessivats de lichens, sphaignes et mousses hypnacées"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a93415cf-523f-48a5-85b1-de41dca5eafd.html"><code>a93415cf-523f-48a5-85b1-de41dca5eafd</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Growth of jack pine and black spruce in response to leachates from lichen, Sphagnum spp. and feather mosses</span><span data-lang="fr" style="display:none">Croissance du pin gris et de l’épinette noire en réponse à l’application de lessivats de lichens, sphaignes et mousses hypnacées</span><div class="small"><code>0f3008be-d40e-4179-a2cc-cfaccf3720a1</code></div></td>
+        <td><span data-lang="en">Growth of jack pine and black spruce in response to leachates from lichen, Sphagnum spp. and feather mosses</span><span data-lang="fr" style="display:none">Croissance du pin gris et de l’épinette noire en réponse à l’application de lessivats de lichens, sphaignes et mousses hypnacées - Données</span><div class="small"><code>a45da5a4-768c-4325-90b1-db788ac1566e</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:18.757092</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:58.971431"
+          data-status="failure"
+          data-resource="d9f86945-5858-4c43-8901-ccadc5e54515"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Jack pine productivity on sandy soils in the boreal forest (Quebec, Canada)"
+          data-dataset-fr="Productivité du pin gris sur sols sableux en forêt boréale (Québec, Canada)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c04e6cf7-571a-428a-8628-fd32ccf485e4.html"><code>c04e6cf7-571a-428a-8628-fd32ccf485e4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Jack pine productivity on sandy soils in the boreal forest (Quebec, Canada)</span><span data-lang="fr" style="display:none">Productivité du pin gris sur sols sableux en forêt boréale (Québec, Canada)</span><div class="small"><code>c77c331b-c3a4-4165-a846-2a52e2ffac32</code></div></td>
+        <td><span data-lang="en">Jack pine productivity on sandy soils in the boreal forest </span><span data-lang="fr" style="display:none">Productivité du pin gris sur sols sableux en forêt boréale </span><div class="small"><code>d9f86945-5858-4c43-8901-ccadc5e54515</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:58.971431</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:58.915205"
+          data-status="failure"
+          data-resource="74aefa7f-4d1b-4a26-ba93-ac8776f615a7"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Jack pine productivity on sandy soils in the boreal forest (Quebec, Canada)"
+          data-dataset-fr="Productivité du pin gris sur sols sableux en forêt boréale (Québec, Canada)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4c0a81e0-8056-493e-a813-14498a3456ab.html"><code>4c0a81e0-8056-493e-a813-14498a3456ab</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Jack pine productivity on sandy soils in the boreal forest (Quebec, Canada)</span><span data-lang="fr" style="display:none">Productivité du pin gris sur sols sableux en forêt boréale (Québec, Canada)</span><div class="small"><code>c77c331b-c3a4-4165-a846-2a52e2ffac32</code></div></td>
+        <td><span data-lang="en">Jack pine productivity on sandy soils in the boreal forest </span><span data-lang="fr" style="display:none">Productivité du pin gris sur sols sableux en forêt boréale </span><div class="small"><code>74aefa7f-4d1b-4a26-ba93-ac8776f615a7</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:58.915205</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:58.604179"
+          data-status="success"
+          data-resource="03eae8fd-4e58-4834-a88b-53781b6b55ac"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Ecology of outbreak populations of the western spruce budworm data"
+          data-dataset-fr="Écologie des populations épidémiques de la tordeuse occidentale de l&#x27;épinette (données)"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5d43e9f2-82ef-455e-a65c-3b099a78fe1d.html"><code>5d43e9f2-82ef-455e-a65c-3b099a78fe1d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Ecology of outbreak populations of the western spruce budworm data</span><span data-lang="fr" style="display:none">Écologie des populations épidémiques de la tordeuse occidentale de l&#x27;épinette (données)</span><div class="small"><code>1df49e77-580f-474e-9850-9b8c07872bee</code></div></td>
+        <td><span data-lang="en">Western spruce budworm data Ecosphere 2021</span><span data-lang="fr" style="display:none">Tordeuse occidentale donnees Ecosphere 2021</span><div class="small"><code>03eae8fd-4e58-4834-a88b-53781b6b55ac</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:32:58.604179</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:54.440179"
+          data-status="success"
+          data-resource="bda2982a-b573-41d7-8597-69be6d2862e5"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Wood supply estimates by ownership and species group"
+          data-dataset-fr="L’approvisionnement en bois, estimations par propriétaire et groupe d&#x27;espèces"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2cf9a5f8-9b60-4cf0-9cb7-5ccaed175f24.html"><code>2cf9a5f8-9b60-4cf0-9cb7-5ccaed175f24</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Wood supply estimates by ownership and species group</span><span data-lang="fr" style="display:none">L’approvisionnement en bois, estimations par propriétaire et groupe d&#x27;espèces</span><div class="small"><code>8f456715-9b14-4bac-a3fd-49fdaee1f9d6</code></div></td>
+        <td><span data-lang="en">Wood supply estimates by ownership and species group</span><span data-lang="fr" style="display:none">L’approvisionnement en bois, estimations par propriétaire et groupe d&#x27;espèces</span><div class="small"><code>bda2982a-b573-41d7-8597-69be6d2862e5</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:54.440179</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:54.042559"
+          data-status="success"
+          data-resource="a25a742b-d32d-48d5-a7d8-6f247cf103ff"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of fires by cause class"
+          data-dataset-fr="Nombre d’incendies de forêt par origine"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a5a7f215-2988-48b6-bfa1-9ff43acd844d.html"><code>a5a7f215-2988-48b6-bfa1-9ff43acd844d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of fires by cause class</span><span data-lang="fr" style="display:none">Nombre d’incendies de forêt par origine</span><div class="small"><code>f2a374ee-3db0-4cd5-a4f9-57d6ab03f5fe</code></div></td>
+        <td><span data-lang="en">Number of fires by cause class</span><span data-lang="fr" style="display:none">Nombre d’incendies de forêt par origine</span><div class="small"><code>a25a742b-d32d-48d5-a7d8-6f247cf103ff</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:54.042559</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:53.686924"
+          data-status="success"
+          data-resource="bdaaa14d-48cb-4869-9339-4bdfafc968af"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area burned by cause class"
+          data-dataset-fr="Superficie incendiée par origine"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d34b4a61-bf9e-4936-9101-94cb8309f2eb.html"><code>d34b4a61-bf9e-4936-9101-94cb8309f2eb</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area burned by cause class</span><span data-lang="fr" style="display:none">Superficie incendiée par origine</span><div class="small"><code>d13b8843-decb-46cb-a745-4269ddf3336d</code></div></td>
+        <td><span data-lang="en">Area burned by cause class</span><span data-lang="fr" style="display:none">Superficie incendiée par origine</span><div class="small"><code>bdaaa14d-48cb-4869-9339-4bdfafc968af</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:53.686924</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:53.287819"
+          data-status="success"
+          data-resource="3f817911-3ae7-42d3-90bc-ec0d08b7e854"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of fires by month"
+          data-dataset-fr="Nombre d’incendies de forêt par mois"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/5d785a4c-b2da-4406-816b-d973a06f27b2.html"><code>5d785a4c-b2da-4406-816b-d973a06f27b2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of fires by month</span><span data-lang="fr" style="display:none">Nombre d’incendies de forêt par mois</span><div class="small"><code>74f979c7-0d34-4b77-8584-45a8dcd2134c</code></div></td>
+        <td><span data-lang="en">Number of fires by month</span><span data-lang="fr" style="display:none">Nombre d’incendies de forêt par mois</span><div class="small"><code>3f817911-3ae7-42d3-90bc-ec0d08b7e854</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:53.287819</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:52.856635"
+          data-status="success"
+          data-resource="42ade42c-c0d1-4b76-bc87-2394a40c8a8f"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area burned by month"
+          data-dataset-fr="Superficie incendiée par mois"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/056d8228-f1fd-46f7-8b1b-b07db7bfdc30.html"><code>056d8228-f1fd-46f7-8b1b-b07db7bfdc30</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area burned by month</span><span data-lang="fr" style="display:none">Superficie incendiée par mois</span><div class="small"><code>60ee4624-e9e5-4035-8f10-eac2607b61b4</code></div></td>
+        <td><span data-lang="en">Area burned by month</span><span data-lang="fr" style="display:none">Superficie incendiée par mois</span><div class="small"><code>42ade42c-c0d1-4b76-bc87-2394a40c8a8f</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:52.856635</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:52.47839"
+          data-status="success"
+          data-resource="1c4f5290-fbf8-4b9e-bbb1-c0e306c582e7"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of fires by fire size class"
+          data-dataset-fr="Nombre d’incendies de forêt par classe de superficie à l’extinction"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/57a79411-d2ae-4f8e-b7e4-8250708a29fb.html"><code>57a79411-d2ae-4f8e-b7e4-8250708a29fb</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of fires by fire size class</span><span data-lang="fr" style="display:none">Nombre d’incendies de forêt par classe de superficie à l’extinction</span><div class="small"><code>c8dcf3a7-fb40-44e7-b478-17b20a2240a4</code></div></td>
+        <td><span data-lang="en">Number of fires by fire size class</span><span data-lang="fr" style="display:none">Nombre d’incendies de forêt par classe de superficie à l’extinction</span><div class="small"><code>1c4f5290-fbf8-4b9e-bbb1-c0e306c582e7</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:52.47839</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:52.091912"
+          data-status="success"
+          data-resource="a8aded39-8194-48fb-be5d-53612f080f1e"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area burned by fire size class"
+          data-dataset-fr="Superficie incendiée par classe de superficie à l’extinction"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/139b5a95-03e5-46cf-b620-bb72b87703fa.html"><code>139b5a95-03e5-46cf-b620-bb72b87703fa</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area burned by fire size class</span><span data-lang="fr" style="display:none">Superficie incendiée par classe de superficie à l’extinction</span><div class="small"><code>c99d8506-f3cd-404a-90e4-54b2dc9b21dc</code></div></td>
+        <td><span data-lang="en">Area burned by fire size class</span><span data-lang="fr" style="display:none">Superficie incendiée par classe de superficie à l’extinction</span><div class="small"><code>a8aded39-8194-48fb-be5d-53612f080f1e</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:52.091912</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:51.720159"
+          data-status="success"
+          data-resource="67aed0b4-4c71-4a24-bd00-12d51f93dc70"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Property losses from fires"
+          data-dataset-fr="Dommage à la propriété dues aux incendies"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/37bbd5fc-b4bb-4f61-9e5c-1d131038b1e4.html"><code>37bbd5fc-b4bb-4f61-9e5c-1d131038b1e4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Property losses from fires</span><span data-lang="fr" style="display:none">Dommage à la propriété dues aux incendies</span><div class="small"><code>b5ebfcbd-eb5e-4f7b-850b-ab840408091d</code></div></td>
+        <td><span data-lang="en">Property losses from fires</span><span data-lang="fr" style="display:none">Dommage à la propriété dues aux incendies</span><div class="small"><code>67aed0b4-4c71-4a24-bd00-12d51f93dc70</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:51.720159</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:51.326149"
+          data-status="failure"
+          data-resource="bb54a8aa-709d-47b0-8d5e-f27abedf39db"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area of moderate to severe defoliation (including beetle-killed trees) by insects"
+          data-dataset-fr="Superficie de défoliation modérée à grave (y compris la mortalité des arbres due aux scolytes) par insectes"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7f22d7d1-35ce-4e8e-add7-46ec63ccf6b0.html"><code>7f22d7d1-35ce-4e8e-add7-46ec63ccf6b0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area of moderate to severe defoliation (including beetle-killed trees) by insects</span><span data-lang="fr" style="display:none">Superficie de défoliation modérée à grave (y compris la mortalité des arbres due aux scolytes) par insectes</span><div class="small"><code>c3c56a39-d6f6-4ea0-886d-78f325cd85d4</code></div></td>
+        <td><span data-lang="en">Area of moderate to severe defoliation (including beetle-killed trees) by insects</span><span data-lang="fr" style="display:none">Superficie de défoliation modérée à grave (y compris la mortalité des arbres due aux scolytes) par insectes</span><div class="small"><code>bb54a8aa-709d-47b0-8d5e-f27abedf39db</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:31:51.326149</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:49.563268"
+          data-status="success"
+          data-resource="eec59ec6-005b-456c-a8e6-d3153cc977e2"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Net merchantable volume of roundwood harvested by ownership, category and species group"
+          data-dataset-fr="Volume marchand net de bois rond récolté par propriétaire, catégorie et groupe d’espèces"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b6813ac9-df63-4fa7-8ead-912ac542e05b.html"><code>b6813ac9-df63-4fa7-8ead-912ac542e05b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Net merchantable volume of roundwood harvested by ownership, category and species group</span><span data-lang="fr" style="display:none">Volume marchand net de bois rond récolté par propriétaire, catégorie et groupe d’espèces</span><div class="small"><code>4148438c-1722-4c3b-a5fd-b64b5b8c768a</code></div></td>
+        <td><span data-lang="en">Net merchantable volume of roundwood harvested by ownership, category and species group</span><span data-lang="fr" style="display:none">Volume marchand net de bois rond récolté par propriétaire, catégorie et groupe d’espèces</span><div class="small"><code>eec59ec6-005b-456c-a8e6-d3153cc977e2</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:49.563268</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:49.066001"
+          data-status="success"
+          data-resource="d1a650d6-d939-4f3f-9a04-5f05b80e768b"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area harvested by ownership, management and harvesting method"
+          data-dataset-fr="Superficie récoltée par propriétaire, aménagement et méthode de récolte"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/40669c61-6320-4fce-98f8-66e65c693f39.html"><code>40669c61-6320-4fce-98f8-66e65c693f39</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area harvested by ownership, management and harvesting method</span><span data-lang="fr" style="display:none">Superficie récoltée par propriétaire, aménagement et méthode de récolte</span><div class="small"><code>95f1f37f-09b7-4aca-be10-074b3139df1f</code></div></td>
+        <td><span data-lang="en">Area harvested by ownership, management and harvesting method</span><span data-lang="fr" style="display:none">Superficie récoltée par propriétaire, aménagement et méthode de récolte</span><div class="small"><code>d1a650d6-d939-4f3f-9a04-5f05b80e768b</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:49.066001</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:48.631196"
+          data-status="success"
+          data-resource="68c16942-dc8e-4158-b405-f828025bdb08"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area of site preparation by ownership and treatment"
+          data-dataset-fr="Superficie de terrain préparé par propriétaire et type de traitement"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7f7d2bd1-b178-44cd-bd1b-ebaacb6b65aa.html"><code>7f7d2bd1-b178-44cd-bd1b-ebaacb6b65aa</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area of site preparation by ownership and treatment</span><span data-lang="fr" style="display:none">Superficie de terrain préparé par propriétaire et type de traitement</span><div class="small"><code>2162a141-dc98-49b2-9b99-e9c95be237f0</code></div></td>
+        <td><span data-lang="en">Area of site preparation by ownership and treatment</span><span data-lang="fr" style="display:none">Superficie de terrain préparé par propriétaire et type de traitement</span><div class="small"><code>68c16942-dc8e-4158-b405-f828025bdb08</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:48.631196</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:48.173467"
+          data-status="success"
+          data-resource="9aa05fdf-c395-4ff1-b594-3c41ee1dbad3"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area of scarification by ownership"
+          data-dataset-fr="Superficie scarifée par propriétaire"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7d234d1d-159e-4e44-8a51-1240f247a81a.html"><code>7d234d1d-159e-4e44-8a51-1240f247a81a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area of scarification by ownership</span><span data-lang="fr" style="display:none">Superficie scarifée par propriétaire</span><div class="small"><code>c551ab38-57ca-410e-8f52-28b1a9d77d0d</code></div></td>
+        <td><span data-lang="en">Area of scarification by ownership</span><span data-lang="fr" style="display:none">Superficie scarifée par propriétaire</span><div class="small"><code>9aa05fdf-c395-4ff1-b594-3c41ee1dbad3</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:48.173467</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:47.755784"
+          data-status="success"
+          data-resource="6e0f41b7-610c-4cdc-a1e1-6e18193bb4c5"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area of direct seeding by ownership and application method"
+          data-dataset-fr="Superficie ensemencée directement par propriétaire et méthode d’application"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7c35d095-1223-4adf-a937-b7285c8d42b2.html"><code>7c35d095-1223-4adf-a937-b7285c8d42b2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area of direct seeding by ownership and application method</span><span data-lang="fr" style="display:none">Superficie ensemencée directement par propriétaire et méthode d’application</span><div class="small"><code>e203afe8-216f-4349-a251-d3786ae90499</code></div></td>
+        <td><span data-lang="en">Area of direct seeding by ownership and application method</span><span data-lang="fr" style="display:none">Superficie ensemencée directement par propriétaire et méthode d’application</span><div class="small"><code>6e0f41b7-610c-4cdc-a1e1-6e18193bb4c5</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:47.755784</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:47.355599"
+          data-status="success"
+          data-resource="de935898-8285-482b-aa34-d7bc4aed0d78"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of seedlings planted by ownership and species group"
+          data-dataset-fr="Nombre de semis plantés par propriétaire et groupe d’espèces"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/6fe780f0-602f-4fe5-a1ce-6524dccc9119.html"><code>6fe780f0-602f-4fe5-a1ce-6524dccc9119</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of seedlings planted by ownership and species group</span><span data-lang="fr" style="display:none">Nombre de semis plantés par propriétaire et groupe d’espèces</span><div class="small"><code>fe71625c-d0ab-45c4-a29c-757ea1ee92a8</code></div></td>
+        <td><span data-lang="en">Number of seedlings planted by ownership and species group</span><span data-lang="fr" style="display:none">Nombre de semis plantés par propriétaire et groupe d’espèces</span><div class="small"><code>de935898-8285-482b-aa34-d7bc4aed0d78</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:47.355599</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:46.969297"
+          data-status="success"
+          data-resource="98ee0c01-a9c0-4302-ad46-d3c44cb5251e"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area planted by ownership and species group"
+          data-dataset-fr="Superficie plantée par propriétaire et groupe d’espèces"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e54bbf21-e9e5-44c0-b32b-604fcb632e45.html"><code>e54bbf21-e9e5-44c0-b32b-604fcb632e45</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area planted by ownership and species group</span><span data-lang="fr" style="display:none">Superficie plantée par propriétaire et groupe d’espèces</span><div class="small"><code>5462153c-7a1a-4578-87fe-fba0f86ceaba</code></div></td>
+        <td><span data-lang="en">Area planted by ownership and species group</span><span data-lang="fr" style="display:none">Superficie plantée par propriétaire et groupe d’espèces</span><div class="small"><code>98ee0c01-a9c0-4302-ad46-d3c44cb5251e</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:46.969297</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:46.482569"
+          data-status="success"
+          data-resource="51ddd760-4688-4812-b3ab-ccdf3ac5eb83"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area of stand tending by ownership, treatment and method"
+          data-dataset-fr="Superficie objet de soins culturaux des peuplements par propriétaire, type de traitement et méthode"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/29f070af-fe83-47b9-ad3b-c21008201a88.html"><code>29f070af-fe83-47b9-ad3b-c21008201a88</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area of stand tending by ownership, treatment and method</span><span data-lang="fr" style="display:none">Superficie objet de soins culturaux des peuplements par propriétaire, type de traitement et méthode</span><div class="small"><code>9416343e-3abd-42f2-a5a1-781eb6d89949</code></div></td>
+        <td><span data-lang="en">Area of stand tending by ownership, treatment and method</span><span data-lang="fr" style="display:none">Superficie objet de soins culturaux des peuplements par propriétaire, type de traitement et méthode</span><div class="small"><code>51ddd760-4688-4812-b3ab-ccdf3ac5eb83</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:46.482569</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:46.051431"
+          data-status="success"
+          data-resource="b682dfde-30ac-442a-876a-6c7fb9c36f2d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Statement of revenues from the sale of timber from provincial Crown land"
+          data-dataset-fr="Revenus provenant de la vente de bois sur les terres provinciales de la Couronne"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8ca256d7-2e4d-4d29-ac4f-70890375b5b5.html"><code>8ca256d7-2e4d-4d29-ac4f-70890375b5b5</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Statement of revenues from the sale of timber from provincial Crown land</span><span data-lang="fr" style="display:none">Revenus provenant de la vente de bois sur les terres provinciales de la Couronne</span><div class="small"><code>e0da8068-6f08-453f-9684-7d00cd6f6f93</code></div></td>
+        <td><span data-lang="en">Statement of revenues from the sale of timber from provincial Crown land</span><span data-lang="fr" style="display:none">Revenus provenant de la vente de bois sur les terres provinciales de la Couronne</span><div class="small"><code>b682dfde-30ac-442a-876a-6c7fb9c36f2d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:46.051431</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:45.656492"
+          data-status="success"
+          data-resource="eb70aa42-9c9e-4f56-ad3b-7c9abd698e0a"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area treated with insecticides by product"
+          data-dataset-fr="Superficie traitée à l’insecticide par produit"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e94877a0-d12f-4406-bbbb-6c03ac440da0.html"><code>e94877a0-d12f-4406-bbbb-6c03ac440da0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area treated with insecticides by product</span><span data-lang="fr" style="display:none">Superficie traitée à l’insecticide par produit</span><div class="small"><code>956c8397-0a23-4bde-9835-a326652ee136</code></div></td>
+        <td><span data-lang="en">Area treated with insecticides by product</span><span data-lang="fr" style="display:none">Superficie traitée à l’insecticide par produit</span><div class="small"><code>eb70aa42-9c9e-4f56-ad3b-7c9abd698e0a</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:45.656492</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:45.289469"
+          data-status="success"
+          data-resource="d90b3c35-f3c9-47d8-9d66-b34a579803d7"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area treated with insecticides by insect pest, product and application method"
+          data-dataset-fr="Superficie traitée à l’insecticide par insecte ravageur, produit et technique d&#x27;épandage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/171a79a6-edd1-4d0b-bc70-97673760ce6b.html"><code>171a79a6-edd1-4d0b-bc70-97673760ce6b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area treated with insecticides by insect pest, product and application method</span><span data-lang="fr" style="display:none">Superficie traitée à l’insecticide par insecte ravageur, produit et technique d&#x27;épandage</span><div class="small"><code>183ce84f-0705-4be5-bec6-fcda00f1bfa3</code></div></td>
+        <td><span data-lang="en">Area treated with insecticides by insect pest, product and application method</span><span data-lang="fr" style="display:none">Superficie traitée à l’insecticide par insecte ravageur, produit et technique d&#x27;épandage</span><div class="small"><code>d90b3c35-f3c9-47d8-9d66-b34a579803d7</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:45.289469</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:44.800678"
+          data-status="success"
+          data-resource="5d58d58c-f19b-4a74-8641-ae5648550ec5"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area treated with insecticides by insect pest, product and ownership"
+          data-dataset-fr="Superficie traitée à l’insecticide par insecte ravageur, produit et propriétaire"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/da070b77-0e24-4f2a-b202-4d95b49e9486.html"><code>da070b77-0e24-4f2a-b202-4d95b49e9486</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area treated with insecticides by insect pest, product and ownership</span><span data-lang="fr" style="display:none">Superficie traitée à l’insecticide par insecte ravageur, produit et propriétaire</span><div class="small"><code>b1e69a65-e8cf-4ad5-ab32-b668ded40652</code></div></td>
+        <td><span data-lang="en">Area treated with insecticides by insect pest, product and ownership</span><span data-lang="fr" style="display:none">Superficie traitée à l’insecticide par insecte ravageur, produit et propriétaire</span><div class="small"><code>5d58d58c-f19b-4a74-8641-ae5648550ec5</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:44.800678</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:44.367018"
+          data-status="success"
+          data-resource="19ca7aa8-2744-4282-9ea2-748112c7f860"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Rate and amount of insecticides applied by insect pest and product"
+          data-dataset-fr="Taux et quantité d’insecticide épandus par insecte ravageur et produit"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b3457a4e-a9fa-4641-a6ea-2de1d67fe718.html"><code>b3457a4e-a9fa-4641-a6ea-2de1d67fe718</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Rate and amount of insecticides applied by insect pest and product</span><span data-lang="fr" style="display:none">Taux et quantité d’insecticide épandus par insecte ravageur et produit</span><div class="small"><code>b45eb1fa-4072-4724-a8ce-5d216b98f4db</code></div></td>
+        <td><span data-lang="en">Rate and amount of insecticides applied by insect pest and product</span><span data-lang="fr" style="display:none">Taux et quantité d’insecticide épandus par insecte ravageur et produit</span><div class="small"><code>19ca7aa8-2744-4282-9ea2-748112c7f860</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:44.367018</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:43.940103"
+          data-status="success"
+          data-resource="6b1a5170-ded5-4226-9ed6-e972a7a23d0a"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area treated with herbicides by product and application method"
+          data-dataset-fr="Superficie traitée à l’herbicide par produit et technique d’épandage"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7703f49f-e74b-47eb-88e7-332c3c3270ab.html"><code>7703f49f-e74b-47eb-88e7-332c3c3270ab</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area treated with herbicides by product and application method</span><span data-lang="fr" style="display:none">Superficie traitée à l’herbicide par produit et technique d’épandage</span><div class="small"><code>93754f06-e946-43c3-89dc-73cfc0736f09</code></div></td>
+        <td><span data-lang="en">Area treated with herbicides by product and application method</span><span data-lang="fr" style="display:none">Superficie traitée à l’herbicide par produit et technique d’épandage</span><div class="small"><code>6b1a5170-ded5-4226-9ed6-e972a7a23d0a</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:43.940103</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:43.518095"
+          data-status="success"
+          data-resource="5886cf00-3bed-4660-9c09-e338fcc40e6f"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Area treated with herbicides by product and ownership"
+          data-dataset-fr="Superficie traitée à l’herbicide par produit et propriétaire"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/6660f6e2-1d46-49a3-93bf-7777ec2af566.html"><code>6660f6e2-1d46-49a3-93bf-7777ec2af566</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Area treated with herbicides by product and ownership</span><span data-lang="fr" style="display:none">Superficie traitée à l’herbicide par produit et propriétaire</span><div class="small"><code>0f327978-d45e-43ad-92c9-3d328fff2ed0</code></div></td>
+        <td><span data-lang="en">Area treated with herbicides by product and ownership</span><span data-lang="fr" style="display:none">Superficie traitée à l’herbicide par produit et propriétaire</span><div class="small"><code>5886cf00-3bed-4660-9c09-e338fcc40e6f</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:43.518095</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:43.09242"
+          data-status="success"
+          data-resource="bba0530d-bef5-4454-8881-0bcbc40b029e"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Rate and amount of herbicides applied by product"
+          data-dataset-fr="Taux et quantité d’herbicides épandus par produit"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b978f453-cba7-4c5f-a17b-40211e2d0bf3.html"><code>b978f453-cba7-4c5f-a17b-40211e2d0bf3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Rate and amount of herbicides applied by product</span><span data-lang="fr" style="display:none">Taux et quantité d’herbicides épandus par produit</span><div class="small"><code>519c7651-6fff-4cca-bcc4-3d947c0ec85b</code></div></td>
+        <td><span data-lang="en">Rate and amount of herbicides applied by product</span><span data-lang="fr" style="display:none">Taux et quantité d’herbicides épandus par produit</span><div class="small"><code>bba0530d-bef5-4454-8881-0bcbc40b029e</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:31:43.09242</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:44.126639"
+          data-status="success"
+          data-resource="3643d857-8f8f-4f9b-9bac-8fde79ea8aa2"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Ground beetle and lepidoptera biodiversity on Anticosti in 1993"
+          data-dataset-fr="Biodiversité des carabes et lépidoptères sur Anticosti en 1993"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8defeb28-50bd-44c6-bacf-bdeb28b39e54.html"><code>8defeb28-50bd-44c6-bacf-bdeb28b39e54</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>f55b476f-534f-4d4c-aacf-3088724cc5fd</code></div></td>
+        <td><span data-lang="en">Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>3643d857-8f8f-4f9b-9bac-8fde79ea8aa2</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:26:44.126639</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:43.714971"
+          data-status="failure"
+          data-resource="59cc7bd6-4639-43e4-89f5-5526d4a44e34"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Ground beetle and lepidoptera biodiversity on Anticosti in 1993"
+          data-dataset-fr="Biodiversité des carabes et lépidoptères sur Anticosti en 1993"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3c2d1eb8-e599-4921-9f4b-103ed9f8cbe2.html"><code>3c2d1eb8-e599-4921-9f4b-103ed9f8cbe2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>f55b476f-534f-4d4c-aacf-3088724cc5fd</code></div></td>
+        <td><span data-lang="en">Metadata - Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Métadonnées - Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>59cc7bd6-4639-43e4-89f5-5526d4a44e34</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">968 err</span><span data-lang="fr" style="display:none">968 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:26:43.714971</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:43.323371"
+          data-status="failure"
+          data-resource="e5683591-4f64-444d-a4b6-d051498aa47e"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Ground beetle and lepidoptera biodiversity on Anticosti in 1993"
+          data-dataset-fr="Biodiversité des carabes et lépidoptères sur Anticosti en 1993"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4a07528b-7f59-4e13-b8f0-65d66e766692.html"><code>4a07528b-7f59-4e13-b8f0-65d66e766692</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>f55b476f-534f-4d4c-aacf-3088724cc5fd</code></div></td>
+        <td><span data-lang="en">Metadata - Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Métadonnées - Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>e5683591-4f64-444d-a4b6-d051498aa47e</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">968 err</span><span data-lang="fr" style="display:none">968 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:26:43.323371</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:42.954586"
+          data-status="success"
+          data-resource="d619e4a2-3b35-466f-b2dc-2460bfe93a3c"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Ground beetle and lepidoptera biodiversity on Anticosti in 1993"
+          data-dataset-fr="Biodiversité des carabes et lépidoptères sur Anticosti en 1993"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/be09e356-e64d-45d6-b9f6-ba59c7a61ce3.html"><code>be09e356-e64d-45d6-b9f6-ba59c7a61ce3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>f55b476f-534f-4d4c-aacf-3088724cc5fd</code></div></td>
+        <td><span data-lang="en">Ground beetle and lepidoptera biodiversity on Anticosti in 1993</span><span data-lang="fr" style="display:none">Biodiversité des carabes et lépidoptères sur Anticosti en 1993</span><div class="small"><code>d619e4a2-3b35-466f-b2dc-2460bfe93a3c</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:26:42.954586</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:42.505768"
+          data-status="success"
+          data-resource="a1606235-95aa-4c81-a8db-19b852be288c"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Secondary insects and fungi post-hemlock looper on Anticosti in 1973"
+          data-dataset-fr="Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/17bc7417-9314-4a1d-aae8-180e768742c6.html"><code>17bc7417-9314-4a1d-aae8-180e768742c6</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Secondary insects and fungi post-hemlock looper on Anticosti in 1973</span><span data-lang="fr" style="display:none">Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973</span><div class="small"><code>9dda09b0-649f-4002-b207-7b204eb81cbb</code></div></td>
+        <td><span data-lang="en">Tree condition post-hemlock looper on Anticosti in 1973</span><span data-lang="fr" style="display:none">État des arbres post-arpenteuse de la pruche sur Anticosti en 1973</span><div class="small"><code>a1606235-95aa-4c81-a8db-19b852be288c</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:26:42.505768</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:42.091955"
+          data-status="success"
+          data-resource="40bc65c1-d092-4912-b8f6-8fd739dede04"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Secondary insects and fungi post-hemlock looper on Anticosti in 1973"
+          data-dataset-fr="Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/21880dc8-c0de-485f-a5a9-e9f66486b3a9.html"><code>21880dc8-c0de-485f-a5a9-e9f66486b3a9</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Secondary insects and fungi post-hemlock looper on Anticosti in 1973</span><span data-lang="fr" style="display:none">Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973</span><div class="small"><code>9dda09b0-649f-4002-b207-7b204eb81cbb</code></div></td>
+        <td><span data-lang="en">Metadata - Tree condition</span><span data-lang="fr" style="display:none">Métadonnées - État des arbres</span><div class="small"><code>40bc65c1-d092-4912-b8f6-8fd739dede04</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:26:42.091955</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:41.738909"
+          data-status="success"
+          data-resource="c9e81495-a04f-4f96-90ac-77481499cbb5"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Secondary insects and fungi post-hemlock looper on Anticosti in 1973"
+          data-dataset-fr="Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/345b8939-a960-4cfb-a9ac-a233bb382490.html"><code>345b8939-a960-4cfb-a9ac-a233bb382490</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Secondary insects and fungi post-hemlock looper on Anticosti in 1973</span><span data-lang="fr" style="display:none">Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973</span><div class="small"><code>9dda09b0-649f-4002-b207-7b204eb81cbb</code></div></td>
+        <td><span data-lang="en">Metadata - Tree condition</span><span data-lang="fr" style="display:none">Métadonnées - État des arbres</span><div class="small"><code>c9e81495-a04f-4f96-90ac-77481499cbb5</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:26:41.738909</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:26:41.377058"
+          data-status="success"
+          data-resource="aa3a0db9-8302-496a-b681-ecae1b3c338d"
+          data-organization="Natural Resources Canada | Ressources naturelles Canada"
+          data-org="Natural Resources Canada | Ressources naturelles Canada"
+          data-version="v0.1"
+          data-dataset-en="Secondary insects and fungi post-hemlock looper on Anticosti in 1973"
+          data-dataset-fr="Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4d828389-c665-4127-9774-71aa055ca494.html"><code>4d828389-c665-4127-9774-71aa055ca494</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Secondary insects and fungi post-hemlock looper on Anticosti in 1973</span><span data-lang="fr" style="display:none">Insectes secondaires et champignons post-arpenteuse de la pruche sur Anticosti en 1973</span><div class="small"><code>9dda09b0-649f-4002-b207-7b204eb81cbb</code></div></td>
+        <td><span data-lang="en">Tree condition post-hemlock looper on Anticosti in 1973</span><span data-lang="fr" style="display:none">État des arbres post-arpenteuse de la pruche sur Anticosti en 1973</span><div class="small"><code>aa3a0db9-8302-496a-b681-ecae1b3c338d</code> · upload</div></td>
+        <td>Natural Resources Canada | Ressources naturelles Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:26:41.377058</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure", "Running"], "datasets": [{"label": "Reports", "data": [78, 18, 1], "backgroundColor": ["#2e8540", "#d3080c", "#3f57a6"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [78], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [18], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}, {"label": "Running", "data": [1], "backgroundColor": "#3f57a6", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Library and Archives Canada | Bibliothèque et Archives Canada (GCDS theme)." />
+  <title>Library and Archives Canada | Bibliothèque et Archives Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Library and Archives Canada | Bibliothèque et Archives Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Library-and-Archives-Canada-Biblioth-que-et-Archives-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 13 · Success: 8 · Failure: 5 · Other: 0 · URL types: 1 · Latest: <time>2024-12-09 18:09:46.893697</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">13</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">8</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">5</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>13</td><td>8</td><td>5</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2024-12-09 18:09:46.893697"
+          data-status="success"
+          data-resource="5ede37fa-b02c-444a-8d22-5c94daa6a459"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Cost to describe a newly acquired published title"
+          data-dataset-fr=" Calcul du coût pour décrire un titre publié nouvellement acquis"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9925d8fe-84df-4508-8a38-1a2080ae54d6.html"><code>9925d8fe-84df-4508-8a38-1a2080ae54d6</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Cost to describe a newly acquired published title</span><span data-lang="fr" style="display:none"> Calcul du coût pour décrire un titre publié nouvellement acquis</span><div class="small"><code>497fa201-6286-45c1-b4ba-54ab0779d2ea</code></div></td>
+        <td><span data-lang="en">Cost to describe a newly acquired published title</span><span data-lang="fr" style="display:none"> Calcul du coût pour décrire un titre publié nouvellement acquis</span><div class="small"><code>5ede37fa-b02c-444a-8d22-5c94daa6a459</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:46.893697</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:07:11.766663"
+          data-status="success"
+          data-resource="c29668f0-0f43-4054-b80c-2fbd86665926"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Published documents acquired during the year that are processed"
+          data-dataset-fr=" Documents publiés acquis pendant l’année qui sont traités."
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4beda9fa-fb4d-4877-9e33-1352586e7e55.html"><code>4beda9fa-fb4d-4877-9e33-1352586e7e55</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Published documents acquired during the year that are processed</span><span data-lang="fr" style="display:none"> Documents publiés acquis pendant l’année qui sont traités.</span><div class="small"><code>0ddba181-11e2-4282-a718-99f3f5e8d9c5</code></div></td>
+        <td><span data-lang="en">Published documents acquired during the year that are processed</span><span data-lang="fr" style="display:none"> Documents publiés acquis pendant l’année qui sont traités.</span><div class="small"><code>c29668f0-0f43-4054-b80c-2fbd86665926</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:07:11.766663</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:51.039491"
+          data-status="failure"
+          data-resource="d899c6a6-d3d2-4e06-ac97-0c148a803d2a"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Annual increase of new digital files preserved (includes both born-digital and digitized documents)"
+          data-dataset-fr="Calcul d’augmentation annuelle du nouveau contenu numérique préservé (comprends les documents numériques et les documents numérisés"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e6e0694d-49ad-461d-8938-e6b1f57cade0.html"><code>e6e0694d-49ad-461d-8938-e6b1f57cade0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Annual increase of new digital files preserved (includes both born-digital and digitized documents)</span><span data-lang="fr" style="display:none">Calcul d’augmentation annuelle du nouveau contenu numérique préservé (comprends les documents numériques et les documents numérisés</span><div class="small"><code>4af9c2e1-0d1a-4659-a3ed-b4e9c16fab4e</code></div></td>
+        <td><span data-lang="en">Annual increase of new digital files preserved (includes both born-digital and digitized documents)</span><span data-lang="fr" style="display:none">Calcul d’augmentation annuelle du nouveau contenu numérique préservé (comprends les documents numériques et les documents numérisés</span><div class="small"><code>d899c6a6-d3d2-4e06-ac97-0c148a803d2a</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 18:04:51.039491</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:50.308229"
+          data-status="failure"
+          data-resource="23b318c9-7ba4-4ead-bf58-f7f0b23e5f0c"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Federal government institutions that participated to an event on recordkeeping"
+          data-dataset-fr="Institutions fédérales qui ont participé à un événement en tenue de documents"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f0ceef09-e1a5-4588-8149-ace1a2323280.html"><code>f0ceef09-e1a5-4588-8149-ace1a2323280</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Federal government institutions that participated to an event on recordkeeping</span><span data-lang="fr" style="display:none">Institutions fédérales qui ont participé à un événement en tenue de documents</span><div class="small"><code>2aeddac2-e351-4e5a-b13f-10f992b724e4</code></div></td>
+        <td><span data-lang="en">Federal government institutions that participated to an event on recordkeeping</span><span data-lang="fr" style="display:none">Institutions fédérales qui ont participé à un événement en tenue de documents</span><div class="small"><code>23b318c9-7ba4-4ead-bf58-f7f0b23e5f0c</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 18:04:50.308229</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:49.515598"
+          data-status="failure"
+          data-resource="5a3271a1-3acc-4692-b0f5-d7af6f44182f"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Calculation time to complete the evaluation of a private archive"
+          data-dataset-fr="Calcul du temps requis pour compléter l’évaluation d’une archive privée"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4f4ee42b-74ae-46bf-bb66-09d2ecae8235.html"><code>4f4ee42b-74ae-46bf-bb66-09d2ecae8235</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Calculation time to complete the evaluation of a private archive</span><span data-lang="fr" style="display:none">Calcul du temps requis pour compléter l’évaluation d’une archive privée</span><div class="small"><code>5b29cbdf-2fec-40ea-bf49-3fc5c99abbd7</code></div></td>
+        <td><span data-lang="en">Calculation time to complete the evaluation of a private archive</span><span data-lang="fr" style="display:none">Calcul du temps requis pour compléter l’évaluation d’une archive privée</span><div class="small"><code>5a3271a1-3acc-4692-b0f5-d7af6f44182f</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 18:04:49.515598</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:48.730811"
+          data-status="failure"
+          data-resource="2391db83-21b6-45af-80b4-a1c8cdf0b457"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="At-risk audio-visual material migrated from an obsolete to a current digital file format"
+          data-dataset-fr="Calcul du matériel audio-visuel à risque qui a été migré d’un format désuet à un format numérique plus récent"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f50d31b7-ae69-4acd-ae04-b493dbeb804a.html"><code>f50d31b7-ae69-4acd-ae04-b493dbeb804a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">At-risk audio-visual material migrated from an obsolete to a current digital file format</span><span data-lang="fr" style="display:none">Calcul du matériel audio-visuel à risque qui a été migré d’un format désuet à un format numérique plus récent</span><div class="small"><code>805cafc6-3e3f-4edb-80cd-0dc2584d940b</code></div></td>
+        <td><span data-lang="en">At-risk audio-visual material migrated from an obsolete to a current digital file format</span><span data-lang="fr" style="display:none">Calcul du matériel audio-visuel à risque qui a été migré d’un format désuet à un format numérique plus récent</span><div class="small"><code>2391db83-21b6-45af-80b4-a1c8cdf0b457</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 18:04:48.730811</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:52:13.625383"
+          data-status="success"
+          data-resource="0adb0630-a93f-4be6-bcd9-98fd8f4ce860"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Cost per attendant at events on managing government information"
+          data-dataset-fr="Coût par participants aux événements en lien avec la gestion de l&#x27;information gouvernementale"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/587ca9a5-5db7-41d0-9c1b-fe8577847014.html"><code>587ca9a5-5db7-41d0-9c1b-fe8577847014</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Cost per attendant at events on managing government information</span><span data-lang="fr" style="display:none">Coût par participants aux événements en lien avec la gestion de l&#x27;information gouvernementale</span><div class="small"><code>7642381d-8008-40a4-82f4-9a71bea3ae6b</code></div></td>
+        <td><span data-lang="en">Cost per attendant at events on managing government information</span><span data-lang="fr" style="display:none">Coût par participants aux événements en gestion de l’information gouvernementale</span><div class="small"><code>0adb0630-a93f-4be6-bcd9-98fd8f4ce860</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:52:13.625383</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:19.757787"
+          data-status="failure"
+          data-resource="b50336d3-bb3a-472b-a916-5d97a7d52ac6"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.2"
+          data-dataset-en="Time required to complete the processing of a private archive"
+          data-dataset-fr="Calcul du temps requis pour compléter le traitement d&#x27;une archive privée"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7e72b5b9-4c05-4bcb-9d2c-4382d6e84ef8.html"><code>7e72b5b9-4c05-4bcb-9d2c-4382d6e84ef8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Time required to complete the processing of a private archive</span><span data-lang="fr" style="display:none">Calcul du temps requis pour compléter le traitement d&#x27;une archive privée</span><div class="small"><code>26c48373-e049-44f2-844f-8f7bd04dd10e</code></div></td>
+        <td><span data-lang="en">Average time required to complete the processing of a private archive</span><span data-lang="fr" style="display:none">Calcul du temps moyen requis pour compléter le traitement d&#x27;une archive privée</span><div class="small"><code>b50336d3-bb3a-472b-a916-5d97a7d52ac6</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:19.757787</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:33.385224"
+          data-status="success"
+          data-resource="52564f6c-9742-44ca-b637-3d3ce91ad0ca"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.1"
+          data-dataset-en="Federal government institutions supported by a full and up-to-date disposition coverage"
+          data-dataset-fr=" Institutions du gouvernement fédéral qui disposent d’une couverture de disposition complète et à jour de leurs documents"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0c102b14-9ac0-4a3a-8d18-198bd14f5fe4.html"><code>0c102b14-9ac0-4a3a-8d18-198bd14f5fe4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Federal government institutions supported by a full and up-to-date disposition coverage</span><span data-lang="fr" style="display:none"> Institutions du gouvernement fédéral qui disposent d’une couverture de disposition complète et à jour de leurs documents</span><div class="small"><code>bedff680-16d8-481f-b03f-f52b7bd17418</code></div></td>
+        <td><span data-lang="en">Federal government institutions supported by a full and up-to-date disposition coverage</span><span data-lang="fr" style="display:none"> Institutions du gouvernement fédéral qui disposent d’une couverture de disposition complète et à jour de leurs documents</span><div class="small"><code>52564f6c-9742-44ca-b637-3d3ce91ad0ca</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:33.385224</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:33.326076"
+          data-status="success"
+          data-resource="49c6cb9e-7e91-4403-b95b-b3b6fefb1420"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.1"
+          data-dataset-en="Average time to issue a Disposition Authorization"
+          data-dataset-fr="Moyenne du temps requis pour émettre une autorisation de disposition"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ac152eef-ddf3-4cd8-81a6-7fec3b49e2d4.html"><code>ac152eef-ddf3-4cd8-81a6-7fec3b49e2d4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Average time to issue a Disposition Authorization</span><span data-lang="fr" style="display:none">Moyenne du temps requis pour émettre une autorisation de disposition</span><div class="small"><code>a5f63986-4108-48ca-a800-8863255bfa1f</code></div></td>
+        <td><span data-lang="en">Average time to issue a Disposition Authorization</span><span data-lang="fr" style="display:none"> Temps moyen requis pour émettre une autorisation de disposition</span><div class="small"><code>49c6cb9e-7e91-4403-b95b-b3b6fefb1420</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:33.326076</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:33.158924"
+          data-status="success"
+          data-resource="f5834f68-6b6b-4f2b-bc89-6a885bae2b11"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.1"
+          data-dataset-en="Documentary Heritage Communities Program (DHCP) recipients that have met their objectives"
+          data-dataset-fr="Bénéficiaires du Programme d’appui aux collectivités du patrimoine documentaire (PCPD) qui ont atteint leurs objectifs"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/251506c9-b517-4a96-9686-6f5d85076197.html"><code>251506c9-b517-4a96-9686-6f5d85076197</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Documentary Heritage Communities Program (DHCP) recipients that have met their objectives</span><span data-lang="fr" style="display:none">Bénéficiaires du Programme d’appui aux collectivités du patrimoine documentaire (PCPD) qui ont atteint leurs objectifs</span><div class="small"><code>83603780-10ea-4527-9eb3-cdde2e4ee915</code></div></td>
+        <td><span data-lang="en">Documentary Heritage Communities Program (DHCP) recipients that have met their objectives</span><span data-lang="fr" style="display:none"> Bénéficiaires du Programme d’appui aux collectivités du patrimoine documentaire (PCPD) qui ont atteint leurs objectifs</span><div class="small"><code>f5834f68-6b6b-4f2b-bc89-6a885bae2b11</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:33.158924</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:32.828024"
+          data-status="success"
+          data-resource="c5d6eb64-449c-41af-a212-e3a88ec99e82"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.1"
+          data-dataset-en="Formal Access to Information requests that have been responded to within the statutory time limits"
+          data-dataset-fr="Demandes formelles d’accès à l’information répondues à l’intérieur des délais prévus"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/33995adf-4e85-4bef-98c3-2f1e127e5ffd.html"><code>33995adf-4e85-4bef-98c3-2f1e127e5ffd</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Formal Access to Information requests that have been responded to within the statutory time limits</span><span data-lang="fr" style="display:none">Demandes formelles d’accès à l’information répondues à l’intérieur des délais prévus</span><div class="small"><code>4f355080-d321-4054-876d-8c37808a5496</code></div></td>
+        <td><span data-lang="en">Formal Access to Information requests that have been responded to within the statutory time limits</span><span data-lang="fr" style="display:none"> Demandes formelles d’accès à l’information répondues à l’intérieur des délais prévus</span><div class="small"><code>c5d6eb64-449c-41af-a212-e3a88ec99e82</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:32.828024</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:32.773265"
+          data-status="success"
+          data-resource="181dd89f-cfba-48e8-b505-fede9ce977cc"
+          data-organization="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-org="Library and Archives Canada | Bibliothèque et Archives Canada"
+          data-version="v0.1"
+          data-dataset-en="Amount of digital material downloaded by clients on LAC’s website"
+          data-dataset-fr="Quantité de matériel numérique téléchargé sur le site Web de BAC"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9b0e069a-0342-43e8-9496-6faedbc9a876.html"><code>9b0e069a-0342-43e8-9496-6faedbc9a876</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Amount of digital material downloaded by clients on LAC’s website</span><span data-lang="fr" style="display:none">Quantité de matériel numérique téléchargé sur le site Web de BAC</span><div class="small"><code>c2e701bf-ea7f-48de-b013-12df20422eeb</code></div></td>
+        <td><span data-lang="en">Amount of digital material downloaded by clients on LAC’s website</span><span data-lang="fr" style="display:none">Quantité de matériel numérique téléchargé en ligne à partir du site Web de BAC</span><div class="small"><code>181dd89f-cfba-48e8-b505-fede9ce977cc</code> · upload</div></td>
+        <td>Library and Archives Canada | Bibliothèque et Archives Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:32.773265</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [8, 5], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [8], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [5], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

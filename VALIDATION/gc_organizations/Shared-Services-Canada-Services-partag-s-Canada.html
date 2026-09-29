@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Shared Services Canada | Services partagés Canada (GCDS theme)." />
+  <title>Shared Services Canada | Services partagés Canada · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Shared Services Canada | Services partagés Canada</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Shared-Services-Canada-Services-partag-s-Canada.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 46 · Success: 43 · Failure: 3 · Other: 0 · URL types: 1 · Latest: <time>2026-04-16 17:09:44.126392</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">46</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">43</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">3</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>46</td><td>43</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-04-16 17:09:44.126392"
+          data-status="success"
+          data-resource="435c5119-32e8-4542-8d4c-d63d27b41695"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Software Requests Fulfilled Within Established Service Level Standards"
+          data-dataset-fr="Pourcentage de demandes de logiciel traitées conformément aux normes du niveau de service établi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/43201400-0b51-4dba-a5da-4e0592069fec.html"><code>43201400-0b51-4dba-a5da-4e0592069fec</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Software Requests Fulfilled Within Established Service Level Standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de logiciel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>34884260-2021-4d39-84e3-16468a278611</code></div></td>
+        <td><span data-lang="en">Percentage of software requests fulfilled within established service level standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de logiciel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>435c5119-32e8-4542-8d4c-d63d27b41695</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-16 17:09:44.126392</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-27 15:14:29.335015"
+          data-status="success"
+          data-resource="7a743875-2b16-4464-ae28-524def42e692"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Employment Equity"
+          data-dataset-fr="l&#x27;équité en matière d&#x27;emploi "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/047074f3-3a81-4d03-ac4a-1cb46424e14a.html"><code>047074f3-3a81-4d03-ac4a-1cb46424e14a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Employment Equity</span><span data-lang="fr" style="display:none">l&#x27;équité en matière d&#x27;emploi </span><div class="small"><code>8ceaa13d-603f-4959-a888-fb31fcd20182</code></div></td>
+        <td><span data-lang="en">Employment Equity</span><span data-lang="fr" style="display:none">equite en maitre d&#x27;emploi</span><div class="small"><code>7a743875-2b16-4464-ae28-524def42e692</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-27 15:14:29.335015</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-27 15:14:05.906297"
+          data-status="success"
+          data-resource="aae683dc-c33c-47c9-8ffe-7b6bdef8ef40"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Employment Equity"
+          data-dataset-fr="l&#x27;équité en matière d&#x27;emploi "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/03409c2d-7a41-4f4e-8f7d-732076accf20.html"><code>03409c2d-7a41-4f4e-8f7d-732076accf20</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Employment Equity</span><span data-lang="fr" style="display:none">l&#x27;équité en matière d&#x27;emploi </span><div class="small"><code>8ceaa13d-603f-4959-a888-fb31fcd20182</code></div></td>
+        <td><span data-lang="en">Employment Equity </span><span data-lang="fr" style="display:none">equite en maitre d&#x27;emploi</span><div class="small"><code>aae683dc-c33c-47c9-8ffe-7b6bdef8ef40</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-27 15:14:05.906297</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-27 14:52:57.124694"
+          data-status="success"
+          data-resource="bd742248-114d-40f0-90bc-379e22c88d13"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Software Requests Fulfilled Within Established Service Level Standards"
+          data-dataset-fr="Pourcentage de demandes de logiciel traitées conformément aux normes du niveau de service établi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/43c92835-a32a-46cd-af87-5d3dd9cd83a8.html"><code>43c92835-a32a-46cd-af87-5d3dd9cd83a8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Software Requests Fulfilled Within Established Service Level Standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de logiciel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>34884260-2021-4d39-84e3-16468a278611</code></div></td>
+        <td><span data-lang="en">Percentage of software requests fulfilled within established service level standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de logiciel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>bd742248-114d-40f0-90bc-379e22c88d13</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-27 14:52:57.124694</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-27 14:46:16.177563"
+          data-status="success"
+          data-resource="2d0032c2-1791-495d-82d7-c9af2ef201d7"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Critical Incidents"
+          data-dataset-fr="Incidents critiques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9c939c0d-4b44-46eb-941d-9c604bd72c7c.html"><code>9c939c0d-4b44-46eb-941d-9c604bd72c7c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Critical Incidents</span><span data-lang="fr" style="display:none">Incidents critiques</span><div class="small"><code>62f76982-ee86-43f5-90d5-146d9eeeded1</code></div></td>
+        <td><span data-lang="en">Critical Incidents</span><span data-lang="fr" style="display:none">Incidents critiques </span><div class="small"><code>2d0032c2-1791-495d-82d7-c9af2ef201d7</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-27 14:46:16.177563</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-27 14:45:50.872451"
+          data-status="success"
+          data-resource="63ad98ed-d163-4834-a532-29307e99da24"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Critical Incidents"
+          data-dataset-fr="Incidents critiques"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/45ccf3bf-b4aa-455a-b342-410517363f42.html"><code>45ccf3bf-b4aa-455a-b342-410517363f42</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Critical Incidents</span><span data-lang="fr" style="display:none">Incidents critiques</span><div class="small"><code>62f76982-ee86-43f5-90d5-146d9eeeded1</code></div></td>
+        <td><span data-lang="en">Critical Incidents</span><span data-lang="fr" style="display:none">Incidents critiques </span><div class="small"><code>63ad98ed-d163-4834-a532-29307e99da24</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-27 14:45:50.872451</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 14:12:26.624297"
+          data-status="success"
+          data-resource="3ffd3d35-a99b-4aa3-aa7f-c1e7374c988f"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Hardware Requests Fulfilled Within Established Service Level Standards"
+          data-dataset-fr="Pourcentage de demandes de matériel traitées conformément aux normes du niveau de service établi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/4b4db6c8-31c2-4274-b6b8-ed439af6abad.html"><code>4b4db6c8-31c2-4274-b6b8-ed439af6abad</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Hardware Requests Fulfilled Within Established Service Level Standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de matériel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>8dc0ad19-a5d3-4d22-8184-898940d61c75</code></div></td>
+        <td><span data-lang="en">Percentage of hardware requests fulfilled within established service level standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de matériel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>3ffd3d35-a99b-4aa3-aa7f-c1e7374c988f</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 14:12:26.624297</time></td>
+      </tr>
+    
+      <tr data-created="2026-03-23 14:11:54.888108"
+          data-status="success"
+          data-resource="9d4be37d-9394-4e6a-9aba-429254150475"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Hardware Requests Fulfilled Within Established Service Level Standards"
+          data-dataset-fr="Pourcentage de demandes de matériel traitées conformément aux normes du niveau de service établi"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/8aebda6f-129d-47d7-8b93-42d1d6172ab5.html"><code>8aebda6f-129d-47d7-8b93-42d1d6172ab5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Hardware Requests Fulfilled Within Established Service Level Standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de matériel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>8dc0ad19-a5d3-4d22-8184-898940d61c75</code></div></td>
+        <td><span data-lang="en">Percentage of hardware requests fulfilled within established service level standards</span><span data-lang="fr" style="display:none">Pourcentage de demandes de matériel traitées conformément aux normes du niveau de service établi</span><div class="small"><code>9d4be37d-9394-4e6a-9aba-429254150475</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-23 14:11:54.888108</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-18 16:08:06.246729"
+          data-status="success"
+          data-resource="acc9c86d-6aa0-406b-83cf-7182b7a5836d"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Time the Mobile Device Services Cellular Network is Available"
+          data-dataset-fr="Pourcentage du temps où le réseau cellulaire des services des appareils mobiles est disponible"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d5819c63-64b3-40e7-a639-2d0e54b3a89a.html"><code>d5819c63-64b3-40e7-a639-2d0e54b3a89a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Time the Mobile Device Services Cellular Network is Available</span><span data-lang="fr" style="display:none">Pourcentage du temps où le réseau cellulaire des services des appareils mobiles est disponible</span><div class="small"><code>2261e96e-9e6f-4a14-8cbb-7dacd51a4d9c</code></div></td>
+        <td><span data-lang="en">Percentage of time the Mobile Device Services Cellular Network is available</span><span data-lang="fr" style="display:none">Pourcentage du temps où le réseau cellulaire des services des appareils mobiles est disponible</span><div class="small"><code>acc9c86d-6aa0-406b-83cf-7182b7a5836d</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-18 16:08:06.246729</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-18 15:57:32.022733"
+          data-status="success"
+          data-resource="f4ce526c-eed9-4b13-9224-be9e6e44b59b"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Time the Mobile Device Services Cellular Network is Available"
+          data-dataset-fr="Pourcentage du temps où le réseau cellulaire des services des appareils mobiles est disponible"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d9ac43f1-cd29-4a1a-85e2-4be52e296902.html"><code>d9ac43f1-cd29-4a1a-85e2-4be52e296902</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Time the Mobile Device Services Cellular Network is Available</span><span data-lang="fr" style="display:none">Pourcentage du temps où le réseau cellulaire des services des appareils mobiles est disponible</span><div class="small"><code>2261e96e-9e6f-4a14-8cbb-7dacd51a4d9c</code></div></td>
+        <td><span data-lang="en">Percentage of time the Mobile Device Services Cellular Network is available</span><span data-lang="fr" style="display:none">% du temps où le réseau cellulaire des services des appareils mobiles est disponible</span><div class="small"><code>f4ce526c-eed9-4b13-9224-be9e6e44b59b</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-18 15:57:32.022733</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-10 19:51:57.431185"
+          data-status="failure"
+          data-resource="658f29eb-d924-4523-aacb-8d423f33e927"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Customer Satisfaction Feedback Initiative - General Satisfaction Questionnaire"
+          data-dataset-fr="Au sujet des initiatives de rétroaction sur la satisfaction de la clientèle - Questionnaire sur la satisfaction générale"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/08a40886-af55-473a-ae9e-9f8b2f311d2b.html"><code>08a40886-af55-473a-ae9e-9f8b2f311d2b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative - General Satisfaction Questionnaire</span><span data-lang="fr" style="display:none">Au sujet des initiatives de rétroaction sur la satisfaction de la clientèle - Questionnaire sur la satisfaction générale</span><div class="small"><code>55b59eab-92bd-45f2-bf08-8d12f0bda709</code></div></td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative - General Satisfaction Questionnaire</span><span data-lang="fr" style="display:none">Au sujet des initiatives de rétroaction sur la satisfaction de la clientèle - Questionnaire sur la satisfaction générale</span><div class="small"><code>658f29eb-d924-4523-aacb-8d423f33e927</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">16 err</span><span data-lang="fr" style="display:none">16 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2026-02-10 19:51:57.431185</time></td>
+      </tr>
+    
+      <tr data-created="2026-02-10 19:18:35.416507"
+          data-status="success"
+          data-resource="fde1c857-c931-41b3-8f94-2d89d9200a78"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Fleet Data"
+          data-dataset-fr="Données du parc automobile"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/62160b5b-a167-4b84-93ee-7ea8c58d47b6.html"><code>62160b5b-a167-4b84-93ee-7ea8c58d47b6</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fleet Data</span><span data-lang="fr" style="display:none">Données du parc automobile</span><div class="small"><code>f6986d8e-81ac-4c3f-9eb2-867cae32b984</code></div></td>
+        <td><span data-lang="en">Fleet Data</span><span data-lang="fr" style="display:none">Données du parc automobile</span><div class="small"><code>fde1c857-c931-41b3-8f94-2d89d9200a78</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-02-10 19:18:35.416507</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-28 18:43:59.623266"
+          data-status="success"
+          data-resource="36c92e8a-2e8e-42ea-8d04-a8029a64b927"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Cost of procurement per each $100 of contracts awarded "
+          data-dataset-fr="Coût de l&#x27;approvisionnement par $100 de contrats attribués"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cccf56ac-59d4-4463-9bb1-b6d1646605d9.html"><code>cccf56ac-59d4-4463-9bb1-b6d1646605d9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Cost of procurement per each $100 of contracts awarded </span><span data-lang="fr" style="display:none">Coût de l&#x27;approvisionnement par $100 de contrats attribués</span><div class="small"><code>fc540275-898d-4632-a4d8-5356faf6275b</code></div></td>
+        <td><span data-lang="en">Cost of procurement per each $100 of contracts awarded </span><span data-lang="fr" style="display:none">Coût de l&#x27;approvisionnement par $100 de contrats attribués</span><div class="small"><code>36c92e8a-2e8e-42ea-8d04-a8029a64b927</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-28 18:43:59.623266</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-28 18:43:37.586171"
+          data-status="success"
+          data-resource="5fa3ada7-788e-4c69-a622-27b5870b1993"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Cost of procurement per each $100 of contracts awarded "
+          data-dataset-fr="Coût de l&#x27;approvisionnement par $100 de contrats attribués"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7ccee964-6dc7-4401-8362-201833091aa6.html"><code>7ccee964-6dc7-4401-8362-201833091aa6</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Cost of procurement per each $100 of contracts awarded </span><span data-lang="fr" style="display:none">Coût de l&#x27;approvisionnement par $100 de contrats attribués</span><div class="small"><code>fc540275-898d-4632-a4d8-5356faf6275b</code></div></td>
+        <td><span data-lang="en">Cost of procurement per each $100 of contracts awarded </span><span data-lang="fr" style="display:none">Coût de l&#x27;approvisionnement par $100 de contrats attribués</span><div class="small"><code>5fa3ada7-788e-4c69-a622-27b5870b1993</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-28 18:43:37.586171</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-28 16:19:24.156426"
+          data-status="success"
+          data-resource="8f104dca-6a38-4ab1-a6db-071030b50107"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of time IT security services are available"
+          data-dataset-fr="Pourcentage du temps de disponibilité des services de sécurité de la TI"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a714a683-3c38-4304-b0dc-d5f22c642cfb.html"><code>a714a683-3c38-4304-b0dc-d5f22c642cfb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of time IT security services are available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des services de sécurité de la TI</span><div class="small"><code>29017f8f-54ce-42a9-9ff7-61f53d5abee1</code></div></td>
+        <td><span data-lang="en">Percentage of time IT security services are available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des services de sécurité de la TI</span><div class="small"><code>8f104dca-6a38-4ab1-a6db-071030b50107</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-28 16:19:24.156426</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-28 16:18:56.817807"
+          data-status="success"
+          data-resource="5d711bed-8361-406e-9c49-34561e8d0dcc"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of time IT security services are available"
+          data-dataset-fr="Pourcentage du temps de disponibilité des services de sécurité de la TI"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/834439ad-6bef-4752-8e1f-f6415d31779f.html"><code>834439ad-6bef-4752-8e1f-f6415d31779f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of time IT security services are available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des services de sécurité de la TI</span><div class="small"><code>29017f8f-54ce-42a9-9ff7-61f53d5abee1</code></div></td>
+        <td><span data-lang="en">Percentage of time IT security services are available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des services de sécurité de la TI</span><div class="small"><code>5d711bed-8361-406e-9c49-34561e8d0dcc</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-28 16:18:56.817807</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-05 14:00:31.531287"
+          data-status="success"
+          data-resource="166979cf-2b5a-4815-a635-e57d32448fc2"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Fixed Telephony"
+          data-dataset-fr="Téléphonie fixe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7907e4ed-e99f-4b1a-b88e-c469d1f679a5.html"><code>7907e4ed-e99f-4b1a-b88e-c469d1f679a5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fixed Telephony</span><span data-lang="fr" style="display:none">Téléphonie fixe</span><div class="small"><code>f516ebfa-4e5d-4bc9-800e-03ade299a94f</code></div></td>
+        <td><span data-lang="en">Fixed Telephony</span><span data-lang="fr" style="display:none">Téléphonie fixe</span><div class="small"><code>166979cf-2b5a-4815-a635-e57d32448fc2</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-05 14:00:31.531287</time></td>
+      </tr>
+    
+      <tr data-created="2025-11-05 14:00:09.56981"
+          data-status="success"
+          data-resource="7332f362-1cc0-4b2a-a46d-79fe0c81e925"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Fixed Telephony"
+          data-dataset-fr="Téléphonie fixe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0b4713cc-84ce-4811-bb9e-e311ab89997e.html"><code>0b4713cc-84ce-4811-bb9e-e311ab89997e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Fixed Telephony</span><span data-lang="fr" style="display:none">Téléphonie fixe</span><div class="small"><code>f516ebfa-4e5d-4bc9-800e-03ade299a94f</code></div></td>
+        <td><span data-lang="en">Fixed Telephony</span><span data-lang="fr" style="display:none">Téléphonie fixe</span><div class="small"><code>7332f362-1cc0-4b2a-a46d-79fe0c81e925</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-11-05 14:00:09.56981</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-16 14:34:17.443672"
+          data-status="success"
+          data-resource="22e5d219-ee44-494d-8a8d-ec6115428338"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en=" External Credential Management Service Availability"
+          data-dataset-fr="Disponibilité du service de gestion de justification externe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e4877b3f-c7d3-42c1-86ba-2c59342e7cee.html"><code>e4877b3f-c7d3-42c1-86ba-2c59342e7cee</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en"> External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion de justification externe</span><div class="small"><code>d521eba3-8534-4a15-b31a-aca14e10c296</code></div></td>
+        <td><span data-lang="en">GCKEY</span><span data-lang="fr" style="display:none">GCClé</span><div class="small"><code>22e5d219-ee44-494d-8a8d-ec6115428338</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-16 14:34:17.443672</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-16 14:33:16.249617"
+          data-status="success"
+          data-resource="fe28342b-04c8-4e91-902f-3bdcbb77a09b"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en=" External Credential Management Service Availability"
+          data-dataset-fr="Disponibilité du service de gestion de justification externe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9621a62c-9fe6-4790-b42f-9341b15da689.html"><code>9621a62c-9fe6-4790-b42f-9341b15da689</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en"> External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion de justification externe</span><div class="small"><code>d521eba3-8534-4a15-b31a-aca14e10c296</code></div></td>
+        <td><span data-lang="en">GCKEY</span><span data-lang="fr" style="display:none">GCClé</span><div class="small"><code>fe28342b-04c8-4e91-902f-3bdcbb77a09b</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-16 14:33:16.249617</time></td>
+      </tr>
+    
+      <tr data-created="2025-09-09 17:17:01.621927"
+          data-status="success"
+          data-resource="c9e28240-e9de-49a5-9f47-11befc131761"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Customer Satisfaction Feedback Initiative – Service Questionnaire Results"
+          data-dataset-fr="Initiative de rétroaction sur la satisfaction de la clientèle – Résultats du questionnaire sur les services"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/85775442-39c6-48c6-8b77-36f4710d8445.html"><code>85775442-39c6-48c6-8b77-36f4710d8445</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative – Service Questionnaire Results</span><span data-lang="fr" style="display:none">Initiative de rétroaction sur la satisfaction de la clientèle – Résultats du questionnaire sur les services</span><div class="small"><code>bfbcc5b7-c9e4-4852-bba8-b1e26f149954</code></div></td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative – Service Questionnaire Results</span><span data-lang="fr" style="display:none">Initiative de rétroaction sur la satisfaction de la clientèle – Résultats du questionnaire sur les services</span><div class="small"><code>c9e28240-e9de-49a5-9f47-11befc131761</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-09-09 17:17:01.621927</time></td>
+      </tr>
+    
+      <tr data-created="2025-09-09 17:14:21.625148"
+          data-status="success"
+          data-resource="320b8365-ac05-4311-876d-ec2962d1a514"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Customer Satisfaction Feedback Initiative – Service Questionnaire Results"
+          data-dataset-fr="Initiative de rétroaction sur la satisfaction de la clientèle – Résultats du questionnaire sur les services"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2bde0cc9-1f5b-48a8-b283-abb297aba255.html"><code>2bde0cc9-1f5b-48a8-b283-abb297aba255</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative – Service Questionnaire Results</span><span data-lang="fr" style="display:none">Initiative de rétroaction sur la satisfaction de la clientèle – Résultats du questionnaire sur les services</span><div class="small"><code>bfbcc5b7-c9e4-4852-bba8-b1e26f149954</code></div></td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative – Service Questionnaire Results</span><span data-lang="fr" style="display:none">Initiative de rétroaction sur la satisfaction de la clientèle – Résultats du questionnaire sur les services</span><div class="small"><code>320b8365-ac05-4311-876d-ec2962d1a514</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-09-09 17:14:21.625148</time></td>
+      </tr>
+    
+      <tr data-created="2025-09-09 17:08:53.645485"
+          data-status="failure"
+          data-resource="4ad9bd97-b766-41ff-8673-a0eb69fbc915"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Customer Satisfaction Feedback Initiative - General Satisfaction Questionnaire"
+          data-dataset-fr="Au sujet des initiatives de rétroaction sur la satisfaction de la clientèle - Questionnaire sur la satisfaction générale"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ca2b8d2c-8fc4-4986-9fe8-1b5ee020cd29.html"><code>ca2b8d2c-8fc4-4986-9fe8-1b5ee020cd29</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative - General Satisfaction Questionnaire</span><span data-lang="fr" style="display:none">Au sujet des initiatives de rétroaction sur la satisfaction de la clientèle - Questionnaire sur la satisfaction générale</span><div class="small"><code>55b59eab-92bd-45f2-bf08-8d12f0bda709</code></div></td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative - General Satisfaction Questionnaire</span><span data-lang="fr" style="display:none">Au sujet des initiatives de rétroaction sur la satisfaction de la clientèle - Questionnaire sur la satisfaction générale</span><div class="small"><code>4ad9bd97-b766-41ff-8673-a0eb69fbc915</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">17 err</span><span data-lang="fr" style="display:none">17 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-09-09 17:08:53.645485</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:07:48.906816"
+          data-status="success"
+          data-resource="59b049b4-245b-43d7-8da4-66268c74c48a"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Enterprise Service Model Consumption Actuals"
+          data-dataset-fr="Modèle de service d’entreprise Consommation réelle "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/2f07eba3-5527-42c6-b3fa-1fffcebf285b.html"><code>2f07eba3-5527-42c6-b3fa-1fffcebf285b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle </span><div class="small"><code>6681cb87-ba88-45dd-809c-6fbba5f76d10</code></div></td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals FY 2022-2023</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle AF 2022-2023</span><div class="small"><code>59b049b4-245b-43d7-8da4-66268c74c48a</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:07:48.906816</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:07:47.985704"
+          data-status="success"
+          data-resource="6e63217b-f1ad-4cd7-862e-8aee283b71c0"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Enterprise Service Model Consumption Actuals"
+          data-dataset-fr="Modèle de service d’entreprise Consommation réelle "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b58c7104-9d62-4962-8996-51512308e179.html"><code>b58c7104-9d62-4962-8996-51512308e179</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle </span><div class="small"><code>6681cb87-ba88-45dd-809c-6fbba5f76d10</code></div></td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals FY 2022-2023</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle AF 2022-2023</span><div class="small"><code>6e63217b-f1ad-4cd7-862e-8aee283b71c0</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:07:47.985704</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:05.826005"
+          data-status="success"
+          data-resource="b183dd54-ff33-43df-bc9c-58e75d128784"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Email Services Metrics"
+          data-dataset-fr="Paramètres des service de courrier électronique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/849f34f2-a0b3-44e1-84c5-b27b549198e1.html"><code>849f34f2-a0b3-44e1-84c5-b27b549198e1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Email Services Metrics</span><span data-lang="fr" style="display:none">Paramètres des service de courrier électronique</span><div class="small"><code>f5ac36cd-1fb4-4e97-9ee2-72552979387b</code></div></td>
+        <td><span data-lang="en">Email Services Metrics 2021-2022</span><span data-lang="fr" style="display:none">Paramètres des services de courriels 2021-2022</span><div class="small"><code>b183dd54-ff33-43df-bc9c-58e75d128784</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:05.826005</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:04.95349"
+          data-status="success"
+          data-resource="7d0d7edd-97af-4285-bcf1-f4cf889fc845"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Email Services Metrics"
+          data-dataset-fr="Paramètres des service de courrier électronique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e9ddc5c2-e478-41a4-86f9-5536f1778084.html"><code>e9ddc5c2-e478-41a4-86f9-5536f1778084</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Email Services Metrics</span><span data-lang="fr" style="display:none">Paramètres des service de courrier électronique</span><div class="small"><code>f5ac36cd-1fb4-4e97-9ee2-72552979387b</code></div></td>
+        <td><span data-lang="en">Email Services Metrics 2021-2022</span><span data-lang="fr" style="display:none">Paramètres des services de courriels 2021-2022</span><div class="small"><code>7d0d7edd-97af-4285-bcf1-f4cf889fc845</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:04.95349</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:04.106863"
+          data-status="success"
+          data-resource="d68355f6-6192-4d54-8baa-34e934f71e38"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Email Services Metrics"
+          data-dataset-fr="Paramètres des service de courrier électronique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0cd80da2-c9a5-4304-8afc-05b1e0b3e1da.html"><code>0cd80da2-c9a5-4304-8afc-05b1e0b3e1da</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Email Services Metrics</span><span data-lang="fr" style="display:none">Paramètres des service de courrier électronique</span><div class="small"><code>f5ac36cd-1fb4-4e97-9ee2-72552979387b</code></div></td>
+        <td><span data-lang="en">Email Services Metrics 2020-2021</span><span data-lang="fr" style="display:none">Paramètres des services de courriels 2020-2021</span><div class="small"><code>d68355f6-6192-4d54-8baa-34e934f71e38</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:04.106863</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:03.274783"
+          data-status="success"
+          data-resource="e385d83a-7291-45e0-a57a-3dac33581b4e"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Email Services Metrics"
+          data-dataset-fr="Paramètres des service de courrier électronique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/71626013-9ec7-41a6-b4aa-b35d6325b2bb.html"><code>71626013-9ec7-41a6-b4aa-b35d6325b2bb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Email Services Metrics</span><span data-lang="fr" style="display:none">Paramètres des service de courrier électronique</span><div class="small"><code>f5ac36cd-1fb4-4e97-9ee2-72552979387b</code></div></td>
+        <td><span data-lang="en">Email Services Metrics 2020-2021</span><span data-lang="fr" style="display:none">Paramètres des services de courriels 2020-2021</span><div class="small"><code>e385d83a-7291-45e0-a57a-3dac33581b4e</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:03.274783</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:02.306182"
+          data-status="success"
+          data-resource="90fb7ee5-9f59-4871-955d-f0dd219e88e9"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Email Services Metrics"
+          data-dataset-fr="Paramètres des service de courrier électronique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0d3e28fb-5565-4c60-ad32-97709f9b6b5e.html"><code>0d3e28fb-5565-4c60-ad32-97709f9b6b5e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Email Services Metrics</span><span data-lang="fr" style="display:none">Paramètres des service de courrier électronique</span><div class="small"><code>f5ac36cd-1fb4-4e97-9ee2-72552979387b</code></div></td>
+        <td><span data-lang="en">Email Services Metrics 2019-2020</span><span data-lang="fr" style="display:none">Paramètres des services de courriels 2019-2020</span><div class="small"><code>90fb7ee5-9f59-4871-955d-f0dd219e88e9</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:02.306182</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:01.386257"
+          data-status="success"
+          data-resource="ae23c6f2-e165-4345-ae7f-e5036ed0e3f3"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Email Services Metrics"
+          data-dataset-fr="Paramètres des service de courrier électronique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/3d8ee2ed-7a14-4cb8-84e0-71c8af23f3c4.html"><code>3d8ee2ed-7a14-4cb8-84e0-71c8af23f3c4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Email Services Metrics</span><span data-lang="fr" style="display:none">Paramètres des service de courrier électronique</span><div class="small"><code>f5ac36cd-1fb4-4e97-9ee2-72552979387b</code></div></td>
+        <td><span data-lang="en">Email Services Metrics 2019-2020</span><span data-lang="fr" style="display:none">Paramètres des services de courriels 2019-2020</span><div class="small"><code>ae23c6f2-e165-4345-ae7f-e5036ed0e3f3</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:01.386257</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:37:00.390088"
+          data-status="success"
+          data-resource="063d147b-316d-43c2-ae7e-e5fb53d4a966"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Time the New Consolidated Data Centre Facilities are Available"
+          data-dataset-fr="Pourcentage du temps de disponibilité des installations nouvelles et regroupées des centres de données"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/51c1c831-d908-4c5f-9cea-e2d87ac95d03.html"><code>51c1c831-d908-4c5f-9cea-e2d87ac95d03</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Time the New Consolidated Data Centre Facilities are Available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des installations nouvelles et regroupées des centres de données</span><div class="small"><code>3335c550-9b1d-40ac-8877-e7cfb9198925</code></div></td>
+        <td><span data-lang="en">Percentage of time the new consolidated data centre facilities are available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des installations nouvelles et regroupées des centres de données</span><div class="small"><code>063d147b-316d-43c2-ae7e-e5fb53d4a966</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:37:00.390088</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:36:59.41274"
+          data-status="success"
+          data-resource="be6dece3-b579-4b96-82e6-abb07b13ab63"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of Time the New Consolidated Data Centre Facilities are Available"
+          data-dataset-fr="Pourcentage du temps de disponibilité des installations nouvelles et regroupées des centres de données"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/6cab3924-a64e-4df9-b201-82f330c562cc.html"><code>6cab3924-a64e-4df9-b201-82f330c562cc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of Time the New Consolidated Data Centre Facilities are Available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des installations nouvelles et regroupées des centres de données</span><div class="small"><code>3335c550-9b1d-40ac-8877-e7cfb9198925</code></div></td>
+        <td><span data-lang="en">Percentage of time the new consolidated data centre facilities are available</span><span data-lang="fr" style="display:none">Pourcentage du temps de disponibilité des installations nouvelles et regroupées des centres de données</span><div class="small"><code>be6dece3-b579-4b96-82e6-abb07b13ab63</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:36:59.41274</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:31:31.746681"
+          data-status="success"
+          data-resource="784f271e-80a4-4520-bef8-9e2a13e53193"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Legacy Data Centres"
+          data-dataset-fr="Centres de données existants"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b309e397-dc72-4191-b244-44e30a39d084.html"><code>b309e397-dc72-4191-b244-44e30a39d084</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Legacy Data Centres</span><span data-lang="fr" style="display:none">Centres de données existants</span><div class="small"><code>c115e246-3f60-4b0c-8788-ff897e59c9af</code></div></td>
+        <td><span data-lang="en">Legacy Data Centres</span><span data-lang="fr" style="display:none">Centres de données existants</span><div class="small"><code>784f271e-80a4-4520-bef8-9e2a13e53193</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:31:31.746681</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:31:30.494562"
+          data-status="success"
+          data-resource="c849b326-1674-4ce0-9f62-5e9f651676fa"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="Legacy Data Centres"
+          data-dataset-fr="Centres de données existants"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/f698afc1-d3fb-4c27-94fd-c59ecb8d9262.html"><code>f698afc1-d3fb-4c27-94fd-c59ecb8d9262</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Legacy Data Centres</span><span data-lang="fr" style="display:none">Centres de données existants</span><div class="small"><code>c115e246-3f60-4b0c-8788-ff897e59c9af</code></div></td>
+        <td><span data-lang="en">Legacy Data Centres</span><span data-lang="fr" style="display:none">Centres de données existants</span><div class="small"><code>c849b326-1674-4ce0-9f62-5e9f651676fa</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:31:30.494562</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:06:09.169009"
+          data-status="success"
+          data-resource="819c1ca8-2536-40be-8c58-f1e828d34834"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="SSC-Consumer -led Project Statistics"
+          data-dataset-fr="SPC-Statistiques de projet dirigés par le client"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/48c10ce5-4e3d-4263-a16d-95d1ddef981e.html"><code>48c10ce5-4e3d-4263-a16d-95d1ddef981e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">SSC-Consumer -led Project Statistics</span><span data-lang="fr" style="display:none">SPC-Statistiques de projet dirigés par le client</span><div class="small"><code>7f601545-fc5e-4937-af3e-fc856646c6c3</code></div></td>
+        <td><span data-lang="en">Percentage of SSC-led projects rated as on time, on scope and on budget </span><span data-lang="fr" style="display:none">Pourcentage des projets dirigés par SPC évalués dans le respect des délais, de la portée et du budget</span><div class="small"><code>819c1ca8-2536-40be-8c58-f1e828d34834</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:06:09.169009</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:06:08.408887"
+          data-status="success"
+          data-resource="2a3d2f6e-4041-4b9b-b878-61ce338c979d"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en="SSC-Consumer -led Project Statistics"
+          data-dataset-fr="SPC-Statistiques de projet dirigés par le client"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/af7854ca-74f7-4d97-ba64-bca60b7ad522.html"><code>af7854ca-74f7-4d97-ba64-bca60b7ad522</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">SSC-Consumer -led Project Statistics</span><span data-lang="fr" style="display:none">SPC-Statistiques de projet dirigés par le client</span><div class="small"><code>7f601545-fc5e-4937-af3e-fc856646c6c3</code></div></td>
+        <td><span data-lang="en">Percentage of SSC-led projects rated as on time, on scope and on budget</span><span data-lang="fr" style="display:none">Pourcentage des projets dirigés par SPC évalués dans le respect des délais, de la portée et du budget </span><div class="small"><code>2a3d2f6e-4041-4b9b-b878-61ce338c979d</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:06:08.408887</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:57:36.909113"
+          data-status="success"
+          data-resource="29344fb4-8980-477e-bc13-d84b9e85160a"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en=" External Credential Management Service Availability"
+          data-dataset-fr="Disponibilité du service de gestion de justification externe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b1bfa202-3e30-46ce-8a2a-75ebec459c29.html"><code>b1bfa202-3e30-46ce-8a2a-75ebec459c29</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en"> External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion de justification externe</span><div class="small"><code>d521eba3-8534-4a15-b31a-aca14e10c296</code></div></td>
+        <td><span data-lang="en">SecureKey Concierge</span><span data-lang="fr" style="display:none">SecureKey Concierge</span><div class="small"><code>29344fb4-8980-477e-bc13-d84b9e85160a</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:57:36.909113</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:57:36.106722"
+          data-status="success"
+          data-resource="4f402fcd-c5c2-4848-a80b-958fd85913f4"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en=" External Credential Management Service Availability"
+          data-dataset-fr="Disponibilité du service de gestion de justification externe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/e5043a0a-6cdd-4e6e-a757-1718f47e4a37.html"><code>e5043a0a-6cdd-4e6e-a757-1718f47e4a37</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en"> External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion de justification externe</span><div class="small"><code>d521eba3-8534-4a15-b31a-aca14e10c296</code></div></td>
+        <td><span data-lang="en">SecureKey Concierge</span><span data-lang="fr" style="display:none">SecureKey Concierge</span><div class="small"><code>4f402fcd-c5c2-4848-a80b-958fd85913f4</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:57:36.106722</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:57:33.541002"
+          data-status="success"
+          data-resource="493defe5-07e0-4373-a91e-64cdc5d7546a"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en=" External Credential Management Service Availability"
+          data-dataset-fr="Disponibilité du service de gestion de justification externe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/535052c9-3b26-43ed-810e-f54b33aba67e.html"><code>535052c9-3b26-43ed-810e-f54b33aba67e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en"> External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion de justification externe</span><div class="small"><code>d521eba3-8534-4a15-b31a-aca14e10c296</code></div></td>
+        <td><span data-lang="en">External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion des justificatifs externes</span><div class="small"><code>493defe5-07e0-4373-a91e-64cdc5d7546a</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:57:33.541002</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:57:32.62938"
+          data-status="success"
+          data-resource="0470eeb1-69d0-4e54-83b9-862789bf4840"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.2"
+          data-dataset-en=" External Credential Management Service Availability"
+          data-dataset-fr="Disponibilité du service de gestion de justification externe"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/36e0e96c-bd91-440c-b3ba-f202edc89cc1.html"><code>36e0e96c-bd91-440c-b3ba-f202edc89cc1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en"> External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion de justification externe</span><div class="small"><code>d521eba3-8534-4a15-b31a-aca14e10c296</code></div></td>
+        <td><span data-lang="en">External Credential Management Service Availability</span><span data-lang="fr" style="display:none">Disponibilité du service de gestion des justificatifs externes</span><div class="small"><code>0470eeb1-69d0-4e54-83b9-862789bf4840</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:57:32.62938</time></td>
+      </tr>
+    
+      <tr data-created="2024-10-30 12:32:40.905183"
+          data-status="success"
+          data-resource="34cf116e-84c7-4567-a53e-8fe635a771d4"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.1"
+          data-dataset-en="Enterprise Service Model Consumption Actuals"
+          data-dataset-fr="Modèle de service d’entreprise Consommation réelle "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d8d1c72a-b16d-4cf0-a5f7-e7afe636f6a2.html"><code>d8d1c72a-b16d-4cf0-a5f7-e7afe636f6a2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle </span><div class="small"><code>6681cb87-ba88-45dd-809c-6fbba5f76d10</code></div></td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals FY 2023-2024</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle AF 2023-2024</span><div class="small"><code>34cf116e-84c7-4567-a53e-8fe635a771d4</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-10-30 12:32:40.905183</time></td>
+      </tr>
+    
+      <tr data-created="2024-10-30 12:30:45.54558"
+          data-status="success"
+          data-resource="5cdf2ddd-ec91-4b44-8ec7-692e35f790fe"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.1"
+          data-dataset-en="Enterprise Service Model Consumption Actuals"
+          data-dataset-fr="Modèle de service d’entreprise Consommation réelle "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/09ead0bb-a7e1-4978-9a47-160ed6a7e1e4.html"><code>09ead0bb-a7e1-4978-9a47-160ed6a7e1e4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle </span><div class="small"><code>6681cb87-ba88-45dd-809c-6fbba5f76d10</code></div></td>
+        <td><span data-lang="en">Enterprise Service Model Consumption Actuals FY 2023-2024</span><span data-lang="fr" style="display:none">Modèle de service d’entreprise Consommation réelle AF 2023-2024</span><div class="small"><code>5cdf2ddd-ec91-4b44-8ec7-692e35f790fe</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-10-30 12:30:45.54558</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:28.205784"
+          data-status="success"
+          data-resource="69693ad1-b688-441f-ae6b-bdce26a8b6e2"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.1"
+          data-dataset-en="Customer Satisfaction Feedback Initiative (CSFI) Monthly Partner Survey Results"
+          data-dataset-fr="Résultats du sondage mensuel des partenaires sur l&#x27;Initiative de rétroaction sur la satisfaction de la clientèle "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/dd6994cf-41db-40f5-be58-a44633c25fbb.html"><code>dd6994cf-41db-40f5-be58-a44633c25fbb</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative (CSFI) Monthly Partner Survey Results</span><span data-lang="fr" style="display:none">Résultats du sondage mensuel des partenaires sur l&#x27;Initiative de rétroaction sur la satisfaction de la clientèle </span><div class="small"><code>460becb4-ef83-4728-bcaa-88f438daa54d</code></div></td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative (CSFI) Monthly Partner Survey Results</span><span data-lang="fr" style="display:none">Résultats du sondage mensuel des partenaires sur Initiative de rétroaction sur la satisfaction de la clientèle (IRSC) </span><div class="small"><code>69693ad1-b688-441f-ae6b-bdce26a8b6e2</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:28.205784</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:28.142366"
+          data-status="failure"
+          data-resource="cdfb1696-7e08-42b1-8742-915af79bab5a"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.1"
+          data-dataset-en="Customer Satisfaction Feedback Initiative (CSFI) Monthly Partner Survey Results"
+          data-dataset-fr="Résultats du sondage mensuel des partenaires sur l&#x27;Initiative de rétroaction sur la satisfaction de la clientèle "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/704bf4b6-8eaa-49b5-a2e6-ca1eecaf2bcf.html"><code>704bf4b6-8eaa-49b5-a2e6-ca1eecaf2bcf</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative (CSFI) Monthly Partner Survey Results</span><span data-lang="fr" style="display:none">Résultats du sondage mensuel des partenaires sur l&#x27;Initiative de rétroaction sur la satisfaction de la clientèle </span><div class="small"><code>460becb4-ef83-4728-bcaa-88f438daa54d</code></div></td>
+        <td><span data-lang="en">Customer Satisfaction Feedback Initiative (CSFI) Monthly Partner Survey Results</span><span data-lang="fr" style="display:none">Résultats du sondage mensuel des partenaires sur Initiative de rétroaction sur la satisfaction de la clientèle (IRSC) </span><div class="small"><code>cdfb1696-7e08-42b1-8742-915af79bab5a</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:28.142366</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:00.719257"
+          data-status="success"
+          data-resource="f32cb731-0ef2-412f-b957-951a2472e76b"
+          data-organization="Shared Services Canada | Services partagés Canada"
+          data-org="Shared Services Canada | Services partagés Canada"
+          data-version="v0.1"
+          data-dataset-en="Fleet Data"
+          data-dataset-fr="Données du parc automobile"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/29f97837-285c-44f9-8ee1-f33056b0713d.html"><code>29f97837-285c-44f9-8ee1-f33056b0713d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Fleet Data</span><span data-lang="fr" style="display:none">Données du parc automobile</span><div class="small"><code>f6986d8e-81ac-4c3f-9eb2-867cae32b984</code></div></td>
+        <td><span data-lang="en">Fleet Data</span><span data-lang="fr" style="display:none">Données du parc automobile</span><div class="small"><code>f32cb731-0ef2-412f-b957-951a2472e76b</code> · upload</div></td>
+        <td>Shared Services Canada | Services partagés Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:00.719257</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [43, 3], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [43], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [3], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

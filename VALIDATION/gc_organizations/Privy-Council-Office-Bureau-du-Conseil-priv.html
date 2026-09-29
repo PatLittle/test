@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Privy Council Office | Bureau du Conseil privé (GCDS theme)." />
+  <title>Privy Council Office | Bureau du Conseil privé · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Privy Council Office | Bureau du Conseil privé</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Privy-Council-Office-Bureau-du-Conseil-priv.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 3 · Success: 3 · Failure: 0 · Other: 0 · URL types: 1 · Latest: <time>2026-04-17 21:43:01.133795</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">3</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">3</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">0</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">1</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>3</td><td>3</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2026-04-17 21:43:01.133795"
+          data-status="success"
+          data-resource="92bec4b7-6feb-4215-a5f7-61da342b2354"
+          data-organization="Privy Council Office | Bureau du Conseil privé"
+          data-org="Privy Council Office | Bureau du Conseil privé"
+          data-version="v0.2"
+          data-dataset-en="Government of Canada - Consultations"
+          data-dataset-fr="Gouvernement du Canada - Consultations "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d465b362-0d46-412d-983f-dae7dd5caf0f.html"><code>d465b362-0d46-412d-983f-dae7dd5caf0f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Government of Canada - Consultations</span><span data-lang="fr" style="display:none">Gouvernement du Canada - Consultations </span><div class="small"><code>7c03f039-3753-4093-af60-74b0f7b2385d</code></div></td>
+        <td><span data-lang="en">Consultations - All </span><span data-lang="fr" style="display:none">Consultations - Toutes</span><div class="small"><code>92bec4b7-6feb-4215-a5f7-61da342b2354</code> · upload</div></td>
+        <td>Privy Council Office | Bureau du Conseil privé</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-17 21:43:01.133795</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:51:16.169202"
+          data-status="success"
+          data-resource="3da353e9-df46-43d4-b17c-c78d96aee863"
+          data-organization="Privy Council Office | Bureau du Conseil privé"
+          data-org="Privy Council Office | Bureau du Conseil privé"
+          data-version="v0.2"
+          data-dataset-en="MyDemocracy.ca Data "
+          data-dataset-fr="Données de MaDémocratie.ca"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0967c42c-150e-480c-acda-c59db9ee9227.html"><code>0967c42c-150e-480c-acda-c59db9ee9227</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">MyDemocracy.ca Data </span><span data-lang="fr" style="display:none">Données de MaDémocratie.ca</span><div class="small"><code>5514bf8b-74ab-4779-a304-69df9e54ecda</code></div></td>
+        <td><span data-lang="en">MyDemocracy.ca – Data set</span><span data-lang="fr" style="display:none">MaDémocratie.ca – Ensemble de données </span><div class="small"><code>3da353e9-df46-43d4-b17c-c78d96aee863</code> · upload</div></td>
+        <td>Privy Council Office | Bureau du Conseil privé</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:51:16.169202</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:38.407508"
+          data-status="success"
+          data-resource="7585bd73-730d-4d38-966d-736618d38301"
+          data-organization="Privy Council Office | Bureau du Conseil privé"
+          data-org="Privy Council Office | Bureau du Conseil privé"
+          data-version="v0.2"
+          data-dataset-en="MyDemocracy.ca Data "
+          data-dataset-fr="Données de MaDémocratie.ca"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/661f2b02-15bd-43dd-b394-1cb5b786a31d.html"><code>661f2b02-15bd-43dd-b394-1cb5b786a31d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">MyDemocracy.ca Data </span><span data-lang="fr" style="display:none">Données de MaDémocratie.ca</span><div class="small"><code>5514bf8b-74ab-4779-a304-69df9e54ecda</code></div></td>
+        <td><span data-lang="en">MyDemocracy.ca – Data set</span><span data-lang="fr" style="display:none">MaDémocratie.ca – Ensemble de données </span><div class="small"><code>7585bd73-730d-4d38-966d-736618d38301</code> · upload</div></td>
+        <td>Privy Council Office | Bureau du Conseil privé</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:38.407508</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success"], "datasets": [{"label": "Reports", "data": [3], "backgroundColor": ["#2e8540"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [3], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>

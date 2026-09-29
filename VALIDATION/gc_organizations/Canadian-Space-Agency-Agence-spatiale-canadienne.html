@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Organization validation reports for Canadian Space Agency | Agence spatiale canadienne (GCDS theme)." />
+  <title>Canadian Space Agency | Agence spatiale canadienne · GCDS Validation Reports</title>
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@gcds-core/css-shortcuts@1.0.0/dist/gcds-css-shortcuts.min.css" />
+  <link rel="stylesheet" href="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.css" />
+  <link rel="stylesheet" href="../gc_style.css" />
+  <script type="module" src="https://cdn.design-system.alpha.canada.ca/@cdssnc/gcds-components@0.43.1/dist/gcds/gcds.esm.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script defer src="../app.js"></script>
+</head>
+<body>
+  <gcds-header service-title="Validation Portal" service-href="../gc_index.html" skip-to-href="#main-content"></gcds-header>
+  <div class="gc-wrapper">
+    <gcds-container id="main-content" main-container size="xl" centered tag="main">
+      <section class="panel section">
+        <div class="actions" style="justify-content:space-between">
+          <div class="h1">Canadian Space Agency | Agence spatiale canadienne</div>
+          <div class="actions">
+            <a class="btn secondary" href="../gc_index.html">All reports</a>
+            <a class="btn secondary" href="index.html">Organizations</a>
+            <a class="btn secondary" href="../organizations/Canadian-Space-Agency-Agence-spatiale-canadienne.html">Primary view</a>
+            <div class="lang-toggle">
+              <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+              <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+            </div>
+          </div>
+        </div>
+        <p class="subtle" style="margin-top:12px">
+          Total reports: 15 · Success: 3 · Failure: 12 · Other: 0 · URL types: 2 · Latest: <time>2024-12-09 18:05:35.429207</time>
+        </p>
+        <div class="summary-grid">
+          <div class="summary-tile">
+            <div class="label">Total reports</div>
+            <div class="value">15</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Success</div>
+            <div class="value" style="color:var(--gc-good)">3</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">Failure</div>
+            <div class="value" style="color:var(--gc-bad)">12</div>
+          </div>
+          <div class="summary-tile">
+            <div class="label">URL types</div>
+            <div class="value">2</div>
+          </div>
+        </div>
+      </section>
+
+      <div class="chart-grid">
+        <div class="chart-card">
+          <h3>Status distribution</h3>
+          <canvas id="statusChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Reports by URL type &amp; status</h3>
+          <canvas id="urlTypeChart"></canvas>
+        </div>
+      </div>
+
+      <section class="panel section">
+        <h3 style="margin:0 0 16px">URL type breakdown</h3>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>URL type</th>
+                <th>Total</th>
+                <th>Success</th><th>Failure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>upload</td><td>14</td><td>3</td><td>11</td></tr><tr><td>remote</td><td>1</td><td>0</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="controls">
+          <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+          <div>
+            <label class="subtle">Status<br/>
+              <select class="select" id="filter-status">
+                <option value="">All</option>
+                <option value="success">success</option>
+                <option value="failure">failure</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Created<br/>
+              <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+            </label>
+          </div>
+          <div>
+            <label class="subtle">Version<br/>
+              <select class="select" id="filter-version">
+                <option value="">All</option>
+                <option value="v0.2">v0.2</option>
+                <option value="v0.1">v0.1</option>
+                <option value="unknown">unknown</option>
+              </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table" data-report-table>
+            <thead>
+              <tr>
+                <th>ID</th>
+
+                <th data-sort="dataset" onclick="sortBy('dataset')">
+                  Dataset<br/>
+                  <div class="small">Title (EN/FR)</div>
+                </th>
+
+                <th data-sort="resource" onclick="sortBy('resource')">
+                  Resource
+                  <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+                </th>
+
+                <th data-sort="organization" onclick="sortBy('organization')">
+                  Organization
+                </th>
+
+                <th>
+                  Errors
+                  <div class="small" data-lang="en">EN</div>
+                  <div class="small" data-lang="fr" style="display:none">FR</div>
+                </th>
+
+                <th data-sort="status" onclick="sortBy('status')">
+                  Status
+                </th>
+
+                <th data-sort="created" onclick="sortBy('created')">
+                  Created
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              
+      <tr data-created="2024-12-09 18:05:35.429207"
+          data-status="success"
+          data-resource="9ba4c185-2aab-4cf1-ab94-2045b9da1d05"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.2"
+          data-dataset-en="Astronautics Vocabulary"
+          data-dataset-fr="Vocabulaire astronautique"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/9fea2ea3-49c3-4912-a4bb-91ded137991c.html"><code>9fea2ea3-49c3-4912-a4bb-91ded137991c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Astronautics Vocabulary</span><span data-lang="fr" style="display:none">Vocabulaire astronautique</span><div class="small"><code>5d31f5b8-8bd6-48fc-aad8-f4f054f83a09</code></div></td>
+        <td><span data-lang="en">Astronautics Voabulary</span><span data-lang="fr" style="display:none">Vocabulaire de l&#x27;astronautique</span><div class="small"><code>9ba4c185-2aab-4cf1-ab94-2045b9da1d05</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:05:35.429207</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:05:23.727324"
+          data-status="success"
+          data-resource="8d5b21aa-f5b6-4586-9b2b-5ac44779b66a"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.2"
+          data-dataset-en="The Geospace Observatory (GO) Canada Initiative"
+          data-dataset-fr="L&#x27;initiative de l&#x27;Observatoire géospatial (GO) canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/67413e1c-39d7-4b9e-bee1-26a1fa80bd43.html"><code>67413e1c-39d7-4b9e-bee1-26a1fa80bd43</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Geospace Observatory (GO) Canada Initiative</span><span data-lang="fr" style="display:none">L&#x27;initiative de l&#x27;Observatoire géospatial (GO) canadien</span><div class="small"><code>0176458c-553b-48b4-a5e2-492022c81e85</code></div></td>
+        <td><span data-lang="en">GO_Canada_Map_Data_EN</span><span data-lang="fr" style="display:none">GO_Canada_Map_Data_EN</span><div class="small"><code>8d5b21aa-f5b6-4586-9b2b-5ac44779b66a</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:05:23.727324</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:05:22.590696"
+          data-status="success"
+          data-resource="b335e213-16e9-4755-8125-a22b55319cb5"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.2"
+          data-dataset-en="The Geospace Observatory (GO) Canada Initiative"
+          data-dataset-fr="L&#x27;initiative de l&#x27;Observatoire géospatial (GO) canadien"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/ad287e5b-9afa-4263-add3-6779799728b4.html"><code>ad287e5b-9afa-4263-add3-6779799728b4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The Geospace Observatory (GO) Canada Initiative</span><span data-lang="fr" style="display:none">L&#x27;initiative de l&#x27;Observatoire géospatial (GO) canadien</span><div class="small"><code>0176458c-553b-48b4-a5e2-492022c81e85</code></div></td>
+        <td><span data-lang="en">GO_Canada_Carte_Data_FR</span><span data-lang="fr" style="display:none">GO_Canada_Carte_Data_FR</span><div class="small"><code>b335e213-16e9-4755-8125-a22b55319cb5</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:05:22.590696</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:03.87542"
+          data-status="failure"
+          data-resource="21800371-03f9-434c-8c7b-6039d45a25bf"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Canadian Space Agency (CSA) peer-reviewed publications list"
+          data-dataset-fr="Liste des publications de l&#x27;Agence spatiale canadienne (ASC) évaluées par les pairs"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/c3627652-bd0d-46f8-9a28-ae9a4469a3b1.html"><code>c3627652-bd0d-46f8-9a28-ae9a4469a3b1</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Space Agency (CSA) peer-reviewed publications list</span><span data-lang="fr" style="display:none">Liste des publications de l&#x27;Agence spatiale canadienne (ASC) évaluées par les pairs</span><div class="small"><code>dd18f931-a23e-4126-874f-68e1bc73851b</code></div></td>
+        <td><span data-lang="en">CSA peer-reviewed publications list - 2017</span><span data-lang="fr" style="display:none">Liste des publications de l&#x27;ASC évaluées par les pairs - 2017</span><div class="small"><code>21800371-03f9-434c-8c7b-6039d45a25bf</code> · remote</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">457 err</span><span data-lang="fr" style="display:none">457 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:03.87542</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:58.084721"
+          data-status="failure"
+          data-resource="37f7a142-0616-49af-a1b6-d45a7656ed91"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a3516419-a174-490b-9871-481d3df8371a.html"><code>a3516419-a174-490b-9871-481d3df8371a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Earth Surface Science by Country (2011-2017)</span><span data-lang="fr" style="display:none">Publications dans le sous-domaine des sciences de la surface terrestre par pays (2011-2017)</span><div class="small"><code>37f7a142-0616-49af-a1b6-d45a7656ed91</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:58.084721</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:58.01663"
+          data-status="failure"
+          data-resource="78a2706b-97e3-4191-bf62-cc09cb9ea7bf"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/467c7428-1278-4940-b00f-4c86b542e300.html"><code>467c7428-1278-4940-b00f-4c86b542e300</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Atmospheric Science by Country (2011-2017)</span><span data-lang="fr" style="display:none">Publications dans le sous-domaine des sciences de l&#x27;atmosphère par pays (2011-2017)</span><div class="small"><code>78a2706b-97e3-4191-bf62-cc09cb9ea7bf</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:58.01663</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.952805"
+          data-status="failure"
+          data-resource="71f804c6-e9a7-475e-8a00-460b8df34d14"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/0d884cca-ecd3-4b71-b500-89585c749fae.html"><code>0d884cca-ecd3-4b71-b500-89585c749fae</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Planetary Exploration by Country (2011-2017) </span><span data-lang="fr" style="display:none">Publications dans le sous-domaine de l&#x27;exploration planétaire par pays (2011-2017)</span><div class="small"><code>71f804c6-e9a7-475e-8a00-460b8df34d14</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.952805</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.897705"
+          data-status="failure"
+          data-resource="952983ca-f489-4d22-b972-4c75acdb6b47"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/a50b3cbc-8600-4a78-8620-818e571167ca.html"><code>a50b3cbc-8600-4a78-8620-818e571167ca</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Solar-Terrestrial Science by Country (2011-2017)</span><span data-lang="fr" style="display:none"> Publications dans le sous-domaine des sciences solaires-terrestres par pays (2011-2017)</span><div class="small"><code>952983ca-f489-4d22-b972-4c75acdb6b47</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.897705</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.841671"
+          data-status="failure"
+          data-resource="dc8d6b44-8059-49ae-8d6e-335b8c364643"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/7a988a18-f9e4-49bb-9adb-66f11a3acd6a.html"><code>7a988a18-f9e4-49bb-9adb-66f11a3acd6a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Space Health and Life Science by Country (2011-2017)</span><span data-lang="fr" style="display:none"> Publications dans le sous-domaine de la santé spatiale et des sciences </span><div class="small"><code>dc8d6b44-8059-49ae-8d6e-335b8c364643</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.841671</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.782932"
+          data-status="failure"
+          data-resource="616506d4-5fe9-4359-91ed-718296fc21f1"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/cf0a2773-e512-4ada-b1bc-1e9945dfd1c3.html"><code>cf0a2773-e512-4ada-b1bc-1e9945dfd1c3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in Space Sciences by Country (2011-2017)</span><span data-lang="fr" style="display:none">Publications en sciences spatiales par pays (2011-2017)</span><div class="small"><code>616506d4-5fe9-4359-91ed-718296fc21f1</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.782932</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.727705"
+          data-status="failure"
+          data-resource="c671cdf8-b7f4-48cb-9450-54a1a6ff89cb"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/853d9e9f-8065-4cbc-9b76-46370c0f70ab.html"><code>853d9e9f-8065-4cbc-9b76-46370c0f70ab</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Astronomy by Country (2011-2017)</span><span data-lang="fr" style="display:none">Publications dans le sous-domaine de l&#x27;astronomie par pays (2011-2017)</span><div class="small"><code>c671cdf8-b7f4-48cb-9450-54a1a6ff89cb</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.727705</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.651685"
+          data-status="failure"
+          data-resource="29ed1d63-3461-444e-8fa7-861460033477"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries"
+          data-dataset-fr="Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/48067167-3b86-4e0e-b1b8-41136a678e67.html"><code>48067167-3b86-4e0e-b1b8-41136a678e67</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Study establishing Canada&#x27;s ranking in the citation score of Canadian space-related publications in relation to OECD countries</span><span data-lang="fr" style="display:none">Étude visant à établir le rang du Canada au niveau du pointage de citation des publications canadiennes relatives à l’espace par rapport aux pays de l’OCDE</span><div class="small"><code>a2fc08f1-d847-41c3-a2b5-764c3e0a5813</code></div></td>
+        <td><span data-lang="en">Publlications in the Subfield of Space Technology Development and Engineering by Country (2011-2017)</span><span data-lang="fr" style="display:none">Publications dans le sous-domaine du développement et de l&#x27;ingénierie des technologies spatiales par pays (2011-2017)</span><div class="small"><code>29ed1d63-3461-444e-8fa7-861460033477</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.651685</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.591997"
+          data-status="failure"
+          data-resource="f5329912-ed23-4f39-9c7d-086e003e4d26"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Report on Funded Open Access Scientific Publications"
+          data-dataset-fr="Rapport sur le libre accès des publications scientifiques financées "
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/b3b005b4-b4a0-490d-bc9b-bf2664b7607a.html"><code>b3b005b4-b4a0-490d-bc9b-bf2664b7607a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Report on Funded Open Access Scientific Publications</span><span data-lang="fr" style="display:none">Rapport sur le libre accès des publications scientifiques financées </span><div class="small"><code>ca983b71-df22-431a-9d5f-94e77b835dd5</code></div></td>
+        <td><span data-lang="en">Funded open access publications_2011-2017</span><span data-lang="fr" style="display:none">Publications en libre accès financées_2011-2017</span><div class="small"><code>f5329912-ed23-4f39-9c7d-086e003e4d26</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.591997</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.485956"
+          data-status="failure"
+          data-resource="f2c7ba28-ed9a-4feb-9bab-9168ccd0e153"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Data on the number of scientific publications and presentations by principal investigators"
+          data-dataset-fr="Données sur le nombre de publications et de présentations scientifiques par les principales investigateurs"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/aa9bb7a0-7642-4776-aafa-0f94596a8235.html"><code>aa9bb7a0-7642-4776-aafa-0f94596a8235</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Data on the number of scientific publications and presentations by principal investigators</span><span data-lang="fr" style="display:none">Données sur le nombre de publications et de présentations scientifiques par les principales investigateurs</span><div class="small"><code>f781b1ff-1205-4e94-93c8-dbb3b8e5973c</code></div></td>
+        <td><span data-lang="en">Data on the number of scientific presentations</span><span data-lang="fr" style="display:none">Données sur le nombre de présentations scientifiques</span><div class="small"><code>f2c7ba28-ed9a-4feb-9bab-9168ccd0e153</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.485956</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:57.415933"
+          data-status="failure"
+          data-resource="afeb3b0a-277f-4ff3-9902-0655b8b020c1"
+          data-organization="Canadian Space Agency | Agence spatiale canadienne"
+          data-org="Canadian Space Agency | Agence spatiale canadienne"
+          data-version="v0.1"
+          data-dataset-en="Data on the number of scientific publications and presentations by principal investigators"
+          data-dataset-fr="Données sur le nombre de publications et de présentations scientifiques par les principales investigateurs"
+          data-filtered="1">
+        <td>
+          <a href="../gc_reports/d274ee6a-9e43-406a-b0ea-60dfa293fe8e.html"><code>d274ee6a-9e43-406a-b0ea-60dfa293fe8e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Data on the number of scientific publications and presentations by principal investigators</span><span data-lang="fr" style="display:none">Données sur le nombre de publications et de présentations scientifiques par les principales investigateurs</span><div class="small"><code>f781b1ff-1205-4e94-93c8-dbb3b8e5973c</code></div></td>
+        <td><span data-lang="en">Data on the number of scientific publications</span><span data-lang="fr" style="display:none">Données sur le nombre de publications scientifiques</span><div class="small"><code>afeb3b0a-277f-4ff3-9902-0655b8b020c1</code> · upload</div></td>
+        <td>Canadian Space Agency | Agence spatiale canadienne</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:57.415933</time></td>
+      </tr>
+    
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <span class="subtle" id="pager-info"></span>
+          <span class="subtle">Rows per page</span>
+          <select class="select" id="page-size">
+            <option value="25" selected>25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="500">500</option>
+          </select>
+          <button class="btn secondary" onclick="gotoPrev()">Prev</button>
+          <button class="btn" onclick="gotoNext()">Next</button>
+        </div>
+      </section>
+
+      <gcds-date-modified>2026-09-29</gcds-date-modified>
+    </gcds-container>
+  </div>
+  <gcds-footer display="full" contextual-heading="Canadian Digital Service"></gcds-footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#1b1b1b';
+      const gridColor = 'rgba(0,0,0,0.08)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [3, 12], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload", "remote"], "datasets": [{"label": "Success", "data": [3, 0], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [11, 1], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
