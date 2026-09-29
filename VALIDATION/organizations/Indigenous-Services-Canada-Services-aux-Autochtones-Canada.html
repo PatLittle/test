@@ -1,0 +1,527 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Indigenous Services Canada | Services aux Autochtones Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Indigenous Services Canada | Services aux Autochtones Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 15 · Success: 13 · Failure: 2 · Other: 0 · URL types: 1 · Latest: <time>2026-04-07 13:06:02.227789</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">15</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">13</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">2</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>15</td><td>13</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2026-04-07 13:06:02.227789"
+          data-status="success"
+          data-resource="a0dec98d-de1e-49b9-ad7f-ef61461b56e5"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2023-2024"
+          data-dataset-fr="Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2023-2024"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a258f8b1-caed-42b8-a60b-54046c037a4b.html"><code>a258f8b1-caed-42b8-a60b-54046c037a4b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2023-2024</span><span data-lang="fr" style="display:none">Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2023-2024</span><div class="small"><code>5d27d152-09d8-4303-adc4-0c46b4a9733b</code></div></td>
+        <td><span data-lang="en">Results of the mandatory minimum 5% Indigenous procurement target for fiscal year 2023-2024</span><span data-lang="fr" style="display:none">Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2023-2024</span><div class="small"><code>a0dec98d-de1e-49b9-ad7f-ef61461b56e5</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 13:06:02.227789</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:55:13.676441"
+          data-status="success"
+          data-resource="5b73d9c0-de6e-4b19-bf44-68811bee8e28"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 and 2025-2026 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target"
+          data-dataset-fr="2024-2025 et 2025-2026 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/725cbda0-403a-49c9-8a81-03c612ef96b2.html"><code>725cbda0-403a-49c9-8a81-03c612ef96b2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 and 2025-2026 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target</span><span data-lang="fr" style="display:none">2024-2025 et 2025-2026 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones</span><div class="small"><code>440a10df-4f65-47f4-851c-6acf30d37841</code></div></td>
+        <td><span data-lang="en">2024-25 and 2025-26 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target</span><span data-lang="fr" style="display:none">2024-25 et 2025-26 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones</span><div class="small"><code>5b73d9c0-de6e-4b19-bf44-68811bee8e28</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:55:13.676441</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:41:07.709249"
+          data-status="success"
+          data-resource="626a46d3-5ed0-44f3-98dd-1ac6fb8fae5c"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 and 2025-2026 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target"
+          data-dataset-fr="2024-2025 et 2025-2026 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4c4bbb73-6e23-4891-b841-7912ecd1d90e.html"><code>4c4bbb73-6e23-4891-b841-7912ecd1d90e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 and 2025-2026 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target</span><span data-lang="fr" style="display:none">2024-2025 et 2025-2026 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones</span><div class="small"><code>440a10df-4f65-47f4-851c-6acf30d37841</code></div></td>
+        <td><span data-lang="en">Goods and Services Where Organizations Identified Indigenous Business Capacity Gaps</span><span data-lang="fr" style="display:none">Produits et services pour lesquels les organisations ont identifié des lacunes en matière de capacité des entreprises autochtones</span><div class="small"><code>626a46d3-5ed0-44f3-98dd-1ac6fb8fae5c</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:41:07.709249</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:35:11.943533"
+          data-status="success"
+          data-resource="e2359e4c-ac72-4935-8fe1-70285c14c0ea"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2022-2023"
+          data-dataset-fr="Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f0984964-ba3a-4c91-a367-bcbe8f027b14.html"><code>f0984964-ba3a-4c91-a367-bcbe8f027b14</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2022-2023</span><span data-lang="fr" style="display:none">Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2022-2023</span><div class="small"><code>34b3aa67-dd04-455b-996f-9d9b5032ed39</code></div></td>
+        <td><span data-lang="en">Results of the mandatory minimum 5% Indigenous procurement target for fiscal year 2022-2023</span><span data-lang="fr" style="display:none">Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2022-2023</span><div class="small"><code>e2359e4c-ac72-4935-8fe1-70285c14c0ea</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:35:11.943533</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:31:12.467585"
+          data-status="success"
+          data-resource="79a8571c-9241-4a0a-a6b3-688e63c847fe"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2024-2025"
+          data-dataset-fr="Résultats de la cible minimale obligatoire de 5 % d’approvisionnement auprès des entreprises autochtones pour l’exercice 2024-2025"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f229ccb7-516a-4e05-a96a-ffa9f81d44ed.html"><code>f229ccb7-516a-4e05-a96a-ffa9f81d44ed</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2024-2025</span><span data-lang="fr" style="display:none">Résultats de la cible minimale obligatoire de 5 % d’approvisionnement auprès des entreprises autochtones pour l’exercice 2024-2025</span><div class="small"><code>65dfa39f-e699-4698-b8c7-29e1b99d7b23</code></div></td>
+        <td><span data-lang="en">Contract Details of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2024-2025</span><span data-lang="fr" style="display:none">Détails sur les contrats concernant l’objectif minimum obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones pour l’exercice 2024‑2025</span><div class="small"><code>79a8571c-9241-4a0a-a6b3-688e63c847fe</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:31:12.467585</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:30:47.433377"
+          data-status="success"
+          data-resource="03cb0d81-fe7a-45bf-b933-f7a78bdf2ef2"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2024-2025"
+          data-dataset-fr="Résultats de la cible minimale obligatoire de 5 % d’approvisionnement auprès des entreprises autochtones pour l’exercice 2024-2025"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9c325242-fc76-4d24-a2f7-567073fc6f8c.html"><code>9c325242-fc76-4d24-a2f7-567073fc6f8c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2024-2025</span><span data-lang="fr" style="display:none">Résultats de la cible minimale obligatoire de 5 % d’approvisionnement auprès des entreprises autochtones pour l’exercice 2024-2025</span><div class="small"><code>65dfa39f-e699-4698-b8c7-29e1b99d7b23</code></div></td>
+        <td><span data-lang="en">Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2024-2025</span><span data-lang="fr" style="display:none">Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2024-2025</span><div class="small"><code>03cb0d81-fe7a-45bf-b933-f7a78bdf2ef2</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:30:47.433377</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:26:05.23324"
+          data-status="success"
+          data-resource="01f8aa2f-55ed-4caf-b97b-510b9b59021d"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2023-2024"
+          data-dataset-fr="Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2023-2024"
+          data-filtered="1">
+        <td>
+          <a href="../reports/79b23925-a22c-4d35-9e44-b88c9803e682.html"><code>79b23925-a22c-4d35-9e44-b88c9803e682</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Results of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2023-2024</span><span data-lang="fr" style="display:none">Résultats de l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2023-2024</span><div class="small"><code>5d27d152-09d8-4303-adc4-0c46b4a9733b</code></div></td>
+        <td><span data-lang="en">Contract Details of the Mandatory Minimum 5% Indigenous Procurement Target for Fiscal Year 2023-2024</span><span data-lang="fr" style="display:none">Détails sur les contrats concernant l’objectif minimum obligatoire d’approvisionnement autochtone de 5 % pour l’exercice 2023-2024</span><div class="small"><code>01f8aa2f-55ed-4caf-b97b-510b9b59021d</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:26:05.23324</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:23:40.627756"
+          data-status="success"
+          data-resource="a8b56549-c3d1-47f4-9fd7-11931b0933d9"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="2025-2026 and 2026-2027 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target"
+          data-dataset-fr="2025-2026 et 2026-2027 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c373d859-08e9-450d-b6d1-18a4c2b7b7d1.html"><code>c373d859-08e9-450d-b6d1-18a4c2b7b7d1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2025-2026 and 2026-2027 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target</span><span data-lang="fr" style="display:none">2025-2026 et 2026-2027 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones</span><div class="small"><code>88bd5306-e0a1-46dd-8e02-909931ade592</code></div></td>
+        <td><span data-lang="en">2025-26 and 2026-27 Gaps in Indigenous Procurement</span><span data-lang="fr" style="display:none">Lacunes dans l’approvisionnement autochtone 2025-2026 et 2026-2027</span><div class="small"><code>a8b56549-c3d1-47f4-9fd7-11931b0933d9</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:23:40.627756</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:23:10.986154"
+          data-status="success"
+          data-resource="2c4492e4-d555-4ba4-9222-575aec94011e"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="2025-2026 and 2026-2027 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target"
+          data-dataset-fr="2025-2026 et 2026-2027 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/00e64e98-c479-4279-b274-17e1820ec2ad.html"><code>00e64e98-c479-4279-b274-17e1820ec2ad</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2025-2026 and 2026-2027 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target</span><span data-lang="fr" style="display:none">2025-2026 et 2026-2027 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones</span><div class="small"><code>88bd5306-e0a1-46dd-8e02-909931ade592</code></div></td>
+        <td><span data-lang="en">2025-26 and 2026-27 Planned Procurement</span><span data-lang="fr" style="display:none">Approvisionnements planifiés 2025-2026 et 2026-2027</span><div class="small"><code>2c4492e4-d555-4ba4-9222-575aec94011e</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:23:10.986154</time></td>
+      </tr>
+    
+      <tr data-created="2026-04-07 12:22:32.990201"
+          data-status="success"
+          data-resource="ff1220e6-517b-4011-b97a-59f9c7be0c11"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="2025-2026 and 2026-2027 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target"
+          data-dataset-fr="2025-2026 et 2026-2027 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/11af0e68-1962-4365-acf0-8ae9a5a028a0.html"><code>11af0e68-1962-4365-acf0-8ae9a5a028a0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2025-2026 and 2026-2027 Planned Procurement – Mandatory Minimum 5% Indigenous Procurement Target</span><span data-lang="fr" style="display:none">2025-2026 et 2026-2027 Approvisionnements planifiés – Cible minimale obligatoire de 5 % d’approvisionnement auprès d’entreprises autochtones</span><div class="small"><code>88bd5306-e0a1-46dd-8e02-909931ade592</code></div></td>
+        <td><span data-lang="en">2025-26 and 2026-27 Planning Report Summary</span><span data-lang="fr" style="display:none">Sommaire du rapport de planification 2025-2026 et 2026-2027</span><div class="small"><code>ff1220e6-517b-4011-b97a-59f9c7be0c11</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-04-07 12:22:32.990201</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-15 19:50:11.816508"
+          data-status="success"
+          data-resource="7a2b6d7b-e94a-4fa6-bd8e-f9c6f7798439"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Population Registered under the Indian Act by Gender and Residence: Data Series from 2023"
+          data-dataset-fr="Population inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence: série de données à partir de 2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/dd27c49e-444e-43eb-94e4-ea862d219063.html"><code>dd27c49e-444e-43eb-94e4-ea862d219063</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Population Registered under the Indian Act by Gender and Residence: Data Series from 2023</span><span data-lang="fr" style="display:none">Population inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence: série de données à partir de 2023</span><div class="small"><code>b1b8433a-47c8-4427-94d9-0b051b17d108</code></div></td>
+        <td><span data-lang="en">Population Registered under the Indian Act by Gender and Residence - Dataset</span><span data-lang="fr" style="display:none">Population Inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence - Ensemble de données</span><div class="small"><code>7a2b6d7b-e94a-4fa6-bd8e-f9c6f7798439</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-15 19:50:11.816508</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 14:21:26.870876"
+          data-status="success"
+          data-resource="c6b001cc-1227-4721-84b9-c6e6153b158e"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Population Registered under the Indian Act by Gender and Residence, 2022"
+          data-dataset-fr="Population inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence, 2022"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5147c3c8-d1b1-44fc-9493-a3f8a4105472.html"><code>5147c3c8-d1b1-44fc-9493-a3f8a4105472</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Population Registered under the Indian Act by Gender and Residence, 2022</span><span data-lang="fr" style="display:none">Population inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence, 2022</span><div class="small"><code>6a493874-853b-4dbf-869d-22544fec79ec</code></div></td>
+        <td><span data-lang="en">Population Registered under the Indian Act by Gender and Residence - Dataset - 2022</span><span data-lang="fr" style="display:none">Population Inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence - Ensemble de données - 2022</span><div class="small"><code>c6b001cc-1227-4721-84b9-c6e6153b158e</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-07 14:21:26.870876</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-07 14:03:27.541705"
+          data-status="success"
+          data-resource="b4babb86-4e7a-433e-a183-370b9f0678a1"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.2"
+          data-dataset-en="Population Registered under the Indian Act by Gender and Residence, 2022"
+          data-dataset-fr="Population inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence, 2022"
+          data-filtered="1">
+        <td>
+          <a href="../reports/973896ff-3d8e-4011-8084-58adfcd3f91d.html"><code>973896ff-3d8e-4011-8084-58adfcd3f91d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Population Registered under the Indian Act by Gender and Residence, 2022</span><span data-lang="fr" style="display:none">Population inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence, 2022</span><div class="small"><code>6a493874-853b-4dbf-869d-22544fec79ec</code></div></td>
+        <td><span data-lang="en">Population Registered under the Indian Act by Gender and Residence - Dataset - 2022</span><span data-lang="fr" style="display:none">Population Inscrite en vertu de la Loi sur les Indiens selon le genre et la résidence - Ensemble de données - 2022</span><div class="small"><code>b4babb86-4e7a-433e-a183-370b9f0678a1</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-07 14:03:27.541705</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:27.812455"
+          data-status="failure"
+          data-resource="3f93d304-e379-4c1c-acab-e1f3eef7f668"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.1"
+          data-dataset-en="List of Briefing Notes prepared for the Deputy Minister of Indigenous Services Canada"
+          data-dataset-fr="Listes des notes d&#x27;information préparées à l&#x27;intention du sous-ministre des Services aux Autochtones Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6c0335e7-eb82-47d9-ade9-c206acfda156.html"><code>6c0335e7-eb82-47d9-ade9-c206acfda156</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">List of Briefing Notes prepared for the Deputy Minister of Indigenous Services Canada</span><span data-lang="fr" style="display:none">Listes des notes d&#x27;information préparées à l&#x27;intention du sous-ministre des Services aux Autochtones Canada</span><div class="small"><code>80b1eb54-d797-4eb4-b464-61fb33b99354</code></div></td>
+        <td><span data-lang="en">List of Briefing Notes prepared for the Deputy Minister of Indigenous Services Canada - April 2019</span><span data-lang="fr" style="display:none">Listes des notes d&#x27;information préparées à l&#x27;intention du sous-ministre des Services aux Autochtones Canada - avril 2019</span><div class="small"><code>3f93d304-e379-4c1c-acab-e1f3eef7f668</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">17 err</span><span data-lang="fr" style="display:none">17 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:27.812455</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:27.747711"
+          data-status="failure"
+          data-resource="7c6c7ff8-fec7-44aa-a108-97716cdc7e4d"
+          data-organization="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-org="Indigenous Services Canada | Services aux Autochtones Canada"
+          data-version="v0.1"
+          data-dataset-en="List of Briefing Notes prepared for the Minister of Indigenous Services"
+          data-dataset-fr="Listes des notes d&#x27;information préparées à l&#x27;intention du ministre des Services aux Autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/de1c2ec1-df2e-4ef3-b6ea-7adb838cbd26.html"><code>de1c2ec1-df2e-4ef3-b6ea-7adb838cbd26</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">List of Briefing Notes prepared for the Minister of Indigenous Services</span><span data-lang="fr" style="display:none">Listes des notes d&#x27;information préparées à l&#x27;intention du ministre des Services aux Autochtones</span><div class="small"><code>6e4a1102-255b-4339-ab47-9a3fb6429c13</code></div></td>
+        <td><span data-lang="en">List of Briefing Notes prepared for the Minister of Indigenous Services- April 2019 </span><span data-lang="fr" style="display:none">Listes des notes d&#x27;information préparées à l&#x27;intention du ministre des Services aux Autochtones - avril 2019</span><div class="small"><code>7c6c7ff8-fec7-44aa-a108-97716cdc7e4d</code> · upload</div></td>
+        <td>Indigenous Services Canada | Services aux Autochtones Canada</td>
+        <td><span data-lang="en">17 err</span><span data-lang="fr" style="display:none">17 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:27.747711</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [13, 2], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [13], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [2], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

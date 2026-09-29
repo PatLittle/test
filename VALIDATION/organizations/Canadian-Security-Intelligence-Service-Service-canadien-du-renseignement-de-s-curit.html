@@ -1,0 +1,506 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 14 · Success: 0 · Failure: 14 · Other: 0 · URL types: 1 · Latest: <time>2025-01-04 04:01:47.844934</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">14</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">0</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">14</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>14</td><td>14</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2025-01-04 04:01:47.844934"
+          data-status="failure"
+          data-resource="964857e0-555f-4d44-b363-b9fea45f6a89"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.2"
+          data-dataset-en="Employment Equity Representation for the Canadian Security Intelligence Service"
+          data-dataset-fr="Équité en matière d&#x27; emploi-Représentation du Service canadien du renseignement de sécurité"
+          data-filtered="1">
+        <td>
+          <a href="../reports/de9245ca-dccb-4564-9e34-017c10307051.html"><code>de9245ca-dccb-4564-9e34-017c10307051</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Employment Equity Representation for the Canadian Security Intelligence Service</span><span data-lang="fr" style="display:none">Équité en matière d&#x27; emploi-Représentation du Service canadien du renseignement de sécurité</span><div class="small"><code>d77a24fe-eb38-4d02-8e00-32148a708b11</code></div></td>
+        <td><span data-lang="en">Employment Equity Representation for the Canadian Security Intelligence Service -Dataset</span><span data-lang="fr" style="display:none">Équité en matière d&#x27; emploi-Représentation du Service canadien du renseignement de sécurité - dataset</span><div class="small"><code>964857e0-555f-4d44-b363-b9fea45f6a89</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">16 err</span><span data-lang="fr" style="display:none">16 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-01-04 04:01:47.844934</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:26.767266"
+          data-status="failure"
+          data-resource="dd69f879-da1d-4247-8857-6fc8e72fc7b2"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Distribution of Designated Group Members and Age Range "
+          data-dataset-fr="Distribution de membres de groupe désignés et groupe d&#x27;âges"
+          data-filtered="1">
+        <td>
+          <a href="../reports/50cc8e2b-05af-419c-a2d6-205fe204b239.html"><code>50cc8e2b-05af-419c-a2d6-205fe204b239</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range </span><span data-lang="fr" style="display:none">Distribution de membres de groupe désignés et groupe d&#x27;âges</span><div class="small"><code>f3b563cc-e1cb-4889-88a1-30e93d38cd68</code></div></td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range (2017-2018)</span><span data-lang="fr" style="display:none">Distribution de membres de groupe désignés et groupe d&#x27;âges (2017- 2018)</span><div class="small"><code>dd69f879-da1d-4247-8857-6fc8e72fc7b2</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">8 err</span><span data-lang="fr" style="display:none">8 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:26.767266</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:26.70968"
+          data-status="failure"
+          data-resource="43568583-41e7-443a-948a-4f31559fcb20"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Supervision in Bilingual Regions"
+          data-dataset-fr="Supervision dans les bureaux régionaux bilingues"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4acdbe2e-8798-46bc-98ab-3721c1f3fddf.html"><code>4acdbe2e-8798-46bc-98ab-3721c1f3fddf</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Supervision in Bilingual Regions</span><span data-lang="fr" style="display:none">Supervision dans les bureaux régionaux bilingues</span><div class="small"><code>c7762ccf-bb9c-463b-92a9-64e3b69f4708</code></div></td>
+        <td><span data-lang="en">Supervision in Bilingual Regions</span><span data-lang="fr" style="display:none">Supervision dans les bureaux régionaux bilingues</span><div class="small"><code>43568583-41e7-443a-948a-4f31559fcb20</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:26.70968</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:26.652921"
+          data-status="failure"
+          data-resource="3c1be69c-03e6-4c26-86e7-6dd35009a3a6"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Participation by Employment Category "
+          data-dataset-fr="Participation par catégorie d&#x27;emploi"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4f1578e0-e448-48d5-b44f-6aeb26909033.html"><code>4f1578e0-e448-48d5-b44f-6aeb26909033</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Participation by Employment Category </span><span data-lang="fr" style="display:none">Participation par catégorie d&#x27;emploi</span><div class="small"><code>254938fa-0893-40f1-9a0e-4cccb494bd9c</code></div></td>
+        <td><span data-lang="en">Participation by Employment Category</span><span data-lang="fr" style="display:none">Participation par catégorie d&#x27;emploi</span><div class="small"><code>3c1be69c-03e6-4c26-86e7-6dd35009a3a6</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">44 err</span><span data-lang="fr" style="display:none">44 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:26.652921</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:26.09638"
+          data-status="failure"
+          data-resource="6699da6d-7f9f-4566-a500-aad136571615"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Distribution of Designated Group Members and Age Range (2017-2018)"
+          data-dataset-fr="Distribution de membres de groupe désignés et groupe d&#x27;âges (2017- 2018)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c7eb1897-75bf-4013-9a68-4736c29144f7.html"><code>c7eb1897-75bf-4013-9a68-4736c29144f7</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range (2017-2018)</span><span data-lang="fr" style="display:none">Distribution de membres de groupe désignés et groupe d&#x27;âges (2017- 2018)</span><div class="small"><code>09337323-a186-4884-b758-f21fedd71727</code></div></td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range (2017-2018)</span><span data-lang="fr" style="display:none">Distribution de membres de groupe désignés et groupe d&#x27;âges (2017- 2018)</span><div class="small"><code>6699da6d-7f9f-4566-a500-aad136571615</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">8 err</span><span data-lang="fr" style="display:none">8 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:26.09638</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:26.041686"
+          data-status="failure"
+          data-resource="1fd24a95-8f39-410f-a669-46d11e48583b"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Representation of Designated Group Members by Employment Equity Occupational Group "
+          data-dataset-fr="Représentation de membres de groupes désignés en fonction des catégories professionelles de l&#x27;équité en matière d&#x27;emploi "
+          data-filtered="1">
+        <td>
+          <a href="../reports/b6d02c86-b79e-473b-9d98-52a90297025b.html"><code>b6d02c86-b79e-473b-9d98-52a90297025b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Representation of Designated Group Members by Employment Equity Occupational Group </span><span data-lang="fr" style="display:none">Représentation de membres de groupes désignés en fonction des catégories professionelles de l&#x27;équité en matière d&#x27;emploi </span><div class="small"><code>e7db3b72-e459-44a6-a749-5d64b57dc3d9</code></div></td>
+        <td><span data-lang="en">Representation of Designated Group Members by Employment Equity Occupational Group</span><span data-lang="fr" style="display:none">Représentation de membres de groupes désignés en fonction des catégories professionelles de l&#x27;équité en matière d&#x27;emploi</span><div class="small"><code>1fd24a95-8f39-410f-a669-46d11e48583b</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">8 err</span><span data-lang="fr" style="display:none">8 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:26.041686</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:11.573554"
+          data-status="failure"
+          data-resource="2227d77f-f812-4675-926d-8a7293b9f858"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="ACCESS TO INFORMATION &amp; PRIVACY(ATIP) STATISTICS"
+          data-dataset-fr="STATISTIQUES - ACCÈS À L&#x27;INFORMATION &amp; PROTECTION DES RENSEIGNEMENTS "
+          data-filtered="1">
+        <td>
+          <a href="../reports/63f0cbab-8360-45ee-8400-39b4f5ad2cbc.html"><code>63f0cbab-8360-45ee-8400-39b4f5ad2cbc</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">ACCESS TO INFORMATION &amp; PRIVACY(ATIP) STATISTICS</span><span data-lang="fr" style="display:none">STATISTIQUES - ACCÈS À L&#x27;INFORMATION &amp; PROTECTION DES RENSEIGNEMENTS </span><div class="small"><code>a91c1530-0cdd-45bc-af0c-c6874855b55e</code></div></td>
+        <td><span data-lang="en">ACCESS TO INFORMATION &amp; PRIVACY(ATIP) STATISTICS</span><span data-lang="fr" style="display:none">STATISTIQUES - ACCÈS À L&#x27;INFORMATION &amp; PROTECTION DES RENSEIGNEMENTS </span><div class="small"><code>2227d77f-f812-4675-926d-8a7293b9f858</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.573554</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:11.5202"
+          data-status="failure"
+          data-resource="0d83d7ca-6aa3-4462-b127-9c65ad0209e9"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="CSIS ACTUAL EXPENDITURES (Millions of Dollars) "
+          data-dataset-fr="DÉPENSES RÉELLES DU SCRS (en Millions de dollars)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/1e02eb26-5319-4442-909f-1ad34e3145a0.html"><code>1e02eb26-5319-4442-909f-1ad34e3145a0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">CSIS ACTUAL EXPENDITURES (Millions of Dollars) </span><span data-lang="fr" style="display:none">DÉPENSES RÉELLES DU SCRS (en Millions de dollars)</span><div class="small"><code>eb73a783-84f1-438d-acf2-18117f38cc83</code></div></td>
+        <td><span data-lang="en">CSIS ACTUAL EXPENDITURES (Millions of Dollars)</span><span data-lang="fr" style="display:none">ÉPENSES RÉELLES DU SCRS (en Millions de dollars)</span><div class="small"><code>0d83d7ca-6aa3-4462-b127-9c65ad0209e9</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">16 err</span><span data-lang="fr" style="display:none">16 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.5202</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:11.289497"
+          data-status="failure"
+          data-resource="89eb535e-7fa4-41db-b143-64746d5ebc80"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Distribution of Designated Group Members and Age Range"
+          data-dataset-fr="Distribution de membres de groupes désignés et groupes d&#x27;âge "
+          data-filtered="1">
+        <td>
+          <a href="../reports/526930a5-0e88-48a0-bab7-edea1ab76935.html"><code>526930a5-0e88-48a0-bab7-edea1ab76935</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range</span><span data-lang="fr" style="display:none">Distribution de membres de groupes désignés et groupes d&#x27;âge </span><div class="small"><code>479112da-a42a-4bf7-91bc-f40f810050a9</code></div></td>
+        <td><span data-lang="en">Supervision in Bilingual Regions</span><span data-lang="fr" style="display:none">Supervision dans les bureaux régionaux bilingues </span><div class="small"><code>89eb535e-7fa4-41db-b143-64746d5ebc80</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">14 err</span><span data-lang="fr" style="display:none">14 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.289497</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:11.233969"
+          data-status="failure"
+          data-resource="6106480b-9286-41bd-ab06-7112d9841108"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Distribution of Designated Group Members and Age Range"
+          data-dataset-fr="Distribution de membres de groupes désignés et groupes d&#x27;âge "
+          data-filtered="1">
+        <td>
+          <a href="../reports/3da78cc9-cfd6-42fb-bf21-5799fd7f839b.html"><code>3da78cc9-cfd6-42fb-bf21-5799fd7f839b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range</span><span data-lang="fr" style="display:none">Distribution de membres de groupes désignés et groupes d&#x27;âge </span><div class="small"><code>479112da-a42a-4bf7-91bc-f40f810050a9</code></div></td>
+        <td><span data-lang="en">Distribution of Designated Group Members and Age Range (2018-2019)</span><span data-lang="fr" style="display:none">Distribution de membres de groupes désignés et groupes d&#x27;âge (2018-2019)</span><div class="small"><code>6106480b-9286-41bd-ab06-7112d9841108</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">8 err</span><span data-lang="fr" style="display:none">8 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.233969</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:11.058553"
+          data-status="failure"
+          data-resource="4c5b6f37-632c-4b34-ae71-2f04054f33c3"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Statistics - Immigration and Citizenship Screening Programs "
+          data-dataset-fr="Statistiques - Programmes de filtrage Citoyenneté &amp; Immigration "
+          data-filtered="1">
+        <td>
+          <a href="../reports/6e7780be-3891-4f47-984f-3a61d461f68f.html"><code>6e7780be-3891-4f47-984f-3a61d461f68f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Statistics - Immigration and Citizenship Screening Programs </span><span data-lang="fr" style="display:none">Statistiques - Programmes de filtrage Citoyenneté &amp; Immigration </span><div class="small"><code>b2058a42-ef99-4e59-9fd1-eca61641f9ab</code></div></td>
+        <td><span data-lang="en">Statistics - Immigration and Citizenship Screening Programs </span><span data-lang="fr" style="display:none">Statistiques - Programmes de filtrage Citoyenneté &amp; Immigration </span><div class="small"><code>4c5b6f37-632c-4b34-ae71-2f04054f33c3</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">32 err</span><span data-lang="fr" style="display:none">32 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.058553</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:50.864524"
+          data-status="failure"
+          data-resource="6b8ccc1b-d4e1-4d59-89ce-6bb0ebc26d89"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="CSIS ACTUAL EXPENDITURES (Millions of Dollars)"
+          data-dataset-fr="DÉPENSES RÉELLES DU SCRS (en Millions de dollars)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6b132733-bca7-4062-9b44-80f58efa2c61.html"><code>6b132733-bca7-4062-9b44-80f58efa2c61</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">CSIS ACTUAL EXPENDITURES (Millions of Dollars)</span><span data-lang="fr" style="display:none">DÉPENSES RÉELLES DU SCRS (en Millions de dollars)</span><div class="small"><code>9dc4c03c-a3c9-48c4-88f6-ab2fb36e690f</code></div></td>
+        <td><span data-lang="en">CSIS ACTUAL EXPENDITURES (Millions of Dollars)</span><span data-lang="fr" style="display:none">CSIS ACTUAL EXPEDÉPENSES RÉELLES DU SCRS (en Millions de dollars)</span><div class="small"><code>6b8ccc1b-d4e1-4d59-89ce-6bb0ebc26d89</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">20 err</span><span data-lang="fr" style="display:none">20 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:31:50.864524</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:49.94552"
+          data-status="failure"
+          data-resource="1f59fe5e-00f8-4f71-8201-8367c52a53da"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Statistics - Immigration and Citizenship Screening Programs"
+          data-dataset-fr="Statistiques - Immigration et citoyenneté - Programme de filtrage "
+          data-filtered="1">
+        <td>
+          <a href="../reports/f906da50-8f21-4773-9d55-63c78e64b5b2.html"><code>f906da50-8f21-4773-9d55-63c78e64b5b2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Statistics - Immigration and Citizenship Screening Programs</span><span data-lang="fr" style="display:none">Statistiques - Immigration et citoyenneté - Programme de filtrage </span><div class="small"><code>5bcbb8b0-ebfe-4ad8-afea-2073867708d0</code></div></td>
+        <td><span data-lang="en">Statistics - Immigration and Citizenship Screening Programs </span><span data-lang="fr" style="display:none">Statistiques - Immigration et citoyenneté - Programme de filtrage </span><div class="small"><code>1f59fe5e-00f8-4f71-8201-8367c52a53da</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">30 err</span><span data-lang="fr" style="display:none">30 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:31:49.94552</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:31:38.925392"
+          data-status="failure"
+          data-resource="c35acc1e-92ad-4589-8968-998fe5aca980"
+          data-organization="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-org="Canadian Security Intelligence Service | Service canadien du renseignement de sécurité"
+          data-version="v0.1"
+          data-dataset-en="Access to Information and Privacy (ATIP) Statistics "
+          data-dataset-fr="Statistiques – Accés à l’information and protection des statistiques"
+          data-filtered="1">
+        <td>
+          <a href="../reports/17e2f100-dc4f-4be1-8cb4-1657ee1bb18d.html"><code>17e2f100-dc4f-4be1-8cb4-1657ee1bb18d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Access to Information and Privacy (ATIP) Statistics </span><span data-lang="fr" style="display:none">Statistiques – Accés à l’information and protection des statistiques</span><div class="small"><code>568ca1ca-d5ba-4399-8483-7bd28e069bd9</code></div></td>
+        <td><span data-lang="en">Access to Information and Privacy (ATIP) Statistics </span><span data-lang="fr" style="display:none">Statistiques – Accés à l’information and protection des statistiques</span><div class="small"><code>c35acc1e-92ad-4589-8968-998fe5aca980</code> · upload</div></td>
+        <td>Canadian Security Intelligence Service | Service canadien du renseignement de sécurité</td>
+        <td><span data-lang="en">11 err</span><span data-lang="fr" style="display:none">11 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:31:38.925392</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Failure"], "datasets": [{"label": "Reports", "data": [14], "backgroundColor": ["#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Failure", "data": [14], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

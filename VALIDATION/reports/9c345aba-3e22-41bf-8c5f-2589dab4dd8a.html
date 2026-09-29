@@ -1,0 +1,156 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Report 9c345aba-3e22-41bf-8c5f-2589dab4dd8a</title>
+<link rel="stylesheet" href="../style.css"><script defer src="../app.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="../index.html">← Reports</a></div>
+      <div class="lang-toggle">
+        <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+        <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:18px"><code>9c345aba-3e22-41bf-8c5f-2589dab4dd8a</code></div>
+      
+        <div class="kv" style="margin-top:8px">
+          <div>Version</div><div><span class="badge na">v0.1</span></div>
+          <div>Organization</div><div><a href="../organizations/Department-of-Finance-Canada-Minist-re-des-Finances-Canada.html">Department of Finance Canada | Ministère des Finances Canada</a></div>
+          <div>Dataset</div><div><span data-lang="en">Federal Budget 2024</span><span data-lang="fr" style="display:none">Budget fédéral de 2024</span> <span class="small"><code>94ca1f06-d184-4e80-81fe-9c5a5645c11c</code></span>
+          <div>
+            <a class="badge link" href="https://registry.open.canada.ca/dataset/94ca1f06-d184-4e80-81fe-9c5a5645c11c" target="_blank" rel="noopener">edit</a>
+            &nbsp;
+            <a class="badge link" href="https://open.canada.ca/data/en/dataset/94ca1f06-d184-4e80-81fe-9c5a5645c11c" target="_blank" rel="noopener">portal</a>
+          </div>
+        </div>
+          <div>Resource</div><div><span data-lang="en">Data Charts</span><span data-lang="fr" style="display:none">Données de graphiques</span> <span class="small"><code>3ad4f5b0-a49d-4dfc-87d0-69325b60a810</code> · upload</span></div>
+          <div>Status</div><div><span class="badge bad">failure</span></div>
+          <div>Created</div><div><time>2024-04-29 17:56:26.091579</time></div>
+        </div>
+    </div>
+
+    <section data-lang="en"  class="panel">
+      <div class="section">
+        <div class="kv">
+          <div>Valid</div><div><span class="badge bad">FAIL</span></div>
+          <div>Errors</div><div>3</div>
+          <div>Rows</div><div>11</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="h1" style="font-size:16px">Table 1</div>
+        <div class="kv" style="margin-top:8px"><div>Valid</div><div>&lt;span class=&quot;badge bad&quot;&gt;FAIL&lt;/span&gt;</div><div>Format</div><div>xlsx</div><div>Encoding</div><div>no</div><div>Scheme</div><div>https</div><div>Source</div><div>https://opencanada.blob.core.windows.net/opengovprod/resources/3ad4f5b0-a49d-4dfc-87d0-69325b60a810/donnees-de-graphiques.xlsx?sr=b&amp;sp=r&amp;sig=fkuWRJs7cFBIPnJaEHaT2FuYGARIVNVcsqduB71X8Ss%3D&amp;sv=2019-07-07&amp;se=2024-04-29T18%3A56%3A33Z</div><div>Time</div><div>0.131</div><div>Row count</div><div>11</div><div>Row count</div><div>11</div><div>Error count</div><div>3</div><div>Error count</div><div>3</div></div>
+        <h4 style="margin:12px 0 6px">Errors</h4><table class="table"><thead><tr><th>Row</th><th>Field</th><th>Code</th><th>Message</th></tr></thead><tbody><tr><td></td><td></td><td>blank-header</td><td>Header in column 2 is blank</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 10 has a missing value in column 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Row 11 has a missing value in column 2</td></tr></tbody></table>
+        <h4 style="margin:12px 0 6px">Headers</h4><div class="code">Graphique 1 - Croissance de l&#x27;emploi depuis 2020, économies du G7
+</div>
+        <h4 style="margin:12px 0 6px">Raw table JSON</h4><div class="code">{
+  &quot;error-count&quot;: 3,
+  &quot;format&quot;: &quot;xlsx&quot;,
+  &quot;row-count&quot;: 11,
+  &quot;encoding&quot;: &quot;no&quot;,
+  &quot;headers&quot;: [
+    &quot;Graphique 1 - Croissance de l&#x27;emploi depuis 2020, économies du G7&quot;,
+    &quot;&quot;
+  ],
+  &quot;errors&quot;: [
+    {
+      &quot;message&quot;: &quot;Header in column 2 is blank&quot;,
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;column-number&quot;: 2,
+      &quot;message-data&quot;: {},
+      &quot;row&quot;: [
+        &quot;Pays&quot;,
+        &quot;Variation des emplois&quot;
+      ]
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;column-number&quot;: 2,
+      &quot;row-number&quot;: 10,
+      &quot;message-data&quot;: {},
+      &quot;message&quot;: &quot;Row 10 has a missing value in column 2&quot;,
+      &quot;row&quot;: [
+        &quot;Nota – Les derniers points de données correspondent à mars 2024 (Canada, États-Unis), à février 2024 (Allemagne, Italie, Japon) et au T4 de 2023 (Royaume-Uni, France). Variation par rapport à février 2020, sauf pour la France et le Royaume-Uni (T4 de 2019).&quot;
+      ]
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;column-number&quot;: 2,
+      &quot;row-number&quot;: 11,
+      &quot;message-data&quot;: {},
+      &quot;message&quot;: &quot;Row 11 has a missing value in column 2&quot;,
+      &quot;row&quot;: [
+        &quot;Source : Haver Analytics.&quot;
+      ]
+    }
+  ],
+  &quot;source&quot;: &quot;https://opencanada.blob.core.windows.net/opengovprod/resources/3ad4f5b0-a49d-4dfc-87d0-69325b60a810/donnees-de-graphiques.xlsx?sr=b&amp;sp=r&amp;sig=fkuWRJs7cFBIPnJaEHaT2FuYGARIVNVcsqduB71X8Ss%3D&amp;sv=2019-07-07&amp;se=2024-04-29T18%3A56%3A33Z&quot;,
+  &quot;time&quot;: 0.131,
+  &quot;scheme&quot;: &quot;https&quot;,
+  &quot;valid&quot;: false
+}</div>
+      </div></section><section data-lang="fr" style="display:none" class="panel">
+      <div class="section">
+        <div class="kv">
+          <div>Valide</div><div><span class="badge bad">FAIL</span></div>
+          <div>Erreurs</div><div>3</div>
+          <div>Lignes</div><div>11</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="h1" style="font-size:16px">Table 1</div>
+        <div class="kv" style="margin-top:8px"><div>Valid</div><div>&lt;span class=&quot;badge bad&quot;&gt;FAIL&lt;/span&gt;</div><div>Format</div><div>xlsx</div><div>Encoding</div><div>no</div><div>Scheme</div><div>https</div><div>Source</div><div>https://opencanada.blob.core.windows.net/opengovprod/resources/3ad4f5b0-a49d-4dfc-87d0-69325b60a810/donnees-de-graphiques.xlsx?sr=b&amp;sp=r&amp;sig=fkuWRJs7cFBIPnJaEHaT2FuYGARIVNVcsqduB71X8Ss%3D&amp;sv=2019-07-07&amp;se=2024-04-29T18%3A56%3A33Z</div><div>Time</div><div>0.098</div><div>Row count</div><div>11</div><div>Row count</div><div>11</div><div>Error count</div><div>3</div><div>Error count</div><div>3</div></div>
+        <h4 style="margin:12px 0 6px">Erreurs</h4><table class="table"><thead><tr><th>Ligne</th><th>Champ</th><th>Code</th><th>Message</th></tr></thead><tbody><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 2 est vide.</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 10 de la colonne 2</td></tr><tr><td></td><td></td><td>missing-value</td><td>Il manque une valeur dans la ligne 11 de la colonne 2</td></tr></tbody></table>
+        <h4 style="margin:12px 0 6px">En-têtes</h4><div class="code">Graphique 1 - Croissance de l&#x27;emploi depuis 2020, économies du G7
+</div>
+        <h4 style="margin:12px 0 6px">JSON brut de la table</h4><div class="code">{
+  &quot;error-count&quot;: 3,
+  &quot;format&quot;: &quot;xlsx&quot;,
+  &quot;row-count&quot;: 11,
+  &quot;encoding&quot;: &quot;no&quot;,
+  &quot;headers&quot;: [
+    &quot;Graphique 1 - Croissance de l&#x27;emploi depuis 2020, économies du G7&quot;,
+    &quot;&quot;
+  ],
+  &quot;errors&quot;: [
+    {
+      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 2 est vide.&quot;,
+      &quot;code&quot;: &quot;blank-header&quot;,
+      &quot;column-number&quot;: 2,
+      &quot;message-data&quot;: {},
+      &quot;row&quot;: [
+        &quot;Pays&quot;,
+        &quot;Variation des emplois&quot;
+      ]
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;column-number&quot;: 2,
+      &quot;row-number&quot;: 10,
+      &quot;message-data&quot;: {},
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 10 de la colonne 2&quot;,
+      &quot;row&quot;: [
+        &quot;Nota – Les derniers points de données correspondent à mars 2024 (Canada, États-Unis), à février 2024 (Allemagne, Italie, Japon) et au T4 de 2023 (Royaume-Uni, France). Variation par rapport à février 2020, sauf pour la France et le Royaume-Uni (T4 de 2019).&quot;
+      ]
+    },
+    {
+      &quot;code&quot;: &quot;missing-value&quot;,
+      &quot;column-number&quot;: 2,
+      &quot;row-number&quot;: 11,
+      &quot;message-data&quot;: {},
+      &quot;message&quot;: &quot;Il manque une valeur dans la ligne 11 de la colonne 2&quot;,
+      &quot;row&quot;: [
+        &quot;Source : Haver Analytics.&quot;
+      ]
+    }
+  ],
+  &quot;source&quot;: &quot;https://opencanada.blob.core.windows.net/opengovprod/resources/3ad4f5b0-a49d-4dfc-87d0-69325b60a810/donnees-de-graphiques.xlsx?sr=b&amp;sp=r&amp;sig=fkuWRJs7cFBIPnJaEHaT2FuYGARIVNVcsqduB71X8Ss%3D&amp;sv=2019-07-07&amp;se=2024-04-29T18%3A56%3A33Z&quot;,
+  &quot;time&quot;: 0.098,
+  &quot;scheme&quot;: &quot;https&quot;,
+  &quot;valid&quot;: false
+}</div>
+      </div></section>
+  </div>
+</body></html>

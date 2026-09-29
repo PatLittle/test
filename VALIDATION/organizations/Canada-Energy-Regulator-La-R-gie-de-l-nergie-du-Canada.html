@@ -1,0 +1,233 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canada Energy Regulator | La Régie de l’énergie du Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Canada Energy Regulator | La Régie de l’énergie du Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 1 · Success: 1 · Failure: 0 · Other: 0 · URL types: 1 · Latest: <time>2024-12-09 18:09:39.388524</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">1</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">1</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">0</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2024-12-09 18:09:39.388524"
+          data-status="success"
+          data-resource="80117e7a-35d4-43c8-bdb4-672f73f9a0ab"
+          data-organization="Canada Energy Regulator | La Régie de l’énergie du Canada"
+          data-org="Canada Energy Regulator | La Régie de l’énergie du Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada’s Energy Future 2020: Energy Supply and Demand Projections to 2050"
+          data-dataset-fr="Avenir énergétique du Canada en 2020 - Offre et demande énergétiques à l’horizon 2050"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5a455ec1-a156-4f51-b538-2835c6eb1581.html"><code>5a455ec1-a156-4f51-b538-2835c6eb1581</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada’s Energy Future 2020: Energy Supply and Demand Projections to 2050</span><span data-lang="fr" style="display:none">Avenir énergétique du Canada en 2020 - Offre et demande énergétiques à l’horizon 2050</span><div class="small"><code>bba41250-261a-4f3b-9ce8-db44d9a0f725</code></div></td>
+        <td><span data-lang="en">coal-2020-data-dictionary</span><span data-lang="fr" style="display:none">charbon-2020-dictionnaire-de-donnees</span><div class="small"><code>80117e7a-35d4-43c8-bdb4-672f73f9a0ab</code> · upload</div></td>
+        <td>Canada Energy Regulator | La Régie de l’énergie du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:39.388524</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success"], "datasets": [{"label": "Reports", "data": [1], "backgroundColor": ["#2e8540"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [1], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

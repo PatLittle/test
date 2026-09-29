@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 980" role="img" aria-labelledby="lineage-title lineage-desc">
+  <title id="lineage-title">BN plus ATI data lineage</title>
+  <desc id="lineage-desc">Diagram of source datasets, transformation joins, matching logic, output tables, and final SQLite artifact for the BN plus ATI explorer.</desc>
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+
+    <filter id="soft-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.10"/>
+    </filter>
+
+    <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 z" fill="#1f2937"/>
+    </marker>
+
+    <style>
+      .canvas { fill: url(#bg-gradient); }
+      .lane { stroke: #dbe3ef; stroke-width: 1.2; stroke-dasharray: 5 7; fill: #ffffff66; }
+      .lane-title {
+        font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        fill: #475569;
+        text-transform: uppercase;
+      }
+      .title {
+        font-family: Fraunces, Georgia, serif;
+        font-size: 44px;
+        font-weight: 700;
+        fill: #0f172a;
+      }
+      .subtitle {
+        font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+        font-size: 18px;
+        font-weight: 500;
+        fill: #475569;
+      }
+      .card {
+        stroke-width: 1.5;
+        rx: 16;
+        filter: url(#soft-shadow);
+      }
+      .source { fill: #eaf2ff; stroke: #95bdf8; }
+      .process { fill: #fff4e6; stroke: #f5b26b; }
+      .output { fill: #e8fbf7; stroke: #74d8cd; }
+      .artifact { fill: #edf5ff; stroke: #8eb6ee; }
+
+      .h {
+        font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        fill: #0f172a;
+      }
+      .t {
+        font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        fill: #1e293b;
+      }
+      .s {
+        font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        fill: #334155;
+      }
+      .label-box {
+        fill: #ffffff;
+        stroke: #d0dae8;
+        stroke-width: 1;
+        rx: 8;
+      }
+      .label {
+        font-family: "Space Grotesk", "Segoe UI", Arial, sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        fill: #334155;
+      }
+      .flow {
+        stroke: #1f2937;
+        stroke-width: 3;
+        fill: none;
+        marker-end: url(#arrow);
+      }
+    </style>
+  </defs>
+
+  <rect x="8" y="8" width="1384" height="964" rx="26" class="canvas"/>
+
+  <rect x="28" y="96" width="1344" height="154" rx="16" class="lane"/>
+  <rect x="28" y="274" width="1344" height="310" rx="16" class="lane"/>
+  <rect x="28" y="608" width="1344" height="188" rx="16" class="lane"/>
+  <rect x="28" y="820" width="1344" height="132" rx="16" class="lane"/>
+
+  <text x="58" y="62" class="title">BN + ATI Pipeline</text>
+  <text x="58" y="90" class="subtitle">From open data sources to joined SQLite tables for the explorer UI</text>
+
+  <text x="52" y="116" class="lane-title">Sources</text>
+  <text x="52" y="294" class="lane-title">Transforms</text>
+  <text x="52" y="628" class="lane-title">Output Tables</text>
+  <text x="52" y="840" class="lane-title">Published Artifact</text>
+
+  <!-- Source cards -->
+  <rect x="50" y="124" width="320" height="108" class="card source"/>
+  <text x="72" y="157" class="t">Source A</text>
+  <text x="72" y="183" class="s">Briefing note titles and numbers</text>
+  <text x="72" y="209" class="s">keys: owner_org, tracking_number</text>
+
+  <rect x="380" y="124" width="320" height="108" class="card source"/>
+  <text x="402" y="157" class="t">Source B</text>
+  <text x="402" y="183" class="s">ATI informal request analytics</text>
+  <text x="402" y="209" class="s">owner_org + Request Number</text>
+
+  <rect x="710" y="124" width="320" height="108" class="card source"/>
+  <text x="732" y="157" class="t">Source C</text>
+  <text x="732" y="183" class="s">ATI request summaries</text>
+  <text x="732" y="209" class="s">owner_org + request_number + summary</text>
+
+  <rect x="1040" y="124" width="320" height="108" class="card source"/>
+  <text x="1062" y="157" class="t">DocumentCloud</text>
+  <text x="1062" y="183" class="s">open-by-default lookup</text>
+  <text x="1062" y="209" class="s">owner_org/request/tracking keys</text>
+
+  <!-- Transform cards -->
+  <rect x="370" y="322" width="300" height="112" class="card process"/>
+  <text x="392" y="356" class="t">B Aggregate</text>
+  <text x="392" y="382" class="s">group by owner_org + Request Number</text>
+  <text x="392" y="408" class="s">sum informal_requests, collect UIDs</text>
+
+  <rect x="730" y="322" width="300" height="112" class="card process"/>
+  <text x="752" y="356" class="t">BC Join</text>
+  <text x="752" y="382" class="s">C LEFT JOIN B aggregate</text>
+  <text x="752" y="408" class="s">owner_org + request_number_lc</text>
+
+  <rect x="550" y="500" width="300" height="112" class="card process"/>
+  <text x="572" y="534" class="t">Fuzzy Match A x BC</text>
+  <text x="572" y="560" class="s">same owner_org</text>
+  <text x="572" y="586" class="s">tracking_number pattern in summaries</text>
+
+  <!-- Output cards -->
+  <rect x="140" y="660" width="320" height="112" class="card output"/>
+  <text x="162" y="694" class="t">weak_matches</text>
+  <text x="162" y="720" class="s">weak IDs (c, 1, 0, NA, -, ...)</text>
+  <text x="162" y="746" class="s">stored for QA and diagnostics</text>
+
+  <rect x="540" y="660" width="320" height="112" class="card output"/>
+  <text x="562" y="694" class="t">strong_matches</text>
+  <text x="562" y="720" class="s">weak IDs removed</text>
+  <text x="562" y="746" class="s">DocCloud URL and flag merged in</text>
+
+  <rect x="940" y="660" width="320" height="112" class="card output"/>
+  <text x="962" y="694" class="t">org_stats + weak_stats + meta_counts</text>
+  <text x="962" y="720" class="s">aggregates for charts and counters</text>
+  <text x="962" y="746" class="s">build_date and source row counts</text>
+
+  <!-- Artifact card -->
+  <rect x="490" y="844" width="420" height="94" class="card artifact"/>
+  <text x="512" y="882" class="h">docs/data.sqlite</text>
+  <text x="512" y="910" class="s">tables consumed by docs/index.html</text>
+
+  <!-- Flows -->
+  <path d="M540 232 L540 322" class="flow"/>
+  <path d="M870 232 L870 322" class="flow"/>
+  <path d="M670 378 L730 378" class="flow"/>
+
+  <path d="M210 232 L210 456 L620 456 L620 500" class="flow"/>
+  <path d="M880 434 L880 470 L780 470 L780 500" class="flow"/>
+
+  <path d="M700 612 L700 634 L300 634 L300 660" class="flow"/>
+  <path d="M700 612 L700 660" class="flow"/>
+
+  <path d="M1200 232 L1200 596 L760 596 L760 660" class="flow"/>
+
+  <path d="M860 716 L940 716" class="flow"/>
+  <path d="M460 730 C620 760 780 760 940 730" class="flow"/>
+
+  <path d="M300 772 L300 812 L560 812 L560 844" class="flow"/>
+  <path d="M700 772 L700 844" class="flow"/>
+  <path d="M1100 772 L1100 812 L840 812 L840 844" class="flow"/>
+
+  <!-- Connector labels -->
+  <rect x="744" y="338" width="248" height="30" class="label-box"/>
+  <text x="758" y="359" class="label">join key: owner_org + request_number_lc</text>
+
+  <rect x="500" y="468" width="400" height="30" class="label-box"/>
+  <text x="514" y="489" class="label">match key: owner_org + tracking_number in summaries</text>
+
+  <rect x="824" y="566" width="514" height="30" class="label-box"/>
+  <text x="838" y="587" class="label">DocCloud join: owner_org + request_number (fallback tracking_number)</text>
+</svg>

@@ -1,0 +1,527 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Defence Research and Development Canada | Recherche et développement pour la Défense Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Defence Research and Development Canada | Recherche et développement pour la Défense Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 15 · Success: 0 · Failure: 15 · Other: 0 · URL types: 1 · Latest: <time>2023-07-24 15:14:12.251121</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">15</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">0</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">15</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>15</td><td>15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2023-07-24 15:14:12.251121"
+          data-status="failure"
+          data-resource="259da6a1-ce8b-4dc5-9445-6acfe5cd4c49"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8208f9bb-5fd5-4444-b3ef-e21af20a8fc4.html"><code>8208f9bb-5fd5-4444-b3ef-e21af20a8fc4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">ShipMotionData2022</span><span data-lang="fr" style="display:none">ShipMotionData2022</span><div class="small"><code>259da6a1-ce8b-4dc5-9445-6acfe5cd4c49</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:12.251121</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:12.191802"
+          data-status="failure"
+          data-resource="af6f3e7f-74a7-49fc-955b-bef87e419756"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/796c4a71-3a48-4505-84d9-c45f668f4513.html"><code>796c4a71-3a48-4505-84d9-c45f668f4513</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case07b</span><span data-lang="fr" style="display:none">AirwakeData_Case07b</span><div class="small"><code>af6f3e7f-74a7-49fc-955b-bef87e419756</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:12.191802</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:12.139359"
+          data-status="failure"
+          data-resource="51d6f011-84b6-4837-b595-3ec65dcb3ae9"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/2953be73-6ffd-46d9-b719-94355c3c27fc.html"><code>2953be73-6ffd-46d9-b719-94355c3c27fc</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case07a</span><span data-lang="fr" style="display:none">AirwakeData_Case07a</span><div class="small"><code>51d6f011-84b6-4837-b595-3ec65dcb3ae9</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:12.139359</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:12.082741"
+          data-status="failure"
+          data-resource="67473daf-803c-43ac-ada2-dcbfe30f5f58"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/83f6e9cb-0065-41a9-8366-d81c2c96dc9b.html"><code>83f6e9cb-0065-41a9-8366-d81c2c96dc9b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case06b</span><span data-lang="fr" style="display:none">AirwakeData_Case06b</span><div class="small"><code>67473daf-803c-43ac-ada2-dcbfe30f5f58</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:12.082741</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:12.028575"
+          data-status="failure"
+          data-resource="9071f78e-47f9-4e3e-acab-ad1d603199a5"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4c48a73e-c2d3-423c-9791-12f0e717703c.html"><code>4c48a73e-c2d3-423c-9791-12f0e717703c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case06a</span><span data-lang="fr" style="display:none">AirwakeData_Case06a</span><div class="small"><code>9071f78e-47f9-4e3e-acab-ad1d603199a5</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:12.028575</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.979229"
+          data-status="failure"
+          data-resource="1f15971d-58d9-4754-a95a-f89cc935f7cb"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d1864a7d-602e-4d46-b0c6-ea614a23bb66.html"><code>d1864a7d-602e-4d46-b0c6-ea614a23bb66</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case05b</span><span data-lang="fr" style="display:none">AirwakeData_Case05b</span><div class="small"><code>1f15971d-58d9-4754-a95a-f89cc935f7cb</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.979229</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.927575"
+          data-status="failure"
+          data-resource="aa9eea49-8bbe-4a77-a233-881a4e7c0ee5"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/3fe76082-b308-416b-b095-d5c544dae512.html"><code>3fe76082-b308-416b-b095-d5c544dae512</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case05a</span><span data-lang="fr" style="display:none">AirwakeData_Case05a</span><div class="small"><code>aa9eea49-8bbe-4a77-a233-881a4e7c0ee5</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.927575</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.877466"
+          data-status="failure"
+          data-resource="0d6fccdd-7895-4c07-8a0a-e7a21d6843a5"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6afb8b99-cf80-4036-854e-06b04092413d.html"><code>6afb8b99-cf80-4036-854e-06b04092413d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case04b</span><span data-lang="fr" style="display:none">AirwakeData_Case04b</span><div class="small"><code>0d6fccdd-7895-4c07-8a0a-e7a21d6843a5</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.877466</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.828357"
+          data-status="failure"
+          data-resource="c577242c-4e68-4063-b8cd-7c4350258e81"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ed3a0747-fd41-4c29-a372-ba625df054a2.html"><code>ed3a0747-fd41-4c29-a372-ba625df054a2</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case04a</span><span data-lang="fr" style="display:none">AirwakeData_Case04a</span><div class="small"><code>c577242c-4e68-4063-b8cd-7c4350258e81</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.828357</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.777275"
+          data-status="failure"
+          data-resource="678041c2-84b1-4a41-bf91-a2ce95e43dfc"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f6b0c839-930c-4f2f-aef9-0d99c9b4b60a.html"><code>f6b0c839-930c-4f2f-aef9-0d99c9b4b60a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case03b</span><span data-lang="fr" style="display:none">AirwakeData_Case03b</span><div class="small"><code>678041c2-84b1-4a41-bf91-a2ce95e43dfc</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.777275</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.725392"
+          data-status="failure"
+          data-resource="e34f44f7-7a89-4212-9fc3-2854314aa67d"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ecfcf60e-9186-4040-891d-a75df8c0aef0.html"><code>ecfcf60e-9186-4040-891d-a75df8c0aef0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case03a</span><span data-lang="fr" style="display:none">AirwakeData_Case03a</span><div class="small"><code>e34f44f7-7a89-4212-9fc3-2854314aa67d</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.725392</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.671011"
+          data-status="failure"
+          data-resource="61073e4d-64bb-4233-9442-56c31f746dea"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/345b4369-7eec-4950-b44a-61615a5c3d87.html"><code>345b4369-7eec-4950-b44a-61615a5c3d87</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case02b</span><span data-lang="fr" style="display:none">AirwakeData_Case02b</span><div class="small"><code>61073e4d-64bb-4233-9442-56c31f746dea</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.671011</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.619689"
+          data-status="failure"
+          data-resource="ea05b0e0-4c78-400b-b63c-35971e656e9b"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/878cf145-7af4-4209-83b6-6fd9fd0897ef.html"><code>878cf145-7af4-4209-83b6-6fd9fd0897ef</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case02a</span><span data-lang="fr" style="display:none">AirwakeData_Case02a</span><div class="small"><code>ea05b0e0-4c78-400b-b63c-35971e656e9b</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.619689</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.568236"
+          data-status="failure"
+          data-resource="2d00f5d0-fc76-4f3c-b9cf-99cc1dda24ed"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/aae0d074-8c2e-4fce-b659-0b25215f6e06.html"><code>aae0d074-8c2e-4fce-b659-0b25215f6e06</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirwakeData_Case01b</span><span data-lang="fr" style="display:none">AirwakeData_Case01b</span><div class="small"><code>2d00f5d0-fc76-4f3c-b9cf-99cc1dda24ed</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.568236</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-24 15:14:11.519845"
+          data-status="failure"
+          data-resource="02f25500-dcf7-48fe-b2ce-6ef85da3e9f4"
+          data-organization="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-org="Defence Research and Development Canada | Recherche et développement pour la Défense Canada"
+          data-version="v0.1"
+          data-dataset-en="The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada"
+          data-dataset-fr="Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f7f3bb91-3f4b-443c-8f13-5bcc646f1362.html"><code>f7f3bb91-3f4b-443c-8f13-5bcc646f1362</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">The NATO Generic Destroyer - a shared geometry for collaborative research into modelling and simulation of shipboard launch and recovery: source data posting on Open Science Canada</span><span data-lang="fr" style="display:none">Le contre-torpilleur g´en´erique de l’OTAN – un mod`ele g´eom´etrique partag´e pour la recherche collaborative sur la mod´elisation et la simulation des op´erations de lancement et de r´ecup´eration `a bord des navires : achage des donn´ees sources sur Open Science Canada</span><div class="small"><code>2c30e366-ef2b-400e-8363-0b13e4a7b6f4</code></div></td>
+        <td><span data-lang="en">AirWakeData_Case01a</span><span data-lang="fr" style="display:none">AirWakeData_Case01a</span><div class="small"><code>02f25500-dcf7-48fe-b2ce-6ef85da3e9f4</code> · upload</div></td>
+        <td>Defence Research and Development Canada | Recherche et développement pour la Défense Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-24 15:14:11.519845</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Failure"], "datasets": [{"label": "Reports", "data": [15], "backgroundColor": ["#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Failure", "data": [15], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

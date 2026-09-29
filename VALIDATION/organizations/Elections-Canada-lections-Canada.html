@@ -1,0 +1,884 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elections Canada | Élections Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Elections Canada | Élections Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 32 · Success: 21 · Failure: 11 · Other: 0 · URL types: 1 · Latest: <time>2026-03-02 18:57:59.460953</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">32</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">21</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">11</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>32</td><td>21</td><td>11</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2026-03-02 18:57:59.460953"
+          data-status="success"
+          data-resource="73586e35-290d-431c-94ba-5cf8a97c4ae5"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="Turnout by Age, Gender and Province, GE38–GE45"
+          data-dataset-fr="Participation électorale selon l’âge, le sexe et la province – 38e EG à la 45e EG "
+          data-filtered="1">
+        <td>
+          <a href="../reports/382ee3bb-a96b-4979-a6d0-9510fb76df67.html"><code>382ee3bb-a96b-4979-a6d0-9510fb76df67</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Turnout by Age, Gender and Province, GE38–GE45</span><span data-lang="fr" style="display:none">Participation électorale selon l’âge, le sexe et la province – 38e EG à la 45e EG </span><div class="small"><code>b545fe25-5cf5-4488-9923-b5c2ebeeb8cc</code></div></td>
+        <td><span data-lang="en">Turnout by Age, Gender and Province, GE38–GE45</span><span data-lang="fr" style="display:none">Participation électorale selon l’âge, le sexe et la province – 38e EG à la 45e EG </span><div class="small"><code>73586e35-290d-431c-94ba-5cf8a97c4ae5</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-03-02 18:57:59.460953</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 16:16:59.658723"
+          data-status="failure"
+          data-resource="463aa010-d9c1-470e-b6e3-d18a1c7a6a4a"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary"
+          data-dataset-fr="Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés"
+          data-filtered="1">
+        <td>
+          <a href="../reports/01c055ac-cd93-47e2-b4c9-5041605843af.html"><code>01c055ac-cd93-47e2-b4c9-5041605843af</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary</span><span data-lang="fr" style="display:none">Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés</span><div class="small"><code>08c4ffbc-c513-41a4-b741-d35b41b50c22</code></div></td>
+        <td><span data-lang="en">Transposition_343_FED_Vote_Count</span><span data-lang="fr" style="display:none">Transposition_343_FED_Vote_Count</span><div class="small"><code>463aa010-d9c1-470e-b6e3-d18a1c7a6a4a</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">5 err</span><span data-lang="fr" style="display:none">5 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 16:16:59.658723</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 16:03:11.357309"
+          data-status="success"
+          data-resource="7657696a-1dc4-44ed-a992-61c49ed76740"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary"
+          data-dataset-fr="Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4c21fcda-6ba4-44ae-8c84-e61e93be2c24.html"><code>4c21fcda-6ba4-44ae-8c84-e61e93be2c24</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary</span><span data-lang="fr" style="display:none">Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés</span><div class="small"><code>08c4ffbc-c513-41a4-b741-d35b41b50c22</code></div></td>
+        <td><span data-lang="en">Transposition_343_FED_Summary</span><span data-lang="fr" style="display:none">Transposition_343_FED_Summary</span><div class="small"><code>7657696a-1dc4-44ed-a992-61c49ed76740</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-15 16:03:11.357309</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 16:02:40.07874"
+          data-status="failure"
+          data-resource="61132423-7762-4d39-8adb-38cc007f7e35"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary"
+          data-dataset-fr="Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés"
+          data-filtered="1">
+        <td>
+          <a href="../reports/70878a55-e8d3-40ef-8f7e-c84f42d9a1c7.html"><code>70878a55-e8d3-40ef-8f7e-c84f42d9a1c7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary</span><span data-lang="fr" style="display:none">Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés</span><div class="small"><code>08c4ffbc-c513-41a4-b741-d35b41b50c22</code></div></td>
+        <td><span data-lang="en">Transposition_343_FED_Percentage</span><span data-lang="fr" style="display:none">Transposition_343_FED_Percentage</span><div class="small"><code>61132423-7762-4d39-8adb-38cc007f7e35</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">5 err</span><span data-lang="fr" style="display:none">5 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 16:02:40.07874</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 16:01:54.463148"
+          data-status="success"
+          data-resource="0f8be6d9-d975-4022-b11f-8cd31e41c8f9"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary"
+          data-dataset-fr="Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a3bc5bf8-7e7a-4a72-8f90-be9e59a239e2.html"><code>a3bc5bf8-7e7a-4a72-8f90-be9e59a239e2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Transposition of the Vote from the 44th General Election to the 2023 Representation Orders - Data Dictionary</span><span data-lang="fr" style="display:none">Transposition des votes de la 44e élection générale selon les décrets de représentation de 2023 - Dictionnaire de Donnés</span><div class="small"><code>08c4ffbc-c513-41a4-b741-d35b41b50c22</code></div></td>
+        <td><span data-lang="en">Transposition_343_FED</span><span data-lang="fr" style="display:none">Transposition_343_FED</span><div class="small"><code>0f8be6d9-d975-4022-b11f-8cd31e41c8f9</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-15 16:01:54.463148</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:18.012314"
+          data-status="success"
+          data-resource="078f13c5-fdc6-4b12-ac88-e46f3f4c8a82"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cef46ef5-46e1-4e96-b8aa-1518bde8927a.html"><code>cef46ef5-46e1-4e96-b8aa-1518bde8927a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 13: List of returning officers</span><span data-lang="fr" style="display:none">Tableau 13 : Liste des directeurs du scrutin </span><div class="small"><code>078f13c5-fdc6-4b12-ac88-e46f3f4c8a82</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:18.012314</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:16.891061"
+          data-status="success"
+          data-resource="8d6380a6-c1a3-4a19-b2ca-df0228ab4ddd"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0de44444-ba1a-41ab-8862-421adeeb25c4.html"><code>0de44444-ba1a-41ab-8862-421adeeb25c4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 12: List of candidates by electoral district and individual results</span><span data-lang="fr" style="display:none">Tableau 12 : Liste des candidats par circonscription et résultats individuels</span><div class="small"><code>8d6380a6-c1a3-4a19-b2ca-df0228ab4ddd</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:16.891061</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:15.886788"
+          data-status="failure"
+          data-resource="d9ff2144-4591-4ef5-b313-be5012eca3be"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/df27c52c-6907-4d7c-a663-d2cf095449ef.html"><code>df27c52c-6907-4d7c-a663-d2cf095449ef</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 11: Voting results by electoral district</span><span data-lang="fr" style="display:none">Tableau 11 : Résultats du scrutin par circonscription</span><div class="small"><code>d9ff2144-4591-4ef5-b313-be5012eca3be</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:15.886788</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:14.976158"
+          data-status="success"
+          data-resource="27e9bf7e-b67d-4757-bf63-80aa1c0bc3ee"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ffbeaf3d-e543-4441-9347-01fe64c74828.html"><code>ffbeaf3d-e543-4441-9347-01fe64c74828</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 10: Number of candidates by percentage of valid votes received, by political affiliation</span><span data-lang="fr" style="display:none">Tableau 10 : Nombre de candidats selon le pourcentage des votes obtenus, par appartenance politique</span><div class="small"><code>27e9bf7e-b67d-4757-bf63-80aa1c0bc3ee</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:14.976158</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:14.029488"
+          data-status="success"
+          data-resource="7961f6e7-be2b-48b9-b1c6-914a399990bd"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/1a388acb-3eb6-403f-ab18-d1d9261620c2.html"><code>1a388acb-3eb6-403f-ab18-d1d9261620c2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 8: Number of valid votes by political affiliation</span><span data-lang="fr" style="display:none">Tableau 8 : Nombre de votes valides par appartenance politique </span><div class="small"><code>7961f6e7-be2b-48b9-b1c6-914a399990bd</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:14.029488</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:13.071184"
+          data-status="failure"
+          data-resource="ee21862c-e718-43d2-bb0c-357b58aafed0"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/663d28a1-43b8-478f-9c21-ebeecc4b3e08.html"><code>663d28a1-43b8-478f-9c21-ebeecc4b3e08</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 7: Distribution of seats by political affiliation and sex</span><span data-lang="fr" style="display:none">Tableau 7 : Répartition des sièges par appartenance politique et par sexe </span><div class="small"><code>ee21862c-e718-43d2-bb0c-357b58aafed0</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">9 err</span><span data-lang="fr" style="display:none">9 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:13.071184</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:12.168249"
+          data-status="success"
+          data-resource="eeb33c04-8c31-4e4c-896a-754adf28244a"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/83beded4-7f81-4226-968a-68fbf57a4a73.html"><code>83beded4-7f81-4226-968a-68fbf57a4a73</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 6: Distribution of valid votes under Special Voting Rules</span><span data-lang="fr" style="display:none">Tableau 6 : Répartition des votes valides en vertu des Règles électorales spéciales </span><div class="small"><code>eeb33c04-8c31-4e4c-896a-754adf28244a</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:12.168249</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:11.223696"
+          data-status="failure"
+          data-resource="3fdbf3de-2b2e-4c44-b32e-98e71cae441b"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/3ca907b2-59e5-4911-992d-ea9ee5cd2ece.html"><code>3ca907b2-59e5-4911-992d-ea9ee5cd2ece</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 5: Distribution of valid votes by voting method</span><span data-lang="fr" style="display:none">Tableau 5 : Répartition des votes valides selon les diverses méthodes de vote </span><div class="small"><code>3fdbf3de-2b2e-4c44-b32e-98e71cae441b</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:11.223696</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:10.281107"
+          data-status="failure"
+          data-resource="4acf5ea8-cf65-41c3-a585-d515c7cfdb1a"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/2f5b2389-8261-4420-b48a-adf9e4df9f54.html"><code>2f5b2389-8261-4420-b48a-adf9e4df9f54</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 3: Number of ballots cast and voter turnout</span><span data-lang="fr" style="display:none">Tableau 3 : Nombre de bulletins de vote déposés et participation électorale </span><div class="small"><code>4acf5ea8-cf65-41c3-a585-d515c7cfdb1a</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:10.281107</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:09.395479"
+          data-status="success"
+          data-resource="8199abbe-e318-4869-8b11-fbfc4389129e"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cbe3f943-9ee6-4ea0-a399-97cd9f96a8ea.html"><code>cbe3f943-9ee6-4ea0-a399-97cd9f96a8ea</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 1: Number of electors and polling stations</span><span data-lang="fr" style="display:none">Tableau 1 : Nombre d&#x27;électeurs et de bureaux de scrutin</span><div class="small"><code>8199abbe-e318-4869-8b11-fbfc4389129e</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:09.395479</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:08.450867"
+          data-status="success"
+          data-resource="a0e55318-c04a-480d-9290-85f26ba2c5f7"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c7cfe973-0565-49fe-9234-d9020275db4c.html"><code>c7cfe973-0565-49fe-9234-d9020275db4c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 13: List of returning officers</span><span data-lang="fr" style="display:none">Tableau 13 : Liste des directeurs du scrutin </span><div class="small"><code>a0e55318-c04a-480d-9290-85f26ba2c5f7</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:08.450867</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:07.370221"
+          data-status="success"
+          data-resource="23253a8d-88d7-4710-8945-10ec896e5a11"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cd373e63-3c6f-4cc8-aa83-a728ec5e93c2.html"><code>cd373e63-3c6f-4cc8-aa83-a728ec5e93c2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 12: List of candidates by electoral district and individual results</span><span data-lang="fr" style="display:none">Tableau 12 : Liste des candidats par circonscription et résultats individuels</span><div class="small"><code>23253a8d-88d7-4710-8945-10ec896e5a11</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:07.370221</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:06.368309"
+          data-status="failure"
+          data-resource="fce53469-baac-4e35-adcb-8cf9883aff0c"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9240e4ff-4666-408a-9365-bb7be7858b8c.html"><code>9240e4ff-4666-408a-9365-bb7be7858b8c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 11: Voting results by electoral district</span><span data-lang="fr" style="display:none">Tableau 11 : Résultats du scrutin par circonscription</span><div class="small"><code>fce53469-baac-4e35-adcb-8cf9883aff0c</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:06.368309</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:05.426352"
+          data-status="success"
+          data-resource="358a7505-0e99-425b-acba-81204a0f0dd8"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/da802fe3-c85f-4798-82cc-ccd8a3b5a5ea.html"><code>da802fe3-c85f-4798-82cc-ccd8a3b5a5ea</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 10: Number of candidates by percentage of valid votes received, by political affiliation</span><span data-lang="fr" style="display:none">Tableau 10 : Nombre de candidats selon le pourcentage des votes obtenus, par appartenance politique</span><div class="small"><code>358a7505-0e99-425b-acba-81204a0f0dd8</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:05.426352</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:04.556174"
+          data-status="success"
+          data-resource="f35f83d4-d333-43ed-89d9-ddead330f6f9"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/27111616-eef8-44a8-8527-211f8e7b230c.html"><code>27111616-eef8-44a8-8527-211f8e7b230c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 8: Number of valid votes by political affiliation</span><span data-lang="fr" style="display:none">Tableau 8 : Nombre de votes valides par appartenance politique </span><div class="small"><code>f35f83d4-d333-43ed-89d9-ddead330f6f9</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:04.556174</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:03.641845"
+          data-status="failure"
+          data-resource="fe797752-9dc0-42a0-a286-413ee1d4e832"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/106f8d32-ad8b-4336-ae5a-e4d68696ee6c.html"><code>106f8d32-ad8b-4336-ae5a-e4d68696ee6c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 7: Distribution of seats by political affiliation and sex</span><span data-lang="fr" style="display:none">Tableau 7 : Répartition des sièges par appartenance politique et par sexe </span><div class="small"><code>fe797752-9dc0-42a0-a286-413ee1d4e832</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">9 err</span><span data-lang="fr" style="display:none">9 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:03.641845</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:02.627359"
+          data-status="success"
+          data-resource="b2b05fdc-508b-400b-9461-08cb2da8c2bf"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a9c1752f-e0fd-47e1-adc2-94ff5ab1179a.html"><code>a9c1752f-e0fd-47e1-adc2-94ff5ab1179a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 6: Distribution of valid votes under Special Voting Rules</span><span data-lang="fr" style="display:none">Tableau 6 : Répartition des votes valides en vertu des Règles électorales spéciales </span><div class="small"><code>b2b05fdc-508b-400b-9461-08cb2da8c2bf</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:02.627359</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:01.76556"
+          data-status="failure"
+          data-resource="14b9f26e-8838-4da8-9f6b-c498fdfabe47"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/3194b1ad-07ed-4f9e-a349-1f17e2e6f891.html"><code>3194b1ad-07ed-4f9e-a349-1f17e2e6f891</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 5: Distribution of valid votes by voting method</span><span data-lang="fr" style="display:none">Tableau 5 : Répartition des votes valides selon les diverses méthodes de vote </span><div class="small"><code>14b9f26e-8838-4da8-9f6b-c498fdfabe47</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:01.76556</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:00.897604"
+          data-status="failure"
+          data-resource="349b9d4d-b453-4bd2-affe-7fbb41a1b10e"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/91912bc8-6e71-4cd3-b598-f559e6aa7895.html"><code>91912bc8-6e71-4cd3-b598-f559e6aa7895</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 3: Number of ballots cast and voter turnout</span><span data-lang="fr" style="display:none">Tableau 3 : Nombre de bulletins de vote déposés et participation électorale </span><div class="small"><code>349b9d4d-b453-4bd2-affe-7fbb41a1b10e</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:50:00.897604</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:49:59.956147"
+          data-status="success"
+          data-resource="12d25fc0-462a-45aa-9ce6-b0017d5846ff"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.2"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/caebd946-237d-4a8c-8765-1a500e5c6dad.html"><code>caebd946-237d-4a8c-8765-1a500e5c6dad</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 1: Number of electors and polling stations</span><span data-lang="fr" style="display:none">Tableau 1 : Nombre d&#x27;électeurs et de bureaux de scrutin</span><div class="small"><code>12d25fc0-462a-45aa-9ce6-b0017d5846ff</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:49:59.956147</time></td>
+      </tr>
+    
+      <tr data-created="2023-01-27 20:17:17.167169"
+          data-status="failure"
+          data-resource="6ffdff30-1328-4b23-99c4-7d500b86709c"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="Poll-by-Poll Results - 38th General Election"
+          data-dataset-fr="Résultats par bureau de scrutin - 38e élection générale"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9f3e1b11-8179-4fcd-b102-918a0a876a94.html"><code>9f3e1b11-8179-4fcd-b102-918a0a876a94</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Poll-by-Poll Results - 38th General Election</span><span data-lang="fr" style="display:none">Résultats par bureau de scrutin - 38e élection générale</span><div class="small"><code>3d44e2da-3e36-45cf-ab2a-037801eaaa6b</code></div></td>
+        <td><span data-lang="en">Dataset</span><span data-lang="fr" style="display:none">Ensemble de données </span><div class="small"><code>6ffdff30-1328-4b23-99c4-7d500b86709c</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-01-27 20:17:17.167169</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-09 14:01:08.155216"
+          data-status="success"
+          data-resource="12df72de-795e-44c4-8e94-fa86b6708ca5"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/de408940-9cbf-45e0-85c3-983e8e86aca8.html"><code>de408940-9cbf-45e0-85c3-983e8e86aca8</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 9: Percentage of valid votes by political affiliation</span><span data-lang="fr" style="display:none">Tableau 9 : Pourcentage des votes valides par appartenance politique </span><div class="small"><code>12df72de-795e-44c4-8e94-fa86b6708ca5</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-09-09 14:01:08.155216</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-09 14:01:07.909469"
+          data-status="success"
+          data-resource="a8339d6b-cfeb-4631-8afd-a6ccf2b770ef"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/dd31b555-4342-477b-94e7-27a4d4182735.html"><code>dd31b555-4342-477b-94e7-27a4d4182735</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 4: Voter turnout for the 2019, 2015, 2011 and 2008 general elections</span><span data-lang="fr" style="display:none">Tableau 4 : Participation électorale, élections générales de 2019, 2015, 2011 et 2008</span><div class="small"><code>a8339d6b-cfeb-4631-8afd-a6ccf2b770ef</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-09-09 14:01:07.909469</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-09 14:01:07.810493"
+          data-status="success"
+          data-resource="1cbc6e8c-ce7a-4c6e-a50a-c31675c05dc1"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="43rd General Election: Official Voting Results"
+          data-dataset-fr="43e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7263794c-f26d-4b07-a5bc-919ec463c99c.html"><code>7263794c-f26d-4b07-a5bc-919ec463c99c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">43rd General Election: Official Voting Results</span><span data-lang="fr" style="display:none">43e élection générale : Résultats officiels du scrutin</span><div class="small"><code>199e5070-2fd5-49d3-aa21-aece08964d18</code></div></td>
+        <td><span data-lang="en">Table 2: Number of electors and polling stations for the 2019 2015, 2011 and 2008 general elections</span><span data-lang="fr" style="display:none">Tableau 2 : Nombre d&#x27;électeurs et de bureaux de scrutin, élections générales de 2019, 2015, 2011 et 2008</span><div class="small"><code>1cbc6e8c-ce7a-4c6e-a50a-c31675c05dc1</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-09-09 14:01:07.810493</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-09 14:01:05.260779"
+          data-status="success"
+          data-resource="1dbb335b-8e54-44fa-bf41-493d65125edd"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/de809456-ec17-4f5f-ad30-8d6be008e45b.html"><code>de809456-ec17-4f5f-ad30-8d6be008e45b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 9: Percentage of valid votes by political affiliation</span><span data-lang="fr" style="display:none">Tableau 9 : Pourcentage des votes valides par appartenance politique </span><div class="small"><code>1dbb335b-8e54-44fa-bf41-493d65125edd</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-09-09 14:01:05.260779</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-09 14:01:04.972455"
+          data-status="success"
+          data-resource="b4d2b6b1-1baf-4ec0-bcd6-1f8fffeb6d2f"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7eaceb0e-9fe5-41a8-b414-64fb78c123ad.html"><code>7eaceb0e-9fe5-41a8-b414-64fb78c123ad</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 4: Voter turnout for the 2021, 2019, 2015 and 2011 general elections</span><span data-lang="fr" style="display:none">Tableau 4 : Participation électorale, élections générales de 2021, 2019, 2015 et 2011</span><div class="small"><code>b4d2b6b1-1baf-4ec0-bcd6-1f8fffeb6d2f</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-09-09 14:01:04.972455</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-09 14:01:04.852421"
+          data-status="success"
+          data-resource="37237fe0-9b16-46e3-8680-ed30a5a23aff"
+          data-organization="Elections Canada | Élections Canada"
+          data-org="Elections Canada | Élections Canada"
+          data-version="v0.1"
+          data-dataset-en="44th General Election: Official Voting Results"
+          data-dataset-fr="44e élection générale : Résultats officiels du scrutin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/868e5e9b-e145-465f-a49f-4e1561965abc.html"><code>868e5e9b-e145-465f-a49f-4e1561965abc</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">44th General Election: Official Voting Results</span><span data-lang="fr" style="display:none">44e élection générale : Résultats officiels du scrutin</span><div class="small"><code>065439a9-c194-4259-9c95-245a852be4a1</code></div></td>
+        <td><span data-lang="en">Table 2: Number of electors and polling stations for the 2021, 2019, 2015 and 2011 general elections</span><span data-lang="fr" style="display:none">Tableau 2 : Nombre d&#x27;électeurs et de bureaux de scrutin, élections générales de 2021, 2019, 2015 et 2011</span><div class="small"><code>37237fe0-9b16-46e3-8680-ed30a5a23aff</code> · upload</div></td>
+        <td>Elections Canada | Élections Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-09-09 14:01:04.852421</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [21, 11], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [21], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [11], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

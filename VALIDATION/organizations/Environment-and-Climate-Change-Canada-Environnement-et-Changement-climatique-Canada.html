@@ -1,0 +1,1703 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Environment and Climate Change Canada | Environnement et Changement climatique Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Environment and Climate Change Canada | Environnement et Changement climatique Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 71 · Success: 22 · Failure: 49 · Other: 0 · URL types: 2 · Latest: <time>2026-01-06 19:48:21.02678</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">71</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">22</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">49</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>remote</td><td>49</td><td>0</td><td>49</td></tr><tr><td>upload</td><td>22</td><td>22</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2026-01-06 19:48:21.02678"
+          data-status="success"
+          data-resource="7ba57b86-2c58-4437-a49e-5f6f4af17666"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8d086b75-d6de-47b4-aace-7e63ec31febd.html"><code>8d086b75-d6de-47b4-aace-7e63ec31febd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2025</span><span data-lang="fr" style="display:none">2025</span><div class="small"><code>7ba57b86-2c58-4437-a49e-5f6f4af17666</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-06 19:48:21.02678</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-06 19:43:55.552136"
+          data-status="success"
+          data-resource="35aeeb59-b793-4396-8833-7d605823a82f"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e3d93b09-463e-45f2-bc5d-d6c8d42873d5.html"><code>e3d93b09-463e-45f2-bc5d-d6c8d42873d5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2024</span><span data-lang="fr" style="display:none">2024</span><div class="small"><code>35aeeb59-b793-4396-8833-7d605823a82f</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-06 19:43:55.552136</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-06 19:35:28.637685"
+          data-status="success"
+          data-resource="258b26d9-df6d-4a24-8327-f0356df68b96"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5064e45b-ca41-4ea6-8a04-d63f9bdfb8ed.html"><code>5064e45b-ca41-4ea6-8a04-d63f9bdfb8ed</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2023</span><span data-lang="fr" style="display:none">2023</span><div class="small"><code>258b26d9-df6d-4a24-8327-f0356df68b96</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-06 19:35:28.637685</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-21 15:24:52.721484"
+          data-status="success"
+          data-resource="949c2b2c-7ade-4135-9426-aa814e14ff6a"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0bdeebab-d56b-4a75-8562-73521107f329.html"><code>0bdeebab-d56b-4a75-8562-73521107f329</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2004-2006</span><span data-lang="fr" style="display:none">2004-2006</span><div class="small"><code>949c2b2c-7ade-4135-9426-aa814e14ff6a</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-21 15:24:52.721484</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 16:24:22.440548"
+          data-status="success"
+          data-resource="301b777b-d0a0-4245-8bd4-9591b69ed4fb"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/07e2df26-c834-4b13-8a9b-650ac5d8a498.html"><code>07e2df26-c834-4b13-8a9b-650ac5d8a498</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2007</span><span data-lang="fr" style="display:none">2007</span><div class="small"><code>301b777b-d0a0-4245-8bd4-9591b69ed4fb</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 16:24:22.440548</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 16:21:52.246983"
+          data-status="success"
+          data-resource="faf4349b-d2b8-4d20-9f0e-506a635b6806"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/dee2ca2f-159d-403f-95f1-a45c838478a4.html"><code>dee2ca2f-159d-403f-95f1-a45c838478a4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2008</span><span data-lang="fr" style="display:none">2008</span><div class="small"><code>faf4349b-d2b8-4d20-9f0e-506a635b6806</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 16:21:52.246983</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 16:19:24.351573"
+          data-status="success"
+          data-resource="6d94f9f1-3e46-484d-9135-290baeba2e5e"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ca931ae3-3aff-4d70-b31a-f0eb8e208227.html"><code>ca931ae3-3aff-4d70-b31a-f0eb8e208227</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2009</span><span data-lang="fr" style="display:none">2009</span><div class="small"><code>6d94f9f1-3e46-484d-9135-290baeba2e5e</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 16:19:24.351573</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 16:11:42.011165"
+          data-status="success"
+          data-resource="dd6dde40-7721-45d2-8c5b-362276061339"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f7a6a466-d53e-4207-8f4a-87fe3ccd7ab2.html"><code>f7a6a466-d53e-4207-8f4a-87fe3ccd7ab2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2010</span><span data-lang="fr" style="display:none">2010</span><div class="small"><code>dd6dde40-7721-45d2-8c5b-362276061339</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 16:11:42.011165</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 16:07:20.484699"
+          data-status="success"
+          data-resource="5054a487-8472-4905-9eec-712805a69c3c"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/b617e962-de4c-460a-8567-62bcfe75088b.html"><code>b617e962-de4c-460a-8567-62bcfe75088b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2011</span><span data-lang="fr" style="display:none">2011</span><div class="small"><code>5054a487-8472-4905-9eec-712805a69c3c</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 16:07:20.484699</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:57:56.109434"
+          data-status="success"
+          data-resource="aebe8f8a-d07c-4822-bba7-b693079e5052"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/08dc823d-8d4a-4b42-a1ea-93e7a4486e03.html"><code>08dc823d-8d4a-4b42-a1ea-93e7a4486e03</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2012</span><span data-lang="fr" style="display:none">2012</span><div class="small"><code>aebe8f8a-d07c-4822-bba7-b693079e5052</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:57:56.109434</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:55:49.472847"
+          data-status="success"
+          data-resource="168116ce-b212-42ff-b4c0-3ffff23c45ec"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/285bc845-8c52-482d-a533-aa5de219b29d.html"><code>285bc845-8c52-482d-a533-aa5de219b29d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2013</span><span data-lang="fr" style="display:none">2013</span><div class="small"><code>168116ce-b212-42ff-b4c0-3ffff23c45ec</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:55:49.472847</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:53:59.166078"
+          data-status="success"
+          data-resource="0349dd80-0287-4afa-9416-1dd7444b60c6"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9741c2a7-cc10-4b36-adbe-ef16d16078b6.html"><code>9741c2a7-cc10-4b36-adbe-ef16d16078b6</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2015</span><span data-lang="fr" style="display:none">2015</span><div class="small"><code>0349dd80-0287-4afa-9416-1dd7444b60c6</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:53:59.166078</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:51:05.31208"
+          data-status="success"
+          data-resource="772ab68a-f33d-44d7-a6e4-498704926d63"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c4f5100a-c3d5-48c4-ace5-ec52cd6c2d2f.html"><code>c4f5100a-c3d5-48c4-ace5-ec52cd6c2d2f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2014</span><span data-lang="fr" style="display:none">2014</span><div class="small"><code>772ab68a-f33d-44d7-a6e4-498704926d63</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:51:05.31208</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:44:40.295599"
+          data-status="success"
+          data-resource="54a134b7-92a6-483f-bf5d-db1e3900759f"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/baaab453-ff44-4420-843f-d06d64879e3e.html"><code>baaab453-ff44-4420-843f-d06d64879e3e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2016</span><span data-lang="fr" style="display:none">2016</span><div class="small"><code>54a134b7-92a6-483f-bf5d-db1e3900759f</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:44:40.295599</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:41:49.174535"
+          data-status="success"
+          data-resource="3f801628-a0fe-4b36-9479-554aa53cd3dc"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6f51d172-ea2d-4704-83ae-df8a06f8a4a7.html"><code>6f51d172-ea2d-4704-83ae-df8a06f8a4a7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2017</span><span data-lang="fr" style="display:none">2017</span><div class="small"><code>3f801628-a0fe-4b36-9479-554aa53cd3dc</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:41:49.174535</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:23:35.410969"
+          data-status="success"
+          data-resource="de29eb95-a859-4efa-918e-a647c3310f95"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8eeae627-e2ba-44a0-b19a-68e6fc10b6ef.html"><code>8eeae627-e2ba-44a0-b19a-68e6fc10b6ef</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2018</span><span data-lang="fr" style="display:none">2018</span><div class="small"><code>de29eb95-a859-4efa-918e-a647c3310f95</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:23:35.410969</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:19:38.129373"
+          data-status="success"
+          data-resource="0a1a6e53-2a88-45b1-81d9-600a5d458840"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7e88f058-8f3e-47a7-b2c4-5ff0ed9e5150.html"><code>7e88f058-8f3e-47a7-b2c4-5ff0ed9e5150</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2019</span><span data-lang="fr" style="display:none">2019</span><div class="small"><code>0a1a6e53-2a88-45b1-81d9-600a5d458840</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:19:38.129373</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:17:03.141061"
+          data-status="success"
+          data-resource="43fde3b9-6beb-49dd-a951-619640d73fdd"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4fe9e1de-40e8-492d-b603-0d87c13b5cbd.html"><code>4fe9e1de-40e8-492d-b603-0d87c13b5cbd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2020</span><span data-lang="fr" style="display:none">2020</span><div class="small"><code>43fde3b9-6beb-49dd-a951-619640d73fdd</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:17:03.141061</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 15:08:21.837871"
+          data-status="success"
+          data-resource="c6a393ae-8138-4334-8d04-a3cd75c88935"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8459e55a-6a50-4539-a64b-47b0f799fab3.html"><code>8459e55a-6a50-4539-a64b-47b0f799fab3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2021</span><span data-lang="fr" style="display:none">2021</span><div class="small"><code>c6a393ae-8138-4334-8d04-a3cd75c88935</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 15:08:21.837871</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-20 14:58:56.656643"
+          data-status="success"
+          data-resource="e96132c5-173b-423b-8d25-22b533c1e50f"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="EnerGuide Rating System Open Data"
+          data-dataset-fr="Données ouvertes du Système de cote ÉnerGuide"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e6ab74c7-0010-40f4-bba3-9e622739694e.html"><code>e6ab74c7-0010-40f4-bba3-9e622739694e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">EnerGuide Rating System Open Data</span><span data-lang="fr" style="display:none">Données ouvertes du Système de cote ÉnerGuide</span><div class="small"><code>0a7619fd-2ffe-44b5-9027-3dfcec0866fd</code></div></td>
+        <td><span data-lang="en">2022</span><span data-lang="fr" style="display:none">2022</span><div class="small"><code>e96132c5-173b-423b-8d25-22b533c1e50f</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-10-20 14:58:56.656643</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:19.538941"
+          data-status="failure"
+          data-resource="245d6584-4fa2-488d-a844-f3b865bb9499"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Greenhouse gas emissions from a consumption perspective"
+          data-dataset-fr="Émissions de gaz à effet de serre sur le plan de la consommation"
+          data-filtered="1">
+        <td>
+          <a href="../reports/97d24331-5689-4401-aa9a-1d6013a9d18c.html"><code>97d24331-5689-4401-aa9a-1d6013a9d18c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Greenhouse gas emissions from a consumption perspective</span><span data-lang="fr" style="display:none">Émissions de gaz à effet de serre sur le plan de la consommation</span><div class="small"><code>afb5d056-c75b-4c30-998f-effc256275db</code></div></td>
+        <td><span data-lang="en">Difference between production- and consumption-based emissions from selected countries and regions, 1995 to 2020 - French (6.48 kB)</span><span data-lang="fr" style="display:none">Différence entre les émissions liées à la production et à la consommation, certains pays et régions, 1995 à 2020 - Français (6,48 ko)</span><div class="small"><code>245d6584-4fa2-488d-a844-f3b865bb9499</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">64 err</span><span data-lang="fr" style="display:none">64 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:19.538941</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:19.506878"
+          data-status="failure"
+          data-resource="0889b176-37be-41d9-b1f6-0a683d98d735"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Greenhouse gas emissions from a consumption perspective"
+          data-dataset-fr="Émissions de gaz à effet de serre sur le plan de la consommation"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fd50ef30-c137-4031-aec4-694dd96b1773.html"><code>fd50ef30-c137-4031-aec4-694dd96b1773</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Greenhouse gas emissions from a consumption perspective</span><span data-lang="fr" style="display:none">Émissions de gaz à effet de serre sur le plan de la consommation</span><div class="small"><code>afb5d056-c75b-4c30-998f-effc256275db</code></div></td>
+        <td><span data-lang="en">Difference between production- and consumption-based emissions from selected countries and regions, 1995 to 2020 - English (6.76 kB)</span><span data-lang="fr" style="display:none">Différence entre les émissions liées à la production et à la consommation, certains pays et régions, 1995 à 2020 - Anglais (6,76 ko)</span><div class="small"><code>0889b176-37be-41d9-b1f6-0a683d98d735</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">88 err</span><span data-lang="fr" style="display:none">88 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:19.506878</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:19.477126"
+          data-status="failure"
+          data-resource="fdf80b0a-34ea-4ae4-a746-7ac89b51f619"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Greenhouse gas emissions from a consumption perspective"
+          data-dataset-fr="Émissions de gaz à effet de serre sur le plan de la consommation"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a03c13af-412b-4748-b6c5-557aa63c3229.html"><code>a03c13af-412b-4748-b6c5-557aa63c3229</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Greenhouse gas emissions from a consumption perspective</span><span data-lang="fr" style="display:none">Émissions de gaz à effet de serre sur le plan de la consommation</span><div class="small"><code>afb5d056-c75b-4c30-998f-effc256275db</code></div></td>
+        <td><span data-lang="en">Production- and consumption-based greenhouse gas emissions from Canada, 1995 to 2020 - French (2.18 kB)</span><span data-lang="fr" style="display:none">Émissions de gaz à effet de serre liées à la production et à la consommation, Canada, 1995 à 2020 - Français (2,18 ko)</span><div class="small"><code>fdf80b0a-34ea-4ae4-a746-7ac89b51f619</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:19.477126</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:18.909611"
+          data-status="failure"
+          data-resource="f8b70b9a-266e-43b6-93ee-8bc6e492d9a9"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Greenhouse gas emissions from a consumption perspective"
+          data-dataset-fr="Émissions de gaz à effet de serre sur le plan de la consommation"
+          data-filtered="1">
+        <td>
+          <a href="../reports/03dbf7aa-b6e6-432f-a908-0cc236e59078.html"><code>03dbf7aa-b6e6-432f-a908-0cc236e59078</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Greenhouse gas emissions from a consumption perspective</span><span data-lang="fr" style="display:none">Émissions de gaz à effet de serre sur le plan de la consommation</span><div class="small"><code>afb5d056-c75b-4c30-998f-effc256275db</code></div></td>
+        <td><span data-lang="en">Production- and consumption-based greenhouse gas emissions from Canada, 1995 to 2020 - English (1.87 kB)</span><span data-lang="fr" style="display:none">Émissions de gaz à effet de serre liées à la production et à la consommation, Canada, 1995 à 2020 - Anglais (1,87 ko)</span><div class="small"><code>f8b70b9a-266e-43b6-93ee-8bc6e492d9a9</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:18.909611</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.633625"
+          data-status="failure"
+          data-resource="069897e8-b42f-4bc5-b960-65b1d0397dfc"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bf22613c-e845-411a-8a59-2829807ab748.html"><code>bf22613c-e845-411a-8a59-2829807ab748</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Volume of marine oil spills detected offshore and in coastal areas by the National Aerial Surveillance Program, Canada, 2010 to 2024 - français</span><span data-lang="fr" style="display:none">Volumes des déversements d’hydrocarbures en milieu marin détectés dans les zones côtières et au large par le Programme national de surveillance aérienne, Canada, 2010 à 2024. - français</span><div class="small"><code>069897e8-b42f-4bc5-b960-65b1d0397dfc</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.633625</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.591356"
+          data-status="failure"
+          data-resource="6d483864-0146-478a-971d-3518148656a9"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0d7e3d0e-9d6c-416a-b57c-614bf0c8af4a.html"><code>0d7e3d0e-9d6c-416a-b57c-614bf0c8af4a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Volume of marine oil spills detected offshore and in coastal areas by the National Aerial Surveillance Program, Canada, 2010 to 2024 - English</span><span data-lang="fr" style="display:none">Volumes des déversements d’hydrocarbures en milieu marin détectés dans les zones côtières et au large par le Programme national de surveillance aérienne, Canada, 2010 à 2024. - English</span><div class="small"><code>6d483864-0146-478a-971d-3518148656a9</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.591356</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.555193"
+          data-status="failure"
+          data-resource="50678a26-4fb4-4dd5-ad16-23c35f1ab653"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4732858a-6078-4ae1-9bc5-4411c398668e.html"><code>4732858a-6078-4ae1-9bc5-4411c398668e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Location of marine oil spills of over 10 litres detected by the National Aerial Surveillance Program, Canada, 2024 - français</span><span data-lang="fr" style="display:none">Emplacement des déversements d’hydrocarbures en milieu marin de plus de 10 litres détectés par le Programme national de surveillance aérienne au Canada, 2024 - français</span><div class="small"><code>50678a26-4fb4-4dd5-ad16-23c35f1ab653</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.555193</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.513763"
+          data-status="failure"
+          data-resource="60449f0b-c77a-43eb-8c28-ef5b86520177"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/360dae59-6398-4e37-83f7-360ca09321d9.html"><code>360dae59-6398-4e37-83f7-360ca09321d9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Location of marine oil spills of over 10 litres detected by the National Aerial Surveillance Program, Canada, 2024 - English</span><span data-lang="fr" style="display:none">Emplacement des déversements d’hydrocarbures en milieu marin de plus de 10 litres détectés par le Programme national de surveillance aérienne au Canada, 2024 - English</span><div class="small"><code>60449f0b-c77a-43eb-8c28-ef5b86520177</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.513763</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.478149"
+          data-status="failure"
+          data-resource="4cc083fb-8c15-4348-92f8-2566b779c181"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7ef3ea7f-7470-4ca5-affa-8ba58e582ba5.html"><code>7ef3ea7f-7470-4ca5-affa-8ba58e582ba5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Category of marine oil-spill incident as reported to the National Environmental Emergencies Centre, Canada, 2024 - français</span><span data-lang="fr" style="display:none">Nombre de déversements d’hydrocarbures en milieu marin signalés au Centre national des urgences environnementales par catégorie, Canada, 2024 - français</span><div class="small"><code>4cc083fb-8c15-4348-92f8-2566b779c181</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.478149</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.447318"
+          data-status="failure"
+          data-resource="265e8345-dcc0-4891-a3df-bd3820dfb779"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5756eb6c-48f9-48b0-8528-4a934f6e483f.html"><code>5756eb6c-48f9-48b0-8528-4a934f6e483f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Category of marine oil-spill incident as reported to the National Environmental Emergencies Centre, Canada, 2024 - English</span><span data-lang="fr" style="display:none">Nombre de déversements d’hydrocarbures en milieu marin signalés au Centre national des urgences environnementales par catégorie, Canada, 2024 - Anglais</span><div class="small"><code>265e8345-dcc0-4891-a3df-bd3820dfb779</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.447318</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.417282"
+          data-status="failure"
+          data-resource="513017ef-b74e-4c31-a033-243feb51ddb0"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9a662f81-c5c6-4ff2-bfd7-cf4d11451d62.html"><code>9a662f81-c5c6-4ff2-bfd7-cf4d11451d62</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Number of marine oil spills by volume reported to the National Environmental Emergencies Centre, Canada, 2019 to 2024 - français</span><span data-lang="fr" style="display:none">Nombre de déversements d’hydrocarbures en milieu marin par volume signalés au Centre national des urgences environnementales, Canada, 2019 à 2024 - français</span><div class="small"><code>513017ef-b74e-4c31-a033-243feb51ddb0</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.417282</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.383625"
+          data-status="failure"
+          data-resource="fb10d44c-29c1-4f98-a1d2-da363ace4802"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6bd1d87e-3c12-4f3a-929d-f27f59bca137.html"><code>6bd1d87e-3c12-4f3a-929d-f27f59bca137</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Number of marine oil spills by volume reported to the National Environmental Emergencies Centre, Canada, 2019 to 2024 - English</span><span data-lang="fr" style="display:none">Nombre de déversements d’hydrocarbures en milieu marin par volume signalés au Centre national des urgences environnementales, Canada, 2019 à 2024 - Anglais</span><div class="small"><code>fb10d44c-29c1-4f98-a1d2-da363ace4802</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">13 err</span><span data-lang="fr" style="display:none">13 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.383625</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:12.339207"
+          data-status="failure"
+          data-resource="72e870f6-db95-4987-9ef2-b32a6f1a80b0"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e1cf1c97-e301-407c-ad27-9c61b2483487.html"><code>e1cf1c97-e301-407c-ad27-9c61b2483487</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Number of marine oil spills detected by the National Aerial Surveillance Program, Canada, 2010 to 2024 - français</span><span data-lang="fr" style="display:none">Nombre de déversements d’hydrocarbures en milieu marin détectés par le Programme national de surveillance aérienne, Canada, 2010 à 2024. - Français</span><div class="small"><code>72e870f6-db95-4987-9ef2-b32a6f1a80b0</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:12.339207</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:34:11.68077"
+          data-status="failure"
+          data-resource="9be28b44-2db9-4782-8d5a-ae6107b58524"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Marine oil spills"
+          data-dataset-fr="Déversements d’hydrocarbures en milieu marin"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bf51bf58-3aff-46ec-9934-69594eec07c9.html"><code>bf51bf58-3aff-46ec-9934-69594eec07c9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Marine oil spills</span><span data-lang="fr" style="display:none">Déversements d’hydrocarbures en milieu marin</span><div class="small"><code>ea5ba359-a64e-4f3e-b654-99c0671bd659</code></div></td>
+        <td><span data-lang="en">Number of marine oil spills detected by the National Aerial Surveillance Program, Canada, 2010 to 2024 - English</span><span data-lang="fr" style="display:none">Nombre de déversements d’hydrocarbures en milieu marin détectés par le Programme national de surveillance aérienne, Canada, 2010 à 2024. - Anglais</span><div class="small"><code>9be28b44-2db9-4782-8d5a-ae6107b58524</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:34:11.68077</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.991776"
+          data-status="failure"
+          data-resource="e4e35eef-b5d2-4aa9-a53a-c0fda5408b41"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7f6aa52e-ffdd-4806-bb90-e4eab1751f6c.html"><code>7f6aa52e-ffdd-4806-bb90-e4eab1751f6c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in the British Columbia and the Territories, 2021 - French (csv; 1.2 kB)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau en Colombie-Britannique et dans les territoires, 2021 - Français (csv; 1,2 ko)</span><div class="small"><code>e4e35eef-b5d2-4aa9-a53a-c0fda5408b41</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.991776</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.947712"
+          data-status="failure"
+          data-resource="91ac939a-05b9-43cf-9b96-dd402f5337fe"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/16302cbb-0d1a-4a85-aeeb-19cc6ecfd8d4.html"><code>16302cbb-0d1a-4a85-aeeb-19cc6ecfd8d4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in the British Columbia and the Territories, 2021 - English (csv; 945 B)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau en Colombie-Britannique et dans les territoires, 2021 - Anglais (csv; 945 o)</span><div class="small"><code>91ac939a-05b9-43cf-9b96-dd402f5337fe</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.947712</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.912053"
+          data-status="failure"
+          data-resource="11da9c3b-3b4c-4c15-8fa2-3cd6b942c8e1"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a68f4f77-5d78-42ee-bb22-f27eddf31935.html"><code>a68f4f77-5d78-42ee-bb22-f27eddf31935</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in the British Columbia and the Territories, 2011 to 2021 - French (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau en Colombie-Britannique et dans les territoires, de 2011 à 2021 - Français (csv; 1,3 ko)</span><div class="small"><code>11da9c3b-3b4c-4c15-8fa2-3cd6b942c8e1</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.912053</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.866572"
+          data-status="failure"
+          data-resource="d5cbc77d-966d-4d7f-9fac-3d3be8ffbb62"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/78da030d-f8be-43b7-b7c4-342c48c63e5d.html"><code>78da030d-f8be-43b7-b7c4-342c48c63e5d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in the British Columbia and the Territories, 2011 to 2021 - English (csv; 1 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau en Colombie-Britannique et dans les territoires, de 2011 à 2021 - Anglais (csv; 1 ko)</span><div class="small"><code>d5cbc77d-966d-4d7f-9fac-3d3be8ffbb62</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.866572</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.827158"
+          data-status="failure"
+          data-resource="07a64328-6d61-49bf-9a9a-6f53300b6736"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0c5351a6-8f14-4af7-b38e-ba1e49eacb96.html"><code>0c5351a6-8f14-4af7-b38e-ba1e49eacb96</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in British Columbia and the Territories, 2021 - French (csv; 1.4 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur en Colombie-Britannique et dans les territoires, 2021 - Français (csv; 1,4 ko)</span><div class="small"><code>07a64328-6d61-49bf-9a9a-6f53300b6736</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.827158</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.789681"
+          data-status="failure"
+          data-resource="f0fdbc03-c4e1-4b21-98e1-711caad1af52"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9c4bc06b-186d-49b9-8eff-240e53cd36de.html"><code>9c4bc06b-186d-49b9-8eff-240e53cd36de</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in British Columbia and the Territories, 2021 - English (csv; 1.1 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur en Colombie-Britannique et dans les territoires, 2021 - Anglais (csv; 1,1 ko)</span><div class="small"><code>f0fdbc03-c4e1-4b21-98e1-711caad1af52</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.789681</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.746228"
+          data-status="failure"
+          data-resource="71936e62-974e-4646-b80b-56bb5677b353"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/89227522-59d9-4674-bab4-48e2e69943e9.html"><code>89227522-59d9-4674-bab4-48e2e69943e9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Prairie provinces, 2021 - French (csv; 1.2 kB)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau dans les provinces des Prairies, 2021 - Français (csv; 1,2 ko)</span><div class="small"><code>71936e62-974e-4646-b80b-56bb5677b353</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.746228</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.709134"
+          data-status="failure"
+          data-resource="972f0c59-24ea-4504-bd4d-582f4c131006"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0fad986c-8f27-4741-9439-f18ce0e8bc3a.html"><code>0fad986c-8f27-4741-9439-f18ce0e8bc3a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Prairie provinces, 2021 - English (csv; 956 B)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau dans les provinces des Prairies, 2021 - Anglais (csv; 956 o)</span><div class="small"><code>972f0c59-24ea-4504-bd4d-582f4c131006</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.709134</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.652186"
+          data-status="failure"
+          data-resource="4fcb3eb8-bbcf-412f-899b-6c06b9422447"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/05515837-4de4-4d90-a8a6-32ec969b0021.html"><code>05515837-4de4-4d90-a8a6-32ec969b0021</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Prairie provinces, 2011 to 2021 - French (csv; 1.4 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau dans les provinces des Prairies, de 2011 à 2021 - Français (csv; 1,4 ko)</span><div class="small"><code>4fcb3eb8-bbcf-412f-899b-6c06b9422447</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.652186</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.610514"
+          data-status="failure"
+          data-resource="3cba62b1-f32c-462b-b076-32b43c0c9b14"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9946d4cc-b206-46db-b43b-327547eedcb5.html"><code>9946d4cc-b206-46db-b43b-327547eedcb5</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Prairie provinces, 2011 to 2021 - English (csv; 1 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau dans les provinces des Prairies, de 2011 à 2021 - Anglais (csv; 1 ko)</span><div class="small"><code>3cba62b1-f32c-462b-b076-32b43c0c9b14</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.610514</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.569902"
+          data-status="failure"
+          data-resource="bde48a11-8a8e-449f-af19-248ba94b3a45"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/2b311d31-ee8b-48a2-b66e-03c7d017d415.html"><code>2b311d31-ee8b-48a2-b66e-03c7d017d415</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Prairie provinces, 2021 - French (csv; 1.4 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur dans les provinces des Prairies, 2021 - Français (csv; 1,4 ko)</span><div class="small"><code>bde48a11-8a8e-449f-af19-248ba94b3a45</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.569902</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.517869"
+          data-status="failure"
+          data-resource="6e653e68-83ee-45d6-844f-9cb73b844885"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ecdf044e-4f6b-44ec-a08c-8f782ef3ea9c.html"><code>ecdf044e-4f6b-44ec-a08c-8f782ef3ea9c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Prairie provinces, 2021 - English (csv; 1.1 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur dans les provinces des Prairies, 2021 - Anglais (csv; 1,1 ko)</span><div class="small"><code>6e653e68-83ee-45d6-844f-9cb73b844885</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.517869</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.476802"
+          data-status="failure"
+          data-resource="efad884f-5e37-411b-a13e-f365baf63872"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4b56696e-ae4e-4cce-8878-dcef0fb10272.html"><code>4b56696e-ae4e-4cce-8878-dcef0fb10272</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Ontario, 2021 - French (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau en Ontario, 2021 - Français (csv; 1,3 ko)</span><div class="small"><code>efad884f-5e37-411b-a13e-f365baf63872</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.476802</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.435463"
+          data-status="failure"
+          data-resource="9a701d31-cb9e-43f7-a81d-6fd09af7f0cb"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5e0172a4-f93a-4a4a-a8b5-5aa31cb14eba.html"><code>5e0172a4-f93a-4a4a-a8b5-5aa31cb14eba</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Ontario, 2021 - English (csv; 971 B)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau en Ontario, 2021 - Anglais (csv; 971 o)</span><div class="small"><code>9a701d31-cb9e-43f7-a81d-6fd09af7f0cb</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.435463</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.37835"
+          data-status="failure"
+          data-resource="eb21858c-307f-4465-83e5-43848fc6fed0"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/198b01ef-1e6f-480e-9639-083b507c4982.html"><code>198b01ef-1e6f-480e-9639-083b507c4982</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Ontario, 2011 to 2021 - French (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau en Ontario, de 2011 à 2021 - Français (csv; 1,3 ko)</span><div class="small"><code>eb21858c-307f-4465-83e5-43848fc6fed0</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.37835</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.314903"
+          data-status="failure"
+          data-resource="5928f6de-9a28-4092-8970-cc92324ebb85"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cebbe73c-988a-42c4-8d2a-9a258840d04d.html"><code>cebbe73c-988a-42c4-8d2a-9a258840d04d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Ontario, 2011 to 2021 - English (csv;  1.0 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau en Ontario, de 2011 à 2021 - Anglais (csv; 1,0 ko)</span><div class="small"><code>5928f6de-9a28-4092-8970-cc92324ebb85</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.314903</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.231515"
+          data-status="failure"
+          data-resource="997300b8-3765-4a57-aafc-c00eccd5208d"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9461ae9f-13fc-4794-ac4b-f25cb41be24c.html"><code>9461ae9f-13fc-4794-ac4b-f25cb41be24c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Ontario, 2021 - French (csv; 2 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur en Ontario, 2021 - Français (csv; 2 ko)</span><div class="small"><code>997300b8-3765-4a57-aafc-c00eccd5208d</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.231515</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.183984"
+          data-status="failure"
+          data-resource="bbab79e0-a0c0-48f1-8606-1d9229fd598f"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/334103d1-ef22-4cfb-94e8-2f3c8f5403fc.html"><code>334103d1-ef22-4cfb-94e8-2f3c8f5403fc</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Ontario, 2021 - English (csv; 1 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur en Ontario, 2021 - Anglais (csv; 1 ko)</span><div class="small"><code>bbab79e0-a0c0-48f1-8606-1d9229fd598f</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.183984</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.137032"
+          data-status="failure"
+          data-resource="4d4c029f-caec-427b-b585-db3be245142c"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d015f99f-0f57-43b3-8f06-7c42d8148213.html"><code>d015f99f-0f57-43b3-8f06-7c42d8148213</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Quebec, 2021 - French (csv; 1.1 kB)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau au Québec, 2021 - Français (csv; 1,1 ko)</span><div class="small"><code>4d4c029f-caec-427b-b585-db3be245142c</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.137032</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.095937"
+          data-status="failure"
+          data-resource="a6647466-c960-42cc-8ba0-fb7d33b3b927"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/effa18dc-80c5-4348-8bf1-8d7216edf7ce.html"><code>effa18dc-80c5-4348-8bf1-8d7216edf7ce</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Quebec, 2021 - English (csv; 906 B)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau au Québec, 2021 - Anglais (csv; 906 o)</span><div class="small"><code>a6647466-c960-42cc-8ba0-fb7d33b3b927</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.095937</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:57.045311"
+          data-status="failure"
+          data-resource="555bc8e5-878d-4f31-a16a-b202f7b9be08"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f614af1f-154a-438f-8d98-838e22923036.html"><code>f614af1f-154a-438f-8d98-838e22923036</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Quebec, 2011 to 2021 - French (csv; 1.2kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau au Québec, de 2011 à 2021 - Français (csv; 1,2 ko)</span><div class="small"><code>555bc8e5-878d-4f31-a16a-b202f7b9be08</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:57.045311</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.979238"
+          data-status="failure"
+          data-resource="3309bc54-7afc-4d6d-a143-fb04116f8943"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/b083920c-db18-47f7-89c8-3c5ea0a43ea0.html"><code>b083920c-db18-47f7-89c8-3c5ea0a43ea0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Quebec, 2011 to 2021 - English (csv; 969 B)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau au Québec, de 2011 à 2021 - Anglais (csv; 969 o)</span><div class="small"><code>3309bc54-7afc-4d6d-a143-fb04116f8943</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.979238</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.939991"
+          data-status="failure"
+          data-resource="5f51d7c2-ff42-4f8f-a777-185cfc9d89ad"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4f5361d0-33c4-43ad-bb11-98e9bfae1454.html"><code>4f5361d0-33c4-43ad-bb11-98e9bfae1454</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Quebec, 2021 - French (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur au Québec, 2021 - Français (csv; 1,3 ko)</span><div class="small"><code>5f51d7c2-ff42-4f8f-a777-185cfc9d89ad</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.939991</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.876838"
+          data-status="failure"
+          data-resource="ee10dc10-b4d4-4014-8bcf-28af06b3819c"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/196d4ef5-3a46-4a12-be71-4a0885b6941b.html"><code>196d4ef5-3a46-4a12-be71-4a0885b6941b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Quebec, 2021 - English (csv; 1 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur au Québec, 2021 - Anglais (csv; 1 ko)</span><div class="small"><code>ee10dc10-b4d4-4014-8bcf-28af06b3819c</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.876838</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.838577"
+          data-status="failure"
+          data-resource="4d3d97d7-41f9-4314-8ba7-d4e89f802f00"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/39967e2c-3014-4789-8601-8f336bda8acf.html"><code>39967e2c-3014-4789-8601-8f336bda8acf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Atlantic provinces, 2021 - French (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau dans les provinces de l’Atlantique, 2021 - Français (csv; 1,3 ko)</span><div class="small"><code>4d3d97d7-41f9-4314-8ba7-d4e89f802f00</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.838577</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.786685"
+          data-status="failure"
+          data-resource="8884ce2d-1177-4740-ae0b-a369da4f8d34"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f1afde6c-4b13-4118-841f-33bedfb560cf.html"><code>f1afde6c-4b13-4118-841f-33bedfb560cf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by the most water-intensive sectors in Atlantic provinces, 2021 - English (csv; 930 B)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par les secteurs les plus consommateurs d’eau dans les provinces de l’Atlantique, 2021 - Anglais (csv; 930 o)</span><div class="small"><code>8884ce2d-1177-4740-ae0b-a369da4f8d34</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.786685</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.747964"
+          data-status="failure"
+          data-resource="04e1f1de-b28f-4f1a-9d4b-00867ad69ec0"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4acb5b8d-95fb-4521-ba2b-07b2d2662b35.html"><code>4acb5b8d-95fb-4521-ba2b-07b2d2662b35</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Atlantic provinces, 2011 to 2021-French (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau dans les provinces de l’Atlantique, de 2011 à 2021 - Français (csv; 1,3 ko)</span><div class="small"><code>04e1f1de-b28f-4f1a-9d4b-00867ad69ec0</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.747964</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.712987"
+          data-status="failure"
+          data-resource="5bce0f01-4461-4e4a-a132-3b264054d0e4"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6c657a36-ba30-4961-a4f9-ff24d3c0fe51.html"><code>6c657a36-ba30-4961-a4f9-ff24d3c0fe51</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Variation in water withdrawals by the most water-intensive sectors in Atlantic provinces, 2011 to 2021 - English (csv; 966 B)</span><span data-lang="fr" style="display:none">Variation des prélèvements d’eau des secteurs les plus consommateurs d’eau dans les provinces de l’Atlantique, de 2011 à 2021 - Anglais (966 o)</span><div class="small"><code>5bce0f01-4461-4e4a-a132-3b264054d0e4</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.712987</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.673951"
+          data-status="failure"
+          data-resource="7d762d12-8918-4568-8edf-a313f4c7175f"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fd16cd7e-11e6-48b7-8f1f-eccea18eb77d.html"><code>fd16cd7e-11e6-48b7-8f1f-eccea18eb77d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Atlantic provinces, 2021 - French (csv; 943 B)</span><span data-lang="fr" style="display:none">Prélèvement d&#x27;eau par secteur des provinces de l&#x27;Atlantique, 2021 - Français (csv; 943 o)</span><div class="small"><code>7d762d12-8918-4568-8edf-a313f4c7175f</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">4 err</span><span data-lang="fr" style="display:none">4 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.673951</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.620437"
+          data-status="failure"
+          data-resource="f97ab3fb-1a26-4edb-93f9-4ff3b473edb2"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/44578d31-218f-4468-8ab3-32c822176896.html"><code>44578d31-218f-4468-8ab3-32c822176896</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Atlantic provinces, 2021 - English (csv; 943 B)</span><span data-lang="fr" style="display:none">Prélèvement d&#x27;eau par secteur des provinces de l&#x27;Atlantique, 2021 - Anglais (csv; 943 o)</span><div class="small"><code>f97ab3fb-1a26-4edb-93f9-4ff3b473edb2</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.620437</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.578321"
+          data-status="failure"
+          data-resource="71d11786-c59f-442a-8e13-f552e92eb637"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8376dfda-1c6b-414c-b39d-d4fc16a6fb87.html"><code>8376dfda-1c6b-414c-b39d-d4fc16a6fb87</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by sector in Canada, 2021 - French (csv; 1.7 kB)</span><span data-lang="fr" style="display:none">Volumes d’eau consommés et rejetés par secteur au Canada, 2021 - Français (csv; 1,7 ko)</span><div class="small"><code>71d11786-c59f-442a-8e13-f552e92eb637</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">6 err</span><span data-lang="fr" style="display:none">6 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.578321</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.521916"
+          data-status="failure"
+          data-resource="7ba5c396-0d1c-465b-b9db-312414eff653"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e42dfc38-676d-42a2-ad6f-189bbc0ab95d.html"><code>e42dfc38-676d-42a2-ad6f-189bbc0ab95d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water consumed and returned by sector in Canada, 2021 - English (csv; 1.3 kB)</span><span data-lang="fr" style="display:none">Volumes d&#x27;eau consommés et rejetés par secteur au Canada, 2021 - Anglais (csv; 1,3 ko)</span><div class="small"><code>7ba5c396-0d1c-465b-b9db-312414eff653</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">6 err</span><span data-lang="fr" style="display:none">6 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.521916</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:56.47772"
+          data-status="failure"
+          data-resource="58837bbb-e23d-4be4-828a-bf5b18c22d2f"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/91306778-b9f7-43b9-9119-cc52b787becb.html"><code>91306778-b9f7-43b9-9119-cc52b787becb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water wihdrawn by sector in Canada, 2005 to 2021 - French (csv;2.1 kB)</span><span data-lang="fr" style="display:none">Prélèvement d&#x27;eau par secteur au Canada, 2005 à 2021 - Français (csv; 2,1 ko)</span><div class="small"><code>58837bbb-e23d-4be4-828a-bf5b18c22d2f</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">21 err</span><span data-lang="fr" style="display:none">21 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:56.47772</time></td>
+      </tr>
+    
+      <tr data-created="2025-04-15 13:33:55.758617"
+          data-status="failure"
+          data-resource="25b1e574-400d-4161-87c5-80113e51b9ca"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Water use in Canada"
+          data-dataset-fr="Utilisation de l&#x27;eau au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5965a18d-a0f2-48f5-9bb4-c9aac264d358.html"><code>5965a18d-a0f2-48f5-9bb4-c9aac264d358</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Water use in Canada</span><span data-lang="fr" style="display:none">Utilisation de l&#x27;eau au Canada</span><div class="small"><code>3db80f7c-66f3-4305-b854-1fbb05c36511</code></div></td>
+        <td><span data-lang="en">Water withdrawn by sector in Canada, 2005 to 2021 - English (CSV; 1,7 kB)</span><span data-lang="fr" style="display:none">Prélèvement d’eau par secteur au Canada, 2005 à 2021 - Anglais (CSV; 1,7 ko)</span><div class="small"><code>25b1e574-400d-4161-87c5-80113e51b9ca</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">21 err</span><span data-lang="fr" style="display:none">21 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-04-15 13:33:55.758617</time></td>
+      </tr>
+    
+      <tr data-created="2025-03-14 23:55:07.255823"
+          data-status="failure"
+          data-resource="c199d28f-2923-4997-877c-f2e6b9e02cbf"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Invasive alien species in Canada"
+          data-dataset-fr="Espèces exotiques envahissantes au Canada"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d2039564-02d6-4537-b68b-d27783b91346.html"><code>d2039564-02d6-4537-b68b-d27783b91346</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Invasive alien species in Canada</span><span data-lang="fr" style="display:none">Espèces exotiques envahissantes au Canada</span><div class="small"><code>7ccdaaba-5891-46fb-a39b-3df2626314d0</code></div></td>
+        <td><span data-lang="en">Data table – French (CSV; 1.1 kB)</span><span data-lang="fr" style="display:none">Tableau de données – Français (CSV; 1,1 ko)</span><div class="small"><code>c199d28f-2923-4997-877c-f2e6b9e02cbf</code> · remote</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">10 err</span><span data-lang="fr" style="display:none">10 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-03-14 23:55:07.255823</time></td>
+      </tr>
+    
+      <tr data-created="2025-03-06 16:09:08.532968"
+          data-status="success"
+          data-resource="ce5107a1-2296-4bf2-a79a-2b3d93c8f40b"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Federal Sustainable Development Strategy 2022-2026 data"
+          data-dataset-fr="Données de la Stratégie fédérale de développement durable 2022-2026"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ee904333-07d7-4784-8707-25bbcf71f879.html"><code>ee904333-07d7-4784-8707-25bbcf71f879</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Federal Sustainable Development Strategy 2022-2026 data</span><span data-lang="fr" style="display:none">Données de la Stratégie fédérale de développement durable 2022-2026</span><div class="small"><code>dbce7b33-be2a-4cec-a3be-96bc59887441</code></div></td>
+        <td><span data-lang="en">Federal Sustainable Development Strategy 2022-2026 data</span><span data-lang="fr" style="display:none">Données de la Stratégie fédérale de développement durable 2022-2026</span><div class="small"><code>ce5107a1-2296-4bf2-a79a-2b3d93c8f40b</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-03-06 16:09:08.532968</time></td>
+      </tr>
+    
+      <tr data-created="2025-03-06 16:07:47.912836"
+          data-status="success"
+          data-resource="179c03f7-105a-4e0e-9249-286dda895137"
+          data-organization="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-org="Environment and Climate Change Canada | Environnement et Changement climatique Canada"
+          data-version="v0.2"
+          data-dataset-en="Federal Sustainable Development Strategy 2022-2026 data"
+          data-dataset-fr="Données de la Stratégie fédérale de développement durable 2022-2026"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ff7328aa-c87d-4a9b-8ff2-4cf025c32154.html"><code>ff7328aa-c87d-4a9b-8ff2-4cf025c32154</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Federal Sustainable Development Strategy 2022-2026 data</span><span data-lang="fr" style="display:none">Données de la Stratégie fédérale de développement durable 2022-2026</span><div class="small"><code>dbce7b33-be2a-4cec-a3be-96bc59887441</code></div></td>
+        <td><span data-lang="en">Federal Sustainable Development Strategy 2022-2026 data</span><span data-lang="fr" style="display:none">Données de la Stratégie fédérale de développement durable 2022-2026</span><div class="small"><code>179c03f7-105a-4e0e-9249-286dda895137</code> · upload</div></td>
+        <td>Environment and Climate Change Canada | Environnement et Changement climatique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-03-06 16:07:47.912836</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [22, 49], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["remote", "upload"], "datasets": [{"label": "Success", "data": [0, 22], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [49, 0], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

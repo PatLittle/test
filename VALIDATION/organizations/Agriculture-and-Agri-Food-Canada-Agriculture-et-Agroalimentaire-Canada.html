@@ -1,0 +1,506 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 14 · Success: 13 · Failure: 1 · Other: 0 · URL types: 2 · Latest: <time>2025-12-11 16:27:13.000899</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">14</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">13</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">1</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>remote</td><td>12</td><td>11</td><td>1</td></tr><tr><td>upload</td><td>2</td><td>2</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2025-12-11 16:27:13.000899"
+          data-status="success"
+          data-resource="86b90fbe-67b1-4b87-93b2-35d74c3ec473"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Daily Wholesale Prices Report"
+          data-dataset-fr="Rapports quotidiens des prix des grossistes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5e6b326e-f98a-4491-b642-afd615d53555.html"><code>5e6b326e-f98a-4491-b642-afd615d53555</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Daily Wholesale Prices Report</span><span data-lang="fr" style="display:none">Rapports quotidiens des prix des grossistes</span><div class="small"><code>920bc8e2-de26-4bf6-ac41-ed47962d0ff6</code></div></td>
+        <td><span data-lang="en">Daily Wholesale Prices Report (55 weeks)</span><span data-lang="fr" style="display:none">Rapports quotidiens des prix des grossistes (55 semaines)</span><div class="small"><code>86b90fbe-67b1-4b87-93b2-35d74c3ec473</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-11 16:27:13.000899</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 16:12:59.361026"
+          data-status="success"
+          data-resource="d3b7020f-7a00-4817-9a0d-822ba1dfed79"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bb38b755-a5c2-4c22-a02f-7d1881189e4c.html"><code>bb38b755-a5c2-4c22-a02f-7d1881189e4c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Runoff </span><span data-lang="fr" style="display:none">Ruissellement du jeu de données</span><div class="small"><code>d3b7020f-7a00-4817-9a0d-822ba1dfed79</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 16:12:59.361026</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 16:12:21.990853"
+          data-status="success"
+          data-resource="ed96b5ce-8d9c-4582-b39d-980cb9ccda61"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9600dda9-6f36-4c2d-a63b-9af7b92ca6cf.html"><code>9600dda9-6f36-4c2d-a63b-9af7b92ca6cf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Management Details </span><span data-lang="fr" style="display:none">Détails de gestion de jeu de données</span><div class="small"><code>ed96b5ce-8d9c-4582-b39d-980cb9ccda61</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 16:12:21.990853</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 16:11:17.540979"
+          data-status="success"
+          data-resource="6a120c9b-a33e-4a22-9702-825053cad2d4"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/15f25de9-fdba-44c5-be46-7e53b5ce9426.html"><code>15f25de9-fdba-44c5-be46-7e53b5ce9426</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Snow Water Equivalent</span><span data-lang="fr" style="display:none">Jeu de données équivalent en eau de neige</span><div class="small"><code>6a120c9b-a33e-4a22-9702-825053cad2d4</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 16:11:17.540979</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 16:10:30.287544"
+          data-status="success"
+          data-resource="a884517a-abda-4039-8597-9d0995dbd3ff"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4b3f6678-4263-4686-b4d9-9b6b507b7ecd.html"><code>4b3f6678-4263-4686-b4d9-9b6b507b7ecd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Watershed Management Details</span><span data-lang="fr" style="display:none">Jeu de données pour la gestion des bassins versants</span><div class="small"><code>a884517a-abda-4039-8597-9d0995dbd3ff</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 16:10:30.287544</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 16:09:56.553911"
+          data-status="success"
+          data-resource="2443cb53-6ca0-4e93-8ba2-ffb9a6543572"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d2852581-29c1-4f5e-8a9a-81b26248d721.html"><code>d2852581-29c1-4f5e-8a9a-81b26248d721</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Soil Moisture Content </span><span data-lang="fr" style="display:none">Contenu en humidité du sol</span><div class="small"><code>2443cb53-6ca0-4e93-8ba2-ffb9a6543572</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 16:09:56.553911</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 16:02:39.807605"
+          data-status="success"
+          data-resource="275c11dc-a418-4d13-a82b-97adb6d7aba8"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5e232575-a85a-4118-af47-c5b08862582a.html"><code>5e232575-a85a-4118-af47-c5b08862582a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Soil Nitrate Phosphorus </span><span data-lang="fr" style="display:none">Ensemble de données Phosphore de nitrate de sol</span><div class="small"><code>275c11dc-a418-4d13-a82b-97adb6d7aba8</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 16:02:39.807605</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 15:59:09.416319"
+          data-status="success"
+          data-resource="2b47d89e-0fa3-4ac7-9b08-a87a8d8a1356"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/3463cae9-5d8f-4c52-9056-58b2ad9c8b6b.html"><code>3463cae9-5d8f-4c52-9056-58b2ad9c8b6b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Soil Nutrients 1970-1992 </span><span data-lang="fr" style="display:none">Ensemble de données sur les éléments nutritifs du sol 1970-1992</span><div class="small"><code>2b47d89e-0fa3-4ac7-9b08-a87a8d8a1356</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 15:59:09.416319</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 15:52:24.445326"
+          data-status="success"
+          data-resource="403c6cb3-50df-4cf7-8af8-4c16c9015e10"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/14f9bd90-d06a-4b01-9a06-2bb20466a14b.html"><code>14f9bd90-d06a-4b01-9a06-2bb20466a14b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Phosphate - P</span><span data-lang="fr" style="display:none">Jeu de données Phosphate - P</span><div class="small"><code>403c6cb3-50df-4cf7-8af8-4c16c9015e10</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 15:52:24.445326</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 15:49:04.622641"
+          data-status="success"
+          data-resource="03b0de31-c8a0-4171-967f-79e762ab52f5"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c8317cb9-7ad2-4908-a645-51cebb30ab80.html"><code>c8317cb9-7ad2-4908-a645-51cebb30ab80</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Nitrate-n </span><span data-lang="fr" style="display:none">Jeu de données Nitrate-n</span><div class="small"><code>03b0de31-c8a0-4171-967f-79e762ab52f5</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 15:49:04.622641</time></td>
+      </tr>
+    
+      <tr data-created="2025-12-10 15:41:19.962043"
+          data-status="success"
+          data-resource="1266a3f3-85e8-4613-aa3d-e5e89c5ef609"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011"
+          data-dataset-fr="Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/874adcc3-02e9-4611-a237-c63b620a6653.html"><code>874adcc3-02e9-4611-a237-c63b620a6653</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Swift Current Water Chemistry - Long Term Tillage Study - 1962-2011</span><span data-lang="fr" style="display:none">Chimie de l&#x27;eau de Swift Current - Étude de travail du sol à long terme - 1962-2011</span><div class="small"><code>b22cd297-cdb4-4d76-9f79-cc1c16d0e9e7</code></div></td>
+        <td><span data-lang="en">Dataset Ammoniacal N</span><span data-lang="fr" style="display:none">Jeu de données Ammoniacal N</span><div class="small"><code>1266a3f3-85e8-4613-aa3d-e5e89c5ef609</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-12-10 15:41:19.962043</time></td>
+      </tr>
+    
+      <tr data-created="2025-03-05 13:55:22.436639"
+          data-status="failure"
+          data-resource="ff435632-e786-4584-b29a-c5356eaae90a"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Type specimens in Canada&#x27;s National Collection of Vascular Plants (DAO)"
+          data-dataset-fr="Spécimens types de la Collection nationale de plantes vasculaires (DAO)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/036fc117-b08e-4e56-9222-076e1e5212fb.html"><code>036fc117-b08e-4e56-9222-076e1e5212fb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Type specimens in Canada&#x27;s National Collection of Vascular Plants (DAO)</span><span data-lang="fr" style="display:none">Spécimens types de la Collection nationale de plantes vasculaires (DAO)</span><div class="small"><code>dc1ac14c-2ce1-402a-8c59-5e08c81e0f81</code></div></td>
+        <td><span data-lang="en">Type specimens in Canada&#x27;s National Collection of Vascular Plants (DAO)</span><span data-lang="fr" style="display:none">Spécimens types de la Collection nationale de plantes vasculaires (DAO)</span><div class="small"><code>ff435632-e786-4584-b29a-c5356eaae90a</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-03-05 13:55:22.436639</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:41.764393"
+          data-status="success"
+          data-resource="6e42197a-a9d6-46f0-a48b-8b54822a4ae7"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="The AAFC Productivity Account for Canadian Agriculture"
+          data-dataset-fr="Compte de productivité pour l’agriculture canadienne d’AAC"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9ca88c5f-0cab-4eb6-8c13-9b7a790b31a8.html"><code>9ca88c5f-0cab-4eb6-8c13-9b7a790b31a8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The AAFC Productivity Account for Canadian Agriculture</span><span data-lang="fr" style="display:none">Compte de productivité pour l’agriculture canadienne d’AAC</span><div class="small"><code>6adaeb1f-438b-4d74-b72b-d1b554f3a316</code></div></td>
+        <td><span data-lang="en">PACA Implicit Quantities</span><span data-lang="fr" style="display:none">Quantités implicites – Compte de productivité pour l’agriculture canadienne</span><div class="small"><code>6e42197a-a9d6-46f0-a48b-8b54822a4ae7</code> · upload</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:41.764393</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:40.898904"
+          data-status="success"
+          data-resource="24aee03d-b0a0-435e-b67d-349a4ef3c723"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="The AAFC Productivity Account for Canadian Agriculture"
+          data-dataset-fr="Compte de productivité pour l’agriculture canadienne d’AAC"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a9c1cca7-2a59-48b4-9392-01d3de3a3620.html"><code>a9c1cca7-2a59-48b4-9392-01d3de3a3620</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">The AAFC Productivity Account for Canadian Agriculture</span><span data-lang="fr" style="display:none">Compte de productivité pour l’agriculture canadienne d’AAC</span><div class="small"><code>6adaeb1f-438b-4d74-b72b-d1b554f3a316</code></div></td>
+        <td><span data-lang="en">PACA Prices</span><span data-lang="fr" style="display:none">Prix implicite – Compte de productivité pour l’agriculture canadienne</span><div class="small"><code>24aee03d-b0a0-435e-b67d-349a4ef3c723</code> · upload</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:40.898904</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [13, 1], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["remote", "upload"], "datasets": [{"label": "Success", "data": [11, 2], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [1, 0], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

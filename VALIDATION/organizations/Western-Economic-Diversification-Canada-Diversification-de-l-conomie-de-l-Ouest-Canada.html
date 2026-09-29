@@ -1,0 +1,674 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 22 · Success: 20 · Failure: 2 · Other: 0 · URL types: 1 · Latest: <time>2024-12-09 18:07:27.542433</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">22</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">20</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">2</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>22</td><td>20</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2024-12-09 18:07:27.542433"
+          data-status="success"
+          data-resource="1bbd6b02-4a10-4937-93a2-7f6c5d9e092f"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Amount leveraged per dollar by WD in community projects"
+          data-dataset-fr="Effet de levier par dollar investi par DEO dans des projets communautaires"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cb2d0dd8-d6f6-4a77-96ee-204dc81fcabf.html"><code>cb2d0dd8-d6f6-4a77-96ee-204dc81fcabf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Amount leveraged per dollar by WD in community projects</span><span data-lang="fr" style="display:none">Effet de levier par dollar investi par DEO dans des projets communautaires</span><div class="small"><code>80465a11-b974-45a5-a99a-a24a6cad078b</code></div></td>
+        <td><span data-lang="en">Leverage_e.csv</span><span data-lang="fr" style="display:none">Leverage_e.csv</span><div class="small"><code>1bbd6b02-4a10-4937-93a2-7f6c5d9e092f</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:07:27.542433</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:07:26.782848"
+          data-status="success"
+          data-resource="8eb6b188-beea-4545-b015-b13cc2968b0f"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of professional jobs (including science &amp; technology) in western Canada"
+          data-dataset-fr="Pourcentage de postes professionnels, scientifiques et technologiques dans l’économie de l’Ouest canadien"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8fe4deb6-e3cb-401b-90ef-e703d9ce260f.html"><code>8fe4deb6-e3cb-401b-90ef-e703d9ce260f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of professional jobs (including science &amp; technology) in western Canada</span><span data-lang="fr" style="display:none">Pourcentage de postes professionnels, scientifiques et technologiques dans l’économie de l’Ouest canadien</span><div class="small"><code>4c495642-4168-4149-8366-19bdcb470f2d</code></div></td>
+        <td><span data-lang="en">Jobs_e.csv</span><span data-lang="fr" style="display:none">Jobs_e.csv</span><div class="small"><code>8eb6b188-beea-4545-b015-b13cc2968b0f</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:07:26.782848</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:07:12.511401"
+          data-status="failure"
+          data-resource="aede4602-3728-4722-bee6-98cf0c11ab46"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Number of communities benefitting from Community Economic Growth projects"
+          data-dataset-fr="Nombre de collectivités qui bénéficient des projets de croissance économique des collectivités"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a892ddff-26c5-4d52-b0bf-8aa49281fe83.html"><code>a892ddff-26c5-4d52-b0bf-8aa49281fe83</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Number of communities benefitting from Community Economic Growth projects</span><span data-lang="fr" style="display:none">Nombre de collectivités qui bénéficient des projets de croissance économique des collectivités</span><div class="small"><code>9b9dbdd4-e788-4e72-aeed-8030b212fd12</code></div></td>
+        <td><span data-lang="en">CEG Projects_e.csv</span><span data-lang="fr" style="display:none">CEG Projects_e.csv</span><div class="small"><code>aede4602-3728-4722-bee6-98cf0c11ab46</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 18:07:12.511401</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:46.33763"
+          data-status="success"
+          data-resource="b44c29af-a4a4-4821-9de7-cb6cfecd0c8c"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Percentage of small and medium-sized enterprises that are majority-owned by Indigenous people, youth, visible minorities and persons with disabilities in western Canada"
+          data-dataset-fr="Pourcentage de petites et moyennes entreprises dont les propriétaires majoritaires sont des femmes, des Autochtones, des jeunes, des membres de minorités visibles ou des personnes handicapées, dans l’Ouest canadien"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f3ee2b79-8b5f-4501-987e-83658170aeeb.html"><code>f3ee2b79-8b5f-4501-987e-83658170aeeb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of small and medium-sized enterprises that are majority-owned by Indigenous people, youth, visible minorities and persons with disabilities in western Canada</span><span data-lang="fr" style="display:none">Pourcentage de petites et moyennes entreprises dont les propriétaires majoritaires sont des femmes, des Autochtones, des jeunes, des membres de minorités visibles ou des personnes handicapées, dans l’Ouest canadien</span><div class="small"><code>3c570e08-5b93-46ce-be97-d6770892efd4</code></div></td>
+        <td><span data-lang="en">Business Ownership_e.csv</span><span data-lang="fr" style="display:none">Business Ownership_e.csv</span><div class="small"><code>b44c29af-a4a4-4821-9de7-cb6cfecd0c8c</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:46.33763</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:17.169167"
+          data-status="success"
+          data-resource="aff8bf55-6e4c-42de-96f2-69604742d1ee"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Revenue growth rate of firms supported by WD programs"
+          data-dataset-fr="Taux de croissance des revenus des entreprises soutenues par les programmes de DEO"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4942ed58-ed6e-4d16-8009-c8f521e41292.html"><code>4942ed58-ed6e-4d16-8009-c8f521e41292</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Revenue growth rate of firms supported by WD programs</span><span data-lang="fr" style="display:none">Taux de croissance des revenus des entreprises soutenues par les programmes de DEO</span><div class="small"><code>9fbe6713-590d-4300-88ad-c2dc8b106860</code></div></td>
+        <td><span data-lang="en">Revenue Growth_e.csv</span><span data-lang="fr" style="display:none">Revenue Growth_e.csv</span><div class="small"><code>aff8bf55-6e4c-42de-96f2-69604742d1ee</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:17.169167</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:06:16.366235"
+          data-status="success"
+          data-resource="c1a9658f-8f1c-43d5-97f2-ddf08a065094"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Value of exports of goods from western Canada (in dollars)"
+          data-dataset-fr="Valeur des exportations provenant de l’Ouest canadien (en dollars)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/03d4cfe5-7753-45fe-a44a-8e45a8ff2b38.html"><code>03d4cfe5-7753-45fe-a44a-8e45a8ff2b38</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Value of exports of goods from western Canada (in dollars)</span><span data-lang="fr" style="display:none">Valeur des exportations provenant de l’Ouest canadien (en dollars)</span><div class="small"><code>748e3dbb-9ad2-4dc7-bfae-225c0e62fc28</code></div></td>
+        <td><span data-lang="en">Exports_e.csv</span><span data-lang="fr" style="display:none">Exports_e.csv</span><div class="small"><code>c1a9658f-8f1c-43d5-97f2-ddf08a065094</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:06:16.366235</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:56.529054"
+          data-status="success"
+          data-resource="f22b006d-749a-4db6-a51a-8b1048f604b0"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Value of business expenditures in research and development by firms receiving WD program funding (in $)"
+          data-dataset-fr="Valeur des dépenses en recherche et développement par les entreprises recevant du financement d’un programme de DEO (en dollars)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ec65ba85-9ce9-4905-b0a9-8a74b7f3608d.html"><code>ec65ba85-9ce9-4905-b0a9-8a74b7f3608d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Value of business expenditures in research and development by firms receiving WD program funding (in $)</span><span data-lang="fr" style="display:none">Valeur des dépenses en recherche et développement par les entreprises recevant du financement d’un programme de DEO (en dollars)</span><div class="small"><code>49b5e5df-fd6b-4009-82f0-265dd2e5de21</code></div></td>
+        <td><span data-lang="en">High Growth Firms_e.csv</span><span data-lang="fr" style="display:none">High Growth Firms_e.csv</span><div class="small"><code>f22b006d-749a-4db6-a51a-8b1048f604b0</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:04:56.529054</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:47.906382"
+          data-status="failure"
+          data-resource="c4b6712b-4c1f-4038-8ab8-15538b9953eb"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Number of communities benefitting from federal public infrastructure investments"
+          data-dataset-fr="Nombre de collectivités qui bénéficient des investissements fédéraux dans l’infrastructure publique"
+          data-filtered="1">
+        <td>
+          <a href="../reports/714b3992-e18d-4e70-9d7e-026240daa538.html"><code>714b3992-e18d-4e70-9d7e-026240daa538</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Number of communities benefitting from federal public infrastructure investments</span><span data-lang="fr" style="display:none">Nombre de collectivités qui bénéficient des investissements fédéraux dans l’infrastructure publique</span><div class="small"><code>26499305-b80b-46e7-a5ed-7f1740fde41e</code></div></td>
+        <td><span data-lang="en">Infrastructure_e.csv</span><span data-lang="fr" style="display:none">Infrastructure_e.csv</span><div class="small"><code>c4b6712b-4c1f-4038-8ab8-15538b9953eb</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 18:04:47.906382</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:50:18.972328"
+          data-status="success"
+          data-resource="50dac711-88d2-4d66-a1c8-f3c7ef6f80d9"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.2"
+          data-dataset-en="Value of International Business Activity Facilitated by WD"
+          data-dataset-fr="Valeur de l’activité commerciale internationale facilitée par DEO"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4089e9ed-04e7-4b63-bc2a-88665885d13e.html"><code>4089e9ed-04e7-4b63-bc2a-88665885d13e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Value of International Business Activity Facilitated by WD</span><span data-lang="fr" style="display:none">Valeur de l’activité commerciale internationale facilitée par DEO</span><div class="small"><code>9c3f5337-04b7-4486-9420-7f2b93baf10f</code></div></td>
+        <td><span data-lang="en">IB Facilitated_e.csv</span><span data-lang="fr" style="display:none">IB Facilitated_e.csv</span><div class="small"><code>50dac711-88d2-4d66-a1c8-f3c7ef6f80d9</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:50:18.972328</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 22:38:12.539294"
+          data-status="success"
+          data-resource="044ed42e-a3ec-46f5-b645-2331d2119578"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Value of International Business Activity Facilitated by WD"
+          data-dataset-fr="Valeur de l’activité commerciale internationale facilitée par DEO"
+          data-filtered="1">
+        <td>
+          <a href="../reports/59c7ace4-1acb-454c-a385-d0cae6e47b8a.html"><code>59c7ace4-1acb-454c-a385-d0cae6e47b8a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Value of International Business Activity Facilitated by WD</span><span data-lang="fr" style="display:none">Valeur de l’activité commerciale internationale facilitée par DEO</span><div class="small"><code>9c3f5337-04b7-4486-9420-7f2b93baf10f</code></div></td>
+        <td><span data-lang="en">IB Facilitated_f.csv</span><span data-lang="fr" style="display:none">IB Facilitated_f.csv</span><div class="small"><code>044ed42e-a3ec-46f5-b645-2331d2119578</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 22:38:12.539294</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 22:24:07.401307"
+          data-status="success"
+          data-resource="7e686a64-c6a3-47f3-a4af-3456f3ea48fc"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of communities benefitting from Community Economic Growth projects"
+          data-dataset-fr="Nombre de collectivités qui bénéficient des projets de croissance économique des collectivités"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9b014737-9d2d-49cb-9fc5-b2142159be8e.html"><code>9b014737-9d2d-49cb-9fc5-b2142159be8e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of communities benefitting from Community Economic Growth projects</span><span data-lang="fr" style="display:none">Nombre de collectivités qui bénéficient des projets de croissance économique des collectivités</span><div class="small"><code>9b9dbdd4-e788-4e72-aeed-8030b212fd12</code></div></td>
+        <td><span data-lang="en">CEG Projects_f.csv</span><span data-lang="fr" style="display:none">CEG Projects_f.csv</span><div class="small"><code>7e686a64-c6a3-47f3-a4af-3456f3ea48fc</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 22:24:07.401307</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 22:22:43.712324"
+          data-status="success"
+          data-resource="1f5debc4-3437-460a-912e-98475ad2297f"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of communities benefitting from federal public infrastructure investments"
+          data-dataset-fr="Nombre de collectivités qui bénéficient des investissements fédéraux dans l’infrastructure publique"
+          data-filtered="1">
+        <td>
+          <a href="../reports/74ce5b97-cd31-468b-9f21-4173c2f97891.html"><code>74ce5b97-cd31-468b-9f21-4173c2f97891</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of communities benefitting from federal public infrastructure investments</span><span data-lang="fr" style="display:none">Nombre de collectivités qui bénéficient des investissements fédéraux dans l’infrastructure publique</span><div class="small"><code>26499305-b80b-46e7-a5ed-7f1740fde41e</code></div></td>
+        <td><span data-lang="en">Infrastructure_f.csv</span><span data-lang="fr" style="display:none">Infrastructure_f.csv</span><div class="small"><code>1f5debc4-3437-460a-912e-98475ad2297f</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 22:22:43.712324</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:25:12.919354"
+          data-status="success"
+          data-resource="49f444ec-b538-4282-a711-64b5bcc8c0ee"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Percentage of small and medium-sized enterprises that are majority-owned by Indigenous people, youth, visible minorities and persons with disabilities in western Canada"
+          data-dataset-fr="Pourcentage de petites et moyennes entreprises dont les propriétaires majoritaires sont des femmes, des Autochtones, des jeunes, des membres de minorités visibles ou des personnes handicapées, dans l’Ouest canadien"
+          data-filtered="1">
+        <td>
+          <a href="../reports/24bab367-0444-4d26-869e-e2cdaf84ea74.html"><code>24bab367-0444-4d26-869e-e2cdaf84ea74</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of small and medium-sized enterprises that are majority-owned by Indigenous people, youth, visible minorities and persons with disabilities in western Canada</span><span data-lang="fr" style="display:none">Pourcentage de petites et moyennes entreprises dont les propriétaires majoritaires sont des femmes, des Autochtones, des jeunes, des membres de minorités visibles ou des personnes handicapées, dans l’Ouest canadien</span><div class="small"><code>3c570e08-5b93-46ce-be97-d6770892efd4</code></div></td>
+        <td><span data-lang="en">Business Ownership_f.csv</span><span data-lang="fr" style="display:none">Business Ownership_f.csv</span><div class="small"><code>49f444ec-b538-4282-a711-64b5bcc8c0ee</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:25:12.919354</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:18:44.059649"
+          data-status="success"
+          data-resource="650301a5-e65b-4224-8c5b-1a83092ce262"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Value of exports of goods from western Canada (in dollars)"
+          data-dataset-fr="Valeur des exportations provenant de l’Ouest canadien (en dollars)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/1f0d02b6-21fd-4627-af23-097f08513c45.html"><code>1f0d02b6-21fd-4627-af23-097f08513c45</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Value of exports of goods from western Canada (in dollars)</span><span data-lang="fr" style="display:none">Valeur des exportations provenant de l’Ouest canadien (en dollars)</span><div class="small"><code>748e3dbb-9ad2-4dc7-bfae-225c0e62fc28</code></div></td>
+        <td><span data-lang="en">Exports_f.csv</span><span data-lang="fr" style="display:none">Exports_f.csv</span><div class="small"><code>650301a5-e65b-4224-8c5b-1a83092ce262</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:18:44.059649</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:14:16.639992"
+          data-status="success"
+          data-resource="4054a7ef-50fa-496e-8b95-1c7fb35b62a2"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of high growth firms in western Canada"
+          data-dataset-fr="Nombre d’entreprises à forte croissance dans l’Ouest canadien"
+          data-filtered="1">
+        <td>
+          <a href="../reports/386b4995-87e4-4a94-84ac-fe2206fb65c7.html"><code>386b4995-87e4-4a94-84ac-fe2206fb65c7</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of high growth firms in western Canada</span><span data-lang="fr" style="display:none">Nombre d’entreprises à forte croissance dans l’Ouest canadien</span><div class="small"><code>0bf21cf5-adda-4b1a-a337-2a79ab57d465</code></div></td>
+        <td><span data-lang="en">High Growth Firms_f.csv</span><span data-lang="fr" style="display:none">High Growth Firms_f.csv</span><div class="small"><code>4054a7ef-50fa-496e-8b95-1c7fb35b62a2</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:14:16.639992</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:14:16.079985"
+          data-status="success"
+          data-resource="070fc238-a8a7-4889-8629-74821697485a"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Number of high growth firms in western Canada"
+          data-dataset-fr="Nombre d’entreprises à forte croissance dans l’Ouest canadien"
+          data-filtered="1">
+        <td>
+          <a href="../reports/dfd4eba4-9dd1-4fb7-9d40-b91f5c584301.html"><code>dfd4eba4-9dd1-4fb7-9d40-b91f5c584301</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Number of high growth firms in western Canada</span><span data-lang="fr" style="display:none">Nombre d’entreprises à forte croissance dans l’Ouest canadien</span><div class="small"><code>0bf21cf5-adda-4b1a-a337-2a79ab57d465</code></div></td>
+        <td><span data-lang="en">High Growth Firms_e.csv</span><span data-lang="fr" style="display:none">High Growth Firms_e.csv</span><div class="small"><code>070fc238-a8a7-4889-8629-74821697485a</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:14:16.079985</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:07:47.877372"
+          data-status="success"
+          data-resource="ef958a46-ce72-41e1-9163-7386341a303a"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Revenue growth rate of firms supported by WD programs"
+          data-dataset-fr="Taux de croissance des revenus des entreprises soutenues par les programmes de DEO"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0f02c2e1-2c88-4698-92ae-9784876796f7.html"><code>0f02c2e1-2c88-4698-92ae-9784876796f7</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Revenue growth rate of firms supported by WD programs</span><span data-lang="fr" style="display:none">Taux de croissance des revenus des entreprises soutenues par les programmes de DEO</span><div class="small"><code>9fbe6713-590d-4300-88ad-c2dc8b106860</code></div></td>
+        <td><span data-lang="en">Revenue Growth_f.csv</span><span data-lang="fr" style="display:none">Revenue Growth_f.csv</span><div class="small"><code>ef958a46-ce72-41e1-9163-7386341a303a</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:07:47.877372</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:03:19.3924"
+          data-status="success"
+          data-resource="814908ef-5bd1-4ad3-a62b-72db8cbb301c"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Amount leveraged per dollar by WD in community projects"
+          data-dataset-fr="Effet de levier par dollar investi par DEO dans des projets communautaires"
+          data-filtered="1">
+        <td>
+          <a href="../reports/47be4e84-d721-4147-89b8-1ca5188c3ca3.html"><code>47be4e84-d721-4147-89b8-1ca5188c3ca3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Amount leveraged per dollar by WD in community projects</span><span data-lang="fr" style="display:none">Effet de levier par dollar investi par DEO dans des projets communautaires</span><div class="small"><code>80465a11-b974-45a5-a99a-a24a6cad078b</code></div></td>
+        <td><span data-lang="en">Leverage_f.csv</span><span data-lang="fr" style="display:none">Leverage_f.csv</span><div class="small"><code>814908ef-5bd1-4ad3-a62b-72db8cbb301c</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:03:19.3924</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 18:56:52.504115"
+          data-status="success"
+          data-resource="16eacbde-e4cb-4a36-a82c-cba70e4bc71d"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Value of business expenditures in research and development by firms receiving WD program funding (in $)"
+          data-dataset-fr="Valeur des dépenses en recherche et développement par les entreprises recevant du financement d’un programme de DEO (en dollars)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a8e7bd94-70cb-40e6-9a06-067036490dba.html"><code>a8e7bd94-70cb-40e6-9a06-067036490dba</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Value of business expenditures in research and development by firms receiving WD program funding (in $)</span><span data-lang="fr" style="display:none">Valeur des dépenses en recherche et développement par les entreprises recevant du financement d’un programme de DEO (en dollars)</span><div class="small"><code>49b5e5df-fd6b-4009-82f0-265dd2e5de21</code></div></td>
+        <td><span data-lang="en">High Growth Firms_f.csv</span><span data-lang="fr" style="display:none">High Growth Firms_f.csv</span><div class="small"><code>16eacbde-e4cb-4a36-a82c-cba70e4bc71d</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 18:56:52.504115</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 18:52:22.127732"
+          data-status="success"
+          data-resource="d22066c0-506e-4746-b350-f58a69026c69"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Percentage of professional jobs (including science &amp; technology) in western Canada"
+          data-dataset-fr="Pourcentage de postes professionnels, scientifiques et technologiques dans l’économie de l’Ouest canadien"
+          data-filtered="1">
+        <td>
+          <a href="../reports/05c0bf01-76ed-4fff-a157-700cbdecf144.html"><code>05c0bf01-76ed-4fff-a157-700cbdecf144</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Percentage of professional jobs (including science &amp; technology) in western Canada</span><span data-lang="fr" style="display:none">Pourcentage de postes professionnels, scientifiques et technologiques dans l’économie de l’Ouest canadien</span><div class="small"><code>4c495642-4168-4149-8366-19bdcb470f2d</code></div></td>
+        <td><span data-lang="en">Jobs_f.csv</span><span data-lang="fr" style="display:none">Jobs_f.csv</span><div class="small"><code>d22066c0-506e-4746-b350-f58a69026c69</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 18:52:22.127732</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:33.775012"
+          data-status="success"
+          data-resource="997db63d-5e08-46f2-bd0a-3c55b902bc11"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Small and medium-sized enterprise sales growth"
+          data-dataset-fr="Croissance des ventres de petites et moyennes entreprises"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a4ba374c-71fb-4afe-9a0d-83bc01ae474f.html"><code>a4ba374c-71fb-4afe-9a0d-83bc01ae474f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Small and medium-sized enterprise sales growth</span><span data-lang="fr" style="display:none">Croissance des ventres de petites et moyennes entreprises</span><div class="small"><code>ed9fc134-2267-463d-a3e0-f33d3bef34c1</code></div></td>
+        <td><span data-lang="en">Sales Growth_f.csv</span><span data-lang="fr" style="display:none">Sales Growth_f.csv</span><div class="small"><code>997db63d-5e08-46f2-bd0a-3c55b902bc11</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:33.775012</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:33.695614"
+          data-status="success"
+          data-resource="3ba6e02b-3350-4e8b-b5ab-568c99645f09"
+          data-organization="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-org="Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada"
+          data-version="v0.1"
+          data-dataset-en="Small and medium-sized enterprise sales growth"
+          data-dataset-fr="Croissance des ventres de petites et moyennes entreprises"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bdaed38b-b06c-4784-9070-cf0674d55b3d.html"><code>bdaed38b-b06c-4784-9070-cf0674d55b3d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Small and medium-sized enterprise sales growth</span><span data-lang="fr" style="display:none">Croissance des ventres de petites et moyennes entreprises</span><div class="small"><code>ed9fc134-2267-463d-a3e0-f33d3bef34c1</code></div></td>
+        <td><span data-lang="en">Sales Growth_e.csv</span><span data-lang="fr" style="display:none">Sales Growth_e.csv</span><div class="small"><code>3ba6e02b-3350-4e8b-b5ab-568c99645f09</code> · upload</div></td>
+        <td>Western Economic Diversification Canada | Diversification de l&#x27;économie de l&#x27;Ouest Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-12 19:33:33.695614</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [20, 2], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [20], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [2], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

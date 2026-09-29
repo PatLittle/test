@@ -1,0 +1,1241 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 49 · Success: 23 · Failure: 26 · Other: 0 · URL types: 1 · Latest: <time>2025-10-10 19:14:55.673436</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">49</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">23</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">26</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>49</td><td>23</td><td>26</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2025-10-10 19:14:55.673436"
+          data-status="failure"
+          data-resource="f88700b5-ff45-4b00-a89d-a68b2c134b29"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/46e84db6-d9a7-444e-aa34-8bd9ee89838d.html"><code>46e84db6-d9a7-444e-aa34-8bd9ee89838d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">A Summary of Financial Activities per fiscal year</span><span data-lang="fr" style="display:none">Résumé des activités financières par exercice</span><div class="small"><code>f88700b5-ff45-4b00-a89d-a68b2c134b29</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">21 err</span><span data-lang="fr" style="display:none">21 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 19:14:55.673436</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 18:38:20.640269"
+          data-status="failure"
+          data-resource="e60d1825-c5b3-4185-912a-2ffe00680b48"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f589b20f-433d-420b-a7d2-465bc23181ba.html"><code>f589b20f-433d-420b-a7d2-465bc23181ba</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Cash Flow - Revenues and Expenses</span><span data-lang="fr" style="display:none">Flux de trésorerie - revenus et dépenses</span><div class="small"><code>e60d1825-c5b3-4185-912a-2ffe00680b48</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">42 err</span><span data-lang="fr" style="display:none">42 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 18:38:20.640269</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 15:07:54.248375"
+          data-status="failure"
+          data-resource="feb58cac-f831-45e7-a8e0-5b7a9c517e2c"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cb57ac12-5ce3-42bb-a16c-7b4e11f8f391.html"><code>cb57ac12-5ce3-42bb-a16c-7b4e11f8f391</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Type of Operation</span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation par type d&#x27;exploitation</span><div class="small"><code>feb58cac-f831-45e7-a8e0-5b7a9c517e2c</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">78 err</span><span data-lang="fr" style="display:none">78 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 15:07:54.248375</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 15:04:41.583133"
+          data-status="failure"
+          data-resource="38e90eb2-192c-4e1c-8967-e9d32e02d9fa"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/82a12a70-f7b6-420c-888e-0d44822eb15e.html"><code>82a12a70-f7b6-420c-888e-0d44822eb15e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Business Size</span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation par taille d&#x27;entreprise </span><div class="small"><code>38e90eb2-192c-4e1c-8967-e9d32e02d9fa</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">66 err</span><span data-lang="fr" style="display:none">66 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 15:04:41.583133</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 15:01:27.271438"
+          data-status="failure"
+          data-resource="90887781-36e7-438d-b099-a290e39ffd4a"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/76aac48a-e6bc-4975-b0b4-a689cd99e374.html"><code>76aac48a-e6bc-4975-b0b4-a689cd99e374</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Type of Borrower</span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation par type d&#x27;emprunteur </span><div class="small"><code>90887781-36e7-438d-b099-a290e39ffd4a</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">78 err</span><span data-lang="fr" style="display:none">78 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 15:01:27.271438</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 14:56:49.592189"
+          data-status="failure"
+          data-resource="6376ac99-c135-4781-ab7c-a0f940dfd538"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e2329122-700b-40ac-9dac-63f2742470b0.html"><code>e2329122-700b-40ac-9dac-63f2742470b0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Age of Business</span><span data-lang="fr" style="display:none">Prêts et demandes d’indemnisation par nombre d’années d’activité des entreprises</span><div class="small"><code>6376ac99-c135-4781-ab7c-a0f940dfd538</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">228 err</span><span data-lang="fr" style="display:none">228 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 14:56:49.592189</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 14:52:47.174546"
+          data-status="failure"
+          data-resource="200d710b-17ac-4c1a-a624-fdcc5fc62af9"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ca85985a-f326-4c89-b598-3610cfec1f4b.html"><code>ca85985a-f326-4c89-b598-3610cfec1f4b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Size of Loan </span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation par montant des prêts </span><div class="small"><code>200d710b-17ac-4c1a-a624-fdcc5fc62af9</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">216 err</span><span data-lang="fr" style="display:none">216 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 14:52:47.174546</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 14:49:21.670746"
+          data-status="failure"
+          data-resource="ed172a47-9f8d-4cce-ae94-41b8c4cb4fa1"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bef5bc57-a5b2-4654-b243-fc5a7204e9fb.html"><code>bef5bc57-a5b2-4654-b243-fc5a7204e9fb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Industry Sector </span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation selon le secteur d&#x27;activité </span><div class="small"><code>ed172a47-9f8d-4cce-ae94-41b8c4cb4fa1</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">75 err</span><span data-lang="fr" style="display:none">75 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 14:49:21.670746</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 14:44:22.235314"
+          data-status="failure"
+          data-resource="a93e2a87-ffd8-4f8c-a20a-a38768a600eb"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/0095f900-e633-40d9-a856-8e6bccef65ee.html"><code>0095f900-e633-40d9-a856-8e6bccef65ee</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Asset Type</span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation par type d&#x27;actif </span><div class="small"><code>a93e2a87-ffd8-4f8c-a20a-a38768a600eb</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">81 err</span><span data-lang="fr" style="display:none">81 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 14:44:22.235314</time></td>
+      </tr>
+    
+      <tr data-created="2025-10-10 14:41:36.355736"
+          data-status="failure"
+          data-resource="1c0ad1b2-4b34-40a5-95e2-2cc196fb9d3f"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canada Small Business Financing Program (CSBFP)"
+          data-dataset-fr="Programme de financement des petites entreprises du Canada (PFPEC)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e940e842-87e2-443e-a5f9-79fb4d91ba42.html"><code>e940e842-87e2-443e-a5f9-79fb4d91ba42</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canada Small Business Financing Program (CSBFP)</span><span data-lang="fr" style="display:none">Programme de financement des petites entreprises du Canada (PFPEC)</span><div class="small"><code>3f718801-099d-4037-bb0a-1d41ba8aca8b</code></div></td>
+        <td><span data-lang="en">Loans and Claims—by Province and Territory</span><span data-lang="fr" style="display:none">Prêts et demandes d&#x27;indemnisation par province et territoire </span><div class="small"><code>1c0ad1b2-4b34-40a5-95e2-2cc196fb9d3f</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">717 err</span><span data-lang="fr" style="display:none">717 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-10-10 14:41:36.355736</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:23:48.460264"
+          data-status="success"
+          data-resource="cffc055b-b935-43ae-9957-81452c1f95c8"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2009"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2009"
+          data-filtered="1">
+        <td>
+          <a href="../reports/eeb79366-1a7f-4b89-87fa-0da4eba113fe.html"><code>eeb79366-1a7f-4b89-87fa-0da4eba113fe</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2009</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2009</span><div class="small"><code>2f13112e-b179-4f52-9a98-b752f1789945</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>cffc055b-b935-43ae-9957-81452c1f95c8</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:23:48.460264</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:23:22.285955"
+          data-status="success"
+          data-resource="b3945c6c-9479-4eec-bdae-605ab13e196a"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2009"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2009"
+          data-filtered="1">
+        <td>
+          <a href="../reports/88123452-32c7-4aa2-a6f6-a18cfe8e4e8d.html"><code>88123452-32c7-4aa2-a6f6-a18cfe8e4e8d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2009</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2009</span><div class="small"><code>2f13112e-b179-4f52-9a98-b752f1789945</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>b3945c6c-9479-4eec-bdae-605ab13e196a</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:23:22.285955</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:23:06.372857"
+          data-status="success"
+          data-resource="180d12ea-9311-48e5-831b-54d152802c70"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2009"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2009"
+          data-filtered="1">
+        <td>
+          <a href="../reports/29b1387e-488a-4a2c-9bbc-90b85bdae7b2.html"><code>29b1387e-488a-4a2c-9bbc-90b85bdae7b2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2009</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2009</span><div class="small"><code>2f13112e-b179-4f52-9a98-b752f1789945</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>180d12ea-9311-48e5-831b-54d152802c70</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:23:06.372857</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:22:50.540548"
+          data-status="success"
+          data-resource="f96d3517-f7b4-4ceb-aceb-5903a48dce9f"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2009"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2009"
+          data-filtered="1">
+        <td>
+          <a href="../reports/052071b4-2906-4439-9076-6880be587f57.html"><code>052071b4-2906-4439-9076-6880be587f57</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2009</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2009</span><div class="small"><code>2f13112e-b179-4f52-9a98-b752f1789945</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>f96d3517-f7b4-4ceb-aceb-5903a48dce9f</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:22:50.540548</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:21:16.494033"
+          data-status="success"
+          data-resource="98778b08-8973-4117-b87a-57805e487370"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2010"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2010"
+          data-filtered="1">
+        <td>
+          <a href="../reports/180ba3ec-ba6f-4b68-aea7-85111e58b800.html"><code>180ba3ec-ba6f-4b68-aea7-85111e58b800</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2010</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2010</span><div class="small"><code>3f6bf258-d4f5-4ffd-b316-b45a04884b46</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>98778b08-8973-4117-b87a-57805e487370</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:21:16.494033</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:20:59.71309"
+          data-status="success"
+          data-resource="1275467f-6b5a-479c-9ef3-794a36020fcc"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2010"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2010"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5a8a7fea-b716-4f1e-9d25-0c83de4357ac.html"><code>5a8a7fea-b716-4f1e-9d25-0c83de4357ac</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2010</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2010</span><div class="small"><code>3f6bf258-d4f5-4ffd-b316-b45a04884b46</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>1275467f-6b5a-479c-9ef3-794a36020fcc</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:20:59.71309</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:20:43.464675"
+          data-status="success"
+          data-resource="f88b9c1f-2069-46ee-81aa-4a4b2d8d0698"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2010"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2010"
+          data-filtered="1">
+        <td>
+          <a href="../reports/aef39c41-4213-4037-82e9-e6723800223b.html"><code>aef39c41-4213-4037-82e9-e6723800223b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2010</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2010</span><div class="small"><code>3f6bf258-d4f5-4ffd-b316-b45a04884b46</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>f88b9c1f-2069-46ee-81aa-4a4b2d8d0698</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:20:43.464675</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:20:28.173952"
+          data-status="success"
+          data-resource="21f7a364-39d1-482a-81be-68f783d2172f"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2010"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2010"
+          data-filtered="1">
+        <td>
+          <a href="../reports/adc02073-7817-41ca-be92-59d65b100b4c.html"><code>adc02073-7817-41ca-be92-59d65b100b4c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2010</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2010</span><div class="small"><code>3f6bf258-d4f5-4ffd-b316-b45a04884b46</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>21f7a364-39d1-482a-81be-68f783d2172f</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:20:28.173952</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:12:23.186001"
+          data-status="success"
+          data-resource="a8eab538-b618-4216-8c70-5a424f1085b2"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2012"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2012"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5e902668-6620-420a-b014-7e8ecd12f63e.html"><code>5e902668-6620-420a-b014-7e8ecd12f63e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2012</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2012</span><div class="small"><code>a0afba82-3586-477d-a35d-c68bc772fb2f</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>a8eab538-b618-4216-8c70-5a424f1085b2</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:12:23.186001</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:12:03.05653"
+          data-status="success"
+          data-resource="b9a061e5-cae0-45e6-a1d7-f09f1c2f9e79"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2012"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2012"
+          data-filtered="1">
+        <td>
+          <a href="../reports/986ec758-f163-42bc-8a79-d4ef5444eccb.html"><code>986ec758-f163-42bc-8a79-d4ef5444eccb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2012</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2012</span><div class="small"><code>a0afba82-3586-477d-a35d-c68bc772fb2f</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>b9a061e5-cae0-45e6-a1d7-f09f1c2f9e79</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:12:03.05653</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:11:15.954953"
+          data-status="success"
+          data-resource="2a4a14af-5508-4e41-9253-c0badd9dc878"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2012"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2012"
+          data-filtered="1">
+        <td>
+          <a href="../reports/de8fb026-7a58-4a4e-a21e-bc3d6c81e7c0.html"><code>de8fb026-7a58-4a4e-a21e-bc3d6c81e7c0</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2012</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2012</span><div class="small"><code>a0afba82-3586-477d-a35d-c68bc772fb2f</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>2a4a14af-5508-4e41-9253-c0badd9dc878</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:11:15.954953</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:11:00.210292"
+          data-status="success"
+          data-resource="1c25fa7d-0c57-4302-8feb-533e8ca3064f"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2012"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2012"
+          data-filtered="1">
+        <td>
+          <a href="../reports/38cfa78c-af78-49ff-b4a7-a53a2301e8fd.html"><code>38cfa78c-af78-49ff-b4a7-a53a2301e8fd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2012</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2012</span><div class="small"><code>a0afba82-3586-477d-a35d-c68bc772fb2f</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>1c25fa7d-0c57-4302-8feb-533e8ca3064f</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:11:00.210292</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:07:18.78687"
+          data-status="success"
+          data-resource="dd3d0afe-f9bb-4d6d-be81-bfc33c439ffa"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2013"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2013"
+          data-filtered="1">
+        <td>
+          <a href="../reports/82d10162-d125-4f13-b23f-f285556a5104.html"><code>82d10162-d125-4f13-b23f-f285556a5104</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2013</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2013</span><div class="small"><code>7c10b20b-d607-4f38-a2df-9c35a0852547</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>dd3d0afe-f9bb-4d6d-be81-bfc33c439ffa</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:07:18.78687</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:07:00.179404"
+          data-status="success"
+          data-resource="5af55209-9468-42ee-b8ca-ab420f86c19d"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2013"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2013"
+          data-filtered="1">
+        <td>
+          <a href="../reports/b7d6058b-97c5-46d5-8b2d-06c47fe51cc9.html"><code>b7d6058b-97c5-46d5-8b2d-06c47fe51cc9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2013</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2013</span><div class="small"><code>7c10b20b-d607-4f38-a2df-9c35a0852547</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>5af55209-9468-42ee-b8ca-ab420f86c19d</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:07:00.179404</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:04:57.639639"
+          data-status="success"
+          data-resource="5d514056-84da-4784-9c47-5e66ea519713"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2013"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2013"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8c3e67f3-b8fe-4a3f-93f6-a175b55eb0b9.html"><code>8c3e67f3-b8fe-4a3f-93f6-a175b55eb0b9</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2013</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2013</span><div class="small"><code>7c10b20b-d607-4f38-a2df-9c35a0852547</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>5d514056-84da-4784-9c47-5e66ea519713</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:04:57.639639</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-10 18:04:42.339316"
+          data-status="success"
+          data-resource="9016c3ba-2046-4b4d-9e65-a4e0cdfc7f0d"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Credit Conditions Survey – 2013"
+          data-dataset-fr="Enquête sur les conditions de crédit – 2013"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fcb4103c-2ba0-46f7-8f7c-20ae5bba7917.html"><code>fcb4103c-2ba0-46f7-8f7c-20ae5bba7917</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Credit Conditions Survey – 2013</span><span data-lang="fr" style="display:none">Enquête sur les conditions de crédit – 2013</span><div class="small"><code>7c10b20b-d607-4f38-a2df-9c35a0852547</code></div></td>
+        <td><span data-lang="en">Definitions</span><span data-lang="fr" style="display:none">Définitions</span><div class="small"><code>9016c3ba-2046-4b4d-9e65-a4e0cdfc7f0d</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-10 18:04:42.339316</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 20:02:08.302176"
+          data-status="failure"
+          data-resource="1d7e39a0-a389-47c7-b518-a336eadff87c"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing of Small and Medium Enterprises – 2004"
+          data-dataset-fr="Enquête sur le financement des petites et moyennes entreprises – 2004"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5ea33d4a-04f2-40e7-ae69-4c81867e0daf.html"><code>5ea33d4a-04f2-40e7-ae69-4c81867e0daf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing of Small and Medium Enterprises – 2004</span><span data-lang="fr" style="display:none">Enquête sur le financement des petites et moyennes entreprises – 2004</span><div class="small"><code>1e9d2ae9-73f8-4882-8521-f9fc604dce62</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>1d7e39a0-a389-47c7-b518-a336eadff87c</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">39 err</span><span data-lang="fr" style="display:none">39 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-06-09 20:02:08.302176</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 20:01:50.469569"
+          data-status="success"
+          data-resource="e24c1b8f-2a74-4e6d-81ec-55f8c17a045a"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing of Small and Medium Enterprises – 2004"
+          data-dataset-fr="Enquête sur le financement des petites et moyennes entreprises – 2004"
+          data-filtered="1">
+        <td>
+          <a href="../reports/3bc08764-84d0-460f-8082-5565edbad53c.html"><code>3bc08764-84d0-460f-8082-5565edbad53c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing of Small and Medium Enterprises – 2004</span><span data-lang="fr" style="display:none">Enquête sur le financement des petites et moyennes entreprises – 2004</span><div class="small"><code>1e9d2ae9-73f8-4882-8521-f9fc604dce62</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>e24c1b8f-2a74-4e6d-81ec-55f8c17a045a</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 20:01:50.469569</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 19:56:40.212057"
+          data-status="success"
+          data-resource="e46f99e5-8f7e-4bba-8332-6b0d7e4cca63"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing of Small and Medium Enterprises – 2007"
+          data-dataset-fr="Enquête sur le financement des petites et moyennes entreprises – 2007"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4a26c71c-7f14-4dd0-84bf-4f7b496deb8b.html"><code>4a26c71c-7f14-4dd0-84bf-4f7b496deb8b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing of Small and Medium Enterprises – 2007</span><span data-lang="fr" style="display:none">Enquête sur le financement des petites et moyennes entreprises – 2007</span><div class="small"><code>c0e59eae-b3ff-4c61-b064-570e475c585f</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>e46f99e5-8f7e-4bba-8332-6b0d7e4cca63</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 19:56:40.212057</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 19:56:22.313682"
+          data-status="success"
+          data-resource="4df059f9-ed03-479f-ae8f-df05d3d8138e"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing of Small and Medium Enterprises – 2007"
+          data-dataset-fr="Enquête sur le financement des petites et moyennes entreprises – 2007"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f3df87ae-2a50-4d40-93b6-9e62433d671e.html"><code>f3df87ae-2a50-4d40-93b6-9e62433d671e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing of Small and Medium Enterprises – 2007</span><span data-lang="fr" style="display:none">Enquête sur le financement des petites et moyennes entreprises – 2007</span><div class="small"><code>c0e59eae-b3ff-4c61-b064-570e475c585f</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>4df059f9-ed03-479f-ae8f-df05d3d8138e</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 19:56:22.313682</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 19:45:33.285014"
+          data-status="success"
+          data-resource="4a158b85-617a-4f9b-a5eb-d5468d001082"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing and Growth of Small and Medium Enterprises - 2014"
+          data-dataset-fr="Enquête sur le financement et la croissance des petites et moyennes entreprises - 2014"
+          data-filtered="1">
+        <td>
+          <a href="../reports/b1b92929-d6c2-4ece-bcb9-9acd5e069d3c.html"><code>b1b92929-d6c2-4ece-bcb9-9acd5e069d3c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing and Growth of Small and Medium Enterprises - 2014</span><span data-lang="fr" style="display:none">Enquête sur le financement et la croissance des petites et moyennes entreprises - 2014</span><div class="small"><code>b1ddaa72-a38e-4fd4-ad3c-00cd1b7db316</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>4a158b85-617a-4f9b-a5eb-d5468d001082</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 19:45:33.285014</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 19:45:09.742326"
+          data-status="success"
+          data-resource="e10d7607-734c-44f2-b1f9-46e7cfcd92d7"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing and Growth of Small and Medium Enterprises - 2014"
+          data-dataset-fr="Enquête sur le financement et la croissance des petites et moyennes entreprises - 2014"
+          data-filtered="1">
+        <td>
+          <a href="../reports/414138df-5261-4099-b9cc-763dcdc70993.html"><code>414138df-5261-4099-b9cc-763dcdc70993</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing and Growth of Small and Medium Enterprises - 2014</span><span data-lang="fr" style="display:none">Enquête sur le financement et la croissance des petites et moyennes entreprises - 2014</span><div class="small"><code>b1ddaa72-a38e-4fd4-ad3c-00cd1b7db316</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>e10d7607-734c-44f2-b1f9-46e7cfcd92d7</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 19:45:09.742326</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 19:41:29.014386"
+          data-status="success"
+          data-resource="b3fe1a19-feba-4476-9b08-2118179a208e"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing and Growth of Small and Medium Enterprises – 2011"
+          data-dataset-fr="Enquête sur le financement et la croissance des petites et moyennes entreprises – 2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/165b99af-8f6d-4742-a42e-cf96649d6567.html"><code>165b99af-8f6d-4742-a42e-cf96649d6567</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing and Growth of Small and Medium Enterprises – 2011</span><span data-lang="fr" style="display:none">Enquête sur le financement et la croissance des petites et moyennes entreprises – 2011</span><div class="small"><code>c34ca68e-85bb-43d6-a261-7b42ce9b31e8</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>b3fe1a19-feba-4476-9b08-2118179a208e</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 19:41:29.014386</time></td>
+      </tr>
+    
+      <tr data-created="2025-06-09 19:41:07.471832"
+          data-status="success"
+          data-resource="17da9241-0083-41dd-91b0-7bc33e24f138"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.2"
+          data-dataset-en="Survey on Financing and Growth of Small and Medium Enterprises – 2011"
+          data-dataset-fr="Enquête sur le financement et la croissance des petites et moyennes entreprises – 2011"
+          data-filtered="1">
+        <td>
+          <a href="../reports/19411210-1139-4135-affc-c37e74c46c03.html"><code>19411210-1139-4135-affc-c37e74c46c03</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Survey on Financing and Growth of Small and Medium Enterprises – 2011</span><span data-lang="fr" style="display:none">Enquête sur le financement et la croissance des petites et moyennes entreprises – 2011</span><div class="small"><code>c34ca68e-85bb-43d6-a261-7b42ce9b31e8</code></div></td>
+        <td><span data-lang="en">Tables</span><span data-lang="fr" style="display:none">Tableaux</span><div class="small"><code>17da9241-0083-41dd-91b0-7bc33e24f138</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-06-09 19:41:07.471832</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:17.113694"
+          data-status="failure"
+          data-resource="bc023acc-c110-4b9e-b8dc-b270f199f7cd"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8e39100c-9987-4ed0-876a-b421fc905731.html"><code>8e39100c-9987-4ed0-876a-b421fc905731</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian co-operatives, 2016</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2016</span><div class="small"><code>bc023acc-c110-4b9e-b8dc-b270f199f7cd</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:17.113694</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:17.081618"
+          data-status="failure"
+          data-resource="d77d9591-2147-49fb-9075-88863ca11f7b"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/be2fd1ec-24e7-4cee-b8a6-72cfbc20a629.html"><code>be2fd1ec-24e7-4cee-b8a6-72cfbc20a629</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2016</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2016</span><div class="small"><code>d77d9591-2147-49fb-9075-88863ca11f7b</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:17.081618</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:17.039884"
+          data-status="failure"
+          data-resource="74b37670-d319-4bc8-b221-b2812b5446aa"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/20f59ece-9e77-429c-b8b3-647fb4fba3ac.html"><code>20f59ece-9e77-429c-b8b3-647fb4fba3ac</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2017</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2017</span><div class="small"><code>74b37670-d319-4bc8-b221-b2812b5446aa</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:17.039884</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:17.003323"
+          data-status="failure"
+          data-resource="a270e27e-f074-4161-97e0-40209fe9b98b"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a47dbfd0-e28a-46a3-8b27-39bb290fd5aa.html"><code>a47dbfd0-e28a-46a3-8b27-39bb290fd5aa</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2017</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2017</span><div class="small"><code>a270e27e-f074-4161-97e0-40209fe9b98b</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:17.003323</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.974179"
+          data-status="failure"
+          data-resource="a1fb09ff-ff8e-4530-92a6-790ff99a5cda"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5328a2c0-462f-4213-adde-94d4596e6cc4.html"><code>5328a2c0-462f-4213-adde-94d4596e6cc4</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2018</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2018</span><div class="small"><code>a1fb09ff-ff8e-4530-92a6-790ff99a5cda</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.974179</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.944102"
+          data-status="failure"
+          data-resource="d238f58c-ca10-48a7-b971-bdb4e2f09066"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/eb3bc024-7f22-4419-bf06-32dda75fd69f.html"><code>eb3bc024-7f22-4419-bf06-32dda75fd69f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2018</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2018</span><div class="small"><code>d238f58c-ca10-48a7-b971-bdb4e2f09066</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.944102</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.909798"
+          data-status="failure"
+          data-resource="6427f0e1-6ec1-4dfc-b1f7-60bc55f5a131"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d693131e-7591-40ca-ad6c-5d89ca8304f7.html"><code>d693131e-7591-40ca-ad6c-5d89ca8304f7</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2019</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2019</span><div class="small"><code>6427f0e1-6ec1-4dfc-b1f7-60bc55f5a131</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.909798</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.875938"
+          data-status="failure"
+          data-resource="c666ac0b-c736-4a17-a3d5-7484d428c7a9"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/01151804-aa1f-4523-bdc0-5d1f02370ef3.html"><code>01151804-aa1f-4523-bdc0-5d1f02370ef3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2019</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2019</span><div class="small"><code>c666ac0b-c736-4a17-a3d5-7484d428c7a9</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.875938</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.84526"
+          data-status="failure"
+          data-resource="1711fe19-fd30-4573-937c-85d48dcf6bf5"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6ddcbb85-6505-4a97-92ff-d90792f4cc64.html"><code>6ddcbb85-6505-4a97-92ff-d90792f4cc64</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2020</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2020</span><div class="small"><code>1711fe19-fd30-4573-937c-85d48dcf6bf5</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.84526</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.815434"
+          data-status="failure"
+          data-resource="1cb46c2b-bb67-4c2d-bd21-1972d70ec1e0"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/03481b90-39f4-4b2d-8f70-afbe36ee6ce5.html"><code>03481b90-39f4-4b2d-8f70-afbe36ee6ce5</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2020</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2020</span><div class="small"><code>1cb46c2b-bb67-4c2d-bd21-1972d70ec1e0</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.815434</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.776175"
+          data-status="failure"
+          data-resource="9abc4807-939f-4996-929a-42cc6d3f4acf"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/72aad519-8ba0-4865-aa11-6a1b2af1936f.html"><code>72aad519-8ba0-4865-aa11-6a1b2af1936f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2021</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2021</span><div class="small"><code>9abc4807-939f-4996-929a-42cc6d3f4acf</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.776175</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.747661"
+          data-status="failure"
+          data-resource="fa8ff3bf-9c9c-4d67-a967-12807e95497a"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4201fe9a-ea87-4332-bdfc-4148c085cbce.html"><code>4201fe9a-ea87-4332-bdfc-4148c085cbce</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2021</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2021</span><div class="small"><code>fa8ff3bf-9c9c-4d67-a967-12807e95497a</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.747661</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.7116"
+          data-status="failure"
+          data-resource="b40e1644-0a98-467e-a9bf-c41e27a61f38"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/8584c960-2b7b-4003-8ad8-b4cce2efc53b.html"><code>8584c960-2b7b-4003-8ad8-b4cce2efc53b</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2022</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2022</span><div class="small"><code>b40e1644-0a98-467e-a9bf-c41e27a61f38</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.7116</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-02 14:12:16.481986"
+          data-status="failure"
+          data-resource="eb06c087-e020-4dc7-ae3e-4d2f3aaf6bf2"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Canadian Co-operatives"
+          data-dataset-fr="Coopératives canadiennes"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c921c475-ae18-43d9-b16d-7cc6f5272e39.html"><code>c921c475-ae18-43d9-b16d-7cc6f5272e39</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Co-operatives</span><span data-lang="fr" style="display:none">Coopératives canadiennes</span><div class="small"><code>f241c519-a250-456b-8b1d-a1d483308c20</code></div></td>
+        <td><span data-lang="en">Canadian Co-operatives, 2022</span><span data-lang="fr" style="display:none">Coopératives canadiennes, 2022</span><div class="small"><code>eb06c087-e020-4dc7-ae3e-4d2f3aaf6bf2</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">158 err</span><span data-lang="fr" style="display:none">158 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-02 14:12:16.481986</time></td>
+      </tr>
+    
+      <tr data-created="2023-11-30 20:01:47.42535"
+          data-status="failure"
+          data-resource="46803c1d-3bce-4e36-8390-ccc5e08d07dd"
+          data-organization="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-org="Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada"
+          data-version="v0.1"
+          data-dataset-en="Business Benefits Finder"
+          data-dataset-fr="Outil de recherche d&#x27;aide aux entreprises"
+          data-filtered="1">
+        <td>
+          <a href="../reports/afef0f59-7c6b-4438-adfd-b3fe1a6ae49c.html"><code>afef0f59-7c6b-4438-adfd-b3fe1a6ae49c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Business Benefits Finder</span><span data-lang="fr" style="display:none">Outil de recherche d&#x27;aide aux entreprises</span><div class="small"><code>4e75337e-70d0-4ed7-92d1-3b85192ec6b1</code></div></td>
+        <td><span data-lang="en">IC Programs and Services (2023 November)</span><span data-lang="fr" style="display:none">IC Programmes et services (2023 novembre)</span><div class="small"><code>46803c1d-3bce-4e36-8390-ccc5e08d07dd</code> · upload</div></td>
+        <td>Innovation, Science and Economic Development Canada | Innovation, Sciences et Développement économique Canada</td>
+        <td><span data-lang="en">1000 err</span><span data-lang="fr" style="display:none">1000 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-11-30 20:01:47.42535</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [23, 26], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [23], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [26], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

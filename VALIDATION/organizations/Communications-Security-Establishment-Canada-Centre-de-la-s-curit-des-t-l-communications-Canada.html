@@ -1,0 +1,884 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 32 · Success: 14 · Failure: 18 · Other: 0 · URL types: 1 · Latest: <time>2025-09-03 15:46:08.525264</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">32</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">14</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">18</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>32</td><td>14</td><td>18</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2025-09-03 15:46:08.525264"
+          data-status="success"
+          data-resource="a8e890aa-6097-4de6-96d1-79c7f98336b8"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 Employment Equity and First Official Languages representation for the Communications Security Establishment "
+          data-dataset-fr="2024-2025 Équité en matière d&#x27;emploi et représentation des premières langues officielles pour le Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c56d443e-05b1-4275-8dce-6f2d51060185.html"><code>c56d443e-05b1-4275-8dce-6f2d51060185</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 Employment Equity and First Official Languages representation for the Communications Security Establishment </span><span data-lang="fr" style="display:none">2024-2025 Équité en matière d&#x27;emploi et représentation des premières langues officielles pour le Centre de la sécurité des télécommunications</span><div class="small"><code>112ed90e-da6c-49d7-8bd5-81964bcab466</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>a8e890aa-6097-4de6-96d1-79c7f98336b8</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-09-03 15:46:08.525264</time></td>
+      </tr>
+    
+      <tr data-created="2025-08-29 22:24:25.238674"
+          data-status="failure"
+          data-resource="23705252-1708-4327-a8bd-e23021bb9fee"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="CSE Annual Pay Rate in Dollars"
+          data-dataset-fr="Taux de rémunération (en dollars) du CST"
+          data-filtered="1">
+        <td>
+          <a href="../reports/57e22df8-cb77-497d-bbb8-cb7014aed91e.html"><code>57e22df8-cb77-497d-bbb8-cb7014aed91e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">CSE Annual Pay Rate in Dollars</span><span data-lang="fr" style="display:none">Taux de rémunération (en dollars) du CST</span><div class="small"><code>e3d448a2-3d6a-465e-b900-93c0b3666a6f</code></div></td>
+        <td><span data-lang="en">CSE Annual Pay Rate in Dollars</span><span data-lang="fr" style="display:none">Taux de rémunération (en dollars) du CST</span><div class="small"><code>23705252-1708-4327-a8bd-e23021bb9fee</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">17 err</span><span data-lang="fr" style="display:none">17 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-08-29 22:24:25.238674</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-03 18:50:02.910565"
+          data-status="success"
+          data-resource="c5eb4bc5-ea84-4c36-bafd-e15a766ec0dc"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2012-2026 Population growth for the Communications Security Establishment"
+          data-dataset-fr="2012-2026 Croissance de l’effectif au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a1e071e8-1cec-4306-bdc7-8b6e9c218133.html"><code>a1e071e8-1cec-4306-bdc7-8b6e9c218133</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2012-2026 Population growth for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2012-2026 Croissance de l’effectif au Centre de la sécurité des télécommunications</span><div class="small"><code>1b953875-10d8-461f-a467-d59c40f256f9</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>c5eb4bc5-ea84-4c36-bafd-e15a766ec0dc</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-03 18:50:02.910565</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-02 19:54:35.302582"
+          data-status="success"
+          data-resource="95fd2b03-daf5-413f-827a-b873dad881f5"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2011-2026 Age distribution for the Communications Security Establishment"
+          data-dataset-fr="2011-2026 Répartition de l’effectif selon l’âge au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/76e2e669-370e-46cb-ad66-67532a02d06f.html"><code>76e2e669-370e-46cb-ad66-67532a02d06f</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2011-2026 Age distribution for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2011-2026 Répartition de l’effectif selon l’âge au Centre de la sécurité des télécommunications</span><div class="small"><code>f94b9490-e220-4dd3-b38c-7d2f63ec4042</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>95fd2b03-daf5-413f-827a-b873dad881f5</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-02 19:54:35.302582</time></td>
+      </tr>
+    
+      <tr data-created="2025-07-02 19:50:33.43065"
+          data-status="success"
+          data-resource="352ad5c1-3c40-4b45-a607-dc06f3a50ac1"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2012-2026 Employment tenure distribution for the Communications Security Establishment"
+          data-dataset-fr="2012-2026 Répartition de l’effectif selon la durée du mandat au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/dd8b194a-7cc3-4e3e-b612-a63266314511.html"><code>dd8b194a-7cc3-4e3e-b612-a63266314511</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2012-2026 Employment tenure distribution for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2012-2026 Répartition de l’effectif selon la durée du mandat au Centre de la sécurité des télécommunications</span><div class="small"><code>e40ed226-eb48-4038-a510-9adbcfec2e54</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>352ad5c1-3c40-4b45-a607-dc06f3a50ac1</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-07-02 19:50:33.43065</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-13 16:32:58.009487"
+          data-status="success"
+          data-resource="f9dcc404-cb48-4ce3-9a93-004f966d75d0"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2018-2024 Procurement - Awarded Contracts and Indigenous Businesses"
+          data-dataset-fr="2018-2024 Approvisionnement - contrats attribués et les dossiers attribués aus Autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/59729cc6-58d1-4d26-9b5c-fa62f63410e1.html"><code>59729cc6-58d1-4d26-9b5c-fa62f63410e1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2018-2024 Procurement - Awarded Contracts and Indigenous Businesses</span><span data-lang="fr" style="display:none">2018-2024 Approvisionnement - contrats attribués et les dossiers attribués aus Autochtones</span><div class="small"><code>a8d03bec-ce65-4281-bd92-b56f7c05f6ff</code></div></td>
+        <td><span data-lang="en">CSV FR</span><span data-lang="fr" style="display:none">CSV FR</span><div class="small"><code>f9dcc404-cb48-4ce3-9a93-004f966d75d0</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-13 16:32:58.009487</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-13 16:19:20.659471"
+          data-status="success"
+          data-resource="571ef97f-9ed5-4386-8854-c16aa01576d0"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2018-2024 Procurement - Awarded Contracts and Indigenous Businesses"
+          data-dataset-fr="2018-2024 Approvisionnement - contrats attribués et les dossiers attribués aus Autochtones"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c4ce6e4f-11d8-4531-9dd2-e4e600d89944.html"><code>c4ce6e4f-11d8-4531-9dd2-e4e600d89944</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2018-2024 Procurement - Awarded Contracts and Indigenous Businesses</span><span data-lang="fr" style="display:none">2018-2024 Approvisionnement - contrats attribués et les dossiers attribués aus Autochtones</span><div class="small"><code>a8d03bec-ce65-4281-bd92-b56f7c05f6ff</code></div></td>
+        <td><span data-lang="en">CSV EN</span><span data-lang="fr" style="display:none">CSV EN</span><div class="small"><code>571ef97f-9ed5-4386-8854-c16aa01576d0</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-13 16:19:20.659471</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:51.139018"
+          data-status="success"
+          data-resource="459d0b77-1a26-4522-8206-6fc4c6af0902"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2011-2023 Age distribution for the Communications Security Establishment"
+          data-dataset-fr="2011-2023 Répartition de l’effectif selon l’âge au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ec690014-6a29-4c96-84b0-1ab77e3e320d.html"><code>ec690014-6a29-4c96-84b0-1ab77e3e320d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2011-2023 Age distribution for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2011-2023 Répartition de l’effectif selon l’âge au Centre de la sécurité des télécommunications</span><div class="small"><code>e95a44a5-65b4-476f-aaae-f8406fd3e7fd</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>459d0b77-1a26-4522-8206-6fc4c6af0902</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:51.139018</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:50.122124"
+          data-status="success"
+          data-resource="25f0208f-016d-4d38-8331-1d4593367e19"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="Contracting overview"
+          data-dataset-fr="Aperçu de contrats"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c900a451-c6b2-4af1-9f54-ee496fd8f2b2.html"><code>c900a451-c6b2-4af1-9f54-ee496fd8f2b2</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Contracting overview</span><span data-lang="fr" style="display:none">Aperçu de contrats</span><div class="small"><code>74ca048c-0ac9-4400-8e6c-82dee15f469f</code></div></td>
+        <td><span data-lang="en">CSV FR</span><span data-lang="fr" style="display:none">CSV FR</span><div class="small"><code>25f0208f-016d-4d38-8331-1d4593367e19</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:50.122124</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:49.34903"
+          data-status="success"
+          data-resource="e368f7f9-7b76-40db-94e9-39e23c1e8319"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="Contracting overview"
+          data-dataset-fr="Aperçu de contrats"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cd78ede4-4281-49a8-97a1-dccd3cc4656d.html"><code>cd78ede4-4281-49a8-97a1-dccd3cc4656d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Contracting overview</span><span data-lang="fr" style="display:none">Aperçu de contrats</span><div class="small"><code>74ca048c-0ac9-4400-8e6c-82dee15f469f</code></div></td>
+        <td><span data-lang="en">CSV EN</span><span data-lang="fr" style="display:none">CSV EN</span><div class="small"><code>e368f7f9-7b76-40db-94e9-39e23c1e8319</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:49.34903</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:48.423438"
+          data-status="success"
+          data-resource="66fc7b9f-370b-41e6-b049-f4b9ed468340"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2012-2023 Employment tenure distribution for the Communications Security Establishment"
+          data-dataset-fr="2012-2023 Répartition de l’effectif selon la durée du mandat au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/046b7d5b-f320-43b9-8d31-bc3ba898a534.html"><code>046b7d5b-f320-43b9-8d31-bc3ba898a534</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2012-2023 Employment tenure distribution for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2012-2023 Répartition de l’effectif selon la durée du mandat au Centre de la sécurité des télécommunications</span><div class="small"><code>cf203591-87bd-4400-adcd-17df54b6c59d</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>66fc7b9f-370b-41e6-b049-f4b9ed468340</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:48.423438</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:09:47.67037"
+          data-status="success"
+          data-resource="8a8e7f25-bb61-4b78-8d10-02ebeec3df28"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2012-2023 Population growth for the Communications Security Establishment"
+          data-dataset-fr="2012-2023 Croissance de l’effectif au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/51ff3c54-3421-47ec-8c5b-10d411c68e81.html"><code>51ff3c54-3421-47ec-8c5b-10d411c68e81</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2012-2023 Population growth for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2012-2023 Croissance de l’effectif au Centre de la sécurité des télécommunications</span><div class="small"><code>e2d943c9-878b-42e3-ab27-b22e4700307d</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>8a8e7f25-bb61-4b78-8d10-02ebeec3df28</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:47.67037</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:49:59.259847"
+          data-status="success"
+          data-resource="b629fe88-c760-47cc-afff-87915a290de4"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="CSE Workforce Representation as of June 30th, 2022"
+          data-dataset-fr="Représentation du personnel du CST en date du 30 juin 2022"
+          data-filtered="1">
+        <td>
+          <a href="../reports/4c00816b-5d85-4311-a539-c018a95cc3fa.html"><code>4c00816b-5d85-4311-a539-c018a95cc3fa</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">CSE Workforce Representation as of June 30th, 2022</span><span data-lang="fr" style="display:none">Représentation du personnel du CST en date du 30 juin 2022</span><div class="small"><code>3fb07d1b-8521-4c9a-b7de-6695f46b0d80</code></div></td>
+        <td><span data-lang="en">CSV EN</span><span data-lang="fr" style="display:none">CSV EN</span><div class="small"><code>b629fe88-c760-47cc-afff-87915a290de4</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:49:59.259847</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:40:22.667584"
+          data-status="failure"
+          data-resource="5f29af03-e522-4a09-9299-eb5bcfc47efd"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2021-2022 Canadian Centre for Cyber Security - Contact Centre Statistics "
+          data-dataset-fr="Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2021-2022"
+          data-filtered="1">
+        <td>
+          <a href="../reports/da3c05b5-42cb-4d81-ad9f-bd7e35b2109c.html"><code>da3c05b5-42cb-4d81-ad9f-bd7e35b2109c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2021-2022 Canadian Centre for Cyber Security - Contact Centre Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2021-2022</span><div class="small"><code>b7e8c894-53bd-4a62-8c05-6726921abb98</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV EN/FR</span><div class="small"><code>5f29af03-e522-4a09-9299-eb5bcfc47efd</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">8 err</span><span data-lang="fr" style="display:none">8 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:40:22.667584</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:17:28.499431"
+          data-status="failure"
+          data-resource="d1cc1dec-afe3-4186-9d72-31cd7e782a90"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.2"
+          data-dataset-en="2019-2023 Waste Diversion Report"
+          data-dataset-fr="Rapport de réacheminement des déchets 2019-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9ea0fdfe-e456-4075-a509-65300e8dae0a.html"><code>9ea0fdfe-e456-4075-a509-65300e8dae0a</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2019-2023 Waste Diversion Report</span><span data-lang="fr" style="display:none">Rapport de réacheminement des déchets 2019-2023</span><div class="small"><code>e9f71825-2d08-49d1-9725-bd4c0d77c8d1</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV EN/FR</span><div class="small"><code>d1cc1dec-afe3-4186-9d72-31cd7e782a90</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-09 17:17:28.499431</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-03 16:19:38.05974"
+          data-status="failure"
+          data-resource="39b65880-5a8a-4d86-ac27-02450b7f8b83"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2012-2024 Population growth for the Communications Security Establishment"
+          data-dataset-fr="2012-2024 Croissance de l’effectif au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fd664655-ca3d-465a-9a27-f62229b626ff.html"><code>fd664655-ca3d-465a-9a27-f62229b626ff</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2012-2024 Population growth for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2012-2024 Croissance de l’effectif au Centre de la sécurité des télécommunications</span><div class="small"><code>f81a055d-fa08-487c-8b54-70860004db1c</code></div></td>
+        <td><span data-lang="en">CSV-EN/FR</span><span data-lang="fr" style="display:none">CSV-EN/FR</span><div class="small"><code>39b65880-5a8a-4d86-ac27-02450b7f8b83</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">38 err</span><span data-lang="fr" style="display:none">38 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-03 16:19:38.05974</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-03 16:19:37.764094"
+          data-status="failure"
+          data-resource="a329c35b-fac7-4886-a6e6-d6f6af1bc99c"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2011-2024 Age distribution for the Communications Security Establishment"
+          data-dataset-fr="2011-2024 Répartition de l’effectif selon l’âge au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bff99cb5-7e0e-44d7-aecc-5527c00da09a.html"><code>bff99cb5-7e0e-44d7-aecc-5527c00da09a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2011-2024 Age distribution for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2011-2024 Répartition de l’effectif selon l’âge au Centre de la sécurité des télécommunications</span><div class="small"><code>50756a08-d919-49e8-a54a-8cb8e51d6b07</code></div></td>
+        <td><span data-lang="en">CSV-EN/FR</span><span data-lang="fr" style="display:none">CSV-EN/FR</span><div class="small"><code>a329c35b-fac7-4886-a6e6-d6f6af1bc99c</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">38 err</span><span data-lang="fr" style="display:none">38 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-03 16:19:37.764094</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-03 16:19:37.446167"
+          data-status="failure"
+          data-resource="bba887ca-982a-4a58-a21b-b93b5a937368"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2022-2023 Employment Equity and First Official Languages representation for the Communications Security Establishment &quot;"
+          data-dataset-fr="2022-2023 Équité en matière d&#x27;emploi et représentation des premières langues officielles pour le Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e3f94a97-36ca-481f-86d4-1e7ebb7969ec.html"><code>e3f94a97-36ca-481f-86d4-1e7ebb7969ec</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2022-2023 Employment Equity and First Official Languages representation for the Communications Security Establishment &quot;</span><span data-lang="fr" style="display:none">2022-2023 Équité en matière d&#x27;emploi et représentation des premières langues officielles pour le Centre de la sécurité des télécommunications</span><div class="small"><code>f6afd910-e246-4676-90dd-51c0ea6f6ff3</code></div></td>
+        <td><span data-lang="en">CSV-EN/FR</span><span data-lang="fr" style="display:none">CSV-EN/FR</span><div class="small"><code>bba887ca-982a-4a58-a21b-b93b5a937368</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">2 err</span><span data-lang="fr" style="display:none">2 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-03 16:19:37.446167</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-03 16:19:37.129396"
+          data-status="failure"
+          data-resource="df7cb66d-652c-44ea-bbb1-13ff18495e98"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2012-2024 Employment tenure distribution for the Communications Security Establishment"
+          data-dataset-fr="2012-2024 Répartition de l’effectif selon la durée du mandat au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/408c4380-8930-48e2-b23b-49daef77777e.html"><code>408c4380-8930-48e2-b23b-49daef77777e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2012-2024 Employment tenure distribution for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2012-2024 Répartition de l’effectif selon la durée du mandat au Centre de la sécurité des télécommunications</span><div class="small"><code>54107455-cd52-413e-a8f2-7adc0e4963dd</code></div></td>
+        <td><span data-lang="en">CSV-EN/FR</span><span data-lang="fr" style="display:none">CSV-EN/FR</span><div class="small"><code>df7cb66d-652c-44ea-bbb1-13ff18495e98</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">39 err</span><span data-lang="fr" style="display:none">39 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-03 16:19:37.129396</time></td>
+      </tr>
+    
+      <tr data-created="2024-03-27 18:43:46.170217"
+          data-status="failure"
+          data-resource="936a87ec-dc47-415b-8e17-6694be0b3dfa"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2022-2023 Canadian Centre for Cyber Security - Learning Hub Statistics "
+          data-dataset-fr="Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7c22aac8-7578-4687-a6d3-ee7b3b38f73e.html"><code>7c22aac8-7578-4687-a6d3-ee7b3b38f73e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2022-2023 Canadian Centre for Cyber Security - Learning Hub Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2022-2023</span><div class="small"><code>3bb2fc68-f7bd-465c-9a71-708e719a5779</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV EN/FR</span><div class="small"><code>936a87ec-dc47-415b-8e17-6694be0b3dfa</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">30 err</span><span data-lang="fr" style="display:none">30 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-03-27 18:43:46.170217</time></td>
+      </tr>
+    
+      <tr data-created="2024-03-27 18:43:45.811323"
+          data-status="failure"
+          data-resource="0cdce5a7-2cfb-4357-9b20-16ee4eb5e4c4"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2022-2023 Canadian Centre for Cyber Security - Contact Centre Statistics "
+          data-dataset-fr="Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fc99caa0-3c07-44a0-b26e-31463961bf84.html"><code>fc99caa0-3c07-44a0-b26e-31463961bf84</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2022-2023 Canadian Centre for Cyber Security - Contact Centre Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2022-2023</span><div class="small"><code>17734311-1845-4bb7-bb35-364c9282f92d</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV EN/FR</span><div class="small"><code>0cdce5a7-2cfb-4357-9b20-16ee4eb5e4c4</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">11 err</span><span data-lang="fr" style="display:none">11 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-03-27 18:43:45.811323</time></td>
+      </tr>
+    
+      <tr data-created="2023-03-08 19:05:22.103338"
+          data-status="success"
+          data-resource="bf8a8f86-6c55-4f76-9754-60d94df654c0"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2021-2022 Canadian Centre for Cyber Security - Learning Hub Statistics "
+          data-dataset-fr="Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2021-2022 "
+          data-filtered="1">
+        <td>
+          <a href="../reports/22e58817-c206-47a1-bfba-61377caa011d.html"><code>22e58817-c206-47a1-bfba-61377caa011d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2021-2022 Canadian Centre for Cyber Security - Learning Hub Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2021-2022 </span><div class="small"><code>4ad58fb4-4629-428b-addc-0d4f4c109f40</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV EN/FR</span><div class="small"><code>bf8a8f86-6c55-4f76-9754-60d94df654c0</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2023-03-08 19:05:22.103338</time></td>
+      </tr>
+    
+      <tr data-created="2022-10-04 17:55:14.909396"
+          data-status="success"
+          data-resource="82d7176f-7a34-4a7a-af96-8d67f5982642"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="CSE Workforce Representation as of June 30th, 2022"
+          data-dataset-fr="Représentation du personnel du CST en date du 30 juin 2022"
+          data-filtered="1">
+        <td>
+          <a href="../reports/318b63e4-ee92-45ed-a211-e40f95c37e52.html"><code>318b63e4-ee92-45ed-a211-e40f95c37e52</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">CSE Workforce Representation as of June 30th, 2022</span><span data-lang="fr" style="display:none">Représentation du personnel du CST en date du 30 juin 2022</span><div class="small"><code>3fb07d1b-8521-4c9a-b7de-6695f46b0d80</code></div></td>
+        <td><span data-lang="en">CSV FR</span><span data-lang="fr" style="display:none">CSV FR</span><div class="small"><code>82d7176f-7a34-4a7a-af96-8d67f5982642</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-10-04 17:55:14.909396</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:43.137048"
+          data-status="failure"
+          data-resource="1849a82b-bb06-4f26-ab1b-2729d6da0c8c"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="Library catalogue for Communication Security Establishment"
+          data-dataset-fr="Le catalogue de la bibliothèque pour le Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/777582dd-b105-4046-874e-7c3319897dc6.html"><code>777582dd-b105-4046-874e-7c3319897dc6</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Library catalogue for Communication Security Establishment</span><span data-lang="fr" style="display:none">Le catalogue de la bibliothèque pour le Centre de la sécurité des télécommunications</span><div class="small"><code>56816790-5802-4864-b5d3-ef992d5b739b</code></div></td>
+        <td><span data-lang="en">Library catalogue for Communication Security Establishment</span><span data-lang="fr" style="display:none">Le catalogue de la bibliothèque pour le Centre de la sécurité des télécommunications</span><div class="small"><code>1849a82b-bb06-4f26-ab1b-2729d6da0c8c</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">3 err</span><span data-lang="fr" style="display:none">3 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:43.137048</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:37.852891"
+          data-status="failure"
+          data-resource="ddbf8668-1376-4aab-807f-c277bfc020f1"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2018 Employment Equity for the Communications Security Establishment"
+          data-dataset-fr="2018 Équité en matière d’emploi au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d3f454fe-4df4-40e5-a4cd-d41a02e664af.html"><code>d3f454fe-4df4-40e5-a4cd-d41a02e664af</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2018 Employment Equity for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2018 Équité en matière d’emploi au Centre de la sécurité des télécommunications</span><div class="small"><code>396cb8b1-8b7c-4c95-9943-b6788a26db6b</code></div></td>
+        <td><span data-lang="en">CSE Employment Equity 2018</span><span data-lang="fr" style="display:none">CSE Employment Equity 2018</span><div class="small"><code>ddbf8668-1376-4aab-807f-c277bfc020f1</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:37.852891</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:25.24507"
+          data-status="failure"
+          data-resource="47832d2a-a838-43af-a2c7-103ce2dcae3f"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2019 Employment Equity for the Communications Security Establishment"
+          data-dataset-fr="2019 Équité en matière d’emploi au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/db19dd3b-5047-446b-8b41-5e19c880ac9e.html"><code>db19dd3b-5047-446b-8b41-5e19c880ac9e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2019 Employment Equity for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2019 Équité en matière d’emploi au Centre de la sécurité des télécommunications</span><div class="small"><code>55c43516-3470-4245-a4a2-db3fa453d7bb</code></div></td>
+        <td><span data-lang="en">Employment Equity for the Communications Security Establishment</span><span data-lang="fr" style="display:none">Équité en matière d’emploi au Centre de la sécurité des télécommunications</span><div class="small"><code>47832d2a-a838-43af-a2c7-103ce2dcae3f</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:25.24507</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:05.656683"
+          data-status="failure"
+          data-resource="98820e96-9ed6-49e4-bd76-49ac797c7e72"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2020 Employment Equity for the Communications Security Establishment"
+          data-dataset-fr="2020 Équité en matière d’emploi au Centre de la sécurité des télécommunications"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a5e398cb-eede-4b25-aa61-fc6727a5e41d.html"><code>a5e398cb-eede-4b25-aa61-fc6727a5e41d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2020 Employment Equity for the Communications Security Establishment</span><span data-lang="fr" style="display:none">2020 Équité en matière d’emploi au Centre de la sécurité des télécommunications</span><div class="small"><code>945948ff-ab9c-4461-b7de-225bfd2a02db</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV ANG/FR</span><div class="small"><code>98820e96-9ed6-49e4-bd76-49ac797c7e72</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:05.656683</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:29:57.258604"
+          data-status="failure"
+          data-resource="1aa88af3-b64f-492b-8a3e-1a1afd86b6ad"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2020-2021 Canadian Centre for Cyber Security - Learning Hub Statistics "
+          data-dataset-fr="Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2020 - 2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5ae8c524-aed7-40d8-be2e-0d32573e9e06.html"><code>5ae8c524-aed7-40d8-be2e-0d32573e9e06</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2020-2021 Canadian Centre for Cyber Security - Learning Hub Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2020 - 2021</span><div class="small"><code>e589cb12-8630-43b1-a102-d37fd813d11d</code></div></td>
+        <td><span data-lang="en">2020 - 2021 Canadian Centre for Cyber Security - Learning Hub Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité - Statistiques du centre d&#x27;apprentissage 2020 -2021</span><div class="small"><code>1aa88af3-b64f-492b-8a3e-1a1afd86b6ad</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:29:57.258604</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:29:56.578001"
+          data-status="failure"
+          data-resource="67869c72-2c53-4e71-8f51-6a5ae790fe09"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2015-2021 Access to Information and Privacy (ATIP) Statistics"
+          data-dataset-fr="STATISTIQUES - ACCÈS À L&#x27;INFORMATION &amp; PROTECTION DES RENSEIGNEMENTS 2015-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e7f7372b-a5ed-4ae5-ac34-f14170919b1e.html"><code>e7f7372b-a5ed-4ae5-ac34-f14170919b1e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2015-2021 Access to Information and Privacy (ATIP) Statistics</span><span data-lang="fr" style="display:none">STATISTIQUES - ACCÈS À L&#x27;INFORMATION &amp; PROTECTION DES RENSEIGNEMENTS 2015-2021</span><div class="small"><code>5e640ae2-78f7-468e-9830-34e05d953f7c</code></div></td>
+        <td><span data-lang="en">2015-2021 Access to Information and Privacy (ATIP) Statistics</span><span data-lang="fr" style="display:none">STATISTIQUES - ACCÈS À L&#x27;INFORMATION &amp; PROTECTION DES RENSEIGNEMENTS  2015-2021</span><div class="small"><code>67869c72-2c53-4e71-8f51-6a5ae790fe09</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:29:56.578001</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:29:55.878517"
+          data-status="failure"
+          data-resource="40c423c3-8dca-4053-a49a-2b894d964fe7"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2020-2021 Canadian Centre for Cyber Security - Contact Centre Statistics "
+          data-dataset-fr="Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2020-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/67fa581f-c42b-49c8-a86d-d88fbea515df.html"><code>67fa581f-c42b-49c8-a86d-d88fbea515df</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2020-2021 Canadian Centre for Cyber Security - Contact Centre Statistics </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2020-2021</span><div class="small"><code>5b2146fc-281c-4211-8f67-9c87f6d8d350</code></div></td>
+        <td><span data-lang="en">2020-2021 Canadian Centre for Cyber Security - Contact Centre Statistic </span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité – Centre d’appel – Statistiques sur les demandes 2020-2021</span><div class="small"><code>40c423c3-8dca-4053-a49a-2b894d964fe7</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:29:55.878517</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 18:36:39.160814"
+          data-status="failure"
+          data-resource="5b7611f4-4486-4c2e-942b-9fa7355f1d95"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2018-2019 Canadian Centre for Cyber Security - Learning Hub - Course Statistics"
+          data-dataset-fr="Centre canadien pour la cybersécurité - Centre d&#x27;apprentissage en cybersécurité - Statistiques sur les cours 2018-2019"
+          data-filtered="1">
+        <td>
+          <a href="../reports/be8f3325-2ef2-4fe3-8b02-bf8dd7c44eb6.html"><code>be8f3325-2ef2-4fe3-8b02-bf8dd7c44eb6</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2018-2019 Canadian Centre for Cyber Security - Learning Hub - Course Statistics</span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité - Centre d&#x27;apprentissage en cybersécurité - Statistiques sur les cours 2018-2019</span><div class="small"><code>10c54f86-5029-4387-aed3-e613092e8173</code></div></td>
+        <td><span data-lang="en">2018-2019 Canadian Centre for Cyber Security - Learning Hub - Course Statistics</span><span data-lang="fr" style="display:none">Centre canadien pour la cybersécurité - Centre d&#x27;apprentissage en cybersécurité - Statistiques sur les cours 2018-2019</span><div class="small"><code>5b7611f4-4486-4c2e-942b-9fa7355f1d95</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">25 err</span><span data-lang="fr" style="display:none">25 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 18:36:39.160814</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 18:36:38.206064"
+          data-status="failure"
+          data-resource="afa2e9f1-20e1-4f55-b025-14dda621a68a"
+          data-organization="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-org="Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada"
+          data-version="v0.1"
+          data-dataset-en="2015-2023 Amount of power produced by installed solar panels at CSE "
+          data-dataset-fr="2015-2023 Quantité d&#x27;énergie produite par les panneaux solaires installés par CST "
+          data-filtered="1">
+        <td>
+          <a href="../reports/fcb0e4f1-055d-410c-a462-821bc4a6b4de.html"><code>fcb0e4f1-055d-410c-a462-821bc4a6b4de</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2015-2023 Amount of power produced by installed solar panels at CSE </span><span data-lang="fr" style="display:none">2015-2023 Quantité d&#x27;énergie produite par les panneaux solaires installés par CST </span><div class="small"><code>4cdc69af-3ffe-41ed-8eda-92892f2e5207</code></div></td>
+        <td><span data-lang="en">CSV EN/FR</span><span data-lang="fr" style="display:none">CSV EN/FR</span><div class="small"><code>afa2e9f1-20e1-4f55-b025-14dda621a68a</code> · upload</div></td>
+        <td>Communications Security Establishment Canada | Centre de la sécurité des télécommunications Canada</td>
+        <td><span data-lang="en">19 err</span><span data-lang="fr" style="display:none">19 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 18:36:38.206064</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [14, 18], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [14], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [18], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

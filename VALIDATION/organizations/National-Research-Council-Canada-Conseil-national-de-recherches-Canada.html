@@ -1,0 +1,254 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>National Research Council Canada | Conseil national de recherches Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">National Research Council Canada | Conseil national de recherches Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 2 · Success: 1 · Failure: 1 · Other: 0 · URL types: 1 · Latest: <time>2024-12-09 18:09:38.028037</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">2</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">1</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">1</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>2</td><td>1</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2024-12-09 18:09:38.028037"
+          data-status="success"
+          data-resource="250ea304-fbc3-4291-a40a-9e90877ece1b"
+          data-organization="National Research Council Canada | Conseil national de recherches Canada"
+          data-org="National Research Council Canada | Conseil national de recherches Canada"
+          data-version="v0.2"
+          data-dataset-en="National Research Council Canada Publications 2019-2021"
+          data-dataset-fr="Publications du Conseil national de recherches du Canada pour 2019-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a0ed86af-e8a1-4c3a-b539-4eeb92f1014b.html"><code>a0ed86af-e8a1-4c3a-b539-4eeb92f1014b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">National Research Council Canada Publications 2019-2021</span><span data-lang="fr" style="display:none">Publications du Conseil national de recherches du Canada pour 2019-2021</span><div class="small"><code>46c213f2-863f-4fa2-9a14-467f8a75c8e1</code></div></td>
+        <td><span data-lang="en">NRC Publications 2019-2021</span><span data-lang="fr" style="display:none">Publications du CNRC pour 2019-2021</span><div class="small"><code>250ea304-fbc3-4291-a40a-9e90877ece1b</code> · upload</div></td>
+        <td>National Research Council Canada | Conseil national de recherches Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:09:38.028037</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:11.448012"
+          data-status="failure"
+          data-resource="e8a6157d-d424-4739-a46d-90e03194f229"
+          data-organization="National Research Council Canada | Conseil national de recherches Canada"
+          data-org="National Research Council Canada | Conseil national de recherches Canada"
+          data-version="v0.1"
+          data-dataset-en="National Research Council Canada Peer-reviewed Publications, 2018"
+          data-dataset-fr="Publications du Conseil national de recherches Canada évaluées par les pairs, 2018"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6f8a4751-488d-4c79-980b-54ec009b0cc3.html"><code>6f8a4751-488d-4c79-980b-54ec009b0cc3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">National Research Council Canada Peer-reviewed Publications, 2018</span><span data-lang="fr" style="display:none">Publications du Conseil national de recherches Canada évaluées par les pairs, 2018</span><div class="small"><code>ff0c2020-85e2-4515-8733-3cb8cb60cf2d</code></div></td>
+        <td><span data-lang="en">National Research Council Canada Peer-reviewed Publications, 2018</span><span data-lang="fr" style="display:none">Publications du Conseil national de recherches Canada évaluées par les pairs, 2018</span><div class="small"><code>e8a6157d-d424-4739-a46d-90e03194f229</code> · upload</div></td>
+        <td>National Research Council Canada | Conseil national de recherches Canada</td>
+        <td><span data-lang="en">57 err</span><span data-lang="fr" style="display:none">57 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.448012</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [1, 1], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [1], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [1], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

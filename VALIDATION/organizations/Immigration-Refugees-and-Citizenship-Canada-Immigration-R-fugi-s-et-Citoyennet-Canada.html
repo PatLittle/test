@@ -1,0 +1,527 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 15 · Success: 3 · Failure: 12 · Other: 0 · URL types: 2 · Latest: <time>2025-04-11 13:54:06.784123</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">15</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">3</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">12</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>14</td><td>2</td><td>12</td></tr><tr><td>remote</td><td>1</td><td>1</td><td>0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2025-04-11 13:54:06.784123"
+          data-status="success"
+          data-resource="bdac348b-7ea8-46a6-9cd8-47a449200728"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.2"
+          data-dataset-en="Asylum Claimants – Monthly IRCC Updates"
+          data-dataset-fr="Demandeurs d’asile - Mises à jour mensuelles d’IRCC "
+          data-filtered="1">
+        <td>
+          <a href="../reports/067b7de7-42ee-4f32-b8c3-2a2ba2d23ba8.html"><code>067b7de7-42ee-4f32-b8c3-2a2ba2d23ba8</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Asylum Claimants – Monthly IRCC Updates</span><span data-lang="fr" style="display:none">Demandeurs d’asile - Mises à jour mensuelles d’IRCC </span><div class="small"><code>b6cbcf4d-f763-4924-a2fb-8cc4a06e3de4</code></div></td>
+        <td><span data-lang="en">[rounded numbers - not for calculations] Canada - Asylum Claimants by Province/Territory of Claim, Age and Claim Year</span><span data-lang="fr" style="display:none">[chiffres arrondis - pas pour calculs] Canada - Demandeurs d’asile selon la province / le territoire où la demande a été reçue, l&#x27;âge et l’année à laquelle la demande a été reçue</span><div class="small"><code>bdac348b-7ea8-46a6-9cd8-47a449200728</code> · remote</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2025-04-11 13:54:06.784123</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:48:34.810437"
+          data-status="success"
+          data-resource="bfd6c1fb-42d9-4c2d-ae5e-4a628db7e486"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.2"
+          data-dataset-en="Immigration, Refugees and Citizenship Canada Glossaries "
+          data-dataset-fr="Glossaires d’Immigration, Réfugiés et Citoyenneté Canada "
+          data-filtered="1">
+        <td>
+          <a href="../reports/9c8a54c9-f176-473a-a5a4-3cffdbbcfed3.html"><code>9c8a54c9-f176-473a-a5a4-3cffdbbcfed3</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Immigration, Refugees and Citizenship Canada Glossaries </span><span data-lang="fr" style="display:none">Glossaires d’Immigration, Réfugiés et Citoyenneté Canada </span><div class="small"><code>17f69360-123a-4bd2-8eef-bba94468071f</code></div></td>
+        <td><span data-lang="en">IRCC - Citizenship Program Glossary</span><span data-lang="fr" style="display:none">IRCC - Glossaire du programme de citoyenneté </span><div class="small"><code>bfd6c1fb-42d9-4c2d-ae5e-4a628db7e486</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:48:34.810437</time></td>
+      </tr>
+    
+      <tr data-created="2024-05-01 13:07:36.702692"
+          data-status="failure"
+          data-resource="76ec2291-babc-4f25-88ed-1c2b2e8479e8"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Immigration, Refugees and Citizenship Canada Glossaries "
+          data-dataset-fr="Glossaires d’Immigration, Réfugiés et Citoyenneté Canada "
+          data-filtered="1">
+        <td>
+          <a href="../reports/83f1e43c-e780-4749-838b-99d17bb2d470.html"><code>83f1e43c-e780-4749-838b-99d17bb2d470</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Immigration, Refugees and Citizenship Canada Glossaries </span><span data-lang="fr" style="display:none">Glossaires d’Immigration, Réfugiés et Citoyenneté Canada </span><div class="small"><code>17f69360-123a-4bd2-8eef-bba94468071f</code></div></td>
+        <td><span data-lang="en">IRCC - Visitors Program Glossary </span><span data-lang="fr" style="display:none">IRCC - Glossaire du programme de visiteurs</span><div class="small"><code>76ec2291-babc-4f25-88ed-1c2b2e8479e8</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">161 err</span><span data-lang="fr" style="display:none">161 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-05-01 13:07:36.702692</time></td>
+      </tr>
+    
+      <tr data-created="2024-05-01 13:07:36.658587"
+          data-status="success"
+          data-resource="3c411005-2249-4828-8b5e-8b38c8d78bb2"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Immigration, Refugees and Citizenship Canada Glossaries "
+          data-dataset-fr="Glossaires d’Immigration, Réfugiés et Citoyenneté Canada "
+          data-filtered="1">
+        <td>
+          <a href="../reports/c23f0e71-b5a9-4f2a-97a6-292b91ca815a.html"><code>c23f0e71-b5a9-4f2a-97a6-292b91ca815a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Immigration, Refugees and Citizenship Canada Glossaries </span><span data-lang="fr" style="display:none">Glossaires d’Immigration, Réfugiés et Citoyenneté Canada </span><div class="small"><code>17f69360-123a-4bd2-8eef-bba94468071f</code></div></td>
+        <td><span data-lang="en">IRCC - Visitors Program Glossary</span><span data-lang="fr" style="display:none">IRCC - Glossaire du programme de visiteurs</span><div class="small"><code>3c411005-2249-4828-8b5e-8b38c8d78bb2</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-05-01 13:07:36.658587</time></td>
+      </tr>
+    
+      <tr data-created="2024-05-01 13:07:36.380534"
+          data-status="failure"
+          data-resource="9aabbf0a-7682-4311-b006-742eb40f99e2"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Immigration, Refugees and Citizenship Canada Glossaries "
+          data-dataset-fr="Glossaires d’Immigration, Réfugiés et Citoyenneté Canada "
+          data-filtered="1">
+        <td>
+          <a href="../reports/ab8c1962-3169-40b9-b9a1-cb00d231c7c1.html"><code>ab8c1962-3169-40b9-b9a1-cb00d231c7c1</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Immigration, Refugees and Citizenship Canada Glossaries </span><span data-lang="fr" style="display:none">Glossaires d’Immigration, Réfugiés et Citoyenneté Canada </span><div class="small"><code>17f69360-123a-4bd2-8eef-bba94468071f</code></div></td>
+        <td><span data-lang="en">IRCC - Citizenship Program Glossary  </span><span data-lang="fr" style="display:none">IRCC - Glossaire du programme de citoyenneté</span><div class="small"><code>9aabbf0a-7682-4311-b006-742eb40f99e2</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">487 err</span><span data-lang="fr" style="display:none">487 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-05-01 13:07:36.380534</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.437557"
+          data-status="failure"
+          data-resource="5f09cc6e-0fc6-4e97-9b72-48ffb184a6b6"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7a2aa264-d3a5-429e-b8cc-29fd8f6a6f2a.html"><code>7a2aa264-d3a5-429e-b8cc-29fd8f6a6f2a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">British Columbia (Province of Intended Destination) – Admissions of Permanent Residents by Country of Citizenship and Census Metropolitan Area (CMA) of Intended Destination - Vancouver, 2013 – January to September 2023</span><span data-lang="fr" style="display:none">Colombie-Britannique (Province de destination envisagé) - Admissions de résidents permanents par pays de citoyenneté et la région métropolitaine de recensement (RMR) - Vancouver, 2023 - janvier à septembre 2023</span><div class="small"><code>5f09cc6e-0fc6-4e97-9b72-48ffb184a6b6</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">28 err</span><span data-lang="fr" style="display:none">28 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.437557</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.375355"
+          data-status="failure"
+          data-resource="143c94fa-f40a-469c-8c53-4e9f421dc339"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f22c4583-12d9-4d76-9431-f7fc1ead2bbb.html"><code>f22c4583-12d9-4d76-9431-f7fc1ead2bbb</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">British Columbia (Province of Intended Destination) – Admissions of Permanent Residents by Country of Citizenship and Census Metropolitan Area (CMA) of Intended Destination - Vancouver, 2013 – January to September 2023</span><span data-lang="fr" style="display:none">Colombie-Britannique (Province de destination envisagé) - Admissions de résidents permanents par pays de citoyenneté et la région métropolitaine de recensement (RMR) - Vancouver, 2023 - janvier à septembre 2023</span><div class="small"><code>143c94fa-f40a-469c-8c53-4e9f421dc339</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">82 err</span><span data-lang="fr" style="display:none">82 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.375355</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.296937"
+          data-status="failure"
+          data-resource="aaaf1ba4-d71b-48e3-8558-c06cf387ac60"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7d13907e-b6fd-4e4d-b9be-3f3338fbffb5.html"><code>7d13907e-b6fd-4e4d-b9be-3f3338fbffb5</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Canada - Admissions of Permanent Residents under Guardian Angel Program by Province/Territory of Intended Destination, 2021 - September 2023</span><span data-lang="fr" style="display:none">Canada - Admissions de résidents permanents dans le cadre du programme ange gardien par la province / le territoire de destination envisagé(e), 2021 - septembre 2023</span><div class="small"><code>aaaf1ba4-d71b-48e3-8558-c06cf387ac60</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.296937</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.238159"
+          data-status="failure"
+          data-resource="bd10f274-9750-4f79-a527-5a8611ae87b1"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d7c82de3-c2d7-4e36-afea-eb2e49678556.html"><code>d7c82de3-c2d7-4e36-afea-eb2e49678556</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Canada - Admissions of Permanent Residents under Guardian Angel Program by Province/Territory of Intended Destination, 2021 - September 2023</span><span data-lang="fr" style="display:none">Canada - Admissions de résidents permanents dans le cadre du programme ange gardien par la province / le territoire de destination envisagé(e), 2021 - septembre 2023</span><div class="small"><code>bd10f274-9750-4f79-a527-5a8611ae87b1</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">318 err</span><span data-lang="fr" style="display:none">318 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.238159</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.138465"
+          data-status="failure"
+          data-resource="b06fc4b2-4836-48f0-ac3a-dcc71aaa1663"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6b8feaa9-948f-45a9-9c3c-a95d357fc25f.html"><code>6b8feaa9-948f-45a9-9c3c-a95d357fc25f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Permanent resident applications received more than 6 months ago, processed since February 1, 2021 under the Federal Skilled Workers Immigration Category, country of residence = Canada</span><span data-lang="fr" style="display:none">Demandes de résidence permanente reçues il y a plus de 6 mois, traitées depuis le 1er février 2021 au titre de la catégorie des travailleurs qualifiés (fédéral), pays de résidence = Canada</span><div class="small"><code>b06fc4b2-4836-48f0-ac3a-dcc71aaa1663</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">35 err</span><span data-lang="fr" style="display:none">35 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.138465</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.083587"
+          data-status="failure"
+          data-resource="c42393d6-ec59-4470-87e9-854416d233da"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/03cd0af5-65fa-4fcb-8f2a-cd5919ba4f2c.html"><code>03cd0af5-65fa-4fcb-8f2a-cd5919ba4f2c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Permanent resident applications received more than 6 months ago, processed since February 1, 2021 under the Federal Skilled Workers Immigration Category, country of residence = Canada</span><span data-lang="fr" style="display:none">Demandes de résidence permanente reçues il y a plus de 6 mois, traitées depuis le 1er février 2021 au titre de la catégorie des travailleurs qualifiés (fédéral), pays de résidence = Canada</span><div class="small"><code>c42393d6-ec59-4470-87e9-854416d233da</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">25 err</span><span data-lang="fr" style="display:none">25 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.083587</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:24.023869"
+          data-status="failure"
+          data-resource="c3922ae3-9a47-4d9f-8dc0-5a270f889d61"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d9038ace-c067-41cd-a6e8-d7ccf925deff.html"><code>d9038ace-c067-41cd-a6e8-d7ccf925deff</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Canada - Admissions of Permanent Residents by Province/Territory of Intended Destination, Intended Occupation (NOC4) and Landing Year, 1991-2020</span><span data-lang="fr" style="display:none">Canada – Admissions de résidents permanents par province/territoire de destination prévu, profession (CNP4) envisagée et année d’admission, de 1991 à 2020</span><div class="small"><code>c3922ae3-9a47-4d9f-8dc0-5a270f889d61</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">63 err</span><span data-lang="fr" style="display:none">63 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:24.023869</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:23.961621"
+          data-status="failure"
+          data-resource="ec68f31c-d920-4489-bc16-4ebb35787079"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fa3c64cb-a62b-4f4b-8d40-1a06f16c8bba.html"><code>fa3c64cb-a62b-4f4b-8d40-1a06f16c8bba</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Canada - Admissions of Permanent Residents by Province/Territory of Intended Destination, Intended Occupation (NOC4) and Landing Year, 1991-2020</span><span data-lang="fr" style="display:none">Canada – Admissions de résidents permanents par province/territoire de destination prévu, profession (CNP4) envisagée et année d’admission, de 1991 à 2020</span><div class="small"><code>ec68f31c-d920-4489-bc16-4ebb35787079</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">63 err</span><span data-lang="fr" style="display:none">63 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:23.961621</time></td>
+      </tr>
+    
+      <tr data-created="2023-12-05 14:35:23.405177"
+          data-status="failure"
+          data-resource="6ba7b4f6-2303-4184-8507-3a6a8d532808"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="Permanent Residents – Ad Hoc IRCC (Specialized Datasets)"
+          data-dataset-fr="Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/205d2bd7-baec-4050-a232-42751f18380a.html"><code>205d2bd7-baec-4050-a232-42751f18380a</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">Permanent Residents – Ad Hoc IRCC (Specialized Datasets)</span><span data-lang="fr" style="display:none">Résidents permanents – Ad Hoc IRCC (Ensembles de  données spécialisées)</span><div class="small"><code>ad975a26-df23-456a-8ada-756191a23695</code></div></td>
+        <td><span data-lang="en">Canada - Admissions of Permanent Residents by Province/Territory of Intended Destination, Intended Occupation (NOC4) and Landing Year, 1991-2020</span><span data-lang="fr" style="display:none">Canada – Admissions de résidents permanents par province/territoire de destination prévu, profession (CNP4) envisagée et année d’admission, de 1991 à 2020</span><div class="small"><code>6ba7b4f6-2303-4184-8507-3a6a8d532808</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">83 err</span><span data-lang="fr" style="display:none">83 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-12-05 14:35:23.405177</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:33:00.830763"
+          data-status="failure"
+          data-resource="fb87a39d-38e0-42e2-a167-aced0a422955"
+          data-organization="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-org="Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada"
+          data-version="v0.1"
+          data-dataset-en="IRCC Settlement Program Initiatives"
+          data-dataset-fr="Initiatives du Programme d’établissement d’IRCC"
+          data-filtered="1">
+        <td>
+          <a href="../reports/9117598a-d34a-4576-9aa5-1e5bdebdc51e.html"><code>9117598a-d34a-4576-9aa5-1e5bdebdc51e</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">IRCC Settlement Program Initiatives</span><span data-lang="fr" style="display:none">Initiatives du Programme d’établissement d’IRCC</span><div class="small"><code>0f249746-7337-4ef7-8ecd-a5f9db4c8b62</code></div></td>
+        <td><span data-lang="en">IRCC Settlement Program Initiatives: Active Agreements as of January 2021 </span><span data-lang="fr" style="display:none">Initiatives du Programme d’établissement d’IRCC : Les ententes actives à partir de janvier 2021</span><div class="small"><code>fb87a39d-38e0-42e2-a167-aced0a422955</code> · upload</div></td>
+        <td>Immigration, Refugees and Citizenship Canada | Immigration, Réfugiés et Citoyenneté Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:00.830763</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [3, 12], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload", "remote"], "datasets": [{"label": "Success", "data": [2, 1], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [12, 0], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

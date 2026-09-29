@@ -1,0 +1,380 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Public Safety Canada | Sécurité publique Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Public Safety Canada | Sécurité publique Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 8 · Success: 0 · Failure: 8 · Other: 0 · URL types: 1 · Latest: <time>2024-12-20 20:08:36.804211</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">8</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">0</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">8</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>8</td><td>8</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2024-12-20 20:08:36.804211"
+          data-status="failure"
+          data-resource="1299c9b1-98e4-49c5-853f-a48647470443"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Youth Victims and Accused of Cybercrime – UCR Survey"
+          data-dataset-fr="jeunes victimes et accusés de cybercrime – Programme DUC"
+          data-filtered="1">
+        <td>
+          <a href="../reports/fecc9ada-7398-4a32-9a44-839205de8fde.html"><code>fecc9ada-7398-4a32-9a44-839205de8fde</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Youth Victims and Accused of Cybercrime – UCR Survey</span><span data-lang="fr" style="display:none">jeunes victimes et accusés de cybercrime – Programme DUC</span><div class="small"><code>802c713f-5b98-4b66-8787-4cf4ced5962f</code></div></td>
+        <td><span data-lang="en">UCR-Survey_Youth-Victims-Accused-Cybercrime_2022_EN</span><span data-lang="fr" style="display:none">Programme-DUC_Jeunes-Victimes-Accusés-Cybercrime_2022_FR</span><div class="small"><code>1299c9b1-98e4-49c5-853f-a48647470443</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">58 err</span><span data-lang="fr" style="display:none">58 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-20 20:08:36.804211</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-20 20:06:59.861972"
+          data-status="failure"
+          data-resource="19721041-ae9b-4bdf-9ad4-0bd1cc2865ac"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Youth Victims and Accused of Cybercrime – UCR Survey"
+          data-dataset-fr="jeunes victimes et accusés de cybercrime – Programme DUC"
+          data-filtered="1">
+        <td>
+          <a href="../reports/2f30b4f2-411d-4407-b9ab-3ebb7936ddbf.html"><code>2f30b4f2-411d-4407-b9ab-3ebb7936ddbf</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Youth Victims and Accused of Cybercrime – UCR Survey</span><span data-lang="fr" style="display:none">jeunes victimes et accusés de cybercrime – Programme DUC</span><div class="small"><code>802c713f-5b98-4b66-8787-4cf4ced5962f</code></div></td>
+        <td><span data-lang="en">UCR-Survey_Youth-Victims-Accused-Cybercrime_2022_EN</span><span data-lang="fr" style="display:none">Programme-DUC_Jeunes-Victimes-Accusés-Cybercrime_2022_FR  </span><div class="small"><code>19721041-ae9b-4bdf-9ad4-0bd1cc2865ac</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">72 err</span><span data-lang="fr" style="display:none">72 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-20 20:06:59.861972</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-20 19:54:56.842574"
+          data-status="failure"
+          data-resource="9b9a6afc-4a1a-4e5e-92b7-14645a2f1918"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Uniform Crime Reporting Survey Cyber-Hate Victims"
+          data-dataset-fr="Programme de déclaration uniforme de la criminalité. victimes de la cyber-haine"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7d36fbc1-6ebb-4ce8-ad27-04df1ac165dd.html"><code>7d36fbc1-6ebb-4ce8-ad27-04df1ac165dd</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Uniform Crime Reporting Survey Cyber-Hate Victims</span><span data-lang="fr" style="display:none">Programme de déclaration uniforme de la criminalité. victimes de la cyber-haine</span><div class="small"><code>51abb172-68e8-40f4-9b86-404545446bb7</code></div></td>
+        <td><span data-lang="en">Cyber-Hate-Victims_Uniform-Crime-Reporting-Survey_2022_EN</span><span data-lang="fr" style="display:none">Victimes-Cyberhaine_Programme-Déclaration-Uniforme_2022_FR  </span><div class="small"><code>9b9a6afc-4a1a-4e5e-92b7-14645a2f1918</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">46 err</span><span data-lang="fr" style="display:none">46 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-20 19:54:56.842574</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-20 19:49:53.796725"
+          data-status="failure"
+          data-resource="d05560b8-75dc-4f21-b94f-a6d5925ea8fc"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Uniform Crime Reporting Survey Cyber-Hate Victims"
+          data-dataset-fr="Programme de déclaration uniforme de la criminalité. victimes de la cyber-haine"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ce5587ac-594e-43f8-ba5e-a4e522112aa4.html"><code>ce5587ac-594e-43f8-ba5e-a4e522112aa4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Uniform Crime Reporting Survey Cyber-Hate Victims</span><span data-lang="fr" style="display:none">Programme de déclaration uniforme de la criminalité. victimes de la cyber-haine</span><div class="small"><code>51abb172-68e8-40f4-9b86-404545446bb7</code></div></td>
+        <td><span data-lang="en">Cyber-Hate-Victims_Uniform-Crime-Reporting-Survey_2022_EN</span><span data-lang="fr" style="display:none">Victimes-Cyberhaine_Programme-Déclaration-Uniforme_2022_FR</span><div class="small"><code>d05560b8-75dc-4f21-b94f-a6d5925ea8fc</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">51 err</span><span data-lang="fr" style="display:none">51 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-20 19:49:53.796725</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-20 19:20:57.619388"
+          data-status="failure"
+          data-resource="b5a0c1d6-d536-4898-9c11-bc19a42c63da"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Public Safety Supplementary Table Request - Cyberbullying"
+          data-dataset-fr="Demande de tableau supplémentaire pour Sécurité publique - cyberintimidation"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6a3296b9-67f7-493f-8dc8-45c7bbd6efe7.html"><code>6a3296b9-67f7-493f-8dc8-45c7bbd6efe7</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Public Safety Supplementary Table Request - Cyberbullying</span><span data-lang="fr" style="display:none">Demande de tableau supplémentaire pour Sécurité publique - cyberintimidation</span><div class="small"><code>be2eae2e-27ad-4ba0-a9f8-6b69bad61d91</code></div></td>
+        <td><span data-lang="en">Public-Safety-Supplementary-Table-Request_Cyberbullying_2023_EN</span><span data-lang="fr" style="display:none">Demande-de-tableau-supplémentaire-pour-Sécurité-publique_cyberintimidation_2023¬_FR</span><div class="small"><code>b5a0c1d6-d536-4898-9c11-bc19a42c63da</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">84 err</span><span data-lang="fr" style="display:none">84 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-20 19:20:57.619388</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-20 19:18:24.916282"
+          data-status="failure"
+          data-resource="2c98f05b-552c-4f24-8419-2f60bffa6cb3"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Public Safety Supplementary Table Request - Cyberbullying"
+          data-dataset-fr="Demande de tableau supplémentaire pour Sécurité publique - cyberintimidation"
+          data-filtered="1">
+        <td>
+          <a href="../reports/45b0749e-7c38-460d-a571-68c29dd031ce.html"><code>45b0749e-7c38-460d-a571-68c29dd031ce</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Public Safety Supplementary Table Request - Cyberbullying</span><span data-lang="fr" style="display:none">Demande de tableau supplémentaire pour Sécurité publique - cyberintimidation</span><div class="small"><code>be2eae2e-27ad-4ba0-a9f8-6b69bad61d91</code></div></td>
+        <td><span data-lang="en">Public-Safety-Supplementary-Table-Request_Cyberbullying_2023_EN</span><span data-lang="fr" style="display:none">Demande-de-tableau-supplémentaire-pour-Sécurité-publique_cyberintimidation_2023¬_FR</span><div class="small"><code>2c98f05b-552c-4f24-8419-2f60bffa6cb3</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">78 err</span><span data-lang="fr" style="display:none">78 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-20 19:18:24.916282</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-10 19:12:32.814162"
+          data-status="failure"
+          data-resource="0c2748bc-0ac2-4433-b292-327e9dbdab39"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canadian Internet Use Survey (CIUS2-22) - Public Safety"
+          data-dataset-fr="Enquête canadienne sur l&#x27;utilisation de l&#x27;Internet (ECUI2-22) Sécurité publique"
+          data-filtered="1">
+        <td>
+          <a href="../reports/202bf128-5b3f-43fd-b21e-eb94c6b1b43d.html"><code>202bf128-5b3f-43fd-b21e-eb94c6b1b43d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Internet Use Survey (CIUS2-22) - Public Safety</span><span data-lang="fr" style="display:none">Enquête canadienne sur l&#x27;utilisation de l&#x27;Internet (ECUI2-22) Sécurité publique</span><div class="small"><code>0170d3c9-5859-41b5-ac7b-b0811a2c0ae5</code></div></td>
+        <td><span data-lang="en">Canada-Internet-Use_Survey_2022_EN</span><span data-lang="fr" style="display:none">Usage-Internet-Canadien_ Enquête_2022_FR</span><div class="small"><code>0c2748bc-0ac2-4433-b292-327e9dbdab39</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">67 err</span><span data-lang="fr" style="display:none">67 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-10 19:12:32.814162</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-10 19:08:14.949624"
+          data-status="failure"
+          data-resource="450e0e7f-97c5-4b6c-a6f6-dd7b7cfb85f9"
+          data-organization="Public Safety Canada | Sécurité publique Canada"
+          data-org="Public Safety Canada | Sécurité publique Canada"
+          data-version="v0.2"
+          data-dataset-en="Canadian Internet Use Survey (CIUS2-22) - Public Safety"
+          data-dataset-fr="Enquête canadienne sur l&#x27;utilisation de l&#x27;Internet (ECUI2-22) Sécurité publique"
+          data-filtered="1">
+        <td>
+          <a href="../reports/65085f2d-52c2-40bd-be86-fc4d5d8e9c2b.html"><code>65085f2d-52c2-40bd-be86-fc4d5d8e9c2b</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Canadian Internet Use Survey (CIUS2-22) - Public Safety</span><span data-lang="fr" style="display:none">Enquête canadienne sur l&#x27;utilisation de l&#x27;Internet (ECUI2-22) Sécurité publique</span><div class="small"><code>0170d3c9-5859-41b5-ac7b-b0811a2c0ae5</code></div></td>
+        <td><span data-lang="en">Canada-Internet-Use_Survey_2022_EN</span><span data-lang="fr" style="display:none">Usage-Internet-Canadien_ Enquête_2022_FR</span><div class="small"><code>450e0e7f-97c5-4b6c-a6f6-dd7b7cfb85f9</code> · upload</div></td>
+        <td>Public Safety Canada | Sécurité publique Canada</td>
+        <td><span data-lang="en">67 err</span><span data-lang="fr" style="display:none">67 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-12-10 19:08:14.949624</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Failure"], "datasets": [{"label": "Reports", "data": [8], "backgroundColor": ["#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Failure", "data": [8], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>

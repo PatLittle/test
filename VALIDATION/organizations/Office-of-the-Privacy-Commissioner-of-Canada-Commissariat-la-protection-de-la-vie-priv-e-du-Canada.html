@@ -1,0 +1,779 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada · Validation Reports</title>
+<link rel="stylesheet" href="../style.css">
+<script defer src="../app.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head><body>
+  <div class="container">
+    <div class="header">
+      <div class="h1"><a href="index.html">← Organizations</a></div>
+      <div class="actions">
+        <a class="btn" href="../index.html">All reports</a>
+        <div class="lang-toggle">
+          <button type="button" class="btn" data-set="en" onclick="setLang('en')">EN</button>
+          <button type="button" class="btn" data-set="fr" onclick="setLang('fr')">FR</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <div class="h1" style="font-size:20px">Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</div>
+      <p class="subtle" style="margin-top:8px">
+        Total reports: 27 · Success: 15 · Failure: 12 · Other: 0 · URL types: 1 · Latest: <time>2026-01-08 12:56:15.896194</time>
+      </p>
+      <div class="summary-grid" style="margin-top:16px">
+        <div class="summary-tile">
+          <div class="label">Total reports</div>
+          <div class="value">27</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Success</div>
+          <div class="value" style="color:var(--good)">15</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">Failure</div>
+          <div class="value" style="color:var(--bad)">12</div>
+        </div>
+        <div class="summary-tile">
+          <div class="label">URL types</div>
+          <div class="value">1</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="panel chart-card">
+        <h3>Status distribution</h3>
+        <canvas id="statusChart"></canvas>
+      </div>
+      <div class="panel chart-card">
+        <h3>Reports by URL type &amp; status</h3>
+        <canvas id="urlTypeChart"></canvas>
+      </div>
+    </div>
+
+    <div class="panel section">
+      <h3 style="margin:0 0 12px">URL type breakdown</h3>
+      <div class="table-wrap">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>URL type</th>
+              <th>Total</th>
+              <th>Success</th><th>Failure</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>upload</td><td>27</td><td>15</td><td>12</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="controls">
+        <div class="grow"><input class="input" id="q" placeholder="Search within this organization…"/></div>
+        <div>
+          <label class="subtle">Status<br/>
+            <select class="select" id="filter-status">
+              <option value="">All</option>
+              <option value="success">success</option>
+              <option value="failure">failure</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Created<br/>
+            <input class="input" id="filter-created" placeholder="yyyy-mm…"/>
+          </label>
+        </div>
+        <div>
+          <label class="subtle">Version<br/>
+            <select class="select" id="filter-version">
+              <option value="">All</option>
+              <option value="v0.2">v0.2</option>
+              <option value="v0.1">v0.1</option>
+              <option value="unknown">unknown</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" data-report-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+
+              <th data-sort="dataset" onclick="sortBy('dataset')">
+                Dataset<br/>
+                <div class="small">Title (EN/FR)</div>
+              </th>
+
+              <th data-sort="resource" onclick="sortBy('resource')">
+                Resource
+                <div class="hdr-ctrl"><input class="input" id="filter-resource" placeholder="Filter by resource code…"/></div>
+              </th>
+
+              <th data-sort="organization" onclick="sortBy('organization')">
+                Organization
+              </th>
+
+              <th>
+                Errors
+                <div class="small" data-lang="en">EN</div>
+                <div class="small" data-lang="fr" style="display:none">FR</div>
+              </th>
+
+              <th data-sort="status" onclick="sortBy('status')">
+                Status
+              </th>
+
+              <th data-sort="created" onclick="sortBy('created')">
+                Created
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            
+      <tr data-created="2026-01-08 12:56:15.896194"
+          data-status="success"
+          data-resource="c2e70d2c-7abd-4e3d-8209-974d10f4eef4"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 Public Opinion Research on Privacy Issues"
+          data-dataset-fr="Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025"
+          data-filtered="1">
+        <td>
+          <a href="../reports/62032237-c34f-4a5a-8850-387137007d60.html"><code>62032237-c34f-4a5a-8850-387137007d60</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 Public Opinion Research on Privacy Issues</span><span data-lang="fr" style="display:none">Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025</span><div class="small"><code>78bd27a9-a83d-425a-b909-b9f44a6b1b10</code></div></td>
+        <td><span data-lang="en">2024-25 OPC Parents vs Teachers Dataset</span><span data-lang="fr" style="display:none">2024-2025 CPVP parents c enseignants dataset</span><div class="small"><code>c2e70d2c-7abd-4e3d-8209-974d10f4eef4</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-08 12:56:15.896194</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-07 18:22:00.124742"
+          data-status="success"
+          data-resource="e4c80cd2-2829-43af-9336-5a224461b43c"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 Public Opinion Research on Privacy Issues"
+          data-dataset-fr="Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a01f2c1c-8814-4fc8-a9f4-24459c181fd4.html"><code>a01f2c1c-8814-4fc8-a9f4-24459c181fd4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 Public Opinion Research on Privacy Issues</span><span data-lang="fr" style="display:none">Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025</span><div class="small"><code>78bd27a9-a83d-425a-b909-b9f44a6b1b10</code></div></td>
+        <td><span data-lang="en">2024-25 OPC Survey of Canadians Dataset</span><span data-lang="fr" style="display:none">2024-2025 CPVP Sondage des Canadiens Dataset</span><div class="small"><code>e4c80cd2-2829-43af-9336-5a224461b43c</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-07 18:22:00.124742</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-07 18:21:12.408978"
+          data-status="success"
+          data-resource="98ba59ac-784a-4a0d-9463-0cff4b72b0fc"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 Public Opinion Research on Privacy Issues"
+          data-dataset-fr="Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ab9a2c46-684e-4a29-ab5b-9e5864dbed8c.html"><code>ab9a2c46-684e-4a29-ab5b-9e5864dbed8c</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 Public Opinion Research on Privacy Issues</span><span data-lang="fr" style="display:none">Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025</span><div class="small"><code>78bd27a9-a83d-425a-b909-b9f44a6b1b10</code></div></td>
+        <td><span data-lang="en">2024-25 OPC Survey of Canadians Dataset</span><span data-lang="fr" style="display:none">2024-2025 CPVP Sondage des Canadiens Dataset</span><div class="small"><code>98ba59ac-784a-4a0d-9463-0cff4b72b0fc</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-07 18:21:12.408978</time></td>
+      </tr>
+    
+      <tr data-created="2026-01-07 18:17:42.207074"
+          data-status="success"
+          data-resource="8ac8e36d-6a7f-41e4-bd2b-f0c360ce0cc3"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2024-2025 Public Opinion Research on Privacy Issues"
+          data-dataset-fr="Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d612bdf4-bf1f-4b39-a579-d19af97466e1.html"><code>d612bdf4-bf1f-4b39-a579-d19af97466e1</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2024-2025 Public Opinion Research on Privacy Issues</span><span data-lang="fr" style="display:none">Recherche sur l’opinion publique concernant les enjeux liés à la protection de la vie privée de 2024-2025</span><div class="small"><code>78bd27a9-a83d-425a-b909-b9f44a6b1b10</code></div></td>
+        <td><span data-lang="en">2024-25 OPC Parents vs Teachers Dataset</span><span data-lang="fr" style="display:none">2024-2025 CPVP parents c enseignants dataset</span><div class="small"><code>8ac8e36d-6a7f-41e4-bd2b-f0c360ce0cc3</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2026-01-07 18:17:42.207074</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:05:55.477636"
+          data-status="success"
+          data-resource="11ced2af-457c-45a9-bab1-edc2157dc62d"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2020-21 Survey of Canadians on Privacy-Related Issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/c286e2d9-e2c1-408e-ba99-f053e65abf4e.html"><code>c286e2d9-e2c1-408e-ba99-f053e65abf4e</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on Privacy-Related Issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021</span><div class="small"><code>e8f07d53-d94a-4297-9535-114e95513409</code></div></td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on privacy-related issues – DATASET</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2020-2021 – DATASET</span><div class="small"><code>11ced2af-457c-45a9-bab1-edc2157dc62d</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:05:55.477636</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:05:54.282639"
+          data-status="success"
+          data-resource="faaa1146-2ce1-4829-b173-19076735275e"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2020-21 Survey of Canadians on Privacy-Related Issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/b0285099-befc-4517-85ba-6142f78aaa6d.html"><code>b0285099-befc-4517-85ba-6142f78aaa6d</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on Privacy-Related Issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021</span><div class="small"><code>e8f07d53-d94a-4297-9535-114e95513409</code></div></td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on privacy-related issues – DATASET</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2020-2021 – DATASET</span><div class="small"><code>faaa1146-2ce1-4829-b173-19076735275e</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:05:54.282639</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:05:11.57821"
+          data-status="success"
+          data-resource="6f1d71ee-6dbf-4a2d-b4c2-7be45c1468da"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2019‐20 Survey of Canadian businesses on privacy‐related issues"
+          data-dataset-fr="Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/7625405d-93ef-46b6-a11a-062062014d98.html"><code>7625405d-93ef-46b6-a11a-062062014d98</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2019‐20 Survey of Canadian businesses on privacy‐related issues</span><span data-lang="fr" style="display:none">Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>df3df303-1f52-45dd-a347-05eb8bc4706f</code></div></td>
+        <td><span data-lang="en">2019-20 Survey of Canadian businesses on privacy-related issues - Dataset</span><span data-lang="fr" style="display:none">protection des renseignements personnels – Dataset</span><div class="small"><code>6f1d71ee-6dbf-4a2d-b4c2-7be45c1468da</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:05:11.57821</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 18:04:54.347373"
+          data-status="success"
+          data-resource="bb983347-2d7a-45a4-8065-81e1b3247d41"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2018-19 Survey of Canadians on Privacy"
+          data-dataset-fr="Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d1cbb086-5b24-42a0-a53a-6e6674689c41.html"><code>d1cbb086-5b24-42a0-a53a-6e6674689c41</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2018-19 Survey of Canadians on Privacy</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019</span><div class="small"><code>e86f5b03-afdc-489c-a7a3-7a5f08167ce6</code></div></td>
+        <td><span data-lang="en">1.	2018-19 Survey of Canadians on Privacy - DATASET</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019 – DATASET</span><div class="small"><code>bb983347-2d7a-45a4-8065-81e1b3247d41</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 18:04:54.347373</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:49:58.0073"
+          data-status="success"
+          data-resource="5c08fdc2-cc6b-4b30-9511-94598654f0f8"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2021-22 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a210c097-92e6-4eac-81ed-4f51473c2f62.html"><code>a210c097-92e6-4eac-81ed-4f51473c2f62</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2021-22 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>923cbbdc-afb2-48dc-a343-ad75d231026b</code></div></td>
+        <td><span data-lang="en">2021-22 Survey of Businesses Dataset</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises - Dataset</span><div class="small"><code>5c08fdc2-cc6b-4b30-9511-94598654f0f8</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:49:58.0073</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:49:56.792385"
+          data-status="success"
+          data-resource="3f967942-a6a2-4d1e-b2af-cb57867f7e8a"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2021-22 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6713fdf4-52e6-4f93-8fe1-c6824bef4398.html"><code>6713fdf4-52e6-4f93-8fe1-c6824bef4398</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2021-22 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>923cbbdc-afb2-48dc-a343-ad75d231026b</code></div></td>
+        <td><span data-lang="en">2021-22 Survey of Businesses Dataset</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises Dataset</span><div class="small"><code>3f967942-a6a2-4d1e-b2af-cb57867f7e8a</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:49:56.792385</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:48:42.707628"
+          data-status="success"
+          data-resource="6815c38c-ccd5-4794-836c-87e4bd8e2b9a"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2022-23 Survey of Canadians on privacy-related issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/56227752-4599-4d29-8604-f0cd42fab2f4.html"><code>56227752-4599-4d29-8604-f0cd42fab2f4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023</span><div class="small"><code>897a64fd-619d-48cc-b056-c9f6484b63b1</code></div></td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues - Dataset</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2022-2023 - Dataset</span><div class="small"><code>6815c38c-ccd5-4794-836c-87e4bd8e2b9a</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:48:42.707628</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 17:48:41.619197"
+          data-status="success"
+          data-resource="e6a3bcb8-af6b-48cc-8e1c-e0a573391a86"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2022-23 Survey of Canadians on privacy-related issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/f20f3e49-1b4a-4fd3-acdc-22520dad1916.html"><code>f20f3e49-1b4a-4fd3-acdc-22520dad1916</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023</span><div class="small"><code>897a64fd-619d-48cc-b056-c9f6484b63b1</code></div></td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues - Dataset</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2022-2023 - Dataset</span><div class="small"><code>e6a3bcb8-af6b-48cc-8e1c-e0a573391a86</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 17:48:41.619197</time></td>
+      </tr>
+    
+      <tr data-created="2024-12-09 16:53:55.670003"
+          data-status="success"
+          data-resource="663811d3-9d70-4074-8d40-c5ba71dd5816"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.2"
+          data-dataset-en="2023-24 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/1b4a7491-c4fb-48cb-8c3f-13f2fe797fa4.html"><code>1b4a7491-c4fb-48cb-8c3f-13f2fe797fa4</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">2023-24 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>c22e29fd-cb94-4a62-b4cb-5079848dddc8</code></div></td>
+        <td><span data-lang="en">2023-24 Survey of Businesses on privacy-related issues_Dataset</span><span data-lang="fr" style="display:none">Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignement_Dataset</span><div class="small"><code>663811d3-9d70-4074-8d40-c5ba71dd5816</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2024-12-09 16:53:55.670003</time></td>
+      </tr>
+    
+      <tr data-created="2024-06-14 18:12:24.077579"
+          data-status="failure"
+          data-resource="1f015fb4-1d39-4810-9dfa-85e0477a81c4"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2023-24 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/28894851-8ccb-4a31-9f90-e2baa337e526.html"><code>28894851-8ccb-4a31-9f90-e2baa337e526</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2023-24 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>c22e29fd-cb94-4a62-b4cb-5079848dddc8</code></div></td>
+        <td><span data-lang="en">2023-24 Survey of Businesses on privacy-related issues_Dictionary</span><span data-lang="fr" style="display:none">Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignement_Dictionnaire</span><div class="small"><code>1f015fb4-1d39-4810-9dfa-85e0477a81c4</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-06-14 18:12:24.077579</time></td>
+      </tr>
+    
+      <tr data-created="2024-06-14 18:12:24.047282"
+          data-status="failure"
+          data-resource="2450862e-9026-4adb-be25-d3793e49300f"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2023-24 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/85babe5d-5d95-4a90-b117-5a7eca07128f.html"><code>85babe5d-5d95-4a90-b117-5a7eca07128f</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2023-24 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>c22e29fd-cb94-4a62-b4cb-5079848dddc8</code></div></td>
+        <td><span data-lang="en">2023-24 Survey of Businesses on privacy-related issues_Dictionary</span><span data-lang="fr" style="display:none">Sondage de 2023-2024 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignement_Dictionnaire</span><div class="small"><code>2450862e-9026-4adb-be25-d3793e49300f</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2024-06-14 18:12:24.047282</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-12 20:31:13.905467"
+          data-status="failure"
+          data-resource="acde8327-0007-43dd-ad67-b2e8db750025"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2022-23 Survey of Canadians on privacy-related issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/5915032d-1772-49fb-b9e8-75242c2c0e4c.html"><code>5915032d-1772-49fb-b9e8-75242c2c0e4c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023</span><div class="small"><code>897a64fd-619d-48cc-b056-c9f6484b63b1</code></div></td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues - Dictionary</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2022-2023 – Dictionnaire</span><div class="small"><code>acde8327-0007-43dd-ad67-b2e8db750025</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">5 err</span><span data-lang="fr" style="display:none">5 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-12 20:31:13.905467</time></td>
+      </tr>
+    
+      <tr data-created="2023-07-12 20:31:13.855332"
+          data-status="failure"
+          data-resource="324d9801-8beb-48ba-90bd-a0021a81a1bd"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2022-23 Survey of Canadians on privacy-related issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023"
+          data-filtered="1">
+        <td>
+          <a href="../reports/a12c57ab-426a-466d-ad15-9a558b09a5f0.html"><code>a12c57ab-426a-466d-ad15-9a558b09a5f0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2022-2023</span><div class="small"><code>897a64fd-619d-48cc-b056-c9f6484b63b1</code></div></td>
+        <td><span data-lang="en">2022-23 Survey of Canadians on privacy-related issues - Dictionary</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2022-2023 – Dictionnaire</span><div class="small"><code>324d9801-8beb-48ba-90bd-a0021a81a1bd</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">6 err</span><span data-lang="fr" style="display:none">6 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2023-07-12 20:31:13.855332</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-22 12:49:38.139676"
+          data-status="failure"
+          data-resource="fb30a5d8-c3b7-434a-a627-d23b6552808c"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2021-22 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/bd015bed-e757-4467-a2e7-bf81b67974b3.html"><code>bd015bed-e757-4467-a2e7-bf81b67974b3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2021-22 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>923cbbdc-afb2-48dc-a343-ad75d231026b</code></div></td>
+        <td><span data-lang="en">2021-22 Survey of Businesses Dictionary</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises - Dictionnaire</span><div class="small"><code>fb30a5d8-c3b7-434a-a627-d23b6552808c</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-09-22 12:49:38.139676</time></td>
+      </tr>
+    
+      <tr data-created="2022-09-22 12:49:38.089837"
+          data-status="failure"
+          data-resource="cb073605-f5cb-43dc-b20a-8956c1970d6d"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2021-22 Survey of Canadian businesses on privacy-related issues"
+          data-dataset-fr="Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/78228183-ab99-4eb8-be0b-7c45178ad4c1.html"><code>78228183-ab99-4eb8-be0b-7c45178ad4c1</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2021-22 Survey of Canadian businesses on privacy-related issues</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>923cbbdc-afb2-48dc-a343-ad75d231026b</code></div></td>
+        <td><span data-lang="en">2021-22 Survey of Businesses Dictionary</span><span data-lang="fr" style="display:none">Sondage de 2021-2022 auprès des entreprises - Dictionnaire</span><div class="small"><code>cb073605-f5cb-43dc-b20a-8956c1970d6d</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-09-22 12:49:38.089837</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:53:02.738699"
+          data-status="failure"
+          data-resource="05afd4b8-f317-46ab-bc5c-60e36eb8b3c0"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2018-19 Survey of Canadians on Privacy"
+          data-dataset-fr="Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019"
+          data-filtered="1">
+        <td>
+          <a href="../reports/d9feddb5-2028-45dc-bb70-250e35d0af0c.html"><code>d9feddb5-2028-45dc-bb70-250e35d0af0c</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2018-19 Survey of Canadians on Privacy</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019</span><div class="small"><code>e86f5b03-afdc-489c-a7a3-7a5f08167ce6</code></div></td>
+        <td><span data-lang="en">2.	2018-19 Survey of Canadians on Privacy - Dictionary</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019 – Dictionnaire</span><div class="small"><code>05afd4b8-f317-46ab-bc5c-60e36eb8b3c0</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-14 19:53:02.738699</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:53:02.681896"
+          data-status="failure"
+          data-resource="b826488b-92b2-403e-a75e-a3bb1185ce7c"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2018-19 Survey of Canadians on Privacy"
+          data-dataset-fr="Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019"
+          data-filtered="1">
+        <td>
+          <a href="../reports/2aef15c6-0c23-405f-a394-5df8851d75fc.html"><code>2aef15c6-0c23-405f-a394-5df8851d75fc</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2018-19 Survey of Canadians on Privacy</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019</span><div class="small"><code>e86f5b03-afdc-489c-a7a3-7a5f08167ce6</code></div></td>
+        <td><span data-lang="en">2.	2018-19 Survey of Canadians on Privacy - Dictionary</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019 – Dictionnaire</span><div class="small"><code>b826488b-92b2-403e-a75e-a3bb1185ce7c</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">14 err</span><span data-lang="fr" style="display:none">14 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-14 19:53:02.681896</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 19:53:02.62582"
+          data-status="success"
+          data-resource="4cffbe96-6bb8-4d44-9625-e691f8b188cc"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2018-19 Survey of Canadians on Privacy"
+          data-dataset-fr="Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019"
+          data-filtered="1">
+        <td>
+          <a href="../reports/33b0f3a7-0ad3-462e-9065-91d9af884651.html"><code>33b0f3a7-0ad3-462e-9065-91d9af884651</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2018-19 Survey of Canadians on Privacy</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019</span><div class="small"><code>e86f5b03-afdc-489c-a7a3-7a5f08167ce6</code></div></td>
+        <td><span data-lang="en">1.	2018-19 Survey of Canadians on Privacy - DATASET</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2018-2019 – DATASET</span><div class="small"><code>4cffbe96-6bb8-4d44-9625-e691f8b188cc</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 19:53:02.62582</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 15:56:35.46368"
+          data-status="failure"
+          data-resource="f9fac4ff-4c7e-43a8-b1da-67d4da579bc0"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2019‐20 Survey of Canadian businesses on privacy‐related issues"
+          data-dataset-fr="Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/ed782536-8500-43ec-afa7-dbc8f29de4f9.html"><code>ed782536-8500-43ec-afa7-dbc8f29de4f9</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2019‐20 Survey of Canadian businesses on privacy‐related issues</span><span data-lang="fr" style="display:none">Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>df3df303-1f52-45dd-a347-05eb8bc4706f</code></div></td>
+        <td><span data-lang="en">2019-20 Survey of Canadian businesses on privacy-related issues - Dictionary</span><span data-lang="fr" style="display:none">Sondage de 2019-2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels – Dictionnaire</span><div class="small"><code>f9fac4ff-4c7e-43a8-b1da-67d4da579bc0</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-14 15:56:35.46368</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 15:56:35.408058"
+          data-status="failure"
+          data-resource="b5135be4-1a45-4dee-86cc-6af9b10430bd"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2019‐20 Survey of Canadian businesses on privacy‐related issues"
+          data-dataset-fr="Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/cc56a03c-1387-4ab5-9190-f1d9d9812dc0.html"><code>cc56a03c-1387-4ab5-9190-f1d9d9812dc0</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2019‐20 Survey of Canadian businesses on privacy‐related issues</span><span data-lang="fr" style="display:none">Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>df3df303-1f52-45dd-a347-05eb8bc4706f</code></div></td>
+        <td><span data-lang="en">2019-20 Survey of Canadian businesses on privacy-related issues - Dictionary</span><span data-lang="fr" style="display:none">Sondage de 2019-2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels – Dictionnaire</span><div class="small"><code>b5135be4-1a45-4dee-86cc-6af9b10430bd</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">7 err</span><span data-lang="fr" style="display:none">7 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-14 15:56:35.408058</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-14 15:56:35.346637"
+          data-status="success"
+          data-resource="b7ebc21e-3ff4-48b2-9a43-82be0a4e67a7"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2019‐20 Survey of Canadian businesses on privacy‐related issues"
+          data-dataset-fr="Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels"
+          data-filtered="1">
+        <td>
+          <a href="../reports/e45dbe8e-7b7a-42fb-957a-071811377dee.html"><code>e45dbe8e-7b7a-42fb-957a-071811377dee</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2019‐20 Survey of Canadian businesses on privacy‐related issues</span><span data-lang="fr" style="display:none">Sondage de 2019‐2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels</span><div class="small"><code>df3df303-1f52-45dd-a347-05eb8bc4706f</code></div></td>
+        <td><span data-lang="en">2019-20 Survey of Canadian businesses on privacy-related issues - Dataset</span><span data-lang="fr" style="display:none">Sondage de 2019-2020 auprès des entreprises canadiennes concernant les enjeux liés à la protection des renseignements personnels – Dataset</span><div class="small"><code>b7ebc21e-3ff4-48b2-9a43-82be0a4e67a7</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">0 err</span><span data-lang="fr" style="display:none">0 err.</span></td>
+        <td><span class="badge ok">success</span></td>
+        <td><time>2022-04-14 15:56:35.346637</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:03.320034"
+          data-status="failure"
+          data-resource="a5044b2e-ecf3-4eeb-bc8e-e4d1ac41e77a"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2020-21 Survey of Canadians on Privacy-Related Issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6cbb705f-0f83-4379-b9d0-a9632fd6b28d.html"><code>6cbb705f-0f83-4379-b9d0-a9632fd6b28d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on Privacy-Related Issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021</span><div class="small"><code>e8f07d53-d94a-4297-9535-114e95513409</code></div></td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on privacy-related issues – Dictionary</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2020-2021 – Dictionnaire</span><div class="small"><code>a5044b2e-ecf3-4eeb-bc8e-e4d1ac41e77a</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">9 err</span><span data-lang="fr" style="display:none">9 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:03.320034</time></td>
+      </tr>
+    
+      <tr data-created="2022-04-12 19:32:03.235698"
+          data-status="failure"
+          data-resource="39a03d93-c135-4f6b-ba8f-126da76b8081"
+          data-organization="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-org="Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada"
+          data-version="v0.1"
+          data-dataset-en="2020-21 Survey of Canadians on Privacy-Related Issues"
+          data-dataset-fr="Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021"
+          data-filtered="1">
+        <td>
+          <a href="../reports/44c5399a-0201-4c2e-a6bd-57e2dcf6863d.html"><code>44c5399a-0201-4c2e-a6bd-57e2dcf6863d</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on Privacy-Related Issues</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur les enjeux liés à la protection de la vie privée de 2020-2021</span><div class="small"><code>e8f07d53-d94a-4297-9535-114e95513409</code></div></td>
+        <td><span data-lang="en">2020-21 Survey of Canadians on privacy-related issues – Dictionary</span><span data-lang="fr" style="display:none">Sondage auprès des Canadiens sur la protection de la vie privée de 2020-2021 – Dictionnaire</span><div class="small"><code>39a03d93-c135-4f6b-ba8f-126da76b8081</code> · upload</div></td>
+        <td>Office of the Privacy Commissioner of Canada | Commissariat à la protection de la vie privée du Canada</td>
+        <td><span data-lang="en">6 err</span><span data-lang="fr" style="display:none">6 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:32:03.235698</time></td>
+      </tr>
+    
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <span class="subtle" id="pager-info"></span>
+        <span class="subtle">Rows per page</span>
+        <select class="select" id="page-size">
+          <option value="25" selected>25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="500">500</option>
+        </select>
+        <button class="btn" onclick="gotoPrev()">Prev</button>
+        <button class="btn" onclick="gotoNext()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const tickColor = '#e8ecfa';
+      const gridColor = 'rgba(255,255,255,0.1)';
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [15, 12], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [15], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [12], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
+      if(window.Chart){
+        const statusCanvas = document.getElementById('statusChart');
+        if(statusCanvas){
+          new Chart(statusCanvas.getContext('2d'), {
+            type: 'pie',
+            data: statusData,
+            options: {
+              plugins: {
+                legend: {
+                  position: 'bottom',
+                  labels: { color: tickColor }
+                }
+              }
+            }
+          });
+        }
+        const urlCanvas = document.getElementById('urlTypeChart');
+        if(urlCanvas){
+          new Chart(urlCanvas.getContext('2d'), {
+            type: 'bar',
+            data: urlTypeData,
+            options: {
+              plugins: {
+                legend: {
+                  labels: { color: tickColor }
+                }
+              },
+              responsive: true,
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor }
+                },
+                y: {
+                  stacked: true,
+                  ticks: { color: tickColor },
+                  grid: { color: gridColor },
+                  beginAtZero: true
+                }
+              }
+            }
+          });
+        }
+      }
+    });
+  </script>
+</body></html>
