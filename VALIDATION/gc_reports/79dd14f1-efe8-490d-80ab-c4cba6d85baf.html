@@ -29,7 +29,7 @@
         </div>
         
         <div class="kv" style="margin-top:12px">
-          <div>Version</div><div><span class="badge na">v0.1</span></div>
+          <div>Version</div><div><span class="badge na">v0.2</span></div>
           <div>Organization</div><div><a href="../gc_organizations/Immigration-and-Refugee-Board-of-Canada-Commission-de-l-immigration-et-du-statut-de-r-fugi-du-Canada.html">Immigration and Refugee Board of Canada | Commission de l&#x27;immigration et du statut de réfugié du Canada</a></div>
           <div>Dataset</div><div><span data-lang="en">Refugee Protection Division (RPD) Decisions</span><span data-lang="fr" style="display:none">Décisions de la Section de la protection des réfugiés (SPR)</span> <span class="small"><code>6e47f705-71ed-41f0-8fd5-d1a8508a3b63</code></span>
           <div>
@@ -40,7 +40,7 @@
         </div>
           <div>Resource</div><div><span data-lang="en">Refugee Protection Division Decisions 2022 Q4</span><span data-lang="fr" style="display:none">Décisions de la Section de la protection des réfugiés 2022 T4</span> <span class="small"><code>0ca9e188-5601-4456-b5f3-bbd5d543c4d4</code> · upload</span></div>
           <div>Status</div><div><span class="badge bad">failure</span></div>
-          <div>Created</div><div><time>2023-11-20 18:37:01.585637</time></div>
+          <div>Created</div><div><time>2026-06-02 19:38:51.807533</time></div>
         </div>
       </section>
 
@@ -48,169 +48,95 @@
       <div class="section">
         <div class="kv">
           <div>Valid</div><div><span class="badge bad">FAIL</span></div>
-          <div>Errors</div><div>3</div>
-          <div>Rows</div><div>1000</div>
+          <div>Errors</div><div>1</div>
+          <div>Warnings</div><div>0</div>
+          <div>Rows</div><div>857</div>
         </div>
       </div>
-      <div class="section">
-        <div class="h1" style="font-size:16px">Table 1</div>
-        <div class="kv" style="margin-top:8px"><div>Valid</div><div>&lt;span class=&quot;badge bad&quot;&gt;FAIL&lt;/span&gt;</div><div>Format</div><div>csv</div><div>Encoding</div><div>utf-8-sig</div><div>Scheme</div><div>https</div><div>Source</div><div>https://opencanada.blob.core.windows.net/opengovprod/resources/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/refugee-protection-division-decisions-q1-2013-to-q4-2022.csv?sr=b&amp;sp=r&amp;sig=wOogmU5BGMjBcHa8KUM0yXQh8ZNXaDqKU3SH6UCC6iQ%3D&amp;sv=2019-07-07&amp;se=2023-11-20T21%3A36%3A27Z</div><div>Time</div><div>0.139</div><div>Row count</div><div>1000</div><div>Row count</div><div>1000</div><div>Error count</div><div>3</div><div>Error count</div><div>3</div></div>
-        <h4 style="margin:12px 0 6px">Errors</h4><table class="table"><thead><tr><th>Row</th><th>Field</th><th>Code</th><th>Message</th></tr></thead><tbody><tr><td></td><td></td><td>blank-header</td><td>Header in column 5 is blank</td></tr><tr><td></td><td></td><td>blank-header</td><td>Header in column 6 is blank</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>Header in column 6 is duplicated to header in column(s) 5</td></tr></tbody></table>
-        <h4 style="margin:12px 0 6px">Headers</h4><div class="code">Country of Persecution
-Year
-Outcome
-Total
-
-</div>
-        <h4 style="margin:12px 0 6px">Raw table JSON</h4><div class="code">{
-  &quot;error-count&quot;: 3,
-  &quot;format&quot;: &quot;csv&quot;,
-  &quot;row-count&quot;: 1000,
-  &quot;encoding&quot;: &quot;utf-8-sig&quot;,
-  &quot;headers&quot;: [
+    <div class="section">
+      <div class="h1" style="font-size:16px">qr7-rpd-open-data-2022-q4-eng-revised <span class="badge na">table</span></div>
+      <div class="kv" style="margin-top:8px"><div>Valid</div><div><span class="badge bad">FAIL</span></div><div>Type</div><div>table</div><div>Source</div><div><a href="https://registry.open.canada.ca/en/dataset/6e47f705-71ed-41f0-8fd5-d1a8508a3b63/resource/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/download/qr7-rpd-open-data-2022-q4-eng-revised.csv" target="_blank" rel="noopener">https://registry.open.canada.ca/en/dataset/6e47f705-71ed-41f0-8fd5-d1a8508a3b63/resource/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/download/qr7-rpd-open-data-2022-q4-eng-revised.csv</a></div><div>Rows</div><div>857</div><div>Fields</div><div>4</div><div>Errors</div><div>1</div><div>Warnings</div><div>0</div><div>Bytes</div><div>32768</div><div>Seconds</div><div>0.197</div></div>
+      <h4 style="margin:12px 0 6px">Labels</h4><div class="code">Country of Persecution<br/>Year<br/>Outcome<br/>Total</div>
+      <h4 style="margin:12px 0 6px">Warnings</h4><div class="code"><span class="subtle">(none)</span></div>
+      <h4 style="margin:12px 0 6px">Errors</h4><div class="code">{&#x27;type&#x27;: &#x27;encoding-error&#x27;, &#x27;title&#x27;: &#x27;Encoding Error&#x27;, &#x27;description&#x27;: &#x27;Data reading error because of an encoding problem.&#x27;, &#x27;message&#x27;: &quot;The data source could not be successfully decoded: &#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;, &#x27;tags&#x27;: [], &#x27;note&#x27;: &quot;&#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;}</div>
+      <h4 style="margin:12px 0 6px">Raw task JSON</h4><div class="code">{
+  &quot;name&quot;: &quot;qr7-rpd-open-data-2022-q4-eng-revised&quot;,
+  &quot;type&quot;: &quot;table&quot;,
+  &quot;valid&quot;: false,
+  &quot;place&quot;: &quot;https://registry.open.canada.ca/en/dataset/6e47f705-71ed-41f0-8fd5-d1a8508a3b63/resource/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/download/qr7-rpd-open-data-2022-q4-eng-revised.csv&quot;,
+  &quot;labels&quot;: [
     &quot;Country of Persecution&quot;,
     &quot;Year&quot;,
     &quot;Outcome&quot;,
-    &quot;Total&quot;,
-    &quot;&quot;,
-    &quot;&quot;
+    &quot;Total&quot;
   ],
+  &quot;stats&quot;: {
+    &quot;errors&quot;: 1,
+    &quot;warnings&quot;: 0,
+    &quot;seconds&quot;: 0.197,
+    &quot;bytes&quot;: 32768,
+    &quot;fields&quot;: 4,
+    &quot;rows&quot;: 857
+  },
+  &quot;warnings&quot;: [],
   &quot;errors&quot;: [
     {
-      &quot;message&quot;: &quot;Header in column 5 is blank&quot;,
-      &quot;code&quot;: &quot;blank-header&quot;,
-      &quot;column-number&quot;: 5,
-      &quot;message-data&quot;: {},
-      &quot;row&quot;: [
-        &quot;Afghanistan&quot;,
-        &quot;2013&quot;,
-        &quot;Positive&quot;,
-        &quot;274&quot;,
-        &quot;&quot;,
-        &quot;&quot;
-      ]
-    },
-    {
-      &quot;message&quot;: &quot;Header in column 6 is blank&quot;,
-      &quot;code&quot;: &quot;blank-header&quot;,
-      &quot;column-number&quot;: 6,
-      &quot;message-data&quot;: {},
-      &quot;row&quot;: [
-        &quot;Afghanistan&quot;,
-        &quot;2013&quot;,
-        &quot;Positive&quot;,
-        &quot;274&quot;,
-        &quot;&quot;,
-        &quot;&quot;
-      ]
-    },
-    {
-      &quot;message&quot;: &quot;Header in column 6 is duplicated to header in column(s) 5&quot;,
-      &quot;code&quot;: &quot;duplicate-header&quot;,
-      &quot;column-number&quot;: 6,
-      &quot;message-data&quot;: {
-        &quot;column_numbers&quot;: &quot;5&quot;,
-        &quot;original&quot;: &quot;5&quot;
-      },
-      &quot;row&quot;: [
-        &quot;Afghanistan&quot;,
-        &quot;2013&quot;,
-        &quot;Positive&quot;,
-        &quot;274&quot;,
-        &quot;&quot;,
-        &quot;&quot;
-      ]
+      &quot;type&quot;: &quot;encoding-error&quot;,
+      &quot;title&quot;: &quot;Encoding Error&quot;,
+      &quot;description&quot;: &quot;Data reading error because of an encoding problem.&quot;,
+      &quot;message&quot;: &quot;The data source could not be successfully decoded: &#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;,
+      &quot;tags&quot;: [],
+      &quot;note&quot;: &quot;&#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;
     }
-  ],
-  &quot;source&quot;: &quot;https://opencanada.blob.core.windows.net/opengovprod/resources/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/refugee-protection-division-decisions-q1-2013-to-q4-2022.csv?sr=b&amp;sp=r&amp;sig=wOogmU5BGMjBcHa8KUM0yXQh8ZNXaDqKU3SH6UCC6iQ%3D&amp;sv=2019-07-07&amp;se=2023-11-20T21%3A36%3A27Z&quot;,
-  &quot;time&quot;: 0.139,
-  &quot;scheme&quot;: &quot;https&quot;,
-  &quot;valid&quot;: false
+  ]
 }</div>
-      </div></section><section data-lang="fr" style="display:none" class="panel">
+    </div></section><section data-lang="fr" style="display:none" class="panel">
       <div class="section">
         <div class="kv">
           <div>Valide</div><div><span class="badge bad">FAIL</span></div>
-          <div>Erreurs</div><div>3</div>
-          <div>Lignes</div><div>1000</div>
+          <div>Erreurs</div><div>1</div>
+          <div>Avertissements</div><div>0</div>
+          <div>Lignes</div><div>857</div>
         </div>
       </div>
-      <div class="section">
-        <div class="h1" style="font-size:16px">Table 1</div>
-        <div class="kv" style="margin-top:8px"><div>Valid</div><div>&lt;span class=&quot;badge bad&quot;&gt;FAIL&lt;/span&gt;</div><div>Format</div><div>csv</div><div>Encoding</div><div>utf-8-sig</div><div>Scheme</div><div>https</div><div>Source</div><div>https://opencanada.blob.core.windows.net/opengovprod/resources/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/refugee-protection-division-decisions-q1-2013-to-q4-2022.csv?sr=b&amp;sp=r&amp;sig=wOogmU5BGMjBcHa8KUM0yXQh8ZNXaDqKU3SH6UCC6iQ%3D&amp;sv=2019-07-07&amp;se=2023-11-20T21%3A36%3A27Z</div><div>Time</div><div>0.087</div><div>Row count</div><div>1000</div><div>Row count</div><div>1000</div><div>Error count</div><div>3</div><div>Error count</div><div>3</div></div>
-        <h4 style="margin:12px 0 6px">Erreurs</h4><table class="table"><thead><tr><th>Ligne</th><th>Champ</th><th>Code</th><th>Message</th></tr></thead><tbody><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 5 est vide.</td></tr><tr><td></td><td></td><td>blank-header</td><td>L&#x27;en-tête de la colonne 6 est vide.</td></tr><tr><td></td><td></td><td>duplicate-header</td><td>L&#x27;en-tête de la colonne 6 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 5.</td></tr></tbody></table>
-        <h4 style="margin:12px 0 6px">En-têtes</h4><div class="code">Country of Persecution
-Year
-Outcome
-Total
-
-</div>
-        <h4 style="margin:12px 0 6px">JSON brut de la table</h4><div class="code">{
-  &quot;error-count&quot;: 3,
-  &quot;format&quot;: &quot;csv&quot;,
-  &quot;row-count&quot;: 1000,
-  &quot;encoding&quot;: &quot;utf-8-sig&quot;,
-  &quot;headers&quot;: [
+    <div class="section">
+      <div class="h1" style="font-size:16px">qr7-rpd-open-data-2022-q4-eng-revised <span class="badge na">table</span></div>
+      <div class="kv" style="margin-top:8px"><div>Valid</div><div><span class="badge bad">FAIL</span></div><div>Type</div><div>table</div><div>Source</div><div><a href="https://registry.open.canada.ca/en/dataset/6e47f705-71ed-41f0-8fd5-d1a8508a3b63/resource/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/download/qr7-rpd-open-data-2022-q4-eng-revised.csv" target="_blank" rel="noopener">https://registry.open.canada.ca/en/dataset/6e47f705-71ed-41f0-8fd5-d1a8508a3b63/resource/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/download/qr7-rpd-open-data-2022-q4-eng-revised.csv</a></div><div>Rows</div><div>857</div><div>Fields</div><div>4</div><div>Errors</div><div>1</div><div>Warnings</div><div>0</div><div>Bytes</div><div>32768</div><div>Seconds</div><div>0.082</div></div>
+      <h4 style="margin:12px 0 6px">Étiquettes</h4><div class="code">Country of Persecution<br/>Year<br/>Outcome<br/>Total</div>
+      <h4 style="margin:12px 0 6px">Avertissements</h4><div class="code"><span class="subtle">(none)</span></div>
+      <h4 style="margin:12px 0 6px">Erreurs</h4><div class="code">{&#x27;type&#x27;: &#x27;encoding-error&#x27;, &#x27;title&#x27;: &quot;Erreur d&#x27;encodage&quot;, &#x27;description&#x27;: &quot;Erreur de lecture des données en raison d’un problème d&#x27;encodage.&quot;, &#x27;message&#x27;: &quot;La source de données n&#x27;a pas pu être décodée avec succès : &#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;, &#x27;tags&#x27;: [], &#x27;note&#x27;: &quot;&#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;}</div>
+      <h4 style="margin:12px 0 6px">JSON brut de la tâche</h4><div class="code">{
+  &quot;name&quot;: &quot;qr7-rpd-open-data-2022-q4-eng-revised&quot;,
+  &quot;type&quot;: &quot;table&quot;,
+  &quot;valid&quot;: false,
+  &quot;place&quot;: &quot;https://registry.open.canada.ca/en/dataset/6e47f705-71ed-41f0-8fd5-d1a8508a3b63/resource/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/download/qr7-rpd-open-data-2022-q4-eng-revised.csv&quot;,
+  &quot;labels&quot;: [
     &quot;Country of Persecution&quot;,
     &quot;Year&quot;,
     &quot;Outcome&quot;,
-    &quot;Total&quot;,
-    &quot;&quot;,
-    &quot;&quot;
+    &quot;Total&quot;
   ],
+  &quot;stats&quot;: {
+    &quot;errors&quot;: 1,
+    &quot;warnings&quot;: 0,
+    &quot;seconds&quot;: 0.082,
+    &quot;bytes&quot;: 32768,
+    &quot;fields&quot;: 4,
+    &quot;rows&quot;: 857
+  },
+  &quot;warnings&quot;: [],
   &quot;errors&quot;: [
     {
-      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 5 est vide.&quot;,
-      &quot;code&quot;: &quot;blank-header&quot;,
-      &quot;column-number&quot;: 5,
-      &quot;message-data&quot;: {},
-      &quot;row&quot;: [
-        &quot;Afghanistan&quot;,
-        &quot;2013&quot;,
-        &quot;Positive&quot;,
-        &quot;274&quot;,
-        &quot;&quot;,
-        &quot;&quot;
-      ]
-    },
-    {
-      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 6 est vide.&quot;,
-      &quot;code&quot;: &quot;blank-header&quot;,
-      &quot;column-number&quot;: 6,
-      &quot;message-data&quot;: {},
-      &quot;row&quot;: [
-        &quot;Afghanistan&quot;,
-        &quot;2013&quot;,
-        &quot;Positive&quot;,
-        &quot;274&quot;,
-        &quot;&quot;,
-        &quot;&quot;
-      ]
-    },
-    {
-      &quot;message&quot;: &quot;L&#x27;en-tête de la colonne 6 est dupliquédans l&#x27;en-tête de la colonne ou des colonnes 5.&quot;,
-      &quot;code&quot;: &quot;duplicate-header&quot;,
-      &quot;column-number&quot;: 6,
-      &quot;message-data&quot;: {
-        &quot;column_numbers&quot;: &quot;5&quot;,
-        &quot;original&quot;: &quot;5&quot;
-      },
-      &quot;row&quot;: [
-        &quot;Afghanistan&quot;,
-        &quot;2013&quot;,
-        &quot;Positive&quot;,
-        &quot;274&quot;,
-        &quot;&quot;,
-        &quot;&quot;
-      ]
+      &quot;type&quot;: &quot;encoding-error&quot;,
+      &quot;title&quot;: &quot;Erreur d&#x27;encodage&quot;,
+      &quot;description&quot;: &quot;Erreur de lecture des données en raison d’un problème d&#x27;encodage.&quot;,
+      &quot;message&quot;: &quot;La source de données n&#x27;a pas pu être décodée avec succès : &#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;,
+      &quot;tags&quot;: [],
+      &quot;note&quot;: &quot;&#x27;utf-8&#x27; codec can&#x27;t decode byte 0xf4 in position 1124: invalid continuation byte&quot;
     }
-  ],
-  &quot;source&quot;: &quot;https://opencanada.blob.core.windows.net/opengovprod/resources/0ca9e188-5601-4456-b5f3-bbd5d543c4d4/refugee-protection-division-decisions-q1-2013-to-q4-2022.csv?sr=b&amp;sp=r&amp;sig=wOogmU5BGMjBcHa8KUM0yXQh8ZNXaDqKU3SH6UCC6iQ%3D&amp;sv=2019-07-07&amp;se=2023-11-20T21%3A36%3A27Z&quot;,
-  &quot;time&quot;: 0.087,
-  &quot;scheme&quot;: &quot;https&quot;,
-  &quot;valid&quot;: false
+  ]
 }</div>
-      </div></section>
+    </div></section>
 
       <gcds-date-modified>2026-09-29</gcds-date-modified>
     </gcds-container>
