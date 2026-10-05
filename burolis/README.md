@@ -7,7 +7,7 @@ English and French results, merges them on `serviceId`, and keeps separate
 
 ## Current snapshot
 
-Updated in UTC on **2026-09-28**. Change detected: **yes**.
+Updated in UTC on **2026-10-05**. Change detected: **yes**.
 
 | Measure | Count |
 | --- | ---: |
@@ -15,14 +15,14 @@ Updated in UTC on **2026-09-28**. Change detected: **yes**.
 | French records | 10,661 |
 | Merged services | 10,661 |
 | Institution codes | 195 |
-| Provision values | 60 |
+| Provision values | 61 |
 
 ## Provision counts
 
 ```mermaid
 pie showData
     title Services by provision
-    "5-1-h-i" : 4055
+    "5-1-h-i" : 4054
     "5-1-c" : 1092
     "5-1-b" : 812
     "5-1-a" : 800
@@ -67,15 +67,16 @@ pie showData
     "6-1-e" : 9
     "7-4-d-ii" : 9
     "6-2-a" : 7
-    "5-2" : 6
     "9-f" : 6
+    "5-2" : 5
     "9-b" : 5
     "7-4-a-ii" : 4
     "7-4-c-iii" : 4
     "7-4-d-i" : 4
     "11-a-iii" : 3
-    "5-1-h-ii" : 3
+    "5-1-k" : 3
     "7-4-b" : 3
+    "5-1-h-ii" : 2
     "5-3.1" : 2
     "8-a" : 2
     "24-2" : 1
@@ -89,10 +90,10 @@ pie showData
 ```mermaid
 pie showData
     title Services by language obligation ID
-    "2" : 5251
-    "1" : 4250
-    "3" : 1154
-    "4" : 6
+    "2" : 5255
+    "1" : 4253
+    "3" : 1151
+    "4" : 2
 ```
 
 ## Top 25 institutions by service count
@@ -102,9 +103,9 @@ Labels use the source `institutionCode` field.
 ```mermaid
 xychart-beta
     title "Top 25 institutions by service count"
-    x-axis ["CPO", "RCM", "AIR", "CSD", "PEN", "BSF", "DFO", "EXT", "CAP", "DOE", "ICA", "FBD", "IMC", "FCC", "MOT", "VIA", "DVA", "CTA", "DND", "SVC", "NHW", "DUS", "AGR", "CBC", "RSN"]
+    x-axis ["CPO", "RCM", "AIR", "CSD", "PEN", "BSF", "DFO", "EXT", "CAP", "DOE", "ICA", "FBD", "IMC", "FCC", "DND", "MOT", "VIA", "DVA", "CTA", "SVC", "NHW", "DUS", "AGR", "CBC", "RSN"]
     y-axis "Services" 0 --> 5952
-    bar [5952, 781, 421, 349, 299, 232, 205, 185, 180, 135, 107, 106, 102, 100, 83, 79, 78, 75, 71, 58, 57, 53, 45, 43, 39]
+    bar [5952, 781, 421, 349, 299, 232, 189, 185, 180, 135, 107, 106, 102, 100, 87, 83, 79, 78, 75, 58, 57, 53, 45, 43, 39]
 ```
 
 ## Data files
