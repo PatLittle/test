@@ -323,7 +323,7 @@
   const urlParam = params.get("db_url");
   const sizeParam = params.get("db_size");
   const DB_URL = urlParam || "./data.sqlite";
-  const DB_FILE_LENGTH = Number(sizeParam || "15421440") || 0;
+  const DB_FILE_LENGTH = Number(sizeParam || "15441920") || 0;
   const createDbWorker = window.createDbWorker;
   if (!createDbWorker) throw new Error("sql.js-httpvfs failed to load");
   const useFileLength = urlParam ? Number(sizeParam) || 0 : DB_FILE_LENGTH;
