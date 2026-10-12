@@ -7,7 +7,7 @@ English and French results, merges them on `serviceId`, and keeps separate
 
 ## Current snapshot
 
-Updated in UTC on **2026-10-05**. Change detected: **yes**.
+Updated in UTC on **2026-10-12**. Change detected: **no**.
 
 | Measure | Count |
 | --- | ---: |
