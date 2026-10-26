@@ -8770,16 +8770,16 @@
     "officeNumber": "10458",
     "locality": "Sackville",
     "region": "NB",
-    "telephone": "",
+    "telephone": "506364-5044",
     "address": "17 RUELLE WATERFOWL",
     "countryId": null,
     "langObligation": "bilingue",
     "langObligationId": 1,
     "isSelfDesignated": false,
-    "provision": "5-1-h-ii",
-    "phoneCountryCode": null,
-    "phoneAreaCode": null,
-    "phoneNumber": null,
+    "provision": "5-1-h.1",
+    "phoneCountryCode": "1",
+    "phoneAreaCode": "506",
+    "phoneNumber": "364-5044",
     "demoTypeId": null,
     "censusMinPopulation": null,
     "censusTotalPopulation": null,
@@ -8794,8 +8794,8 @@
     "measureDemandFrench": 0,
     "measureDemandPercentage": null,
     "volume": "-",
-    "saMinorityPopulation": 308845,
-    "saTotalPopulation": 2350025,
+    "saMinorityPopulation": 242540,
+    "saTotalPopulation": 2006935,
     "saMinorityPercentage": null,
     "programsInfo": null
   },
@@ -11440,8 +11440,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 10634,
     "serviceName": "Services de recherche et de sauvetage 10634 Garde CC - Navire (Cape Breton and Spray) / Tel.: 506-336-2296",
     "serviceType": "Services de recherche et de sauvetage",
@@ -12400,8 +12400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 10713,
     "serviceName": "Services de recherche et de sauvetage 10713 Garde CC - Navire - Cape Spy / Phone : 1-902-687-3279",
     "serviceType": "Services de recherche et de sauvetage",
@@ -46520,8 +46520,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 10963,
     "serviceName": "Communications navire-terre 10963 Garde CC",
     "serviceType": "Services de communications navire-terre",
@@ -114360,8 +114360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 11127,
     "serviceName": "Bureau local 11127 Garde CC, Aide à la navigation  1-867-874-5515",
     "serviceType": "Bureau local",
@@ -245360,8 +245360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 11444,
     "serviceName": "Services de recherche et de sauvetage 11444 Garde CC - Navire (Cape Light and Clark's Harbour) / 1-902-745-2433",
     "serviceType": "Services de recherche et de sauvetage",
@@ -247400,8 +247400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 11449,
     "serviceName": "Services de recherche et de sauvetage 11449 Garde CC - Navire (Bickerton) / Tel.: 1-902-364-2555",
     "serviceType": "Services de recherche et de sauvetage",
@@ -249520,8 +249520,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 11454,
     "serviceName": "Services de recherche et de sauvetage 11454 Garde CC - Navire (Spindrift) / Tel.: 1-902-733-2128",
     "serviceType": "Services de recherche et de sauvetage",
@@ -252440,8 +252440,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 11461,
     "serviceName": "Communications navire-terre 11461 Garde CC (1-902-564-7752)",
     "serviceType": "Services de communications navire-terre",
@@ -253720,8 +253720,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 11464,
     "serviceName": "Services de recherche et de sauvetage 11464 Garde CC - Navire (Westport) / 1-902-839-2270",
     "serviceType": "Services de recherche et de sauvetage",
@@ -265800,46 +265800,6 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DOE",
-    "institutionName": "Environnement et Changement climatique Canada",
-    "serviceId": 114973,
-    "serviceName": "Cornerbrooke ",
-    "serviceType": "Une clientèle restreinte identifiable",
-    "serviceLevel": "Un service non-clé",
-    "clientele": "Une clientèle restreinte identifiable",
-    "officeNumber": "115103",
-    "locality": "Corner Brook",
-    "region": "NL",
-    "telephone": "0000000000000000",
-    "address": "503-4 Avenue Herald Corner Brook NL",
-    "countryId": null,
-    "langObligation": "anglais",
-    "langObligationId": 2,
-    "isSelfDesignated": false,
-    "provision": "6-1-a",
-    "phoneCountryCode": "000",
-    "phoneAreaCode": "0000",
-    "phoneNumber": "000000000000",
-    "demoTypeId": null,
-    "censusMinPopulation": null,
-    "censusTotalPopulation": null,
-    "censusMinPercentage": null,
-    "censusCode": null,
-    "cmaCensusName": "-",
-    "csdCensusName": "-",
-    "groupName": null,
-    "groupId": null,
-    "serviceStatus": "Actif",
-    "measureDemandEnglish": null,
-    "measureDemandFrench": null,
-    "measureDemandPercentage": null,
-    "volume": "-",
-    "saMinorityPopulation": 0,
-    "saTotalPopulation": 0,
-    "saMinorityPercentage": null,
-    "programsInfo": null
-  },
-  {
     "institutionCode": "EXT",
     "institutionName": "Affaires mondiales Canada",
     "serviceId": 1150,
@@ -274920,8 +274880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 1208,
     "serviceName": "Bureau local 1208 Garde CC / Tel.: 1-250-480-2737",
     "serviceType": "Bureau local",
@@ -275400,8 +275360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 1210,
     "serviceName": "Bureau local 1210 Garde CC",
     "serviceType": "Bureau local",
@@ -275800,8 +275760,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 1214,
     "serviceName": "Bureau local 1214 Garde CC",
     "serviceType": "Bureau local",
@@ -276040,8 +276000,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 1215,
     "serviceName": "Bureau local 1215 Garde CC - Aide a la navigation",
     "serviceType": "Bureau local",
@@ -288040,8 +288000,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 13039,
     "serviceName": "Bureau local 13039 Base de la Garde CC",
     "serviceType": "Bureau local",
@@ -288280,8 +288240,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 13079,
     "serviceName": "Services de recherche et de sauvetage 13079 Garde CC - Navire (Cap-aux-Meules) / Tel.: 1-418-986-3661",
     "serviceType": "Services de recherche et de sauvetage",
@@ -288320,8 +288280,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 13088,
     "serviceName": "Communications navire-terre 13088 Garde CC",
     "serviceType": "Services de communications navire-terre",
@@ -312640,8 +312600,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 16671,
     "serviceName": "Bureau local 16671 Aide à la navigation (Officer in charge - 1-519-736-3312 (Ext. 301))",
     "serviceType": "Bureau local",
@@ -315920,8 +315880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 2080,
     "serviceName": "Services de recherche et de sauvetage 2080",
     "serviceType": "Services de recherche et de sauvetage",
@@ -315960,8 +315920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 2083,
     "serviceName": "Bureau local 2083 Aide à la navigation 1-250-624-9146",
     "serviceType": "Bureau local",
@@ -331720,8 +331680,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6096,
     "serviceName": "Services de recherche et de sauvetage 6096 Garde CC - Navire / Superintendent SAR - 1-709-772-2123",
     "serviceType": "Services de recherche et de sauvetage",
@@ -331800,8 +331760,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6098,
     "serviceName": "Bureau local 6098 Bureau régional, Aide à la navigation, Information sur les glaces / 1-709-772-2800",
     "serviceType": "Bureau local",
@@ -333720,8 +333680,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6184,
     "serviceName": "Bureau local 6184 Garde CC - Alerte et avertissement d'urgence / Superviseur 1-418-648-4557",
     "serviceType": "Bureau local",
@@ -334920,8 +334880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6290,
     "serviceName": "Services de recherche et de sauvetage 6290 Garde CC - Navire (Cap Tourmente) / Tel.: 1-418-648-4668",
     "serviceType": "Services de recherche et de sauvetage",
@@ -334960,8 +334920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6291,
     "serviceName": "Communications navire-terre 6291 Garde CC",
     "serviceType": "Services de communications navire-terre",
@@ -337080,8 +337040,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6410,
     "serviceName": "Services de recherche et de sauvetage 6410 Garde CC - Navire (Cape Dundas) / 1-519-736-6533",
     "serviceType": "Services de recherche et de sauvetage",
@@ -337120,8 +337080,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6411,
     "serviceName": "Bureau local 6411 Garde CC - 1-807-468-6441 (Ext. 21)",
     "serviceType": "Bureau local",
@@ -337160,8 +337120,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6415,
     "serviceName": "Bureau local 6415 Garde CC (Superviseur - 1-705-773-4331)",
     "serviceType": "Bureau local",
@@ -340520,8 +340480,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 6660,
     "serviceName": "Services de recherche et de sauvetage 6660 Garde CC - Navire (Cap de Rabast) / Tel.: 1-418-538-3588",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347200,8 +347160,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89535,
     "serviceName": "Services de recherche et de sauvetage 89535 Garde CC - Navire (W.G. George) / 1-709-886-2838",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347240,8 +347200,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89536,
     "serviceName": "Services de recherche et de sauvetage 89536 Garde CC - Navire (W. Jackman) / Phone # 1-709-891-1610",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347280,8 +347240,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89537,
     "serviceName": "Services de recherche et de sauvetage 89537 Garde CC - Navire / Superintendent - SAR 1-709-772-2123",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347320,8 +347280,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89543,
     "serviceName": "Services de recherche et de sauvetage 89543 Garde CC - Navire (Cape Discovery) / Tel.: 1-519-524-9336",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347360,8 +347320,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89544,
     "serviceName": "Services de recherche et de sauvetage 89544 Garde CC - Navire (Sambro) / 1-902-868-2444",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347400,8 +347360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89547,
     "serviceName": "Services de recherche et de sauvetage 89547 Garde CC - Navire (Cape Chaillon) / Tel.: 1-807-345-6311",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347440,8 +347400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89551,
     "serviceName": "Services de recherche et de sauvetage 89551 Garde CC - Navire (Cape Providence) / Tel.: 1-519-538-3771",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347480,8 +347440,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89552,
     "serviceName": "Services de recherche et de sauvetage 89552 Garde CC - Navire (Cape Mercy) / Tel.: 1-905-372-7601",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347520,8 +347480,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89553,
     "serviceName": "Services de recherche et de sauvetage 89553 Garde CC - Navire (Cape Hearne) / Tel.: 1-613-546-3527",
     "serviceType": "Services de recherche et de sauvetage",
@@ -347560,8 +347520,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 89555,
     "serviceName": "Services de recherche et de sauvetage 89555 Garde CC - Navire (Cape Commodore) / Tel.: 1-519-596-2710",
     "serviceType": "Services de recherche et de sauvetage",
@@ -359040,8 +359000,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 93501,
     "serviceName": "Services de recherche et de sauvetage 93501 Garde CC - Navire (Cape Storm) / Tel.: 1-905-321-8779",
     "serviceType": "Services de recherche et de sauvetage",
@@ -359080,8 +359040,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 93502,
     "serviceName": "Bureau local 93502 Base GCC",
     "serviceType": "Bureau local",
@@ -359120,8 +359080,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 93503,
     "serviceName": "Bureau local 93503 Collège de la Garde côtière (Directeur 1-902-564-3660 Ext. 1110).",
     "serviceType": "Bureau local",
@@ -364836,46 +364796,6 @@
     "volume": "-",
     "saMinorityPopulation": 0,
     "saTotalPopulation": 0,
-    "saMinorityPercentage": null,
-    "programsInfo": null
-  },
-  {
-    "institutionCode": "ICA",
-    "institutionName": "Agence canadienne d'inspection des aliments",
-    "serviceId": 93953,
-    "serviceName": "Bureau local 93953",
-    "serviceType": "Bureau local",
-    "serviceLevel": "Un service non-clé",
-    "clientele": "Le grand public",
-    "officeNumber": "93953",
-    "locality": "Sainte-Anne-Des-Monts",
-    "region": "QC",
-    "telephone": "",
-    "address": "44 ROUTE DU PARC",
-    "countryId": null,
-    "langObligation": "français",
-    "langObligationId": 3,
-    "isSelfDesignated": false,
-    "provision": "5-1-h-i",
-    "phoneCountryCode": null,
-    "phoneAreaCode": null,
-    "phoneNumber": null,
-    "demoTypeId": null,
-    "censusMinPopulation": null,
-    "censusTotalPopulation": null,
-    "censusMinPercentage": null,
-    "censusCode": null,
-    "cmaCensusName": "-",
-    "csdCensusName": "-",
-    "groupName": null,
-    "groupId": null,
-    "serviceStatus": "Actif",
-    "measureDemandEnglish": 0,
-    "measureDemandFrench": 0,
-    "measureDemandPercentage": null,
-    "volume": "-",
-    "saMinorityPopulation": 1520,
-    "saTotalPopulation": 59985,
     "saMinorityPercentage": null,
     "programsInfo": null
   },
@@ -374360,8 +374280,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 94648,
     "serviceName": "Services de recherche et de sauvetage 94648 Garde CC - Navire (Cap Nord) / Tel.: 1-902-888-4017",
     "serviceType": "Services de recherche et de sauvetage",
@@ -379000,8 +378920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 94893,
     "serviceName": "Services de recherche et de sauvetage 94893 Garde CC - Navire (Cap Percé) / Tel: 1-418-235-4234",
     "serviceType": "Services de recherche et de sauvetage",
@@ -379040,8 +378960,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 94894,
     "serviceName": "Services de recherche et de sauvetage 94894 Garde CC - Navire (Cap d'Espoir) / Tel.: 1-418-269-5686",
     "serviceType": "Services de recherche et de sauvetage",
@@ -396160,8 +396080,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 95716,
     "serviceName": "Bureau local 95716 GCC - Services techniques intégrés",
     "serviceType": "Bureau local",
@@ -396200,8 +396120,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 95718,
     "serviceName": "Bureau local 95718 Bureau du Commissaire adjoint de la Garde côtière canadienne, region de l'Atlantique - 1-709-772-5150",
     "serviceType": "Bureau local",
@@ -396480,8 +396400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 95735,
     "serviceName": "Bureau local 95735 Base de la GCC 1-613-925-2865",
     "serviceType": "Bureau local",
@@ -402920,8 +402840,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 96030,
     "serviceName": "Bureau local 96030 Approvisionnement des navires - CCG (DG phone number 1-613-949-9121)",
     "serviceType": "Bureau local",
@@ -402960,8 +402880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 96031,
     "serviceName": "Bureau local 96031 Bureau régional de la Garde côtière canadienne. Centre et Arctique (C&A)",
     "serviceType": "Bureau local",
@@ -403000,8 +402920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 96032,
     "serviceName": "Bureau local 96032 Bureau de secteur, GCC , 1-519-383-1920 / (DR, ITS)",
     "serviceType": "Bureau local",
@@ -403200,8 +403120,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 96039,
     "serviceName": "Bureau local 96039 Administration régionale GCC - Région de l'ouest",
     "serviceType": "Bureau local",
@@ -407480,8 +407400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Pêches et Océans Canada",
+    "institutionCode": "DND",
+    "institutionName": "Défense nationale",
     "serviceId": 96183,
     "serviceName": "Bureau local 96183 Base de la GCC / 1-819-379-7338",
     "serviceType": "Bureau local",
@@ -419580,46 +419500,6 @@
     "phoneCountryCode": "1",
     "phoneAreaCode": "613",
     "phoneNumber": "957-2983",
-    "demoTypeId": null,
-    "censusMinPopulation": null,
-    "censusTotalPopulation": null,
-    "censusMinPercentage": null,
-    "censusCode": null,
-    "cmaCensusName": "-",
-    "csdCensusName": "-",
-    "groupName": null,
-    "groupId": null,
-    "serviceStatus": "Actif",
-    "measureDemandEnglish": 0,
-    "measureDemandFrench": 0,
-    "measureDemandPercentage": null,
-    "volume": "-",
-    "saMinorityPopulation": 0,
-    "saTotalPopulation": 0,
-    "saMinorityPercentage": null,
-    "programsInfo": null
-  },
-  {
-    "institutionCode": "RRF",
-    "institutionName": "Fondation canadienne des relations raciales",
-    "serviceId": 96668,
-    "serviceName": "Bureau régional du Québec",
-    "serviceType": "Bureau local",
-    "serviceLevel": "Un service non-clé",
-    "clientele": "Le grand public",
-    "officeNumber": "96668",
-    "locality": "Montréal",
-    "region": "QC",
-    "telephone": "438994-3621",
-    "address": "360 RUE SAINT-JACQUES, PIÈCE 500",
-    "countryId": null,
-    "langObligation": "bilingue",
-    "langObligationId": 1,
-    "isSelfDesignated": false,
-    "provision": "5-1-a",
-    "phoneCountryCode": "1",
-    "phoneAreaCode": "438",
-    "phoneNumber": "994-3621",
     "demoTypeId": null,
     "censusMinPopulation": null,
     "censusTotalPopulation": null,

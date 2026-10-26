@@ -8770,16 +8770,16 @@
     "officeNumber": "10458",
     "locality": "Sackville",
     "region": "NB",
-    "telephone": "",
+    "telephone": "506364-5044",
     "address": "17 WATERFOWL LANE",
     "countryId": null,
     "langObligation": "Bilingual",
     "langObligationId": 1,
     "isSelfDesignated": false,
-    "provision": "5-1-h-ii",
-    "phoneCountryCode": null,
-    "phoneAreaCode": null,
-    "phoneNumber": null,
+    "provision": "5-1-h.1",
+    "phoneCountryCode": "1",
+    "phoneAreaCode": "506",
+    "phoneNumber": "364-5044",
     "demoTypeId": null,
     "censusMinPopulation": null,
     "censusTotalPopulation": null,
@@ -8794,8 +8794,8 @@
     "measureDemandFrench": 0,
     "measureDemandPercentage": null,
     "volume": "-",
-    "saMinorityPopulation": 308845,
-    "saTotalPopulation": 2350025,
+    "saMinorityPopulation": 242540,
+    "saTotalPopulation": 2006935,
     "saMinorityPercentage": null,
     "programsInfo": null
   },
@@ -11440,8 +11440,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 10634,
     "serviceName": "Search and rescue services 10634 CC Guard - Vessel (Cape Breton and Spray)",
     "serviceType": "Search and rescue services",
@@ -12400,8 +12400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 10713,
     "serviceName": "Search and rescue services 10713 CC Guard - Vessel",
     "serviceType": "Search and rescue services",
@@ -46520,8 +46520,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 10963,
     "serviceName": "Ship-to-shore communications 10963 CC Guard",
     "serviceType": "Ship-to-shore communication services",
@@ -114360,8 +114360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 11127,
     "serviceName": "Local Office 11127 CC Guard, Aid to Navigation   1-867-874-5515",
     "serviceType": "A local office or facility",
@@ -245360,8 +245360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 11444,
     "serviceName": "Search and rescue services 11444 CC Guard - Vessel (Cape Light and Clark's Harbour)",
     "serviceType": "Search and rescue services",
@@ -247400,8 +247400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 11449,
     "serviceName": "Search and rescue services 11449 CC Guard - Vessel (Bickerton)",
     "serviceType": "Search and rescue services",
@@ -249520,8 +249520,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 11454,
     "serviceName": "Search and rescue services 11454 CC Guard - Vessel (Spindrift)",
     "serviceType": "Search and rescue services",
@@ -252440,8 +252440,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 11461,
     "serviceName": "Ship-to-shore communications 11461 CC Guard",
     "serviceType": "Ship-to-shore communication services",
@@ -253720,8 +253720,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 11464,
     "serviceName": "Search and rescue services 11464 CC Guard - Vessel (Westport)",
     "serviceType": "Search and rescue services",
@@ -265800,46 +265800,6 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DOE",
-    "institutionName": "Environment and Climate Change Canada",
-    "serviceId": 114973,
-    "serviceName": "Cornerbrooke ",
-    "serviceType": "An identifiable restricted clientele",
-    "serviceLevel": "Non-key service",
-    "clientele": "An identifiable restricted clientele",
-    "officeNumber": "115103",
-    "locality": "Corner Brook",
-    "region": "NL",
-    "telephone": "0000000000000000",
-    "address": "503-4 Herald Ave Corner Brook NL",
-    "countryId": null,
-    "langObligation": "English",
-    "langObligationId": 2,
-    "isSelfDesignated": false,
-    "provision": "6-1-a",
-    "phoneCountryCode": "000",
-    "phoneAreaCode": "0000",
-    "phoneNumber": "000000000000",
-    "demoTypeId": null,
-    "censusMinPopulation": null,
-    "censusTotalPopulation": null,
-    "censusMinPercentage": null,
-    "censusCode": null,
-    "cmaCensusName": "-",
-    "csdCensusName": "-",
-    "groupName": null,
-    "groupId": null,
-    "serviceStatus": "Active",
-    "measureDemandEnglish": null,
-    "measureDemandFrench": null,
-    "measureDemandPercentage": null,
-    "volume": "-",
-    "saMinorityPopulation": 0,
-    "saTotalPopulation": 0,
-    "saMinorityPercentage": null,
-    "programsInfo": null
-  },
-  {
     "institutionCode": "EXT",
     "institutionName": "Global Affairs Canada",
     "serviceId": 1150,
@@ -274920,8 +274880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 1208,
     "serviceName": "Local Office 1208 CC Guard",
     "serviceType": "A local office or facility",
@@ -275400,8 +275360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 1210,
     "serviceName": "Local Office 1210 CC Guard",
     "serviceType": "A local office or facility",
@@ -275800,8 +275760,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 1214,
     "serviceName": "Local Office 1214 CC Guard",
     "serviceType": "A local office or facility",
@@ -276040,8 +276000,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 1215,
     "serviceName": "Local Office 1215 CC Guard- Aids to Navigation ",
     "serviceType": "A local office or facility",
@@ -288040,8 +288000,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 13039,
     "serviceName": "Local Office 13039 CC Guard Base",
     "serviceType": "A local office or facility",
@@ -288280,8 +288240,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 13079,
     "serviceName": "Search and rescue services 13079 CC Guard - Vessel (Cap-aux-Meules)",
     "serviceType": "Search and rescue services",
@@ -288320,8 +288280,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 13088,
     "serviceName": "Ship-to-shore communications 13088 CC Guard",
     "serviceType": "Ship-to-shore communication services",
@@ -312640,8 +312600,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 16671,
     "serviceName": "Local Office 16671 Aids to Navigation",
     "serviceType": "A local office or facility",
@@ -315920,8 +315880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 2080,
     "serviceName": "Search and rescue services 2080",
     "serviceType": "Search and rescue services",
@@ -315960,8 +315920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 2083,
     "serviceName": "Local Office 2083 Aid to Navigation",
     "serviceType": "A local office or facility",
@@ -331720,8 +331680,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6096,
     "serviceName": "Search and rescue services 6096 CC Guard - Vessel",
     "serviceType": "Search and rescue services",
@@ -331800,8 +331760,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6098,
     "serviceName": "Local Office 6098 Regional office, Aids to Navigation, Ice Information",
     "serviceType": "A local office or facility",
@@ -333720,8 +333680,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6184,
     "serviceName": "Local Office 6184 CC Guard - Environmental Response",
     "serviceType": "A local office or facility",
@@ -334920,8 +334880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6290,
     "serviceName": "Search and rescue services 6290 CC Guard - Vessel (Cap Tourmente)",
     "serviceType": "Search and rescue services",
@@ -334960,8 +334920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6291,
     "serviceName": "Ship-to-shore communications 6291 CC Guard",
     "serviceType": "Ship-to-shore communication services",
@@ -337080,8 +337040,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6410,
     "serviceName": "Search and rescue services 6410 CC Guard - Vessel (Cape Dundas)",
     "serviceType": "Search and rescue services",
@@ -337120,8 +337080,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6411,
     "serviceName": "Local Office 6411 CC Guard",
     "serviceType": "A local office or facility",
@@ -337160,8 +337120,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6415,
     "serviceName": "Local Office 6415 CC Guard",
     "serviceType": "A local office or facility",
@@ -340520,8 +340480,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 6660,
     "serviceName": "Search and rescue services 6660 CC Guard - Vessel (Cap de Rabast)",
     "serviceType": "Search and rescue services",
@@ -347200,8 +347160,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89535,
     "serviceName": "Search and rescue services 89535 CC Guard - Vessel (W.G. George)",
     "serviceType": "Search and rescue services",
@@ -347240,8 +347200,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89536,
     "serviceName": "Search and rescue services 89536 CC Guard - Vessel (W. Jackman)",
     "serviceType": "Search and rescue services",
@@ -347280,8 +347240,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89537,
     "serviceName": "Search and rescue services 89537 CC Guard - Vessel",
     "serviceType": "Search and rescue services",
@@ -347320,8 +347280,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89543,
     "serviceName": "Search and rescue services 89543 CC Guard - Vessel (Cape Discovery)",
     "serviceType": "Search and rescue services",
@@ -347360,8 +347320,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89544,
     "serviceName": "Search and rescue services 89544 CC Guard - Vessel  - SAR (Sambro)",
     "serviceType": "Search and rescue services",
@@ -347400,8 +347360,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89547,
     "serviceName": "Search and rescue services 89547 CC Guard - Vessel (Cape Chaillon)",
     "serviceType": "Search and rescue services",
@@ -347440,8 +347400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89551,
     "serviceName": "Search and rescue services 89551 CC Guard - Vessel (Cape Providence)",
     "serviceType": "Search and rescue services",
@@ -347480,8 +347440,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89552,
     "serviceName": "Search and rescue services 89552 CC Guard - Vessel (Cape Mercy)",
     "serviceType": "Search and rescue services",
@@ -347520,8 +347480,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89553,
     "serviceName": "Search and rescue services 89553 CC Guard - Vessel (Cape Hearne)",
     "serviceType": "Search and rescue services",
@@ -347560,8 +347520,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 89555,
     "serviceName": "Search and rescue services 89555 CC Guard - Vessel (Cape Commodore)",
     "serviceType": "Search and rescue services",
@@ -359040,8 +359000,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 93501,
     "serviceName": "Search and rescue services 93501 CC Guard - Vessel (Cape Storm)",
     "serviceType": "Search and rescue services",
@@ -359080,8 +359040,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 93502,
     "serviceName": "Local Office 93502 CCG Base",
     "serviceType": "A local office or facility",
@@ -359120,8 +359080,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 93503,
     "serviceName": "Local Office 93503 Canadian Coast Guard College",
     "serviceType": "A local office or facility",
@@ -364836,46 +364796,6 @@
     "volume": "-",
     "saMinorityPopulation": 0,
     "saTotalPopulation": 0,
-    "saMinorityPercentage": null,
-    "programsInfo": null
-  },
-  {
-    "institutionCode": "ICA",
-    "institutionName": "Canadian Food Inspection Agency",
-    "serviceId": 93953,
-    "serviceName": "Local Office 93953",
-    "serviceType": "A local office or facility",
-    "serviceLevel": "Non-key service",
-    "clientele": "The general public",
-    "officeNumber": "93953",
-    "locality": "Sainte-Anne-Des-Monts",
-    "region": "QC",
-    "telephone": "",
-    "address": "44 DU PARC RD",
-    "countryId": null,
-    "langObligation": "French",
-    "langObligationId": 3,
-    "isSelfDesignated": false,
-    "provision": "5-1-h-i",
-    "phoneCountryCode": null,
-    "phoneAreaCode": null,
-    "phoneNumber": null,
-    "demoTypeId": null,
-    "censusMinPopulation": null,
-    "censusTotalPopulation": null,
-    "censusMinPercentage": null,
-    "censusCode": null,
-    "cmaCensusName": "-",
-    "csdCensusName": "-",
-    "groupName": null,
-    "groupId": null,
-    "serviceStatus": "Active",
-    "measureDemandEnglish": 0,
-    "measureDemandFrench": 0,
-    "measureDemandPercentage": null,
-    "volume": "-",
-    "saMinorityPopulation": 1520,
-    "saTotalPopulation": 59985,
     "saMinorityPercentage": null,
     "programsInfo": null
   },
@@ -374360,8 +374280,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 94648,
     "serviceName": "Search and rescue services 94648 CC Guard - Vessel (Cap Nord)",
     "serviceType": "Search and rescue services",
@@ -379000,8 +378920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 94893,
     "serviceName": "Search and rescue services 94893 CC Guard - Vessel (Cap Percé)",
     "serviceType": "Search and rescue services",
@@ -379040,8 +378960,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 94894,
     "serviceName": "Search and rescue services 94894 CC Guard - Vessel (Cap d'Espoir)",
     "serviceType": "Search and rescue services",
@@ -396160,8 +396080,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 95716,
     "serviceName": "Local Office 95716 CCG - Integrated Technical Services 1-902-566-7961",
     "serviceType": "A local office or facility",
@@ -396200,8 +396120,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 95718,
     "serviceName": "Local Office 95718 Assistant Commissioner's Office - Canadian Coast Guard Atlantic Region / 1-709-772-5150",
     "serviceType": "A local office or facility",
@@ -396480,8 +396400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 95735,
     "serviceName": "Local Office 95735 CCG Base",
     "serviceType": "A local office or facility",
@@ -402920,8 +402840,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 96030,
     "serviceName": "Local Office 96030 Vessel Procurement - CCG (DG phone number 1-613-949-9121)",
     "serviceType": "A local office or facility",
@@ -402960,8 +402880,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 96031,
     "serviceName": "Local Office 96031 Canadian Coast Guard Regional Headquarters. Central and Arctic (C&A)",
     "serviceType": "A local office or facility",
@@ -403000,8 +402920,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 96032,
     "serviceName": "Local Office 96032 Sector Office - CCG - 1-519-383-1920 / (RD, ITS)",
     "serviceType": "A local office or facility",
@@ -403200,8 +403120,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 96039,
     "serviceName": "Local Office 96039 CCG Regional Headquarters - Western Region / Telephone Assistant Commissioner (for OL only) 250-480-2765.",
     "serviceType": "A local office or facility",
@@ -407480,8 +407400,8 @@
     "programsInfo": null
   },
   {
-    "institutionCode": "DFO",
-    "institutionName": "Fisheries and Oceans Canada",
+    "institutionCode": "DND",
+    "institutionName": "National Defence",
     "serviceId": 96183,
     "serviceName": "Local Office 96183 CCG Base",
     "serviceType": "A local office or facility",
@@ -419580,46 +419500,6 @@
     "phoneCountryCode": "1",
     "phoneAreaCode": "613",
     "phoneNumber": "957-2983",
-    "demoTypeId": null,
-    "censusMinPopulation": null,
-    "censusTotalPopulation": null,
-    "censusMinPercentage": null,
-    "censusCode": null,
-    "cmaCensusName": "-",
-    "csdCensusName": "-",
-    "groupName": null,
-    "groupId": null,
-    "serviceStatus": "Active",
-    "measureDemandEnglish": 0,
-    "measureDemandFrench": 0,
-    "measureDemandPercentage": null,
-    "volume": "-",
-    "saMinorityPopulation": 0,
-    "saTotalPopulation": 0,
-    "saMinorityPercentage": null,
-    "programsInfo": null
-  },
-  {
-    "institutionCode": "RRF",
-    "institutionName": "Canadian Race Relations Foundation",
-    "serviceId": 96668,
-    "serviceName": "Quebec Region Office",
-    "serviceType": "A local office or facility",
-    "serviceLevel": "Non-key service",
-    "clientele": "The general public",
-    "officeNumber": "96668",
-    "locality": "Montreal",
-    "region": "QC",
-    "telephone": "438994-3621",
-    "address": "360 SAINT-JACQUES ST, SUITE 500",
-    "countryId": null,
-    "langObligation": "Bilingual",
-    "langObligationId": 1,
-    "isSelfDesignated": false,
-    "provision": "5-1-a",
-    "phoneCountryCode": "1",
-    "phoneAreaCode": "438",
-    "phoneNumber": "994-3621",
     "demoTypeId": null,
     "censusMinPopulation": null,
     "censusTotalPopulation": null,
