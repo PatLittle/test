@@ -20,12 +20,12 @@
     <div class="panel section">
       <div class="h1" style="font-size:20px">National Research Council Canada | Conseil national de recherches Canada</div>
       <p class="subtle" style="margin-top:8px">
-        Total reports: 1 · Success: 1 · Failure: 0 · Other: 0 · URL types: 1 · Latest: <time>2024-12-09 18:09:38.028037</time>
+        Total reports: 2 · Success: 1 · Failure: 1 · Other: 0 · URL types: 1 · Latest: <time>2024-12-09 18:09:38.028037</time>
       </p>
       <div class="summary-grid" style="margin-top:16px">
         <div class="summary-tile">
           <div class="label">Total reports</div>
-          <div class="value">1</div>
+          <div class="value">2</div>
         </div>
         <div class="summary-tile">
           <div class="label">Success</div>
@@ -33,7 +33,7 @@
         </div>
         <div class="summary-tile">
           <div class="label">Failure</div>
-          <div class="value" style="color:var(--bad)">0</div>
+          <div class="value" style="color:var(--bad)">1</div>
         </div>
         <div class="summary-tile">
           <div class="label">URL types</div>
@@ -61,11 +61,11 @@
             <tr>
               <th>URL type</th>
               <th>Total</th>
-              <th>Success</th>
+              <th>Success</th><th>Failure</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>upload</td><td>1</td><td>1</td></tr>
+            <tr><td>upload</td><td>2</td><td>1</td><td>1</td></tr>
           </tbody>
         </table>
       </div>
@@ -158,6 +158,27 @@
         <td><time>2024-12-09 18:09:38.028037</time></td>
       </tr>
     
+      <tr data-created="2022-04-12 19:33:11.448012"
+          data-status="failure"
+          data-resource="e8a6157d-d424-4739-a46d-90e03194f229"
+          data-organization="National Research Council Canada | Conseil national de recherches Canada"
+          data-org="National Research Council Canada | Conseil national de recherches Canada"
+          data-version="v0.1"
+          data-dataset-en="National Research Council Canada Peer-reviewed Publications, 2018"
+          data-dataset-fr="Publications du Conseil national de recherches Canada évaluées par les pairs, 2018"
+          data-filtered="1">
+        <td>
+          <a href="../reports/6f8a4751-488d-4c79-980b-54ec009b0cc3.html"><code>6f8a4751-488d-4c79-980b-54ec009b0cc3</code></a>
+          <div class="subtle"><span class="badge na">v0.1</span></div>
+        </td>
+        <td><span data-lang="en">National Research Council Canada Peer-reviewed Publications, 2018</span><span data-lang="fr" style="display:none">Publications du Conseil national de recherches Canada évaluées par les pairs, 2018</span><div class="small"><code>ff0c2020-85e2-4515-8733-3cb8cb60cf2d</code></div></td>
+        <td><span data-lang="en">National Research Council Canada Peer-reviewed Publications, 2018</span><span data-lang="fr" style="display:none">Publications du Conseil national de recherches Canada évaluées par les pairs, 2018</span><div class="small"><code>e8a6157d-d424-4739-a46d-90e03194f229</code> · upload</div></td>
+        <td>National Research Council Canada | Conseil national de recherches Canada</td>
+        <td><span data-lang="en">57 err</span><span data-lang="fr" style="display:none">57 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2022-04-12 19:33:11.448012</time></td>
+      </tr>
+    
           </tbody>
         </table>
       </div>
@@ -181,8 +202,8 @@
     document.addEventListener('DOMContentLoaded', function(){
       const tickColor = '#e8ecfa';
       const gridColor = 'rgba(255,255,255,0.1)';
-      const statusData = {"labels": ["Success"], "datasets": [{"label": "Reports", "data": [1], "backgroundColor": ["#2e8540"], "hoverOffset": 8}]};
-      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [1], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}]};
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [1, 1], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["upload"], "datasets": [{"label": "Success", "data": [1], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [1], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
       if(window.Chart){
         const statusCanvas = document.getElementById('statusChart');
         if(statusCanvas){
