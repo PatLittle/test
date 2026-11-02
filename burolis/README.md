@@ -7,13 +7,13 @@ English and French results, merges them on `serviceId`, and keeps separate
 
 ## Current snapshot
 
-Updated in UTC on **2026-10-26**. Change detected: **yes**.
+Updated in UTC on **2026-11-02**. Change detected: **yes**.
 
 | Measure | Count |
 | --- | ---: |
-| English records | 10,654 |
-| French records | 10,654 |
-| Merged services | 10,654 |
+| English records | 10,650 |
+| French records | 10,650 |
+| Merged services | 10,650 |
 | Institution codes | 195 |
 | Provision values | 61 |
 
@@ -36,7 +36,7 @@ pie showData
     "11-a-ii" : 171
     "5-1-e" : 162
     "5-1-j" : 143
-    "7-1" : 120
+    "7-1" : 118
     "5-1-d.1" : 115
     "11-b" : 114
     "7-4-c-i" : 106
@@ -46,7 +46,7 @@ pie showData
     "9-a" : 81
     "5-1-i" : 60
     "9-c" : 59
-    "6-1-d" : 57
+    "6-1-d" : 56
     "7-5" : 52
     "5-1-m" : 50
     "9-e" : 36
@@ -75,8 +75,8 @@ pie showData
     "7-4-c-iii" : 4
     "7-4-d-i" : 4
     "11-a-iii" : 3
-    "7-4-b" : 3
     "5-3.1" : 2
+    "7-4-b" : 2
     "8-a" : 2
     "24-2" : 1
     "5-1-h-ii" : 1
@@ -90,8 +90,8 @@ pie showData
 ```mermaid
 pie showData
     title Services by language obligation ID
-    "2" : 5252
-    "1" : 4250
+    "2" : 5250
+    "1" : 4248
     "3" : 1150
     "4" : 2
 ```
@@ -105,7 +105,7 @@ xychart-beta
     title "Top 25 institutions by service count"
     x-axis ["CPO", "RCM", "AIR", "CSD", "PEN", "BSF", "EXT", "CAP", "DND", "DFO", "DOE", "FBD", "ICA", "IMC", "FCC", "MOT", "VIA", "DVA", "CTA", "SVC", "NHW", "DUS", "AGR", "CBC", "RSN"]
     y-axis "Services" 0 --> 5952
-    bar [5952, 781, 421, 349, 294, 232, 185, 180, 139, 137, 134, 106, 106, 102, 100, 83, 79, 78, 75, 58, 57, 53, 45, 43, 39]
+    bar [5952, 781, 421, 349, 294, 229, 185, 180, 139, 137, 134, 106, 106, 102, 100, 83, 79, 78, 74, 58, 57, 53, 45, 43, 39]
 ```
 
 ## Data files
