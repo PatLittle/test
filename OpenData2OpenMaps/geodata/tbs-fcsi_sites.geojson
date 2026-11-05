@@ -912057,8 +912057,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -53.6,
-          49.316667
+          -53.607531,
+          49.3194
         ]
       },
       "properties": {
@@ -912067,7 +912067,7 @@
         "reporting_organization_en": null,
         "reporting_organization_fr": null,
         "created": "2007-07-24T16:22:00",
-        "last_modified": "2025-05-28T09:57:00",
+        "last_modified": "2026-11-04T07:48:00",
         "name_en": "Lumsden (North - DFRP# 01296 - Waterlot)",
         "name_fr": "Lumsden (Nord – No du RBIF : 01296 – Plan d'eau)",
         "status_en": "Closed",
@@ -912119,11 +912119,11 @@
         "estimated_cubic_metres": 0.0,
         "estimated_hectares": 0.0,
         "estimated_tons": 0.0,
-        "population_1km": 10.0,
-        "population_5km": 461.0,
-        "population_10km": 724.0,
-        "population_25km": 3470.0,
-        "population_50km": 10383.0,
+        "population_1km": 18.0,
+        "population_5km": 428.0,
+        "population_10km": 692.0,
+        "population_25km": 3482.0,
+        "population_50km": 10695.0,
         "action_plan_en": null,
         "action_plan_fr": null,
         "additional_information_en": null,
