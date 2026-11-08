@@ -20,12 +20,12 @@
     <div class="panel section">
       <div class="h1" style="font-size:20px">Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</div>
       <p class="subtle" style="margin-top:8px">
-        Total reports: 13 · Success: 13 · Failure: 0 · Other: 0 · URL types: 2 · Latest: <time>2025-12-11 16:27:13.000899</time>
+        Total reports: 14 · Success: 13 · Failure: 1 · Other: 0 · URL types: 2 · Latest: <time>2025-12-11 16:27:13.000899</time>
       </p>
       <div class="summary-grid" style="margin-top:16px">
         <div class="summary-tile">
           <div class="label">Total reports</div>
-          <div class="value">13</div>
+          <div class="value">14</div>
         </div>
         <div class="summary-tile">
           <div class="label">Success</div>
@@ -33,7 +33,7 @@
         </div>
         <div class="summary-tile">
           <div class="label">Failure</div>
-          <div class="value" style="color:var(--bad)">0</div>
+          <div class="value" style="color:var(--bad)">1</div>
         </div>
         <div class="summary-tile">
           <div class="label">URL types</div>
@@ -61,11 +61,11 @@
             <tr>
               <th>URL type</th>
               <th>Total</th>
-              <th>Success</th>
+              <th>Success</th><th>Failure</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>remote</td><td>11</td><td>11</td></tr><tr><td>upload</td><td>2</td><td>2</td></tr>
+            <tr><td>remote</td><td>12</td><td>11</td><td>1</td></tr><tr><td>upload</td><td>2</td><td>2</td><td>0</td></tr>
           </tbody>
         </table>
       </div>
@@ -368,6 +368,27 @@
         <td><time>2025-12-10 15:41:19.962043</time></td>
       </tr>
     
+      <tr data-created="2025-03-05 13:55:22.436639"
+          data-status="failure"
+          data-resource="ff435632-e786-4584-b29a-c5356eaae90a"
+          data-organization="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-org="Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada"
+          data-version="v0.2"
+          data-dataset-en="Type specimens in Canada&#x27;s National Collection of Vascular Plants (DAO)"
+          data-dataset-fr="Spécimens types de la Collection nationale de plantes vasculaires (DAO)"
+          data-filtered="1">
+        <td>
+          <a href="../reports/036fc117-b08e-4e56-9222-076e1e5212fb.html"><code>036fc117-b08e-4e56-9222-076e1e5212fb</code></a>
+          <div class="subtle"><span class="badge na">v0.2</span></div>
+        </td>
+        <td><span data-lang="en">Type specimens in Canada&#x27;s National Collection of Vascular Plants (DAO)</span><span data-lang="fr" style="display:none">Spécimens types de la Collection nationale de plantes vasculaires (DAO)</span><div class="small"><code>dc1ac14c-2ce1-402a-8c59-5e08c81e0f81</code></div></td>
+        <td><span data-lang="en">Type specimens in Canada&#x27;s National Collection of Vascular Plants (DAO)</span><span data-lang="fr" style="display:none">Spécimens types de la Collection nationale de plantes vasculaires (DAO)</span><div class="small"><code>ff435632-e786-4584-b29a-c5356eaae90a</code> · remote</div></td>
+        <td>Agriculture and Agri-Food Canada | Agriculture et Agroalimentaire Canada</td>
+        <td><span data-lang="en">1 err</span><span data-lang="fr" style="display:none">1 err.</span></td>
+        <td><span class="badge bad">failure</span></td>
+        <td><time>2025-03-05 13:55:22.436639</time></td>
+      </tr>
+    
       <tr data-created="2024-12-09 18:09:41.764393"
           data-status="success"
           data-resource="6e42197a-a9d6-46f0-a48b-8b54822a4ae7"
@@ -433,8 +454,8 @@
     document.addEventListener('DOMContentLoaded', function(){
       const tickColor = '#e8ecfa';
       const gridColor = 'rgba(255,255,255,0.1)';
-      const statusData = {"labels": ["Success"], "datasets": [{"label": "Reports", "data": [13], "backgroundColor": ["#2e8540"], "hoverOffset": 8}]};
-      const urlTypeData = {"labels": ["remote", "upload"], "datasets": [{"label": "Success", "data": [11, 2], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}]};
+      const statusData = {"labels": ["Success", "Failure"], "datasets": [{"label": "Reports", "data": [13, 1], "backgroundColor": ["#2e8540", "#d3080c"], "hoverOffset": 8}]};
+      const urlTypeData = {"labels": ["remote", "upload"], "datasets": [{"label": "Success", "data": [11, 2], "backgroundColor": "#2e8540", "stack": "status", "borderWidth": 0}, {"label": "Failure", "data": [1, 0], "backgroundColor": "#d3080c", "stack": "status", "borderWidth": 0}]};
       if(window.Chart){
         const statusCanvas = document.getElementById('statusChart');
         if(statusCanvas){
