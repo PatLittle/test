@@ -1386029,6 +1386029,154 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          -103.251339,
+          56.326768
+        ]
+      },
+      "properties": {
+        "site_identifier": null,
+        "reporting_organization_code": "RCM",
+        "reporting_organization_en": null,
+        "reporting_organization_fr": null,
+        "created": "2026-11-09T13:27:00",
+        "last_modified": "2026-11-09T13:27:00",
+        "name_en": "Southend RCMP Detachment",
+        "name_fr": "Détachement de la GRC de Southend",
+        "status_en": "Suspected",
+        "status_fr": "Suspectée",
+        "status_description_en": "Suspected site",
+        "status_description_fr": "Site suspecté",
+        "classification_code": null,
+        "classification_en": null,
+        "classification_fr": null,
+        "property_number": "14922",
+        "reason_for_federal_involvement_en": "Federal Real Property",
+        "reason_for_federal_involvement_fr": "Biens immobiliers fédéraux",
+        "municipality": "Division No. 18, Unorganized",
+        "province": "Saskatchewan",
+        "country_en": "Canada",
+        "country_fr": "Canada",
+        "sgc": "4718090",
+        "fed": "003",
+        "federal_electoral_district_en": "Desnethé--Missinippi--Churchill River",
+        "federal_electoral_district_fr": "Desnethé--Missinippi--Rivière Churchill",
+        "minimap_url": "https://www.tbs-sct.gc.ca/fcsi-rscf/minimap.aspx?fsi=00028290",
+        "management_type_codes": [],
+        "management_types_en": [],
+        "management_types_fr": [],
+        "contaminant_codes": [],
+        "contaminants_en": [],
+        "contaminants_fr": [],
+        "medium_codes": [],
+        "contaminated_media_en": [],
+        "contaminated_media_fr": [],
+        "estimated_cubic_metres": null,
+        "estimated_hectares": null,
+        "estimated_tons": null,
+        "population_1km": 69.0,
+        "population_5km": 711.0,
+        "population_10km": 1067.0,
+        "population_25km": 1067.0,
+        "population_50km": 1095.0,
+        "action_plan_en": null,
+        "action_plan_fr": null,
+        "additional_information_en": null,
+        "additional_information_fr": null,
+        "marker-color": "#f5a623",
+        "marker-size": "small",
+        "marker-symbol": "circle",
+        "source": "https://map-carte.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf.zip"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": null,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -103.251679,
+          56.327296
+        ]
+      },
+      "properties": {
+        "site_identifier": null,
+        "reporting_organization_code": "RCM",
+        "reporting_organization_en": null,
+        "reporting_organization_fr": null,
+        "created": "2026-11-09T13:24:00",
+        "last_modified": "2026-11-09T13:24:00",
+        "name_en": "Southend RCMP Detachment",
+        "name_fr": "Détachement de la GRC de Southend",
+        "status_en": "Suspected",
+        "status_fr": "Suspectée",
+        "status_description_en": "Suspected site",
+        "status_description_fr": "Site suspecté",
+        "classification_code": null,
+        "classification_en": null,
+        "classification_fr": null,
+        "property_number": "14922",
+        "reason_for_federal_involvement_en": "Federal Real Property",
+        "reason_for_federal_involvement_fr": "Biens immobiliers fédéraux",
+        "municipality": "Southend No. 200A",
+        "province": "Saskatchewan",
+        "country_en": "Canada",
+        "country_fr": "Canada",
+        "sgc": "4718826",
+        "fed": "003",
+        "federal_electoral_district_en": "Desnethé--Missinippi--Churchill River",
+        "federal_electoral_district_fr": "Desnethé--Missinippi--Rivière Churchill",
+        "minimap_url": "https://www.tbs-sct.gc.ca/fcsi-rscf/minimap.aspx?fsi=00028291",
+        "management_type_codes": [
+          "2"
+        ],
+        "management_types_en": [
+          "Remediation"
+        ],
+        "management_types_fr": [
+          "Restauration"
+        ],
+        "contaminant_codes": [
+          "13"
+        ],
+        "contaminants_en": [
+          "PAHs (polycyclic aromatic hydrocarbon)"
+        ],
+        "contaminants_fr": [
+          "HAP (hydrocarbures aromatiques polycycliques)"
+        ],
+        "medium_codes": [
+          "4"
+        ],
+        "contaminated_media_en": [
+          "Surface soil"
+        ],
+        "contaminated_media_fr": [
+          "Sol de surface"
+        ],
+        "estimated_cubic_metres": null,
+        "estimated_hectares": null,
+        "estimated_tons": 3.8,
+        "population_1km": 66.0,
+        "population_5km": 707.0,
+        "population_10km": 1067.0,
+        "population_25km": 1067.0,
+        "population_50km": 1095.0,
+        "action_plan_en": "Remediation complete",
+        "action_plan_fr": "Remédiation terminée",
+        "additional_information_en": null,
+        "additional_information_fr": null,
+        "marker-color": "#f5a623",
+        "marker-size": "small",
+        "marker-symbol": "circle",
+        "source": "https://map-carte.tbs-sct.gc.ca/fcsi-rscf/oddo/fcsi-rscf.zip"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": null,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           -53.4819,
           47.697
         ]
