@@ -12195,8 +12195,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          35.578156,
-          33.909298
+          35.535089,
+          33.869519
         ]
       },
       "properties": {
@@ -12205,10 +12205,10 @@
         "city_fr": "Beyrouth",
         "office_type_en": "Embassy of Canada",
         "office_type_fr": "Ambassade du Canada",
-        "address_en": "First Floor, Coolrite Building, 43 Jal El Dib Highway (seaside), Beirut, Lebanon.",
-        "address_fr": "1er étage, Immeuble Coolrite, 43 Autostrade Jal El Dib (bord de mer), Beyrouth, Liban.",
-        "telephone_en": "+961 4 726 700",
-        "telephone_fr": "+961 4 726 700",
+        "address_en": "Charles Helou Street, Spark Tower, Sin El Fil, Lebanon",
+        "address_fr": "Rue Charles Helou, Spark Tower, Sin El Fil, Lebanon",
+        "telephone_en": null,
+        "telephone_fr": null,
         "email_en": "berut.consular@international.gc.ca",
         "email_fr": "berut.consulaire@international.gc.ca",
         "website_en": "https://www.international.gc.ca/country-pays/lebanon-liban/beirut-beyrouth.aspx?lang=eng",
@@ -12244,8 +12244,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            35.578156,
-            33.909298
+            35.535089,
+            33.869519
           ],
           [
             35.921264416438525,
@@ -12270,8 +12270,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            35.578156,
-            33.909298
+            35.535089,
+            33.869519
           ],
           [
             38.55332542910033,
