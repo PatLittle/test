@@ -18803,8 +18803,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -104.98814,
-          39.74236
+          -104.9939941,
+          39.748836
         ]
       },
       "properties": {
@@ -18813,8 +18813,8 @@
         "city_fr": "Denver",
         "office_type_en": "Consulate General of Canada",
         "office_type_fr": "Consulat général du Canada",
-        "address_en": "1625 Broadway, Suite 2600, Denver, Colorado, U.S.A., 80202",
-        "address_fr": "1625 Broadway, Suite 2600, Denver, Colorado, États-Unis, 80202",
+        "address_en": "1001 17th St., Suite 720, Denver, Colorado, U.S.A., 80202",
+        "address_fr": "1001 17th St., Suite 720, Denver, Colorado, États-Unis, 80202",
         "telephone_en": "1-844-880-6519",
         "telephone_fr": "1-844-880-6519",
         "email_en": "ccs.scc@international.gc.ca",
@@ -18848,8 +18848,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            -104.98814,
-            39.74236
+            -104.9939941,
+            39.748836
           ],
           [
             -99.6873053973568,
