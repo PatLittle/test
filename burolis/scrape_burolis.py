@@ -3,10 +3,14 @@
 
 from __future__ import annotations
 
+import argparse
 import csv
 import json
+import os
 import re
+import tempfile
 import time
+import unicodedata
 from collections import Counter
 from collections.abc import Iterable
 from datetime import datetime, timezone
@@ -38,6 +42,185 @@ USER_AGENT = (
 )
 
 Record = dict[str, Any]
+
+# GeoLocator's locate source returns interpolated civic addresses. Geonames
+# adds official place names when an office address cannot be located.
+GEOLOCATOR_URL = "https://geolocator.api.geo.ca/"
+GEOJSON_PATH = OUTPUT_DIR.parents[1] / "OpenData2OpenMaps" / "burolis.geojson"
+GEOCODE_CACHE_PATH = OUTPUT_DIR / "burolis_geocodes.json"
+PROVINCES = dict(zip(
+    "AB BC MB NB NL NS NT NU ON PE QC SK YT".split(),
+    ("Alberta", "British Columbia", "Manitoba", "New Brunswick",
+     "Newfoundland and Labrador", "Nova Scotia", "Northwest Territories",
+     "Nunavut", "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan", "Yukon"),
+))
+STREET_WORDS = set("av ave avenue blvd boul boulevard ch chemin court ct dr drive highway hwy lane ln rd road route rue st street way".split())
+DIRECTIONS = {
+    "n": "north", "nord": "north", "s": "south", "sud": "south",
+    "e": "east", "est": "east", "w": "west", "o": "west", "ouest": "west",
+}
+LOCALITY_CATEGORIES = {
+    "borough", "city", "community", "district municipality", "hamlet", "locality",
+    "municipality", "neighbourhood", "populated place", "town", "township", "village",
+}
+
+
+def location_text(row: Record, field: str) -> str:
+    for key in (field, f"{field}_en", f"{field}_fr"):
+        value = row.get(key)
+        if isinstance(value, str) and value.strip() not in {"", "-"}:
+            if "<" in value:
+                value = BeautifulSoup(value, "html.parser").get_text(" ", strip=True)
+            return " ".join(value.split())
+    return ""
+
+
+def match_text(value: str) -> str:
+    plain = unicodedata.normalize("NFKD", value.casefold())
+    plain = "".join(character for character in plain if not unicodedata.combining(character))
+    return " ".join(re.findall(r"[a-z0-9]+", plain))
+
+
+def street_signature(label: str) -> tuple[str, list[str]] | None:
+    number = re.match(r"^(\d+[a-z]?)\s+(.+)$", match_text(label.split(",", 1)[0]))
+    if number is None:
+        return None
+    street = [DIRECTIONS.get(word, word) for word in number[2].split() if word not in STREET_WORDS]
+    return (number[1], street) if street else None
+
+
+def select_geocode(results: list[Record], precision: str, query: str,
+                   locality: str, province: str) -> Record | None:
+    for item in results:
+        label = item.get("name")
+        region = item.get("province")
+        if not isinstance(label, str) or not isinstance(region, str):
+            continue
+        if match_text(region) != match_text(province):
+            continue
+        category = match_text(str(item.get("category", "")))
+        label_parts = label.split(",")
+        if precision == "address":
+            if item.get("key") != "locate" or category != "street":
+                continue
+            if street_signature(label) != street_signature(query):
+                continue
+            if f" {match_text(locality)} " not in f" {match_text(','.join(label_parts[1:]))} ":
+                continue
+        else:
+            place_name = match_text(label_parts[0].split(" (", 1)[0])
+            if category not in LOCALITY_CATEGORIES or place_name != match_text(locality):
+                continue
+
+        lon, lat = item.get("lng"), item.get("lat")
+        if type(lon) not in (int, float) or type(lat) not in (int, float):
+            continue
+        if -180 <= lon <= 180 and -90 <= lat <= 90:
+            return {"coordinates": [lon, lat], "label": label, "source": item["key"]}
+    return None
+
+
+def write_json_lines(path: Path, start: str, rows: Iterable[Record], end: str) -> None:
+    """Write a JSON document atomically, with one record per line for Git diffs."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(
+        mode="w", encoding="utf-8", newline="\n", dir=path.parent, delete=False
+    ) as output:
+        temporary = Path(output.name)
+        try:
+            output.write(start)
+            for index, row in enumerate(rows):
+                if index:
+                    output.write(",\n")
+                output.write(json.dumps(row, ensure_ascii=False, allow_nan=False, separators=(",", ":")))
+            output.write(end)
+            output.close()
+            temporary.replace(path)
+        finally:
+            temporary.unlink(missing_ok=True)
+
+
+def save_geojson(merged: list[Record], path: Path = GEOJSON_PATH,
+                 cache_path: Path = GEOCODE_CACHE_PATH, max_requests: int | None = None) -> None:
+    cached_rows = load_saved_records(cache_path) or []
+    cache = {row["query"]: row["match"] for row in cached_rows}
+    starting_entries = len(cache)
+    features = []
+    totals: Counter[str] = Counter()
+    requests_sent = 0
+    last_request = 0.0
+    unavailable = False
+    with requests.Session() as session:
+        session.headers["User-Agent"] = "OpenData2OpenMaps-Burolis/1.0 (https://github.com/PatLittle/test)"
+
+        def lookup(precision: str, query: str, locality: str, province: str) -> tuple[bool, Record | None]:
+            nonlocal last_request, requests_sent, unavailable
+            key = f"{precision}|{query.casefold()}"
+            if key in cache:
+                return True, cache[key]
+            if unavailable or (max_requests is not None and requests_sent >= max_requests):
+                return False, None
+
+            # One request at a time, with at least one second between starts.
+            time.sleep(max(0.0, 1.0 - (time.monotonic() - last_request)))
+            last_request = time.monotonic()
+            requests_sent += 1
+            keys = "locate" if precision == "address" else "geonames,locate"
+            try:
+                response = session.get(
+                    GEOLOCATOR_URL, params={"q": query, "lang": "en", "keys": keys}, timeout=(5, 15)
+                )
+                response.raise_for_status()
+                results = response.json()
+                if not isinstance(results, list) or not all(isinstance(item, dict) for item in results):
+                    raise ValueError("expected an array of matches")
+                cache[key] = select_geocode(results, precision, query, locality, province)
+            except (requests.RequestException, ValueError) as exc:
+                print(f"GeoLocator unavailable after {requests_sent:,} requests: {exc}")
+                unavailable = True
+                return False, None
+            if requests_sent % 250 == 0:
+                print(f"GeoLocator: {requests_sent:,} requests completed")
+            return True, cache[key]
+
+        for row in merged:
+            locality = location_text(row, "locality")
+            province = PROVINCES.get(location_text(row, "region").upper())
+            match = None
+            if not province or not locality:
+                status = "outside_canada" if row.get("countryId") is not None and not province else "not_applicable"
+            else:
+                address = re.sub(r"^(\d+[A-Za-z]?)\s*,\s*", r"\1 ", location_text(row, "address"))
+                address = address.split(",", 1)[0]
+                complete = True
+                if street_signature(address):
+                    complete, match = lookup("address", f"{address}, {locality}, {province}", locality, province)
+                status = "address"
+                if match is None:
+                    place_complete, match = lookup("locality", f"{locality}, {province}", locality, province)
+                    status = "locality" if match else "no_match"
+                    if not (complete and place_complete):
+                        status = "locality_pending_address" if match else "pending"
+            totals[status] += 1
+            features.append({
+                "type": "Feature",
+                "id": row["serviceId"],
+                "geometry": {"type": "Point", "coordinates": match["coordinates"]} if match else None,
+                "properties": {
+                    **row,
+                    "geocode_status": status,
+                    "geocode_label": match["label"] if match else None,
+                    "geocode_source": match["source"] if match else None,
+                },
+            })
+
+    if len(cache) != starting_entries:
+        write_json_lines(cache_path, "[\n", (
+            {"query": key, "match": cache[key]} for key in sorted(cache)
+        ), "\n]\n")
+    write_json_lines(path, '{"type":"FeatureCollection","features":[\n', features, "\n]}\n")
+    print(f"Burolis GeoJSON: {len(features):,} features, {requests_sent:,} GeoLocator requests, {dict(totals)}")
+
 
 
 def normalize_csv_value(value: Any) -> Any:
@@ -505,6 +688,17 @@ Labels use the source `institutionCode` field.
 - `data/burolis_bilingual.jsonl`
 - `data/burolis_bilingual.csv`
 - `data/burolis_timeseries.csv`
+- [Burolis GeoJSON](../OpenData2OpenMaps/burolis.geojson)
+
+The GeoJSON contains one feature per bilingual service. Coordinates come from
+the [NRCan GeoLocator API](https://geolocator.api.geo.ca/). Civic-address
+matches can be interpolated. A locality match is approximate. Services outside
+Canada, routes, and services without a suitable match retain null geometry.
+The `geocode_status` field identifies address and locality matches, unresolved
+rows, and lookups pending during a limited run. The workflow reuses completed
+lookups from `data/burolis_geocodes.json` and queries new locations one at a time.
+Use `--geojson-only` to rebuild from the existing bilingual snapshot.
+
 
 The time series has one row per UTC date. `change_detected` is `1` when either
 language's row count or any record content changed from the prior snapshot, and
@@ -529,11 +723,26 @@ def write_readme(content: str, path: Path = README_PATH) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--geojson-only", action="store_true", help="Use the saved bilingual snapshot.")
+    args = parser.parse_args()
+    max_requests = int(os.environ.get("BUROLIS_GEOCODE_MAX_REQUESTS") or "0")
+    if max_requests < 0:
+        parser.error("BUROLIS_GEOCODE_MAX_REQUESTS must be zero or a positive integer")
+
+    if args.geojson_only:
+        saved = load_saved_records(OUTPUT_DIR / "burolis_bilingual.json")
+        if not saved:
+            raise RuntimeError("No saved bilingual Burolis snapshot is available")
+        save_geojson(saved, max_requests=max_requests or None)
+        return
+
     records_en = download_language(EN_URL, "en")
     records_fr = download_language(FR_URL, "fr")
     change_detected = datasets_changed(records_en, records_fr)
     merged = merge_languages(records_en, records_fr)
     save_outputs(records_en, records_fr, merged)
+    save_geojson(merged, max_requests=max_requests or None)
     run_date = datetime.now(timezone.utc).date().isoformat()
     update_timeseries(
         run_date,

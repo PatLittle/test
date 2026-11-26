@@ -117,6 +117,17 @@ xychart-beta
 - `data/burolis_bilingual.jsonl`
 - `data/burolis_bilingual.csv`
 - `data/burolis_timeseries.csv`
+- [Burolis GeoJSON](../OpenData2OpenMaps/burolis.geojson)
+
+The GeoJSON contains one feature per bilingual service. Coordinates come from
+the [NRCan GeoLocator API](https://geolocator.api.geo.ca/). Civic-address
+matches can be interpolated. A locality match is approximate. Services outside
+Canada, routes, and services without a suitable match retain null geometry.
+The `geocode_status` field identifies address and locality matches, unresolved
+rows, and lookups pending during a limited run. The workflow reuses completed
+lookups from `data/burolis_geocodes.json` and queries new locations one at a time.
+Use `--geojson-only` to rebuild from the existing bilingual snapshot.
+
 
 The time series has one row per UTC date. `change_detected` is `1` when either
 language's row count or any record content changed from the prior snapshot, and

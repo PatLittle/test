@@ -194,5 +194,47 @@ class ChangeLogTests(unittest.TestCase):
         self.assertIn("Updated in UTC on **2026-09-23**", readme)
 
 
+class GeocodingTests(unittest.TestCase):
+    def test_geocodes_and_reuses_bilingual_service_locations(self):
+        first = {"serviceId": 1, "address_fr": "123, rue Slater", "locality_en": "Ottawa", "region": "ON"}
+        rows = [
+            first,
+            {**first, "serviceId": 2},
+            {**first, "serviceId": 3, "address_fr": "9 Unknown Street"},
+            {"serviceId": 4, "address_en": "10 Main Street", "region_en": "United States", "countryId": 233},
+            {"serviceId": 5, "address_en": "Ottawa to Toronto", "region_en": "ON->ON"},
+        ]
+        address = {"key": "locate", "name": "123 Slater Street, City Of Ottawa, Ontario",
+                   "province": "Ontario", "category": "Street", "lng": -75.7, "lat": 45.4}
+        city = {"key": "geonames", "name": "Ottawa", "province": "Ontario",
+                "category": "City", "lng": -75.6, "lat": 45.3}
+        with tempfile.TemporaryDirectory() as temp_dir:
+            output = Path(temp_dir) / "burolis.geojson"
+            cache = Path(temp_dir) / "cache.json"
+            with patch.object(scraper.time, "sleep"), patch.object(scraper.requests.Session, "get") as get:
+                get.return_value.json.side_effect = [
+                    [{**address, "name": "123 Wrong Street, Ottawa, Ontario"}, address],
+                    [address],
+                    [city],
+                ]
+                scraper.save_geojson(rows, output, cache)
+                self.assertEqual(get.call_count, 3)
+                first_export = output.read_bytes()
+                get.reset_mock()
+                scraper.save_geojson(rows, output, cache)
+                get.assert_not_called()
+                self.assertEqual(output.read_bytes(), first_export)
+
+            features = json.loads(first_export)["features"]
+            self.assertEqual([feature["id"] for feature in features], [1, 2, 3, 4, 5])
+            self.assertEqual(features[0]["geometry"], {"type": "Point", "coordinates": [-75.7, 45.4]})
+            self.assertEqual(features[0]["properties"]["address_fr"], "123, rue Slater")
+            self.assertEqual(features[0]["geometry"], features[1]["geometry"])
+            self.assertEqual(features[2]["properties"]["geocode_status"], "locality")
+            self.assertEqual(features[3]["properties"]["geocode_status"], "outside_canada")
+            self.assertIsNone(features[3]["geometry"])
+            self.assertIsNone(features[4]["geometry"])
+
+
 if __name__ == "__main__":
     unittest.main()

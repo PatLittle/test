@@ -2,6 +2,15 @@ name: Update Burolis data
 
 on:
   workflow_dispatch:
+    inputs:
+      geojson_only:
+        description: Geocode the saved bilingual snapshot
+        type: boolean
+        default: false
+      geocode_max_requests:
+        description: Maximum new GeoLocator requests this run (0 means all)
+        type: number
+        default: 0
   schedule:
     - cron: "30 8 * * 1"
 
@@ -16,7 +25,7 @@ jobs:
   scrape:
     name: Download and merge Burolis data
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 300
 
     steps:
       - name: Check out main
@@ -38,17 +47,18 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s burolis/tests -v
 
-      - name: Download Burolis data
+      - name: Download and geocode Burolis data
         env:
           PYTHONUNBUFFERED: "1"
-        run: python -u burolis/scrape_burolis.py
+          BUROLIS_GEOCODE_MAX_REQUESTS: ${{ inputs.geocode_max_requests || 0 }}
+        run: python -u burolis/scrape_burolis.py ${{ inputs.geojson_only && '--geojson-only' || '' }}
 
       - name: Commit changed data and statistics
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add burolis/data/ burolis/README.md
+          git add burolis/data/ burolis/README.md OpenData2OpenMaps/burolis.geojson
           if git diff --cached --quiet; then
             echo "No Burolis data changes to commit."
           else
