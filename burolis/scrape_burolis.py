@@ -151,7 +151,7 @@ def save_geojson(merged: list[Record], path: Path = GEOJSON_PATH,
     last_request = 0.0
     unavailable = False
     with requests.Session() as session:
-        session.headers["User-Agent"] = "OpenData2OpenMaps-Burolis/1.0 (https://github.com/PatLittle/test)"
+        session.headers.update({"User-Agent": USER_AGENT, "Accept": "application/json"})
 
         def lookup(precision: str, query: str, locality: str, province: str) -> tuple[bool, Record | None]:
             nonlocal last_request, requests_sent, unavailable
@@ -170,6 +170,9 @@ def save_geojson(merged: list[Record], path: Path = GEOJSON_PATH,
                 response = session.get(
                     GEOLOCATOR_URL, params={"q": query, "lang": "en", "keys": keys}, timeout=(5, 15)
                 )
+                if not response.ok:
+                    excerpt = " ".join(response.text[:400].split())
+                    print(f"GeoLocator HTTP {response.status_code}: {excerpt!r}")
                 response.raise_for_status()
                 results = response.json()
                 if not isinstance(results, list) or not all(isinstance(item, dict) for item in results):
