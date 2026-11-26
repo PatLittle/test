@@ -113,7 +113,8 @@ def iter_properties(source: BinaryIO) -> Iterable[etree._Element]:
 
 
 def parse_xml_file(
-    source: BinaryIO, source_file: str,
+    source: BinaryIO,
+    source_file: str,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     parcel_rows: list[dict[str, Any]] = []
     structure_rows: list[dict[str, Any]] = []
@@ -133,13 +134,29 @@ def parse_xml_file(
             "custodian_code": attr(custodian, "code"),
             "custodian_name_en": text(prop, "./Custodian/Name_E"),
             "custodian_name_fr": text(prop, "./Custodian/Name_F"),
-            "custodian_is_department": as_bool(attr(custodian, "isDepartment")),
-            "custodian_is_crown_corporation": as_bool(attr(custodian, "isCrownCorporation")),
-            "portfolio_last_certified_date": attr(custodian, "portfolioLastCertifiedDate"),
+            "custodian_is_department": as_bool(
+                attr(custodian, "isDepartment")
+            ),
+            "custodian_is_crown_corporation": as_bool(
+                attr(custodian, "isCrownCorporation")
+            ),
+            "portfolio_last_certified_date": attr(
+                custodian,
+                "portfolioLastCertifiedDate",
+            ),
 
-            "official_contact_telephone": text(prop, "./Custodian/Official_Contact_Telephone"),
-            "official_contact_email": text(prop, "./Custodian/Official_Contact_Email"),
-            "official_contact_webform": text(prop, "./Custodian/Official_Contact_WebForm"),
+            "official_contact_telephone": text(
+                prop,
+                "./Custodian/Official_Contact_Telephone",
+            ),
+            "official_contact_email": text(
+                prop,
+                "./Custodian/Official_Contact_Email",
+            ),
+            "official_contact_webform": text(
+                prop,
+                "./Custodian/Official_Contact_WebForm",
+            ),
 
             "property_name_en": text(prop, "Property_Name_E"),
             "property_name_fr": text(prop, "Property_Name_F"),
@@ -154,9 +171,18 @@ def parse_xml_file(
             "interest_type_en": text(prop, "Interest_Type_E"),
             "interest_type_fr": text(prop, "Interest_Type_F"),
 
-            "restriction_code": child_code(prop, "Restriction_on_Interest_E"),
-            "restriction_en": text(prop, "Restriction_on_Interest_E"),
-            "restriction_fr": text(prop, "Restriction_on_Interest_F"),
+            "restriction_code": child_code(
+                prop,
+                "Restriction_on_Interest_E",
+            ),
+            "restriction_en": text(
+                prop,
+                "Restriction_on_Interest_E",
+            ),
+            "restriction_fr": text(
+                prop,
+                "Restriction_on_Interest_F",
+            ),
 
             "photo_urls": joined_text(prop, "./Photos/Photo"),
             "minimap_url": text(prop, "MiniMap"),
@@ -194,44 +220,116 @@ def parse_xml_file(
                 "parcel_id": parcel_id,
 
                 "land_area": as_float(text(parcel, "Land_Area")),
-                "land_area_unit": attr(parcel.find("Land_Area"), "unitofMeasure"),
-                "building_count": as_int(text(parcel, "Building_Count")),
+                "land_area_unit": attr(
+                    parcel.find("Land_Area"),
+                    "unitofMeasure",
+                ),
+                "building_count": as_int(
+                    text(parcel, "Building_Count")
+                ),
                 "floor_area": as_float(text(parcel, "Floor_Area")),
-                "floor_area_unit": attr(parcel.find("Floor_Area"), "unitofMeasure"),
+                "floor_area_unit": attr(
+                    parcel.find("Floor_Area"),
+                    "unitofMeasure",
+                ),
 
-                "parking_exterior": as_int(text(parcel, "./ParkingSpaces/Exterior")),
-                "parking_interior": as_int(text(parcel, "./ParkingSpaces/Interior")),
-                "parking_interior_included_in_floor_area": as_bool(attr(interior_parking, "includedInFloorArea")),
+                "parking_exterior": as_int(
+                    text(parcel, "./ParkingSpaces/Exterior")
+                ),
+                "parking_interior": as_int(
+                    text(parcel, "./ParkingSpaces/Interior")
+                ),
+                "parking_interior_included_in_floor_area": as_bool(
+                    attr(interior_parking, "includedInFloorArea")
+                ),
 
                 "location_type": attr(location, "type"),
                 "sgc_code": attr(location, "sgc"),
-                "federal_electoral_district_code": attr(location, "fed"),
-                "in_rural_area": as_bool(attr(location, "inRuralArea")),
+                "federal_electoral_district_code": attr(
+                    location,
+                    "fed",
+                ),
+                "in_rural_area": as_bool(
+                    attr(location, "inRuralArea")
+                ),
 
-                "province_en": text(parcel, "./Location/Province_E"),
-                "province_fr": text(parcel, "./Location/Province_F"),
-                "metro_area_name_en": text(parcel, "./Location/Metro_Area_Name_E"),
-                "metro_area_name_fr": text(parcel, "./Location/Metro_Area_Name_F"),
-                "municipality_en": text(parcel, "./Location/Municipality_E"),
-                "municipality_fr": text(parcel, "./Location/Municipality_F"),
-                "place_name_en": text(parcel, "./Location/Place_Name_EN"),
-                "place_name_fr": text(parcel, "./Location/Place_Name_FR"),
-                "city_name_en": text(parcel, "./Location/City_Name_E"),
-                "city_name_fr": text(parcel, "./Location/City_Name_F"),
+                "province_en": text(
+                    parcel,
+                    "./Location/Province_E",
+                ),
+                "province_fr": text(
+                    parcel,
+                    "./Location/Province_F",
+                ),
+                "metro_area_name_en": text(
+                    parcel,
+                    "./Location/Metro_Area_Name_E",
+                ),
+                "metro_area_name_fr": text(
+                    parcel,
+                    "./Location/Metro_Area_Name_F",
+                ),
+                "municipality_en": text(
+                    parcel,
+                    "./Location/Municipality_E",
+                ),
+                "municipality_fr": text(
+                    parcel,
+                    "./Location/Municipality_F",
+                ),
+                "place_name_en": text(
+                    parcel,
+                    "./Location/Place_Name_EN",
+                ),
+                "place_name_fr": text(
+                    parcel,
+                    "./Location/Place_Name_FR",
+                ),
+                "city_name_en": text(
+                    parcel,
+                    "./Location/City_Name_E",
+                ),
+                "city_name_fr": text(
+                    parcel,
+                    "./Location/City_Name_F",
+                ),
 
-                "federal_electoral_district_en": text(parcel, "./Location/Federal_Electoral_District_E"),
-                "federal_electoral_district_fr": text(parcel, "./Location/Federal_Electoral_District_F"),
+                "federal_electoral_district_en": text(
+                    parcel,
+                    "./Location/Federal_Electoral_District_E",
+                ),
+                "federal_electoral_district_fr": text(
+                    parcel,
+                    "./Location/Federal_Electoral_District_F",
+                ),
 
-                "country_code": child_code(parcel, "./Location/Country_Name_E"),
-                "country_name_en": text(parcel, "./Location/Country_Name_E"),
-                "country_name_fr": text(parcel, "./Location/Country_Name_F"),
+                "country_code": child_code(
+                    parcel,
+                    "./Location/Country_Name_E",
+                ),
+                "country_name_en": text(
+                    parcel,
+                    "./Location/Country_Name_E",
+                ),
+                "country_name_fr": text(
+                    parcel,
+                    "./Location/Country_Name_F",
+                ),
 
                 "latitude": latitude,
                 "longitude": longitude,
                 "coordinate_valid": coordinate_valid,
 
-                "positional_accuracy": as_float(text(parcel, "./Location/Positional_Accuracy")),
-                "positional_accuracy_unit": attr(parcel.find(, "./Location/Positional_Accuracy"),
+                "positional_accuracy": as_float(
+                    text(
+                        parcel,
+                        "./Location/Positional_Accuracy",
+                    )
+                ),
+                "positional_accuracy_unit": attr(
+                    parcel.find(
+                        "./Location/Positional_Accuracy"
+                    ),
                     "unitofMeasure",
                 ),
 
@@ -260,7 +358,10 @@ def parse_xml_file(
                     if text(use_type, "Use_Name_F")
                 ]
 
-                structure_number = text(structure, "Structure_Number")
+                structure_number = text(
+                    structure,
+                    "Structure_Number",
+                )
 
                 structure_rows.append(
                     {
@@ -276,26 +377,69 @@ def parse_xml_file(
                         ),
 
                         "occupancy": attr(structure, "occupancy"),
-                        "structure_created_date": attr(structure, "createdDate"),
-                        "structure_last_modified_date": attr(structure, "lastModifiedDate"),
+                        "structure_created_date": attr(
+                            structure,
+                            "createdDate",
+                        ),
+                        "structure_last_modified_date": attr(
+                            structure,
+                            "lastModifiedDate",
+                        ),
 
-                        "structure_name_en": text(structure, "Structure_Name_E"),
-                        "structure_name_fr": text(structure, "Structure_Name_F"),
-                        "structure_address_en": text(structure, "Address_E"),
-                        "structure_address_fr": text(structure, "Address_F"),
+                        "structure_name_en": text(
+                            structure,
+                            "Structure_Name_E",
+                        ),
+                        "structure_name_fr": text(
+                            structure,
+                            "Structure_Name_F",
+                        ),
+                        "structure_address_en": text(
+                            structure,
+                            "Address_E",
+                        ),
+                        "structure_address_fr": text(
+                            structure,
+                            "Address_F",
+                        ),
 
-                        "construction_year": as_int(text(structure, "Construction_Year")),
+                        "construction_year": as_int(
+                            text(structure, "Construction_Year")
+                        ),
 
-                        "condition_code": child_code(structure, "Condition_E"),
-                        "condition_en": text(structure, "Condition_E"),
-                        "condition_fr": text(structure, "Condition_F"),
+                        "condition_code": child_code(
+                            structure,
+                            "Condition_E",
+                        ),
+                        "condition_en": text(
+                            structure,
+                            "Condition_E",
+                        ),
+                        "condition_fr": text(
+                            structure,
+                            "Condition_F",
+                        ),
 
-                        "interest_type_code": child_code(structure, "Interest_Type_E"),
-                        "interest_type_en": text(structure, "Interest_Type_E"),
-                        "interest_type_fr": text(structure, "Interest_Type_F"),
+                        "interest_type_code": child_code(
+                            structure,
+                            "Interest_Type_E",
+                        ),
+                        "interest_type_en": text(
+                            structure,
+                            "Interest_Type_E",
+                        ),
+                        "interest_type_fr": text(
+                            structure,
+                            "Interest_Type_F",
+                        ),
 
-                        "floor_area": as_float(text(structure, "Floor_Area")),
-                        "floor_area_unit": attr(structure.find("Floor_Area"), "unitofMeasure"),
+                        "floor_area": as_float(
+                            text(structure, "Floor_Area")
+                        ),
+                        "floor_area_unit": attr(
+                            structure.find("Floor_Area"),
+                            "unitofMeasure",
+                        ),
 
                         "use_type_codes": " | ".join(
                             use_type_codes
@@ -307,11 +451,30 @@ def parse_xml_file(
                             use_names_fr
                         ) or None,
 
-                        "custodian_code": attr(structure_custodian, "code"),
-                        "custodian_name_en": text(structure, "./Custodian/Name_E"),
-                        "custodian_name_fr": text(structure, "./Custodian/Name_F"),
-                        "custodian_is_department": as_bool(attr(structure_custodian, "isDepartment")),
-                        "custodian_is_crown_corporation": as_bool(attr(structure_custodian, "isCrownCorporation")),
+                        "custodian_code": attr(
+                            structure_custodian,
+                            "code",
+                        ),
+                        "custodian_name_en": text(
+                            structure,
+                            "./Custodian/Name_E",
+                        ),
+                        "custodian_name_fr": text(
+                            structure,
+                            "./Custodian/Name_F",
+                        ),
+                        "custodian_is_department": as_bool(
+                            attr(
+                                structure_custodian,
+                                "isDepartment",
+                            )
+                        ),
+                        "custodian_is_crown_corporation": as_bool(
+                            attr(
+                                structure_custodian,
+                                "isCrownCorporation",
+                            )
+                        ),
 
                         "country_code": parcel_data["country_code"],
                         "country_name_en": parcel_data[

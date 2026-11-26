@@ -68,6 +68,7 @@ jobs:
         with:
           ref: main
           persist-credentials: false
+          sparse-checkout: OpenData2OpenMaps
 
       - name: Set up Python
         uses: actions/setup-python@v5
