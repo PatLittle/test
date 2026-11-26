@@ -11,7 +11,7 @@ import sqlite3
 from tempfile import TemporaryDirectory
 from typing import Any, BinaryIO, Iterable
 from urllib.parse import urljoin, urlsplit
-from zipfile import ZipFile
+from zipfile import ZipFile, is_zipfile
 
 import geopandas as gpd
 import pandas as pd
@@ -20,7 +20,11 @@ from lxml import etree
 from shapely.geometry import Point
 
 SOURCE_URL = "https://map-carte.tbs-sct.gc.ca/dfrp-rbif/oddo/dfrp-rbif.zip"
-USER_AGENT = {"User-Agent": "OpenData2OpenMaps DFRP (https://github.com/PatLittle/test)"}
+IMAGE_HEADERS = {"User-Agent": "Mozilla/5.0 (compatible; DFRP-Image-Downloader/1.0)"}
+ZIP_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (compatible; DFRP-GeoPackage-Notebook/1.0)",
+    "Accept": "application/zip, application/octet-stream, */*",
+}
 
 
 def clean_text(value: str | None) -> str | None:
@@ -566,7 +570,7 @@ def get_image_links(parcels: gpd.GeoDataFrame) -> list[tuple[str, str, int, str]
 
 def download_image(url: str) -> tuple[str, bytes] | None:
     try:
-        with requests.get(url, headers=USER_AGENT, stream=True, timeout=(10, 30)) as response:
+        with requests.get(url, headers=IMAGE_HEADERS, stream=True, timeout=(10, 30)) as response:
             response.raise_for_status()
             content_type = response.headers.get("Content-Type", "").split(";", 1)[0].strip().lower()
             if not content_type.startswith("image/"):
@@ -698,12 +702,20 @@ def main() -> None:
         if zip_path is None:
             zip_path = Path(work) / "dfrp-rbif.zip"
             with requests.get(
-                SOURCE_URL, headers=USER_AGENT, stream=True, timeout=(15, 180),
+                SOURCE_URL, headers=ZIP_HEADERS, stream=True, timeout=(15, 180),
             ) as response:
                 response.raise_for_status()
                 with zip_path.open("wb") as destination:
                     for chunk in response.iter_content(chunk_size=1024 * 1024):
                         destination.write(chunk)
+                if not is_zipfile(zip_path):
+                    with zip_path.open("rb") as downloaded:
+                        prefix = downloaded.read(160)
+                    raise ValueError(
+                        f"DFRP source returned HTTP {response.status_code} from {response.url} "
+                        f"with {response.headers.get('Content-Type', 'unknown content type')} "
+                        f"and {zip_path.stat().st_size:,} bytes. Expected ZIP, received {prefix!r}."
+                    )
         cache_updated = build(zip_path, args.output_dir, args.image_cache)
     if github_output := os.environ.get("GITHUB_OUTPUT"):
         with Path(github_output).open("a", encoding="utf-8") as output:
