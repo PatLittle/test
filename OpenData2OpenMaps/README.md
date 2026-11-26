@@ -7,7 +7,7 @@
 
 ## Directory of Federal Real Property downloads
 
-Open the **dfrp-geodata** artifact for a completed run of [Update OpenData2OpenMaps GeoJSON](https://github.com/PatLittle/test/actions/workflows/update-opendata2openmaps.yml). It contains:
+The workflow commits the two GeoJSON files, two GeoParquet files, and plain GeoPackage to [geodata/dfrp on main](geodata/dfrp/). The **dfrp-geodata** artifact for a completed run of [Update OpenData2OpenMaps GeoJSON](https://github.com/PatLittle/test/actions/workflows/update-opendata2openmaps.yml) contains all six files, including the image-enabled GeoPackage.
 
 | Files | Contents |
 | --- | --- |

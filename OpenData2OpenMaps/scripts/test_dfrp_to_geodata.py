@@ -58,9 +58,17 @@ class DfrpExportTest(unittest.TestCase):
                 self.assertTrue(build(archive, output, cache))
                 self.assertCountEqual([call.args[0] for call in fetch.call_args_list], [same, old, minimap])
 
+                tracked_files = {
+                    path.name: path.read_bytes()
+                    for path in output.iterdir()
+                    if path.name != "dfrp_with_images.gpkg"
+                }
+
                 fetch.reset_mock()
                 self.assertFalse(build(archive, output, cache))
                 fetch.assert_not_called()
+                for name, original in tracked_files.items():
+                    self.assertEqual((output / name).read_bytes(), original, name)
 
                 write_archive(new)
                 self.assertTrue(build(archive, output, cache))

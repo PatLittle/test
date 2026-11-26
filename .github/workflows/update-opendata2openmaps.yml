@@ -59,6 +59,8 @@ jobs:
 
   dfrp:
     name: Build DFRP spatial data
+    needs: build
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
 
@@ -67,7 +69,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
-          persist-credentials: false
+          fetch-depth: 0
           sparse-checkout: OpenData2OpenMaps
 
       - name: Set up Python
@@ -99,6 +101,22 @@ jobs:
         with:
           path: OpenData2OpenMaps/.dfrp-cache/images.sqlite3
           key: ${{ steps.dfrp-cache.outputs.cache-primary-key }}
+
+      - name: Commit changed DFRP spatial data
+        shell: bash
+        working-directory: OpenData2OpenMaps/geodata/dfrp
+        run: |
+          git add -- dfrp_parcels.geojson dfrp_structures.geojson \
+            dfrp_parcels.parquet dfrp_structures.parquet dfrp.gpkg
+          if git diff --cached --quiet; then
+            echo "No tracked DFRP data changed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update DFRP spatial data [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
 
       - name: Upload DFRP spatial data
         uses: actions/upload-artifact@v4

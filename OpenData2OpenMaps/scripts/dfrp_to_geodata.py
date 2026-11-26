@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 import os
 from pathlib import Path
 import shutil
@@ -17,6 +18,7 @@ import geopandas as gpd
 import pandas as pd
 import requests
 from lxml import etree
+from pyogrio import get_gdal_config_option, set_gdal_config_options
 from shapely.geometry import Point
 
 SOURCE_URL = "https://map-carte.tbs-sct.gc.ca/dfrp-rbif/oddo/dfrp-rbif.zip"
@@ -502,8 +504,8 @@ def parse_xml_file(
     return parcel_rows, structure_rows
 
 
-def read_layers(zip_path: Path) -> dict[str, gpd.GeoDataFrame]:
-    """Read XML members directly from the archive."""
+def read_layers(zip_path: Path) -> tuple[dict[str, gpd.GeoDataFrame], str]:
+    """Read spatial layers and the latest XML member timestamp from the archive."""
     parcels, structures = [], []
     with ZipFile(zip_path) as archive:
         members = sorted(
@@ -544,7 +546,8 @@ def read_layers(zip_path: Path) -> dict[str, gpd.GeoDataFrame]:
             if field in layer:
                 layer[field] = layer[field].astype("boolean")
         print(f"{name}: {len(layer):,} rows, {layer.geometry.notna().sum():,} with coordinates")
-    return layers
+    source_date = datetime(*max(member.date_time for member in members))
+    return layers, source_date.strftime("%Y-%m-%dT%H:%M:%S.000Z")
 
 
 def get_image_links(parcels: gpd.GeoDataFrame) -> list[tuple[str, str, int, str]]:
@@ -662,7 +665,7 @@ def add_images(package: Path, cache_path: Path, links: list[tuple[str, str, int,
 
 
 def build(zip_path: Path, output_dir: Path, cache_path: Path) -> bool:
-    layers = read_layers(zip_path)
+    layers, source_date = read_layers(zip_path)
     links = get_image_links(layers["parcels"])
     cache_updated = refresh_image_cache(cache_path, {link[3] for link in links})
 
@@ -670,16 +673,22 @@ def build(zip_path: Path, output_dir: Path, cache_path: Path) -> bool:
     with TemporaryDirectory(dir=output_dir) as stage:
         staging = Path(stage)
         plain = staging / "dfrp.gpkg"
-        for name, layer in layers.items():
-            layer.to_file(
-                staging / f"dfrp_{name}.geojson", driver="GeoJSON", engine="pyogrio",
-                index=False, RFC7946="YES",
-            )
-            layer.to_parquet(staging / f"dfrp_{name}.parquet", index=False)
-            layer.to_file(
-                plain, layer=name, driver="GPKG", engine="pyogrio", index=False,
-                geometry_type="Point",
-            )
+        # GDAL normally writes the current clock time into each GeoPackage layer.
+        previous_date = get_gdal_config_option("OGR_CURRENT_DATE")
+        set_gdal_config_options({"OGR_CURRENT_DATE": source_date})
+        try:
+            for name, layer in layers.items():
+                layer.to_file(
+                    staging / f"dfrp_{name}.geojson", driver="GeoJSON", engine="pyogrio",
+                    index=False, RFC7946="YES",
+                )
+                layer.to_parquet(staging / f"dfrp_{name}.parquet", index=False)
+                layer.to_file(
+                    plain, layer=name, driver="GPKG", engine="pyogrio", index=False,
+                    geometry_type="Point",
+                )
+        finally:
+            set_gdal_config_options({"OGR_CURRENT_DATE": previous_date})
         with_images = staging / "dfrp_with_images.gpkg"
         shutil.copyfile(plain, with_images)
         add_images(with_images, cache_path, links)
