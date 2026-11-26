@@ -9968,8 +9968,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -58.16411481424802,
-          6.818898639386618
+          -58.161550056310965,
+          6.823633369930159
         ]
       },
       "properties": {
@@ -9978,8 +9978,8 @@
         "city_fr": "Georgetown",
         "office_type_en": "High Commission of Canada",
         "office_type_fr": "Haut-commissariat du Canada",
-        "address_en": "44 Main St, Georgetown, Guyana",
-        "address_fr": "44 Main St, Georgetown, Guyana",
+        "address_en": "High and Young Streets, Georgetown, Guyana",
+        "address_fr": "Rues High et Young, Georgetown, Guyana",
         "telephone_en": "1-844-880-6519",
         "telephone_fr": "1-844-880-6519",
         "email_en": "ccs.scc@international.gc.ca",
@@ -10017,8 +10017,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            -58.16411481424802,
-            6.818898639386618
+            -58.161550056310965,
+            6.823633369930159
           ],
           [
             -58.9606661406802,
@@ -10043,8 +10043,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            -58.16411481424802,
-            6.818898639386618
+            -58.161550056310965,
+            6.823633369930159
           ],
           [
             -56.137947296318785,
