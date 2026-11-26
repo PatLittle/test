@@ -56,3 +56,52 @@ jobs:
             git pull --rebase origin main
             git push origin HEAD:main
           fi
+
+  dfrp:
+    name: Build DFRP spatial data
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install DFRP dependencies
+        run: python -m pip install geopandas pyogrio pyarrow lxml requests
+
+      - name: Test DFRP export and image reuse
+        run: python OpenData2OpenMaps/scripts/test_dfrp_to_geodata.py
+
+      - name: Restore DFRP image cache
+        id: dfrp-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: OpenData2OpenMaps/.dfrp-cache/images.sqlite3
+          key: dfrp-images-v1-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: dfrp-images-v1-
+
+      - name: Build DFRP GeoJSON, GeoPackages and GeoParquet
+        id: dfrp-build
+        run: python -u OpenData2OpenMaps/scripts/dfrp_to_geodata.py
+
+      - name: Save DFRP image cache
+        if: steps.dfrp-build.outputs.cache_updated == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: OpenData2OpenMaps/.dfrp-cache/images.sqlite3
+          key: ${{ steps.dfrp-cache.outputs.cache-primary-key }}
+
+      - name: Upload DFRP spatial data
+        uses: actions/upload-artifact@v4
+        with:
+          name: dfrp-geodata
+          path: OpenData2OpenMaps/geodata/dfrp/
+          if-no-files-found: error
