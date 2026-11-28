@@ -186075,8 +186075,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -102.390674,
-          50.501546
+          -102.396119,
+          50.469519
         ]
       },
       "properties": {
@@ -186085,7 +186085,7 @@
         "reporting_organization_en": null,
         "reporting_organization_fr": null,
         "created": "2006-08-22T15:12:00",
-        "last_modified": "2025-05-13T12:30:32.720",
+        "last_modified": "2026-11-27T08:52:00",
         "name_en": "363 - Ochapowace - 06545 - OCHAPOWACE INDIAN RESERVE NO. 71 - 0602514005",
         "name_fr": "363 - Ochapowace - 06545 - OCHAPOWACE INDIAN RESERVE NO. 71 - 0602514005",
         "status_en": "Closed",
@@ -186120,10 +186120,10 @@
         "estimated_hectares": 0.0,
         "estimated_tons": 0.0,
         "population_1km": 10.0,
-        "population_5km": 256.0,
-        "population_10km": 929.0,
-        "population_25km": 4751.0,
-        "population_50km": 14368.0,
+        "population_5km": 232.0,
+        "population_10km": 892.0,
+        "population_25km": 4674.0,
+        "population_50km": 14098.0,
         "action_plan_en": null,
         "action_plan_fr": null,
         "additional_information_en": null,
@@ -215736,8 +215736,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -102.390653,
-          50.501535
+          -102.396119,
+          50.469519
         ]
       },
       "properties": {
@@ -215746,7 +215746,7 @@
         "reporting_organization_en": null,
         "reporting_organization_fr": null,
         "created": "2006-08-22T15:46:00",
-        "last_modified": "2020-05-07T09:47:00",
+        "last_modified": "2026-11-27T08:51:00",
         "name_en": "363 - Ochapowace - 06545 - OCHAPOWACE INDIAN RESERVE NO. 71 - 5000009094",
         "name_fr": "363 - Ochapowace - 06545 - OCHAPOWACE INDIAN RESERVE NO. 71 - 5000009094",
         "status_en": "Closed",
@@ -215795,11 +215795,11 @@
         "estimated_cubic_metres": 50.0,
         "estimated_hectares": null,
         "estimated_tons": null,
-        "population_1km": 8.0,
-        "population_5km": 216.0,
-        "population_10km": 803.0,
-        "population_25km": 4467.0,
-        "population_50km": 14089.0,
+        "population_1km": 10.0,
+        "population_5km": 232.0,
+        "population_10km": 892.0,
+        "population_25km": 4674.0,
+        "population_50km": 14098.0,
         "action_plan_en": null,
         "action_plan_fr": null,
         "additional_information_en": null,
